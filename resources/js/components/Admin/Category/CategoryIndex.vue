@@ -14,7 +14,7 @@
             </thead>
             <tbody>
                 <template v-for="category in data">
-                    <tr>
+                    <tr :class="categoryToEdit(category.id)?'d-none':''">
                         <td>{{category.id}}</td>
                         <td>{{category.title}}</td>
                         <td><a href="#" @click.prevent="getCategoryIdToEdit(category.id)">edit</a></td>
@@ -23,7 +23,7 @@
 <!--                    editing fields-->
                     <tr :class="categoryToEdit(category.id)?'':'d-none'">
                         <td>{{category.id}}</td>
-                        <td><input type="text" class="form-control"></td>
+                        <td><input type="text" class="form-control" :value="category.title"></td>
                         <td><a href="#" @click.prevent="getCategoryIdToEdit(null)">update</a></td>
                     </tr>
                 </template>
@@ -57,7 +57,6 @@ export default {
                 })
         },
         getCategoryIdToEdit(id){
-            console.log(id);
             this.toEdit=id
         },
         categoryToEdit(id){

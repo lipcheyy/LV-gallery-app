@@ -38,7 +38,6 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     getCategoryIdToEdit: function getCategoryIdToEdit(id) {
-      console.log(id);
       this.toEdit = id;
     },
     categoryToEdit: function categoryToEdit(id) {
@@ -106,7 +105,9 @@ var render = function render() {
   }), _vm._v(" "), _c("table", {
     staticClass: "table w-25"
   }, [_vm._m(0), _vm._v(" "), _c("tbody", [_vm._l(_vm.data, function (category) {
-    return [_c("tr", [_c("td", [_vm._v(_vm._s(category.id))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(category.title))]), _vm._v(" "), _c("td", [_c("a", {
+    return [_c("tr", {
+      "class": _vm.categoryToEdit(category.id) ? "d-none" : ""
+    }, [_c("td", [_vm._v(_vm._s(category.id))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(category.title))]), _vm._v(" "), _c("td", [_c("a", {
       attrs: {
         href: "#"
       },
@@ -118,7 +119,15 @@ var render = function render() {
       }
     }, [_vm._v("edit")])]), _vm._v(" "), _vm._m(1, true)]), _vm._v(" "), _c("tr", {
       "class": _vm.categoryToEdit(category.id) ? "" : "d-none"
-    }, [_c("td", [_vm._v(_vm._s(category.id))]), _vm._v(" "), _vm._m(2, true), _vm._v(" "), _c("td", [_c("a", {
+    }, [_c("td", [_vm._v(_vm._s(category.id))]), _vm._v(" "), _c("td", [_c("input", {
+      staticClass: "form-control",
+      attrs: {
+        type: "text"
+      },
+      domProps: {
+        value: category.title
+      }
+    })]), _vm._v(" "), _c("td", [_c("a", {
       attrs: {
         href: "#"
       },
@@ -147,15 +156,6 @@ var staticRenderFns = [function () {
       href: "#"
     }
   }, [_vm._v("delete")])]);
-}, function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("td", [_c("input", {
-    staticClass: "form-control",
-    attrs: {
-      type: "text"
-    }
-  })]);
 }];
 render._withStripped = true;
 
