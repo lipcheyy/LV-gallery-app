@@ -96,15 +96,35 @@ var render = function render() {
   return _c("div", [_c("p", [_vm._v("category main page")]), _vm._v(" "), _c("create-component", {
     ref: "test"
   }), _vm._v(" "), _c("table", {
-    staticClass: "table"
-  }, [_vm._m(0), _vm._v(" "), _c("tbody", _vm._l(_vm.data, function (category) {
-    return _c("tr", [_c("td", [_vm._v(_vm._s(category.id))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(category.title))])]);
-  }), 0)])], 1);
+    staticClass: "table w-25"
+  }, [_vm._m(0), _vm._v(" "), _c("tbody", [_vm._l(_vm.data, function (category) {
+    return [_c("tr", [_c("td", [_vm._v(_vm._s(category.id))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(category.title))]), _vm._v(" "), _vm._m(1, true), _vm._v(" "), _vm._m(2, true)])];
+  })], 2)])], 1);
 };
 var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("thead", [_c("tr", [_c("th", [_vm._v("#")]), _vm._v(" "), _c("th", [_vm._v("title")])])]);
+  return _c("thead", [_c("tr", [_c("th", [_vm._v("#")]), _vm._v(" "), _c("th", [_vm._v("title")]), _vm._v(" "), _c("th", {
+    attrs: {
+      colspan: "2"
+    }
+  }, [_vm._v("actions")])])]);
+}, function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("td", [_c("a", {
+    attrs: {
+      href: "#"
+    }
+  }, [_vm._v("edit")])]);
+}, function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("td", [_c("a", {
+    attrs: {
+      href: "#"
+    }
+  }, [_vm._v("delete")])]);
 }];
 render._withStripped = true;
 

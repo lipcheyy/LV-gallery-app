@@ -4,18 +4,23 @@
 
         <create-component ref="test"></create-component>
 
-        <table class="table">
+        <table class="table w-25">
             <thead>
                 <tr>
                     <th>#</th>
                     <th>title</th>
+                    <th colspan="2">actions</th>
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="category in data">
-                    <td>{{category.id}}</td>
-                    <td>{{category.title}}</td>
-                </tr>
+                <template v-for="category in data">
+                    <tr>
+                        <td>{{category.id}}</td>
+                        <td>{{category.title}}</td>
+                        <td><a href="#">edit</a></td>
+                        <td><a href="#">delete</a></td>
+                    </tr>
+                </template>
             </tbody>
         </table>
     </div>
