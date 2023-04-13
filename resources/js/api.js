@@ -24,6 +24,10 @@ api.interceptors.response.use(config => {
     }
     return config
 }, error => {
+    console.log(error.response.status);
+    if (error.response.status===401) {
+        router.push({name: 'user.login'})
+    }
     if (error.response.data.message === 'Token has expired') {
         return axios.post('/api/auth/refresh', {},
             {
@@ -41,9 +45,7 @@ api.interceptors.response.use(config => {
             })
     }
 
-    //console.log(error.response.status);
-    if (error.response.status) {
-        router.push({name: 'user.login'})
-    }
+
+
 })
 export default api
