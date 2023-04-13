@@ -37,9 +37,12 @@ __webpack_require__.r(__webpack_exports__);
         _this.data = res.data.data;
       });
     },
-    categoryToEdit: function categoryToEdit(id) {
+    getCategoryIdToEdit: function getCategoryIdToEdit(id) {
       console.log(id);
       this.toEdit = id;
+    },
+    categoryToEdit: function categoryToEdit(id) {
+      return this.toEdit === id;
     }
   }
 });
@@ -110,10 +113,22 @@ var render = function render() {
       on: {
         click: function click($event) {
           $event.preventDefault();
-          return _vm.categoryToEdit(category.id);
+          return _vm.getCategoryIdToEdit(category.id);
         }
       }
-    }, [_vm._v("edit")])]), _vm._v(" "), _vm._m(1, true)]), _vm._v(" "), _c("tr", [_c("td", [_vm._v(_vm._s(category.id))]), _vm._v(" "), _vm._m(2, true), _vm._v(" "), _c("td", [_vm._v("upd")])])];
+    }, [_vm._v("edit")])]), _vm._v(" "), _vm._m(1, true)]), _vm._v(" "), _c("tr", {
+      "class": _vm.categoryToEdit(category.id) ? "" : "d-none"
+    }, [_c("td", [_vm._v(_vm._s(category.id))]), _vm._v(" "), _vm._m(2, true), _vm._v(" "), _c("td", [_c("a", {
+      attrs: {
+        href: "#"
+      },
+      on: {
+        click: function click($event) {
+          $event.preventDefault();
+          return _vm.getCategoryIdToEdit(null);
+        }
+      }
+    }, [_vm._v("update")])])])];
   })], 2)])], 1);
 };
 var staticRenderFns = [function () {

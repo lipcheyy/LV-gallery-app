@@ -17,14 +17,14 @@
                     <tr>
                         <td>{{category.id}}</td>
                         <td>{{category.title}}</td>
-                        <td><a href="#" @click.prevent="categoryToEdit(category.id)">edit</a></td>
+                        <td><a href="#" @click.prevent="getCategoryIdToEdit(category.id)">edit</a></td>
                         <td><a href="#">delete</a></td>
                     </tr>
 <!--                    editing fields-->
-                    <tr>
+                    <tr :class="categoryToEdit(category.id)?'':'d-none'">
                         <td>{{category.id}}</td>
                         <td><input type="text" class="form-control"></td>
-                        <td>upd</td>
+                        <td><a href="#" @click.prevent="getCategoryIdToEdit(null)">update</a></td>
                     </tr>
                 </template>
             </tbody>
@@ -56,9 +56,12 @@ export default {
                     this.data=res.data.data
                 })
         },
-        categoryToEdit(id){
+        getCategoryIdToEdit(id){
             console.log(id);
             this.toEdit=id
+        },
+        categoryToEdit(id){
+            return this.toEdit===id
         }
     }
 }
