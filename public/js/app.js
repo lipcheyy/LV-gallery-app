@@ -5373,7 +5373,13 @@ var render = function render() {
         name: "user.registration"
       }
     }
-  }, [_vm._v("registration")]) : _vm._e(), _vm._v(" "), _vm.access_token ? _c("a", {
+  }, [_vm._v("registration")]) : _vm._e(), _vm._v(" "), _vm.access_token ? _c("router-link", {
+    attrs: {
+      to: {
+        name: "post.create"
+      }
+    }
+  }, [_vm._v("Add new")]) : _vm._e(), _vm._v(" "), _vm.access_token ? _c("a", {
     attrs: {
       href: "#"
     },
@@ -5426,6 +5432,12 @@ api.interceptors.response.use(function (config) {
   }
   return config;
 }, function (error) {
+  console.log(error.response.status);
+  if (error.response.status === 401) {
+    _router__WEBPACK_IMPORTED_MODULE_1__["default"].push({
+      name: 'user.login'
+    });
+  }
   if (error.response.data.message === 'Token has expired') {
     return axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/auth/refresh', {}, {
       headers: {
@@ -5436,13 +5448,6 @@ api.interceptors.response.use(function (config) {
       //console.log(res);
       error.config.headers.authorization = "Bearer ".concat(res.data.access_token);
       return api.request(error.config);
-    });
-  }
-
-  //console.log(error.response.status);
-  if (error.response.status) {
-    _router__WEBPACK_IMPORTED_MODULE_1__["default"].push({
-      name: 'user.login'
     });
   }
 });
@@ -5562,6 +5567,12 @@ var route = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       return __webpack_require__.e(/*! import() */ "resources_js_components_Admin_Category_CategoryIndex_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Admin/Category/CategoryIndex */ "./resources/js/components/Admin/Category/CategoryIndex.vue"));
     },
     name: 'category.index'
+  }, {
+    path: '/posts/create',
+    component: function component() {
+      return __webpack_require__.e(/*! import() */ "resources_js_components_Post_CreatePost_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Post/CreatePost */ "./resources/js/components/Post/CreatePost.vue"));
+    },
+    name: 'post.create'
   }]
 });
 route.beforeEach(function (to, from, next) {
@@ -43666,7 +43677,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_User_Login_vue":1,"resources_js_components_User_Registration_vue":1,"resources_js_components_Personal_Personal_vue":1,"resources_js_components_Admin_AdminStatistic_vue":1,"resources_js_components_Admin_Category_CategoryIndex_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_User_Login_vue":1,"resources_js_components_User_Registration_vue":1,"resources_js_components_Personal_Personal_vue":1,"resources_js_components_Admin_AdminStatistic_vue":1,"resources_js_components_Admin_Category_CategoryIndex_vue":1,"resources_js_components_Post_CreatePost_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};
