@@ -38,13 +38,21 @@ __webpack_require__.r(__webpack_exports__);
         _this.data = res.data.data;
       });
     },
-    getCategoryIdToEdit: function getCategoryIdToEdit(id, title) {
+    getCategoryDataToEdit: function getCategoryDataToEdit(id, title) {
       this.toEdit = id;
       this.title = title;
-      console.log(this.title, 11);
     },
     categoryToEdit: function categoryToEdit(id) {
       return this.toEdit === id;
+    },
+    update: function update(id) {
+      var _this2 = this;
+      this.toEdit = null;
+      _api__WEBPACK_IMPORTED_MODULE_0__["default"].patch("/api/auth/admin/category/".concat(id), {
+        title: this.title
+      }).then(function (res) {
+        _this2.getCategories();
+      });
     }
   }
 });
@@ -117,7 +125,7 @@ var render = function render() {
       on: {
         click: function click($event) {
           $event.preventDefault();
-          return _vm.getCategoryIdToEdit(category.id, category.title);
+          return _vm.getCategoryDataToEdit(category.id, category.title);
         }
       }
     }, [_vm._v("edit")])]), _vm._v(" "), _vm._m(1, true)]), _vm._v(" "), _c("tr", {
@@ -149,7 +157,7 @@ var render = function render() {
       on: {
         click: function click($event) {
           $event.preventDefault();
-          return _vm.getCategoryIdToEdit(null);
+          return _vm.update(category.id);
         }
       }
     }, [_vm._v("update")])])])];

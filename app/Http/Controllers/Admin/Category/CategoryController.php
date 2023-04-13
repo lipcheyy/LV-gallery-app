@@ -23,7 +23,7 @@ class CategoryController extends Controller
         ]);
         return $data;
     }
-    public function update(UpdateRequest $request){
+    public function update(){
 
     }
 }

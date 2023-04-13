@@ -17,14 +17,14 @@
                     <tr :class="categoryToEdit(category.id)?'d-none':''">
                         <td>{{category.id}}</td>
                         <td>{{category.title}}</td>
-                        <td><a href="#" @click.prevent="getCategoryIdToEdit(category.id,category.title)">edit</a></td>
+                        <td><a href="#" @click.prevent="getCategoryDataToEdit(category.id,category.title)">edit</a></td>
                         <td><a href="#">delete</a></td>
                     </tr>
 <!--                    editing fields-->
                     <tr :class="categoryToEdit(category.id)?'':'d-none'">
                         <td>{{category.id}}</td>
                         <td><input v-model="title" type="text" class="form-control" ></td>
-                        <td><a href="#" @click.prevent="getCategoryIdToEdit(null)">update</a></td>
+                        <td><a href="#" @click.prevent="update(category.id)">update</a></td>
                     </tr>
                 </template>
             </tbody>
@@ -57,15 +57,20 @@ export default {
                     this.data=res.data.data
                 })
         },
-        getCategoryIdToEdit(id,title){
+        getCategoryDataToEdit(id,title){
             this.toEdit=id
             this.title=title
-            console.log(this.title,11);
         },
         categoryToEdit(id){
             return this.toEdit===id
         },
-
+        update(id){
+            this.toEdit=null
+            api.patch(`/api/auth/admin/category/${id}`,{title:this.title})
+                .then(res=>{
+                    this.getCategories()
+                })
+        }
     }
 }
 </script>
