@@ -38,8 +38,10 @@ __webpack_require__.r(__webpack_exports__);
         _this.data = res.data.data;
       });
     },
-    getCategoryIdToEdit: function getCategoryIdToEdit(id) {
+    getCategoryIdToEdit: function getCategoryIdToEdit(id, title) {
       this.toEdit = id;
+      this.title = title;
+      console.log(this.title, 11);
     },
     categoryToEdit: function categoryToEdit(id) {
       return this.toEdit === id;
@@ -115,18 +117,30 @@ var render = function render() {
       on: {
         click: function click($event) {
           $event.preventDefault();
-          return _vm.getCategoryIdToEdit(category.id);
+          return _vm.getCategoryIdToEdit(category.id, category.title);
         }
       }
     }, [_vm._v("edit")])]), _vm._v(" "), _vm._m(1, true)]), _vm._v(" "), _c("tr", {
       "class": _vm.categoryToEdit(category.id) ? "" : "d-none"
     }, [_c("td", [_vm._v(_vm._s(category.id))]), _vm._v(" "), _c("td", [_c("input", {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: _vm.title,
+        expression: "title"
+      }],
       staticClass: "form-control",
       attrs: {
         type: "text"
       },
       domProps: {
-        value: category.title
+        value: _vm.title
+      },
+      on: {
+        input: function input($event) {
+          if ($event.target.composing) return;
+          _vm.title = $event.target.value;
+        }
       }
     })]), _vm._v(" "), _c("td", [_c("a", {
       attrs: {
