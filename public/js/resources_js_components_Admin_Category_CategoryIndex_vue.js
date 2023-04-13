@@ -22,7 +22,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      data: null
+      data: null,
+      toEdit: null
     };
   },
   mounted: function mounted() {
@@ -35,6 +36,10 @@ __webpack_require__.r(__webpack_exports__);
       _api__WEBPACK_IMPORTED_MODULE_0__["default"].get('/api/auth/admin/category').then(function (res) {
         _this.data = res.data.data;
       });
+    },
+    categoryToEdit: function categoryToEdit(id) {
+      console.log(id);
+      this.toEdit = id;
     }
   }
 });
@@ -98,7 +103,17 @@ var render = function render() {
   }), _vm._v(" "), _c("table", {
     staticClass: "table w-25"
   }, [_vm._m(0), _vm._v(" "), _c("tbody", [_vm._l(_vm.data, function (category) {
-    return [_c("tr", [_c("td", [_vm._v(_vm._s(category.id))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(category.title))]), _vm._v(" "), _vm._m(1, true), _vm._v(" "), _vm._m(2, true)])];
+    return [_c("tr", [_c("td", [_vm._v(_vm._s(category.id))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(category.title))]), _vm._v(" "), _c("td", [_c("a", {
+      attrs: {
+        href: "#"
+      },
+      on: {
+        click: function click($event) {
+          $event.preventDefault();
+          return _vm.categoryToEdit(category.id);
+        }
+      }
+    }, [_vm._v("edit")])]), _vm._v(" "), _vm._m(1, true)]), _vm._v(" "), _c("tr", [_c("td", [_vm._v(_vm._s(category.id))]), _vm._v(" "), _vm._m(2, true), _vm._v(" "), _c("td", [_vm._v("upd")])])];
   })], 2)])], 1);
 };
 var staticRenderFns = [function () {
@@ -116,15 +131,16 @@ var staticRenderFns = [function () {
     attrs: {
       href: "#"
     }
-  }, [_vm._v("edit")])]);
+  }, [_vm._v("delete")])]);
 }, function () {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("td", [_c("a", {
+  return _c("td", [_c("input", {
+    staticClass: "form-control",
     attrs: {
-      href: "#"
+      type: "text"
     }
-  }, [_vm._v("delete")])]);
+  })]);
 }];
 render._withStripped = true;
 

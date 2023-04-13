@@ -17,8 +17,14 @@
                     <tr>
                         <td>{{category.id}}</td>
                         <td>{{category.title}}</td>
-                        <td><a href="#">edit</a></td>
+                        <td><a href="#" @click.prevent="categoryToEdit(category.id)">edit</a></td>
                         <td><a href="#">delete</a></td>
+                    </tr>
+<!--                    editing fields-->
+                    <tr>
+                        <td>{{category.id}}</td>
+                        <td><input type="text" class="form-control"></td>
+                        <td>upd</td>
                     </tr>
                 </template>
             </tbody>
@@ -35,7 +41,8 @@ export default {
     components: {CreateComponent},
     data() {
         return {
-            data: null
+            data: null,
+            toEdit:null,
         }
     },
     mounted() {
@@ -49,6 +56,10 @@ export default {
                     this.data=res.data.data
                 })
         },
+        categoryToEdit(id){
+            console.log(id);
+            this.toEdit=id
+        }
     }
 }
 </script>
