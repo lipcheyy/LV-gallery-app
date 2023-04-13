@@ -43,6 +43,7 @@ export default {
         return {
             data: null,
             toEdit:null,
+            title:null,
         }
     },
     mounted() {
