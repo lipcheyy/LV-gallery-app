@@ -23,7 +23,9 @@ class CategoryController extends Controller
         ]);
         return $data;
     }
-    public function update(){
-
+    public function update(Category $category,UpdateRequest $request){
+        $data=$request->validated();
+        $category->update($data);
+        return $category;
     }
 }
