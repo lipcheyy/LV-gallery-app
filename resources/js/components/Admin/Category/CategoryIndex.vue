@@ -4,18 +4,29 @@
 
         <create-component ref="test"></create-component>
 
-        <table class="table">
+        <table class="table w-25">
             <thead>
                 <tr>
                     <th>#</th>
                     <th>title</th>
+                    <th colspan="2">actions</th>
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="category in data">
-                    <td>{{category.id}}</td>
-                    <td>{{category.title}}</td>
-                </tr>
+                <template v-for="category in data">
+                    <tr :class="categoryToEdit(category.id)?'d-none':''">
+                        <td>{{category.id}}</td>
+                        <td>{{category.title}}</td>
+                        <td><a href="#" @click.prevent="getCategoryDataToEdit(category.id,category.title)">edit</a></td>
+                        <td><a href="#">delete</a></td>
+                    </tr>
+<!--                    editing fields-->
+                    <tr :class="categoryToEdit(category.id)?'':'d-none'">
+                        <td>{{category.id}}</td>
+                        <td><input v-model="title" type="text" class="form-control" ></td>
+                        <td><a href="#" @click.prevent="update(category.id)">update</a></td>
+                    </tr>
+                </template>
             </tbody>
         </table>
     </div>
@@ -30,7 +41,9 @@ export default {
     components: {CreateComponent},
     data() {
         return {
-            data: null
+            data: null,
+            toEdit:null,
+            title:null,
         }
     },
     mounted() {
@@ -44,6 +57,20 @@ export default {
                     this.data=res.data.data
                 })
         },
+        getCategoryDataToEdit(id,title){
+            this.toEdit=id
+            this.title=title
+        },
+        categoryToEdit(id){
+            return this.toEdit===id
+        },
+        update(id){
+            this.toEdit=null
+            api.patch(`/api/auth/admin/category/${id}`,{title:this.title})
+                .then(res=>{
+                    this.getCategories()
+                })
+        }
     }
 }
 </script>

@@ -26,6 +26,7 @@ api.interceptors.response.use(config => {
 }, error => {
     console.log(error.response.status);
     if (error.response.status===401) {
+        localStorage.clear()
         router.push({name: 'user.login'})
     }
     if (error.response.data.message === 'Token has expired') {
