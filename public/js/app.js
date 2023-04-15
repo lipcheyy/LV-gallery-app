@@ -5322,12 +5322,6 @@ __webpack_require__.r(__webpack_exports__);
       access_token: null
     };
   },
-  mounted: function mounted() {
-    this.getAccessToken();
-  },
-  updated: function updated() {
-    this.getAccessToken();
-  },
   methods: {
     getAccessToken: function getAccessToken() {
       this.access_token = localStorage.getItem('access_token');
@@ -5365,6 +5359,29 @@ __webpack_require__.r(__webpack_exports__);
   name: "Index",
   components: {
     Header: _Includes_HeaderMain__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
+  data: function data() {
+    return {
+      access_token: null
+    };
+  },
+  mounted: function mounted() {
+    this.$refs.header.getAccessToken();
+  },
+  updated: function updated() {
+    this.$refs.header.getAccessToken();
+  },
+  methods: {
+    // getAccessToken(){
+    //     this.access_token=localStorage.getItem('access_token')
+    // },
+    // logout() {
+    //     api.post('/api/auth/logout')
+    //         .then(res=>{
+    //             localStorage.clear()
+    //             this.$router.push({name:'user.login'})
+    //         })
+    // },
   }
 });
 
@@ -5444,7 +5461,9 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [_c("Header"), _vm._v(" "), _c("router-view")], 1);
+  return _c("div", [_c("Header", {
+    ref: "header"
+  }), _vm._v(" "), _c("router-view")], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;

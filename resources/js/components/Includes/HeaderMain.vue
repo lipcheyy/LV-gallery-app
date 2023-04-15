@@ -13,18 +13,10 @@ import api from "../../api";
 
 export default {
     name: "header",
-
     data(){
         return{
-            access_token:null,
+            access_token:null
         }
-    },
-    mounted() {
-        this.getAccessToken()
-    },
-    updated() {
-        this.getAccessToken()
-
     },
     methods:{
         getAccessToken(){
@@ -37,8 +29,8 @@ export default {
                     this.$router.push({name:'user.login'})
                 })
         },
-
     }
+
 }
 </script>
 
