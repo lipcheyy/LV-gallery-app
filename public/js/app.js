@@ -5367,7 +5367,7 @@ var render = function render() {
         name: "user.login"
       }
     }
-  }, [_vm._v("logn")]) : _vm._e(), _vm._v(" "), !_vm.access_token ? _c("router-link", {
+  }, [_vm._v("login")]) : _vm._e(), _vm._v(" "), !_vm.access_token ? _c("router-link", {
     attrs: {
       to: {
         name: "user.registration"
@@ -43875,6 +43875,11 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		var chunkLoadingGlobal = self["webpackChunk"] = self["webpackChunk"] || [];
 /******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
 /******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/nonce */
+/******/ 	(() => {
+/******/ 		__webpack_require__.nc = undefined;
 /******/ 	})();
 /******/ 	
 /************************************************************************/
