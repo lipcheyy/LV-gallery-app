@@ -20,7 +20,7 @@
                 <td>
                     <div class="logoTable">
                         <a href="#"><img class="tableLogo"src="img/edit.png" alt="edit"></a>
-                        <a href="#"><img class="tableLogo" src="img/del.png" alt="del"></a>
+                        <a href="#"><img class="tableLogo" :src="'../storage/site/del.png'" alt="del"></a>
                     </div>
                 </td>
             </tr>

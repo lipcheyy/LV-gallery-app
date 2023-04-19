@@ -199,15 +199,29 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [_vm._v("\n    input category title\n    "), _c("input", {
+  return _c("div", {
+    staticClass: "categoryBlock"
+  }, [_c("h1", {
+    staticClass: "h1Category"
+  }, [_vm._v("Головна сторінка категорії")]), _vm._v(" "), _c("h3", {
+    staticClass: "h2Category"
+  }, [_vm._v("Назва категорії введення")]), _vm._v(" "), _c("form", {
+    staticClass: "formAddCategory",
+    attrs: {
+      action: "#",
+      method: "#"
+    }
+  }, [_c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
       value: _vm.title,
       expression: "title"
     }],
+    staticClass: "inputCategory",
     attrs: {
-      type: "text"
+      type: "text",
+      placeholder: "Назва"
     },
     domProps: {
       value: _vm.title
@@ -219,6 +233,7 @@ var render = function render() {
       }
     }
   }), _vm._v(" "), _c("a", {
+    staticClass: "buttonCategory",
     attrs: {
       href: "#"
     },
@@ -228,9 +243,47 @@ var render = function render() {
         return _vm.create();
       }
     }
-  }, [_vm._v("create")])]);
+  }, [_vm._v("Створити")])]), _vm._v(" "), _c("table", {
+    staticClass: "categoryTable"
+  }, [_vm._m(0), _vm._v(" "), _c("tr", [_c("td", [_vm._v("Breed")]), _vm._v(" "), _c("td", [_vm._v("Jack Russell")]), _vm._v(" "), _c("td", [_c("div", {
+    staticClass: "logoTable"
+  }, [_vm._m(1), _vm._v(" "), _c("a", {
+    attrs: {
+      href: "#"
+    }
+  }, [_c("img", {
+    staticClass: "tableLogo",
+    attrs: {
+      src: "../storage/site/del.png",
+      alt: "del"
+    }
+  })])])])])])]);
 };
-var staticRenderFns = [];
+var staticRenderFns = [function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("thead", [_c("tr", [_c("td", {
+    staticClass: "firstConTable"
+  }, [_vm._v("ID")]), _vm._v(" "), _c("td", {
+    staticClass: "secConTable"
+  }, [_vm._v("Назва")]), _vm._v(" "), _c("td", {
+    staticClass: "thrdConTable"
+  }, [_vm._v("Дії")])])]);
+}, function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("a", {
+    attrs: {
+      href: "#"
+    }
+  }, [_c("img", {
+    staticClass: "tableLogo",
+    attrs: {
+      src: "img/edit.png",
+      alt: "edit"
+    }
+  })]);
+}];
 render._withStripped = true;
 
 
