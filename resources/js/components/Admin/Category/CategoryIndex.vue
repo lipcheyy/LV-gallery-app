@@ -20,8 +20,8 @@
                         <td>{{category.title}}</td>
                         <td>
                             <div class="logoTable">
-                                <a href="#" @click.prevent="getCategoryDataToEdit(category.id,category.title)"><img class="tableLogo"src="img/edit.png" alt="edit"></a>
-                                <a href="#"><img class="tableLogo" src="img/del.png" alt="del"></a>
+                                <a class="tableLogo" href="#" @click.prevent="getCategoryDataToEdit(category.id,category.title)"><i class="fas fa-pencil"></i></a>
+                                <a class="tableLogo" href="#"><i class="fas fa-trash"></i></a>
                             </div>
                         </td>
                     <tr :class="categoryToEdit(category.id)?'':'d-none'">
@@ -80,28 +80,40 @@ export default {
 </script>
 
 <style scoped>
-
-
-.tableCategory{
-    width: 892px;
-    height: 351px;
-
-    background: #F1F1F1;
-    border: 3px solid #323232;
-    box-shadow: 5px -4px 10px rgba(0, 0, 0, 0.25);
-    border-radius: 17px;
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Istok+Web&display=swap');
+*{
+    margin:0px;
+    padding:0px;
+    box-sizing: border-box;
 }
-.theadCategory{
-    background: #4D4D4D;
+a{
+    outline: none;
+    text-decoration: none;
+    color: #666;
+}
+.TableBlock{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: calc(24px + (100vw / 1280));
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 29px;
+    letter-spacing: 0.14em;
 }
 .categoryTable {
-    width: 815px;
+    width: 70%;
+    min-width: 400px;
     margin-bottom: 20px;
     background: #F1F1F1;
     border: 3px solid #323232;
     box-shadow: 5px -4px 10px rgba(0, 0, 0, 0.25);
     border-collapse: collapse;
-    border-radius: 17px;
 }
 .categoryTable td {
     border: 3px solid #323232;
@@ -113,35 +125,25 @@ export default {
 .secConTable{
     width: 57%;
 }
-
 .categoryTable thead{
     background: #4D4D4D;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 24px;
-    line-height: 29px;
-    text-align: center;
-    letter-spacing: 0.14em;
     color: #FFFFFF;
-}
-.tableLogo{
-    width: 16px;
-    height: 20px;
-}
-.table tr{
-    height: 50px;
 }
 .logoTable{
     display: flex;
     justify-content: center;
     gap: 46%;
+    padding-bottom: 7px;
 }
-.TableBlock{
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+.tableLogo{
+    width: 16px;
+    height: 20px;
+    color:red;
+}
+@media only screen and (max-width:500px) {
+    .categoryTable{
+        font-size: 15px;
+        min-width: 350px;
+    }
 }
 </style>

@@ -123,6 +123,7 @@ var render = function render() {
     }, [_c("td", [_vm._v(_vm._s(category.id))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(category.title))]), _vm._v(" "), _c("td", [_c("div", {
       staticClass: "logoTable"
     }, [_c("a", {
+      staticClass: "tableLogo",
       attrs: {
         href: "#"
       },
@@ -132,12 +133,8 @@ var render = function render() {
           return _vm.getCategoryDataToEdit(category.id, category.title);
         }
       }
-    }, [_c("img", {
-      staticClass: "tableLogo",
-      attrs: {
-        src: "img/edit.png",
-        alt: "edit"
-      }
+    }, [_c("i", {
+      staticClass: "fas fa-pencil"
     })]), _vm._v(" "), _vm._m(1, true)])])]), _c("tr", {
       "class": _vm.categoryToEdit(category.id) ? "" : "d-none"
     }, [_c("td", [_vm._v(_vm._s(category.id))]), _vm._v(" "), _c("td", [_c("input", {
@@ -187,15 +184,12 @@ var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("a", {
+    staticClass: "tableLogo",
     attrs: {
       href: "#"
     }
-  }, [_c("img", {
-    staticClass: "tableLogo",
-    attrs: {
-      src: "img/del.png",
-      alt: "del"
-    }
+  }, [_c("i", {
+    staticClass: "fas fa-trash"
   })]);
 }];
 render._withStripped = true;
@@ -284,8 +278,9 @@ __webpack_require__.r(__webpack_exports__);
 // Imports
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Inter&family=Istok+Web&display=swap);"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.tableCategory[data-v-3caa8e4e]{\n    width: 892px;\n    height: 351px;\n\n    background: #F1F1F1;\n    border: 3px solid #323232;\n    box-shadow: 5px -4px 10px rgba(0, 0, 0, 0.25);\n    border-radius: 17px;\n}\n.theadCategory[data-v-3caa8e4e]{\n    background: #4D4D4D;\n}\n.categoryTable[data-v-3caa8e4e] {\n    width: 815px;\n    margin-bottom: 20px;\n    background: #F1F1F1;\n    border: 3px solid #323232;\n    box-shadow: 5px -4px 10px rgba(0, 0, 0, 0.25);\n    border-collapse: collapse;\n    border-radius: 17px;\n}\n.categoryTable td[data-v-3caa8e4e] {\n    border: 3px solid #323232;\n    padding: 5px;\n}\n.firstConTable[data-v-3caa8e4e]{\n    width: 10%;\n}\n.secConTable[data-v-3caa8e4e]{\n    width: 57%;\n}\n.categoryTable thead[data-v-3caa8e4e]{\n    background: #4D4D4D;\n    font-family: 'Inter';\n    font-style: normal;\n    font-weight: 500;\n    font-size: 24px;\n    line-height: 29px;\n    text-align: center;\n    letter-spacing: 0.14em;\n    color: #FFFFFF;\n}\n.tableLogo[data-v-3caa8e4e]{\n    width: 16px;\n    height: 20px;\n}\n.table tr[data-v-3caa8e4e]{\n    height: 50px;\n}\n.logoTable[data-v-3caa8e4e]{\n    display: flex;\n    justify-content: center;\n    gap: 46%;\n}\n.TableBlock[data-v-3caa8e4e]{\n    margin-top: 20px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    flex-direction: column;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n*[data-v-3caa8e4e]{\n    margin:0px;\n    padding:0px;\n    box-sizing: border-box;\n}\na[data-v-3caa8e4e]{\n    outline: none;\n    text-decoration: none;\n    color: #666;\n}\n.TableBlock[data-v-3caa8e4e]{\n    margin-top: 20px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    flex-direction: column;\n    font-size: calc(24px + (100vw / 1280));\n    text-align: center;\n    font-family: 'Inter', sans-serif;\n    font-style: normal;\n    font-weight: 500;\n    font-size: 24px;\n    line-height: 29px;\n    letter-spacing: 0.14em;\n}\n.categoryTable[data-v-3caa8e4e] {\n    width: 70%;\n    min-width: 400px;\n    margin-bottom: 20px;\n    background: #F1F1F1;\n    border: 3px solid #323232;\n    box-shadow: 5px -4px 10px rgba(0, 0, 0, 0.25);\n    border-collapse: collapse;\n}\n.categoryTable td[data-v-3caa8e4e] {\n    border: 3px solid #323232;\n    padding: 5px;\n}\n.firstConTable[data-v-3caa8e4e]{\n    width: 10%;\n}\n.secConTable[data-v-3caa8e4e]{\n    width: 57%;\n}\n.categoryTable thead[data-v-3caa8e4e]{\n    background: #4D4D4D;\n    color: #FFFFFF;\n}\n.logoTable[data-v-3caa8e4e]{\n    display: flex;\n    justify-content: center;\n    gap: 46%;\n    padding-bottom: 7px;\n}\n.tableLogo[data-v-3caa8e4e]{\n    width: 16px;\n    height: 20px;\n    color:red;\n}\n@media only screen and (max-width:500px) {\n.categoryTable[data-v-3caa8e4e]{\n        font-size: 15px;\n        min-width: 350px;\n}\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -307,10 +302,9 @@ __webpack_require__.r(__webpack_exports__);
 // Imports
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
-___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Praise&display=swap);"]);
-___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Praise&display=swap);"]);
+___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Inter&family=Istok+Web&display=swap);"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n*[data-v-e2a8d78a]{\n    margin:0px;\n    padding:0px;\n    box-sizing: border-box;\n    font-family: Montserrat, sans-serif;\n}\na[data-v-e2a8d78a]{\n    outline: none;\n    text-decoration: none;\n}\n.formAddCategory[data-v-e2a8d78a],\n.categoryBlock[data-v-e2a8d78a]{\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    flex-direction: column;\n    row-gap: 24px;\n}\n.h1Category[data-v-e2a8d78a]{\n    font-family: 'Istok Web';\n    font-style: normal;\n    font-weight: 400;\n    font-size: 64px;\n    line-height: 92px;\n    text-align: center;\n    letter-spacing: 0.14em;\n    color: #550000;\n    text-shadow: 5px 4px 7px rgba(176, 0, 0, 0.25);\n}\n.h2Category[data-v-e2a8d78a]{\n    font-family: 'Inter';\n    font-style: normal;\n    font-weight: 700;\n    font-size: 24px;\n    line-height: 29px;\n    color: #000000;\n}\n.inputCategory[data-v-e2a8d78a]{\n    font-family: 'Inter';\n    font-style: normal;\n    font-weight: 500;\n    font-size: 24px;\n    line-height: 29px;\n    display: flex;\n    align-items: center;\n    min-width: 450px;\n    min-height: 50px;\n    background: #FFFFFF;\n    border: 2px solid #000000;\n    border-radius: 7px;\n    padding: 11px 22px;\n}\n.inputCategory[data-v-e2a8d78a]::-moz-placeholder {\n    color: #C2C2C2;\n}\n.inputCategory[data-v-e2a8d78a]::placeholder {\n    color: #C2C2C2;\n}\n.buttonCategory[data-v-e2a8d78a]{\n    padding: 11px 72px;\n    background: #B00000;\n    border-radius: 7px;\n    font-family: 'Inter';\n    font-style: normal;\n    font-weight: 500;\n    font-size: 24px;\n    line-height: 29px;\n    color: #FFFFFF;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n*[data-v-e2a8d78a]{\n    margin:0px;\n    padding:0px;\n    box-sizing: border-box;\n}\na[data-v-e2a8d78a]{\n    outline: none;\n    text-decoration: none;\n}\n.formAddCategory[data-v-e2a8d78a],\n.categoryBlock[data-v-e2a8d78a]{\n    text-align: center;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    flex-direction: column;\n    row-gap: 24px;\n}\n.h1Category[data-v-e2a8d78a]{\n    font-family: 'Istok Web', sans-serif;\n    font-style: normal;\n    font-weight: 400;\n    font-size: calc(24px + 40*(100vw / 1280));\n    text-align: center;\n    letter-spacing: 0.14em;\n    color: #550000;\n    text-shadow: 5px 4px 7px rgba(176, 0, 0, 0.25);\n}\n.h2Category[data-v-e2a8d78a]{\n    font-family: 'Inter', sans-serif;\n    font-style: normal;\n    font-weight: 700;\n    font-size: calc(24px + (100vw / 1280));\n    line-height: 29px;\n    color: #000000;\n}\n.inputCategory[data-v-e2a8d78a]{\n    font-family: 'Inter', sans-serif;\n    font-style: normal;\n    font-weight: 500;\n    font-size: calc(24px + (100vw / 1280));\n    line-height: 29px;\n    display: flex;\n    align-items: center;\n    width: 46%;\n    min-width: 450px;\n    min-height: 50px;\n    background: #FFFFFF;\n    border: 2px solid #000000;\n    border-radius: 7px;\n    padding: 11px 22px;\n}\n.inputCategory[data-v-e2a8d78a]::-moz-placeholder {\n    color: #C2C2C2;\n}\n.inputCategory[data-v-e2a8d78a]::placeholder {\n    color: #C2C2C2;\n}\n.buttonCategory[data-v-e2a8d78a]{\n    padding: 11px 72px;\n    background: #B00000;\n    border-radius: 7px;\n    font-family: 'Inter';\n    font-style: normal;\n    font-weight: 500;\n    font-size: calc(24px + 3 * (100vw / 1280));\n    line-height: 29px;\n    color: #FFFFFF;\n}\n.buttonCategory[data-v-e2a8d78a]:hover{\n    background-color: #e60404;\n    box-shadow: 0 0 12px #ff0000;\n    -moz-box-shadow: 0 0 12px #a30707;\n    -o-box-shadow: 0 0 12px #bd1206;\n    -ms-box-shadow: 0 0 12px #851202;\n    -webkit-box-shadow: 0 0 12px #d81f1f;\n}\n@media only screen and (max-width:500px) {\n.inputCategory[data-v-e2a8d78a]{\n        min-width: 300px;\n        font-size: 18px;\n        min-height: 50px;\n        border-radius: 7px;\n        padding: 11px 22px;\n}\n.h1Category[data-v-e2a8d78a]{\n        font-size:50px;\n}\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
