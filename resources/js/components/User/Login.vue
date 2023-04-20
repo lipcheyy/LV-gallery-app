@@ -2,8 +2,8 @@
     <div class="main-container">
         <div class="form-container">
             <div class="btn-container">
-                <router-link v-if="!access_token" :to="{name:'user.login'}" class="route-btn active">Вхід</router-link>
-                <router-link v-if="!access_token" :to="{name:'user.registration'}" class="route-btn">Реєстрація</router-link>
+                <router-link  :to="{name:'user.login'}" class="route-btn active">Вхід</router-link>
+                <router-link  :to="{name:'user.registration'}" class="route-btn">Реєстрація</router-link>
             </div>
 
             <div class="inputs-container">

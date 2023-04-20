@@ -62,21 +62,21 @@ var render = function render() {
     staticClass: "form-container"
   }, [_c("div", {
     staticClass: "btn-container"
-  }, [!_vm.access_token ? _c("router-link", {
+  }, [_c("router-link", {
     staticClass: "route-btn active",
     attrs: {
       to: {
         name: "user.login"
       }
     }
-  }, [_vm._v("Вхід")]) : _vm._e(), _vm._v(" "), !_vm.access_token ? _c("router-link", {
+  }, [_vm._v("Вхід")]), _vm._v(" "), _c("router-link", {
     staticClass: "route-btn",
     attrs: {
       to: {
         name: "user.registration"
       }
     }
-  }, [_vm._v("Реєстрація")]) : _vm._e()], 1), _vm._v(" "), _c("div", {
+  }, [_vm._v("Реєстрація")])], 1), _vm._v(" "), _c("div", {
     staticClass: "inputs-container"
   }, [_c("p", {
     staticClass: "title"

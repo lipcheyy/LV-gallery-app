@@ -28,11 +28,11 @@ Route::group([
     'prefix' => 'auth'
 
 ], function ($router) {
-
+    Route::post('me', 'AuthController@me');
+    Route::post('refresh', 'AuthController@refresh');
     Route::group(['middleware'=>'jwt.auth'],function (){
         //лише для авторизованих
-        Route::post('me', 'AuthController@me');
-        Route::post('refresh', 'AuthController@refresh');
+
         Route::group(['namespace' => 'Personal'], function () {
             Route::post('personal','IndexController');
         });
