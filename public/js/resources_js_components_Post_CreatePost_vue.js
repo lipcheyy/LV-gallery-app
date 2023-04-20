@@ -12,18 +12,34 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var dropzone__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! dropzone */ "./node_modules/dropzone/dist/dropzone.mjs");
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../api */ "./resources/js/api.js");
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "CreatePost",
   data: function data() {
     return {
-      dropzone: null
+      dropzone: null,
+      title: null
     };
   },
   mounted: function mounted() {
     this.dropzone = new dropzone__WEBPACK_IMPORTED_MODULE_0__["default"](this.$refs.dropzone, {
-      url: '#'
+      url: 'test',
+      autoProcessQueue: false
     });
+  },
+  methods: {
+    store: function store() {
+      var data = new FormData();
+      var files = this.dropzone.getAcceptedFiles();
+      files.forEach(function (file) {
+        data.append('images[]', file);
+      });
+      _api__WEBPACK_IMPORTED_MODULE_1__["default"].post('/api/auth/posts', data).then(function (res) {
+        console.log(res);
+      });
+    }
   }
 });
 
@@ -47,8 +63,42 @@ var render = function render() {
     staticClass: "dropzone_container"
   }, [_c("div", {
     ref: "dropzone",
-    staticClass: "bg-info p-5"
-  }, [_vm._v("\n        dropzone\n    ")])]);
+    staticClass: "dropzone_form bg-info btn"
+  }, [_vm._v("\n        dropzone\n    ")]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.title,
+      expression: "title"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      type: "text",
+      name: "",
+      id: "",
+      placeholder: "title"
+    },
+    domProps: {
+      value: _vm.title
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.title = $event.target.value;
+      }
+    }
+  }), _vm._v(" "), _c("input", {
+    attrs: {
+      type: "submit",
+      value: "create"
+    },
+    on: {
+      click: function click($event) {
+        $event.preventDefault();
+        return _vm.store.apply(null, arguments);
+      }
+    }
+  })]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -72,7 +122,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.dropzone_container[data-v-015a00e0]{\n    width: 150px;\n    height: 120px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.dropzone_container[data-v-015a00e0]{\n    width: 150px;\n    height: 120px;\n}\n.dropzone_form[data-v-015a00e0]{\n    padding: 10px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
