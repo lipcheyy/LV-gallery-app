@@ -46,12 +46,12 @@ Route::group([
         Route::group(['namespace' => 'User', 'prefix' => 'user'], function () {
             Route::post('/userdata','DataController');
         });
+        Route::group(['namespace'=>'Post','prefix'=>'posts'],function () {
+            Route::post('/', 'PostsController@store');
+        });
     });
 
     Route::post('login', 'AuthController@login');
     Route::post('logout', 'AuthController@logout');
-
-
-
-
 });
+
