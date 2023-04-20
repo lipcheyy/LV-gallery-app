@@ -9,4 +9,7 @@ class Image extends Model
 {
     use HasFactory;
     protected $guarded=false;
+//    public function post(){
+//        return $this->belongsToMany(Image::class,'images','post_id');
+//    }
 }
