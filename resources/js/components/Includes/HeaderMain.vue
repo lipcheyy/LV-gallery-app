@@ -4,6 +4,7 @@
         <router-link v-if="!access_token" :to="{name:'user.registration'}">registration</router-link>
         <router-link v-if="access_token" :to="{name:'post.create'}">Add new</router-link>
         <router-link v-if="access_token" :to="{name:'personal.page'}">personal</router-link>
+        <router-link v-if="access_token" :to="{name:'post.index'}">posts</router-link>
         <a href="#" v-if="access_token" @click.prevent="logout">logout</a>
     </div>
 </template>
