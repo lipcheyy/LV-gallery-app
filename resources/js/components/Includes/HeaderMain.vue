@@ -1,18 +1,11 @@
 <template>
     <div class="asdas">
-        <router-link v-if="!access_token" :to="{name:'user.login'}">login</router-link>
-        <router-link v-if="!access_token" :to="{name:'user.registration'}">registration</router-link>
-        <router-link v-if="access_token" :to="{name:'post.create'}">Add new</router-link>
-        <router-link v-if="access_token" :to="{name:'personal.page'}">personal</router-link>
-        <router-link v-if="access_token" :to="{name:'post.index'}">posts</router-link>
-        <a href="#" v-if="access_token" @click.prevent="logout">logout</a>
-
         <div class="header">
             <div class="leftNav">
                 <ul class="navbarL">
                     <li><a href="#" class="logo"> <img class= "logo" src="./Images/logo.png" alt="logo"> </a></li>
-                    <li><a href="#" class="white_style_text">Головна</a></li>
-                    <li><a href="#" class="white_style_text">Створити</a></li>
+                    <li><router-link v-if="access_token" :to="{name:'post.index'}" class="white_style_text">Головна</router-link></li>
+                    <li><router-link v-if="access_token" :to="{name:'post.create'}" class="white_style_text">Створити</router-link></li>
                     <li><a href="#" class="red_style_text">Категорії <img src="./Images/v.png" alt="v" class="v_ico"></a></li>
                 </ul>
             </div>
@@ -20,8 +13,8 @@
             <div class="rightNav">
                 <ul class="navbarR">
                     <li><a href="#" class="white_style_text">Адмін панель</a></li>
-                    <li><a href="#"><img class= "icoRighr" src="./Images/my_acc.png" alt="myAccount"></a></li>
-                    <li><a href="#"><img class= "icoRighr" src="./Images/exit_ico.png" alt="EXIT"></a></li>
+                    <li><router-link v-if="access_token" :to="{name:'personal.page'}"><img class= "icoRighr" src="./Images/my_acc.png" alt="myAccount"></router-link></li>
+                    <li><a href="#" v-if="access_token" @click.prevent="logout"><img class= "icoRighr" src="./Images/exit_ico.png" alt="EXIT"></a></li>
                 </ul>
             </div>
         </div>

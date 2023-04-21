@@ -2,7 +2,7 @@
     <div>
         <header-layout ref="header_layout"></header-layout>
         <router-view></router-view>
-        <footer-layout></footer-layout>
+<!--        <footer-layout></footer-layout>-->
     </div>
 </template>
 
