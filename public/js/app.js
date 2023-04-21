@@ -5316,7 +5316,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../api */ "./resources/js/api.js");
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "header",
+  name: "header-layout",
   data: function data() {
     return {
       access_token: null
@@ -5358,7 +5358,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Index",
   components: {
-    Header: _Includes_HeaderMain__WEBPACK_IMPORTED_MODULE_1__["default"]
+    HeaderLayout: _Includes_HeaderMain__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
     return {
@@ -5366,10 +5366,10 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
-    this.$refs.header.getAccessToken();
+    this.$refs.header_layout.getAccessToken();
   },
   updated: function updated() {
-    this.$refs.header.getAccessToken();
+    this.$refs.header_layout.getAccessToken();
   },
   methods: {
     // getAccessToken(){
@@ -5467,8 +5467,8 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [_c("Header", {
-    ref: "header"
+  return _c("div", [_c("HeaderLayout", {
+    ref: "header_layout"
   }), _vm._v(" "), _c("router-view")], 1);
 };
 var staticRenderFns = [];

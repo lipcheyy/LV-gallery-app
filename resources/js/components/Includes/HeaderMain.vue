@@ -13,7 +13,7 @@
 import api from "../../api";
 
 export default {
-    name: "header",
+    name: "header-layout",
     data(){
         return{
             access_token:null
