@@ -1,5 +1,7 @@
 <template>
-
+    <div>
+        siiu
+    </div>
 </template>
 
 <script>
