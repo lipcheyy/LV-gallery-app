@@ -2,6 +2,7 @@
     <div>
         <header-layout ref="header_layout"></header-layout>
         <router-view></router-view>
+        <footer-layout></footer-layout>
     </div>
 </template>
 
@@ -9,9 +10,10 @@
 
 import api from "../api";
 import HeaderLayout from "./Includes/HeaderMain";
+import FooterLayout from "./Includes/FooterLayout";
 export default {
     name: "Index",
-    components: {HeaderLayout},
+    components: {HeaderLayout,FooterLayout},
     data(){
         return{
             access_token:null,
