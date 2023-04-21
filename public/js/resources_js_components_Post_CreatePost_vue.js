@@ -87,7 +87,7 @@ var render = function render() {
         _vm.title = $event.target.value;
       }
     }
-  }), _vm._v(" "), _c("input", {
+  }), _vm._v(" "), _vm._m(0), _vm._v(" "), _c("input", {
     attrs: {
       type: "submit",
       value: "create"
@@ -100,7 +100,13 @@ var render = function render() {
     }
   })]);
 };
-var staticRenderFns = [];
+var staticRenderFns = [function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("div", {
+    staticClass: "form-group"
+  }, [_vm._v("\n        choose category\n        "), _c("select")]);
+}];
 render._withStripped = true;
 
 

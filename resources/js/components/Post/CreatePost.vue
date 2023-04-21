@@ -4,6 +4,12 @@
             dropzone
         </div>
         <input v-model="title" type="text" name="" class="form-control"  id="" placeholder="title">
+        <div class="form-group">
+            choose category
+            <select>
+
+            </select>
+        </div>
         <input @click.prevent="store" type="submit" value="create">
     </div>
 </template>
