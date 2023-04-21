@@ -20,7 +20,7 @@
   + ```git clone git@github.com:lipcheyy/LV-gallery-app.git ```
 * Встановити в проекті композер
   + ``` composer install ```
-* Встановити npm
+* Встановити пакети
   + ``` npm install ```
 * Налаштувати БД
   + В директорії проекту в папці ```database``` створити файл та назвати його ```database.sqlite ```
