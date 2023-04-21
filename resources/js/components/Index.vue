@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="component-body">
         <header-layout ref="header_layout"></header-layout>
         <router-view></router-view>
         <footer-layout></footer-layout>
@@ -42,5 +42,8 @@ export default {
 </script>
 
 <style scoped>
-
+    .component-body{
+        margin: 0;
+        padding: 0;
+    }
 </style>
