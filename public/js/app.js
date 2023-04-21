@@ -5512,7 +5512,6 @@ api.interceptors.response.use(function (config) {
   }
   return config;
 }, function (error) {
-  console.log(error.response.status);
   if (error.response.status === 401) {
     localStorage.clear();
     _router__WEBPACK_IMPORTED_MODULE_1__["default"].push({

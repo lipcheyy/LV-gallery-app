@@ -24,7 +24,6 @@ api.interceptors.response.use(config => {
     }
     return config
 }, error => {
-    console.log(error.response.status);
     if (error.response.status===401) {
         localStorage.clear()
         router.push({name: 'user.login'})
