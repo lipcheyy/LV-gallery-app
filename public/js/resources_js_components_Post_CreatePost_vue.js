@@ -20,7 +20,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       dropzone: null,
-      title: null
+      title: null,
+      categories: null
     };
   },
   mounted: function mounted() {
@@ -28,6 +29,7 @@ __webpack_require__.r(__webpack_exports__);
       url: 'test',
       autoProcessQueue: false
     });
+    this.getCategories();
   },
   methods: {
     store: function store() {
@@ -38,6 +40,12 @@ __webpack_require__.r(__webpack_exports__);
       });
       _api__WEBPACK_IMPORTED_MODULE_1__["default"].post('/api/auth/posts', data).then(function (res) {
         console.log(res);
+      });
+    },
+    getCategories: function getCategories() {
+      var _this = this;
+      _api__WEBPACK_IMPORTED_MODULE_1__["default"].get('/api/auth/admin/category').then(function (res) {
+        _this.categories = res.data.data;
       });
     }
   }
@@ -87,7 +95,15 @@ var render = function render() {
         _vm.title = $event.target.value;
       }
     }
-  }), _vm._v(" "), _vm._m(0), _vm._v(" "), _c("input", {
+  }), _vm._v(" "), _c("div", {
+    staticClass: "form-group"
+  }, [_vm._v("\n        choose category\n        "), _c("select", [_vm._l(_vm.categories, function (category) {
+    return [_c("option", {
+      domProps: {
+        value: category.id
+      }
+    }, [_vm._v(_vm._s(category.title))])];
+  })], 2)]), _vm._v(" "), _c("input", {
     attrs: {
       type: "submit",
       value: "create"
@@ -100,13 +116,7 @@ var render = function render() {
     }
   })]);
 };
-var staticRenderFns = [function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("div", {
-    staticClass: "form-group"
-  }, [_vm._v("\n        choose category\n        "), _c("select")]);
-}];
+var staticRenderFns = [];
 render._withStripped = true;
 
 
@@ -128,7 +138,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.dropzone_container[data-v-015a00e0]{\n    width: 150px;\n    height: 120px;\n}\n.dropzone_form[data-v-015a00e0]{\n    padding: 10px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.dropzone_container[data-v-015a00e0] {\n    width: 150px;\n    height: 120px;\n}\n.dropzone_form[data-v-015a00e0] {\n    padding: 10px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
