@@ -1,28 +1,29 @@
 <template>
     <div>
-        <Header ref="header"></Header>
-
+        <header-layout ref="header_layout"></header-layout>
         <router-view></router-view>
+        <footer-layout></footer-layout>
     </div>
 </template>
 
 <script>
 
 import api from "../api";
-import Header from "./Includes/HeaderMain";
+import HeaderLayout from "./Includes/HeaderMain";
+import FooterLayout from "./Includes/FooterLayout";
 export default {
     name: "Index",
-    components: {Header},
+    components: {HeaderLayout,FooterLayout},
     data(){
         return{
             access_token:null,
         }
     },
     mounted() {
-        this.$refs.header.getAccessToken()
+        this.$refs.header_layout.getAccessToken()
     },
     updated() {
-        this.$refs.header.getAccessToken()
+        this.$refs.header_layout.getAccessToken()
     },
     methods:{
         // getAccessToken(){

@@ -12,7 +12,7 @@
 </head>
 <body>
 <header></header>
-<div id="app" class="p-5">
+<div id="app">
     @yield('content')
 </div>
 </body>
