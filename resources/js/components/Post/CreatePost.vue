@@ -6,9 +6,9 @@
         <input v-model="title" type="text" name="" class="form-control" id="" placeholder="title">
         <div class="form-group">
             choose category
-            <select>
+            <select v-model="category_id">
                 <template v-for="category in categories">
-                    <option :value="category.id">{{category.title}}</option>
+                    <option  :value="category.id">{{category.title}}</option>
                 </template>
             </select>
         </div>
@@ -26,9 +26,11 @@ export default {
         return {
             dropzone: null,
             title: null,
-            categories: null
+            categories: null,
+            category_id:1
         }
     },
+
     mounted() {
         this.dropzone = new Dropzone(this.$refs.dropzone, {
             url: 'test',
@@ -43,10 +45,14 @@ export default {
             files.forEach(file => {
                 data.append('images[]', file)
             })
-            api.post('/api/auth/posts', data)
-                .then(res => {
-                    console.log(res);
-                })
+            data.append('title',this.title)
+            data.append('category_id',this.category_id)
+            console.log(this.category_id);
+            console.log(this.title);
+            // api.post('/api/auth/posts', data)
+            //     .then(res => {
+            //         console.log(res);
+            //     })
         },
         getCategories() {
             api.get('/api/auth/admin/category')
@@ -54,6 +60,11 @@ export default {
                     this.categories = res.data.data
                 })
         },
+    },
+    computed: {
+        selectedStudentId() {
+            return this.category_id?.id;
+        }
     }
 }
 </script>

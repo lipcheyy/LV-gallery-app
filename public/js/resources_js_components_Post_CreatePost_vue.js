@@ -21,7 +21,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       dropzone: null,
       title: null,
-      categories: null
+      categories: null,
+      category_id: 1
     };
   },
   mounted: function mounted() {
@@ -38,15 +39,26 @@ __webpack_require__.r(__webpack_exports__);
       files.forEach(function (file) {
         data.append('images[]', file);
       });
-      _api__WEBPACK_IMPORTED_MODULE_1__["default"].post('/api/auth/posts', data).then(function (res) {
-        console.log(res);
-      });
+      data.append('title', this.title);
+      data.append('category_id', this.category_id);
+      console.log(this.category_id);
+      console.log(this.title);
+      // api.post('/api/auth/posts', data)
+      //     .then(res => {
+      //         console.log(res);
+      //     })
     },
     getCategories: function getCategories() {
       var _this = this;
       _api__WEBPACK_IMPORTED_MODULE_1__["default"].get('/api/auth/admin/category').then(function (res) {
         _this.categories = res.data.data;
       });
+    }
+  },
+  computed: {
+    selectedStudentId: function selectedStudentId() {
+      var _this$category_id;
+      return (_this$category_id = this.category_id) === null || _this$category_id === void 0 ? void 0 : _this$category_id.id;
     }
   }
 });
@@ -97,7 +109,25 @@ var render = function render() {
     }
   }), _vm._v(" "), _c("div", {
     staticClass: "form-group"
-  }, [_vm._v("\n        choose category\n        "), _c("select", [_vm._l(_vm.categories, function (category) {
+  }, [_vm._v("\n        choose category\n        "), _c("select", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.category_id,
+      expression: "category_id"
+    }],
+    on: {
+      change: function change($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
+          return o.selected;
+        }).map(function (o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val;
+        });
+        _vm.category_id = $event.target.multiple ? $$selectedVal : $$selectedVal[0];
+      }
+    }
+  }, [_vm._l(_vm.categories, function (category) {
     return [_c("option", {
       domProps: {
         value: category.id
