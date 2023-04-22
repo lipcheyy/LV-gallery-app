@@ -42,8 +42,6 @@ __webpack_require__.r(__webpack_exports__);
       });
       data.append('title', this.title);
       data.append('category_id', this.category_id);
-      console.log(this.category_id);
-      console.log(this.title);
       _api__WEBPACK_IMPORTED_MODULE_1__["default"].post('/api/auth/posts', data).then(function (res) {
         console.log(res);
       });

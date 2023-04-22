@@ -48,8 +48,6 @@ export default {
             })
             data.append('title',this.title)
             data.append('category_id',this.category_id)
-            console.log(this.category_id);
-            console.log(this.title);
             api.post('/api/auth/posts', data)
                 .then(res => {
                     console.log(res);
