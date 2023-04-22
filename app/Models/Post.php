@@ -9,7 +9,7 @@ class Post extends Model
 {
     use HasFactory;
     protected $guarded=false;
-//    public function images(){
-//        return $this->hasMany(Post::class,'post_id','id');
-//    }
+    public function images(){
+        return $this->hasMany(Image::class,'post_id','id');
+    }
 }
