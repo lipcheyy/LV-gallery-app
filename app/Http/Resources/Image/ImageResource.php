@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Http\Resources\Post;
+namespace App\Http\Resources\Image;
 
-use App\Http\Resources\Image\ImageResource;
 use Illuminate\Http\Resources\Json\JsonResource;
-use function Symfony\Component\Translation\t;
 
-class PostResource extends JsonResource
+class ImageResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -18,8 +16,7 @@ class PostResource extends JsonResource
     {
         return [
             'id'=>$this->id,
-            'title'=>$this->title,
-            'images'=>ImageResource::collection($this->images)
+            'url'=>$this->url
         ];
     }
 }

@@ -14,7 +14,10 @@
 <script>
 export default {
     name: "PostLayout",
-    props: ['Likes']
+    props: ['Likes'],
+    methods:{
+
+    }
 }
 </script>
 
