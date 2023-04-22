@@ -22,7 +22,8 @@ __webpack_require__.r(__webpack_exports__);
       dropzone: null,
       title: null,
       categories: null,
-      category_id: 1
+      category_id: 1,
+      response: null
     };
   },
   mounted: function mounted() {
@@ -35,21 +36,24 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     store: function store() {
+      var _this = this;
       var data = new FormData();
       var files = this.dropzone.getAcceptedFiles();
       files.forEach(function (file) {
         data.append('images[]', file);
+        _this.dropzone.removeFile(file);
       });
       data.append('title', this.title);
       data.append('category_id', this.category_id);
       _api__WEBPACK_IMPORTED_MODULE_1__["default"].post('/api/auth/posts', data).then(function (res) {
-        console.log(res);
+        _this.response = res.data.message;
+        _this.title = '';
       });
     },
     getCategories: function getCategories() {
-      var _this = this;
+      var _this2 = this;
       _api__WEBPACK_IMPORTED_MODULE_1__["default"].get('/api/auth/admin/category').then(function (res) {
-        _this.categories = res.data.data;
+        _this2.categories = res.data.data;
       });
     }
   },
@@ -142,7 +146,7 @@ var render = function render() {
         return _vm.store.apply(null, arguments);
       }
     }
-  })]);
+  }), _vm._v(" "), _c("div", [_vm._v(_vm._s(_vm.response))])]);
 };
 var staticRenderFns = [];
 render._withStripped = true;

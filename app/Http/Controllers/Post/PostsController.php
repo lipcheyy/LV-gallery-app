@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\Storage;
 
 class PostsController extends Controller
 {
+    public function index(){
+
+    }
     public function store(StoreRequest $request){
         $data=$request->validated();
         $images=$data['images'];

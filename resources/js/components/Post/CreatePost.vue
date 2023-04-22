@@ -13,6 +13,7 @@
             </select>
         </div>
         <input @click.prevent="store" type="submit" value="create">
+        <div>{{response}}</div>
     </div>
 </template>
 
@@ -27,7 +28,8 @@ export default {
             dropzone: null,
             title: null,
             categories: null,
-            category_id:1
+            category_id:1,
+            response:null
         }
     },
 
@@ -45,12 +47,14 @@ export default {
             const files = this.dropzone.getAcceptedFiles()
             files.forEach(file => {
                 data.append('images[]', file)
+                this.dropzone.removeFile(file)
             })
             data.append('title',this.title)
             data.append('category_id',this.category_id)
             api.post('/api/auth/posts', data)
                 .then(res => {
-                    console.log(res);
+                    this.response=res.data.message
+                    this.title=''
                 })
         },
         getCategories() {
