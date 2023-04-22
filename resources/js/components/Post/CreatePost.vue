@@ -34,7 +34,8 @@ export default {
     mounted() {
         this.dropzone = new Dropzone(this.$refs.dropzone, {
             url: 'test',
-            autoProcessQueue: false
+            autoProcessQueue: false,
+            addRemoveLinks:true
         })
         this.getCategories()
     },
@@ -49,10 +50,10 @@ export default {
             data.append('category_id',this.category_id)
             console.log(this.category_id);
             console.log(this.title);
-            // api.post('/api/auth/posts', data)
-            //     .then(res => {
-            //         console.log(res);
-            //     })
+            api.post('/api/auth/posts', data)
+                .then(res => {
+                    console.log(res);
+                })
         },
         getCategories() {
             api.get('/api/auth/admin/category')

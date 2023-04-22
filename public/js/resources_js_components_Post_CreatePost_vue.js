@@ -28,7 +28,8 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     this.dropzone = new dropzone__WEBPACK_IMPORTED_MODULE_0__["default"](this.$refs.dropzone, {
       url: 'test',
-      autoProcessQueue: false
+      autoProcessQueue: false,
+      addRemoveLinks: true
     });
     this.getCategories();
   },
@@ -43,10 +44,9 @@ __webpack_require__.r(__webpack_exports__);
       data.append('category_id', this.category_id);
       console.log(this.category_id);
       console.log(this.title);
-      // api.post('/api/auth/posts', data)
-      //     .then(res => {
-      //         console.log(res);
-      //     })
+      _api__WEBPACK_IMPORTED_MODULE_1__["default"].post('/api/auth/posts', data).then(function (res) {
+        console.log(res);
+      });
     },
     getCategories: function getCategories() {
       var _this = this;
