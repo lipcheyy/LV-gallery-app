@@ -13,6 +13,14 @@
             </select>
         </div>
         <input @click.prevent="store" type="submit" value="create">
+        <div v-if="post">
+            <p>{{post.title}}</p>
+            <div v-for="image in post.images">
+                <img  :src="image.preview_url" alt="">
+                <img  :src="image.url" alt="">
+            </div>
+
+        </div>
         <div>{{response}}</div>
     </div>
 </template>
@@ -29,7 +37,8 @@ export default {
             title: null,
             categories: null,
             category_id:1,
-            response:null
+            response:null,
+            post:null
         }
     },
 
@@ -40,6 +49,7 @@ export default {
             addRemoveLinks:true
         })
         this.getCategories()
+        this.getPost()
     },
     methods: {
         store() {
@@ -55,6 +65,7 @@ export default {
                 .then(res => {
                     this.response=res.data.message
                     this.title=''
+                    this.getPost()
                 })
         },
         getCategories() {
@@ -62,11 +73,12 @@ export default {
                 .then(res => {
                     this.categories = res.data.data
                 })
-        },
-    },
-    computed: {
-        selectedStudentId() {
-            return this.category_id?.id;
+            },
+        getPost(){
+            api.get('/api/auth/posts')
+                .then(res=>{
+                    this.post=res.data.data
+                })
         }
     }
 }

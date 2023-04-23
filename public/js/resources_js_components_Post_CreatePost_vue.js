@@ -23,7 +23,8 @@ __webpack_require__.r(__webpack_exports__);
       title: null,
       categories: null,
       category_id: 1,
-      response: null
+      response: null,
+      post: null
     };
   },
   mounted: function mounted() {
@@ -33,6 +34,7 @@ __webpack_require__.r(__webpack_exports__);
       addRemoveLinks: true
     });
     this.getCategories();
+    this.getPost();
   },
   methods: {
     store: function store() {
@@ -48,6 +50,7 @@ __webpack_require__.r(__webpack_exports__);
       _api__WEBPACK_IMPORTED_MODULE_1__["default"].post('/api/auth/posts', data).then(function (res) {
         _this.response = res.data.message;
         _this.title = '';
+        _this.getPost();
       });
     },
     getCategories: function getCategories() {
@@ -55,12 +58,12 @@ __webpack_require__.r(__webpack_exports__);
       _api__WEBPACK_IMPORTED_MODULE_1__["default"].get('/api/auth/admin/category').then(function (res) {
         _this2.categories = res.data.data;
       });
-    }
-  },
-  computed: {
-    selectedStudentId: function selectedStudentId() {
-      var _this$category_id;
-      return (_this$category_id = this.category_id) === null || _this$category_id === void 0 ? void 0 : _this$category_id.id;
+    },
+    getPost: function getPost() {
+      var _this3 = this;
+      _api__WEBPACK_IMPORTED_MODULE_1__["default"].get('/api/auth/posts').then(function (res) {
+        _this3.post = res.data.data;
+      });
     }
   }
 });
@@ -146,7 +149,19 @@ var render = function render() {
         return _vm.store.apply(null, arguments);
       }
     }
-  }), _vm._v(" "), _c("div", [_vm._v(_vm._s(_vm.response))])]);
+  }), _vm._v(" "), _vm.post ? _c("div", [_c("p", [_vm._v(_vm._s(_vm.post.title))]), _vm._v(" "), _vm._l(_vm.post.images, function (image) {
+    return _c("div", [_c("img", {
+      attrs: {
+        src: image.preview_url,
+        alt: ""
+      }
+    }), _vm._v(" "), _c("img", {
+      attrs: {
+        src: image.url,
+        alt: ""
+      }
+    })]);
+  })], 2) : _vm._e(), _vm._v(" "), _c("div", [_vm._v(_vm._s(_vm.response))])]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
