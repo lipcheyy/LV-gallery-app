@@ -11,7 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class PostsController extends Controller
+class   PostsController extends Controller
 {
     public function index(){
         $post = Post::latest()->first();

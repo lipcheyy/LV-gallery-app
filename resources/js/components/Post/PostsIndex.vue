@@ -51,10 +51,10 @@ export default {
 }
 
 .pagination-btn {
-    width: 50px;
-    height: 50px;
+    width: 3.2552083333333335vw;
+    height: 6.925207756232687vh;
     border-radius: 50%;
-    border: 2px solid #B00000;
+    border: 0.13850415512465375vh solid #B00000;
     color: black;
     display: flex;
     justify-content: center;
@@ -63,7 +63,7 @@ export default {
     font-family: 'Times New Roman', sans-serif;
     font-style: normal;
     font-weight: 400;
-    font-size: 32px;
+    font-size: 4.43213296398892vh;
     line-height: 37px;
 
     cursor: pointer;

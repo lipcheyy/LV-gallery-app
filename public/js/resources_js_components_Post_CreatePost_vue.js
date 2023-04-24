@@ -1,4 +1,3 @@
-"use strict";
 (self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_components_Post_CreatePost_vue"],{
 
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Post/CreatePost.vue?vue&type=script&lang=js&":
@@ -7,6 +6,7 @@
   \**********************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -76,6 +76,7 @@ __webpack_require__.r(__webpack_exports__);
   \*********************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "render": () => (/* binding */ render),
@@ -87,21 +88,27 @@ var render = function render() {
   return _c("div", {
     staticClass: "dropzone_container"
   }, [_c("div", {
+    staticClass: "wrapper"
+  }, [_c("div", {
     ref: "dropzone",
-    staticClass: "dropzone_form bg-info btn"
-  }, [_vm._v("\n        dropzone\n    ")]), _vm._v(" "), _c("input", {
+    staticClass: "dropzone_form"
+  }, [_c("p", {
+    staticClass: "drop-title"
+  }, [_vm._v("\n                Натисніть або перетягніть зображення\n            ")])]), _vm._v(" "), _vm._m(0)]), _vm._v(" "), _c("div", {
+    staticClass: "data-wrapper"
+  }, [_c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
       value: _vm.title,
       expression: "title"
     }],
-    staticClass: "form-control",
+    staticClass: "file-title",
     attrs: {
       type: "text",
       name: "",
       id: "",
-      placeholder: "title"
+      placeholder: "Назва"
     },
     domProps: {
       value: _vm.title
@@ -112,15 +119,18 @@ var render = function render() {
         _vm.title = $event.target.value;
       }
     }
-  }), _vm._v(" "), _c("div", {
+  }), _vm._v(" "), _vm._m(1), _vm._v(" "), _c("div", {
     staticClass: "form-group"
-  }, [_vm._v("\n        choose category\n        "), _c("select", {
+  }, [_c("p", {
+    staticClass: "category-title"
+  }, [_vm._v("\n                Вибрати категорію\n            ")]), _vm._v(" "), _c("select", {
     directives: [{
       name: "model",
       rawName: "v-model",
       value: _vm.category_id,
       expression: "category_id"
     }],
+    staticClass: "selector",
     on: {
       change: function change($event) {
         var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
@@ -134,14 +144,16 @@ var render = function render() {
     }
   }, [_vm._l(_vm.categories, function (category) {
     return [_c("option", {
+      staticClass: "option",
       domProps: {
         value: category.id
       }
     }, [_vm._v(_vm._s(category.title))])];
   })], 2)]), _vm._v(" "), _c("input", {
+    staticClass: "button-create",
     attrs: {
       type: "submit",
-      value: "create"
+      value: "Створити"
     },
     on: {
       click: function click($event) {
@@ -149,21 +161,30 @@ var render = function render() {
         return _vm.store.apply(null, arguments);
       }
     }
-  }), _vm._v(" "), _vm.post ? _c("div", [_c("p", [_vm._v(_vm._s(_vm.post.title))]), _vm._v(" "), _vm._l(_vm.post.images, function (image) {
-    return _c("div", [_c("img", {
-      attrs: {
-        src: image.preview_url,
-        alt: ""
-      }
-    }), _vm._v(" "), _c("img", {
-      attrs: {
-        src: image.url,
-        alt: ""
-      }
-    })]);
-  })], 2) : _vm._e(), _vm._v(" "), _c("div", [_vm._v(_vm._s(_vm.response))])]);
+  }), _vm._v(" "), _c("div", [_vm._v(_vm._s(_vm.response))])])]);
 };
-var staticRenderFns = [];
+var staticRenderFns = [function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("div", {
+    staticClass: "advice-container"
+  }, [_c("p", {
+    staticClass: "advice"
+  }, [_vm._v("Рекомендуємо використовувати файли високої якості у форматі .jpg (розміром менше 20 МГ)")])]);
+}, function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("div", {
+    staticClass: "name-wrapper"
+  }, [_c("img", {
+    attrs: {
+      src: __webpack_require__(/*! ./Images/Guest.png */ "./resources/js/components/Post/Images/Guest.png"),
+      alt: "Guest"
+    }
+  }), _vm._v(" "), _c("p", {
+    staticClass: "name"
+  }, [_vm._v("Ім'я")])]);
+}];
 render._withStripped = true;
 
 
@@ -175,6 +196,7 @@ render._withStripped = true;
   \******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -185,10 +207,20 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.dropzone_container[data-v-015a00e0] {\n    width: 150px;\n    height: 120px;\n}\n.dropzone_form[data-v-015a00e0] {\n    padding: 10px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.dropzone_container[data-v-015a00e0] {\n    height: 620px;\n    width: 575px;\n    left: 622px;\n    top: 192px;\n    border-radius: 14px;\n    margin: 0 auto;\n    background: #D9D9D9;\n    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.25);\n    display: flex;\n    justify-content: space-evenly;\n    align-items: center;\n}\n.wrapper[data-v-015a00e0] {\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n}\n.dropzone_form[data-v-015a00e0] {\n    width: 250px;\n    height: 450px;\n    background: #FFFFFF;\n    border-radius: 8px;\n    display: flex;\n    flex-display: column;\n    justify-content: center;\n    align-items: center;\n    outline: 2px dashed #D9D9D9;\n    outline-offset: -25px;\n}\n.drop-title[data-v-015a00e0] {\n    position: absolute;\n    font-family: 'Praise', sans-serif;\n    font-style: normal;\n    font-weight: 400;\n    font-size: 13px;\n    line-height: 16px;\n    text-align: center;\n    letter-spacing: 0.065em;\n    color: #000000;\n    width: 135px;\n}\n.data-wrapper[data-v-015a00e0] {\n    width: 260px;\n    height: 500px;\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n}\n.advice[data-v-015a00e0] {\n    font-family: 'Inter', sans-serif;\n    font-style: normal;\n    font-weight: 500;\n    font-size: 12px;\n    line-height: 15px;\n    display: flex;\n    align-items: center;\n    text-align: center;\n    width: 212px;\n    color: #393939;\n    margin-top: 17px;\n}\n.file-title[data-v-015a00e0] {\n    background: #D9D9D9;\n    border-width: 2px 0px;\n    border-style: solid;\n    border-color: #7D7D7D;\n    border-radius: 7px;\n    width: 260px;\n    height: 45px;\n    padding-left: 10px;\n    display: flex;\n    font-family: 'Inter', sans-serif;\n    font-style: normal;\n    font-weight: 500;\n    font-size: 24px;\n    color: #4B4B4B;\n    margin-top: 11px;\n}\n.file-title[data-v-015a00e0]::-moz-placeholder {\n    font-family: 'Inter', sans-serif;\n    font-style: normal;\n    font-weight: 500;\n    font-size: 24px;\n    align-items: center;\n    color: #7D7D7D;\n}\n.file-title[data-v-015a00e0]::placeholder {\n    font-family: 'Inter', sans-serif;\n    font-style: normal;\n    font-weight: 500;\n    font-size: 24px;\n    align-items: center;\n    color: #7D7D7D;\n}\n.category-title[data-v-015a00e0] {\n    font-family: 'Inter', sans-serif;\n    font-style: normal;\n    font-weight: 500;\n    font-size: 24px;\n    line-height: 29px;\n    display: flex;\n    align-items: center;\n    color: #4B4B4B;\n    margin-top: 20px;\n}\n.selector[data-v-015a00e0] {\n    background: #D9D9D9;\n    border-width: 2px 0px;\n    border-style: solid;\n    border-color: #7D7D7D;\n    border-radius: 7px;\n    width: 260px;\n    height: 45px;\n    padding-left: 10px;\n    display: flex;\n    font-family: 'Inter', sans-serif;\n    font-style: normal;\n    font-weight: 500;\n    font-size: 24px;\n    color: #4B4B4B;\n}\n.button-create[data-v-015a00e0] {\n    height: 45px;\n    width: 160px;\n    border-radius: 20px;\n    background: #B00000;\n\n    color: white;\n    font-family: 'Praise', sans-serif;\n    font-style: normal;\n    font-weight: 400;\n    font-size: 24px;\n    line-height: 29px;\n    color: #FFFFFF;\n    border: none;\n    outline: none;\n    display: flex;\n    text-align: center;\n    justify-content: center;\n\n    margin-top: 156px;\n}\n.name-wrapper[data-v-015a00e0] {\n    height: 50px;\n    width: 100%;\n    margin-top: 20px;\n    display: flex;\n    align-items: center;\n}\n.name-wrapper > img[data-v-015a00e0]{\n    width: 50px;\n    height: 50px;\n}\n.name[data-v-015a00e0] {\n    font-family: 'Inter', sans-serif;\n    font-style: normal;\n    font-weight: 500;\n    font-size: 20px;\n    color: #4B4B4B;\n    margin: auto 0;\n    margin-left: 12px;\n}\n.option[data-v-015a00e0] {\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
+
+/***/ }),
+
+/***/ "./resources/js/components/Post/Images/Guest.png":
+/*!*******************************************************!*\
+  !*** ./resources/js/components/Post/Images/Guest.png ***!
+  \*******************************************************/
+/***/ ((module) => {
+
+module.exports = "/images/Guest.png?3cc06a01b2dcf7e06d4125df24547bf9";
 
 /***/ }),
 
@@ -198,6 +230,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, "\n.dropzone_container[data-v-015a00e0]
   \***********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ objectExtend)
@@ -286,6 +319,7 @@ function isUnextendable(val) {
   \**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -315,6 +349,7 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
   \*****************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -355,6 +390,7 @@ component.options.__file = "resources/js/components/Post/CreatePost.vue"
   \******************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -370,6 +406,7 @@ __webpack_require__.r(__webpack_exports__);
   \************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CreatePost_vue_vue_type_template_id_015a00e0_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
@@ -386,6 +423,7 @@ __webpack_require__.r(__webpack_exports__);
   \**************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CreatePost_vue_vue_type_style_index_0_id_015a00e0_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader/dist/cjs.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CreatePost.vue?vue&type=style&index=0&id=015a00e0&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9.use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9.use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Post/CreatePost.vue?vue&type=style&index=0&id=015a00e0&scoped=true&lang=css&");
 
@@ -398,6 +436,7 @@ __webpack_require__.r(__webpack_exports__);
   \*************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Dropzone": () => (/* binding */ $3ed269f2f0fb224b$export$2e2bcd8739ae039),
