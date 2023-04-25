@@ -46,6 +46,7 @@ Route::group([
             Route::group(['namespace' => 'User', 'prefix' => 'users'], function () {
                 Route::post('/','UserController@store');
                 Route::get('/','UserController@index');
+                Route::get('/roles','UserController@getRoles');
                 Route::patch('/{user}','UserController@update');
                 Route::delete('/{user}','UserController@destroy');
             });

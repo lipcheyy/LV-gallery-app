@@ -20,10 +20,27 @@ __webpack_require__.r(__webpack_exports__);
       name: '',
       email: null,
       password: null,
-      password_confirm: null
+      password_confirm: null,
+      roles: null,
+      role_id: 1
     };
   },
-  methods: {}
+  mounted: function mounted() {
+    this.getRoles();
+  },
+  methods: {
+    getId: function getId() {
+      console.log(this.role_id);
+    },
+    getRoles: function getRoles() {
+      var _this = this;
+      _api__WEBPACK_IMPORTED_MODULE_0__["default"].get('/api/auth/admin/users/roles').then(function (res) {
+        _this.roles = res.data;
+        _this.keys = Object.keys(_this.roles);
+        console.log(_this.keys);
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -39,15 +56,32 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _UserCreate__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./UserCreate */ "./resources/js/components/Admin/AddUser/UserCreate.vue");
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../api */ "./resources/js/api.js");
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "UserIndex",
   components: {
     UserCreate: _UserCreate__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  mounted: function mounted() {},
+  data: function data() {
+    return {
+      users: null,
+      toEdit: null,
+      name: null
+    };
+  },
+  mounted: function mounted() {
+    // this.getUsers()
+  },
   methods: {
-    getUsers: function getUsers() {}
+    getUserDataToEdit: function getUserDataToEdit(id, name) {
+      this.toEdit = id;
+      this.name = name;
+    },
+    userToEdit: function userToEdit(id) {
+      return this.toEdit === id;
+    }
   }
 });
 
@@ -149,7 +183,31 @@ var render = function render() {
         _vm.password_confirm = $event.target.value;
       }
     }
-  }), _vm._v(" "), _c("input", {
+  }), _vm._v(" "), _c("select", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.role_id,
+      expression: "role_id"
+    }],
+    on: {
+      change: function change($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
+          return o.selected;
+        }).map(function (o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val;
+        });
+        _vm.role_id = $event.target.multiple ? $$selectedVal : $$selectedVal[0];
+      }
+    }
+  }, [_vm._l(_vm.roles, function (role, roleId) {
+    return [_c("option", {
+      domProps: {
+        value: roleId
+      }
+    }, [_vm._v(_vm._s(role))])];
+  })], 2), _vm._v(" "), _c("input", {
     attrs: {
       type: "submit",
       value: "add"
@@ -157,7 +215,7 @@ var render = function render() {
     on: {
       click: function click($event) {
         $event.preventDefault();
-        return _vm.store.apply(null, arguments);
+        return _vm.getId.apply(null, arguments);
       }
     }
   })]);
@@ -182,9 +240,74 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [_c("user-create")], 1);
+  return _c("div", [_c("user-create"), _vm._v(" "), _c("table", {
+    staticClass: "table"
+  }, [_vm._m(0), _vm._v(" "), _c("tbody", [_vm._l(_vm.users, function (user) {
+    return [_c("tr", {
+      "class": _vm.userToEdit(user.id) ? "d-none" : ""
+    }, [_c("td", [_vm._v(_vm._s(user.id))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(user.name))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(user.role))]), _vm._v(" "), _c("td", [_c("div", {
+      staticClass: "logoTable"
+    }, [_c("a", {
+      staticClass: "tableLogo",
+      attrs: {
+        href: "#"
+      },
+      on: {
+        click: function click($event) {
+          $event.preventDefault();
+          return _vm.getUserDataToEdit(user.id, user.name);
+        }
+      }
+    }, [_c("i", {
+      staticClass: "fas fa-pencil"
+    })])])])]), _c("tr", {
+      "class": _vm.userToEdit(user.id) ? "" : "d-none"
+    }, [_c("td", [_vm._v(_vm._s(user.id))]), _vm._v(" "), _c("td", [_c("input", {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: _vm.name,
+        expression: "name"
+      }],
+      staticClass: "form-control",
+      attrs: {
+        type: "text"
+      },
+      domProps: {
+        value: _vm.name
+      },
+      on: {
+        input: function input($event) {
+          if ($event.target.composing) return;
+          _vm.name = $event.target.value;
+        }
+      }
+    })]), _vm._v(" "), _c("td", [_c("a", {
+      attrs: {
+        href: "#"
+      },
+      on: {
+        click: function click($event) {
+          $event.preventDefault();
+          return _vm.update(user.id);
+        }
+      }
+    }, [_vm._v("update")])])])];
+  })], 2)])], 1);
 };
-var staticRenderFns = [];
+var staticRenderFns = [function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("thead", [_c("tr", [_c("td", {
+    staticClass: "firstConTable"
+  }, [_vm._v("ID")]), _vm._v(" "), _c("td", {
+    staticClass: "secConTable"
+  }, [_vm._v("Назва")]), _vm._v(" "), _c("td", {
+    staticClass: "secConTable"
+  }, [_vm._v("role")]), _vm._v(" "), _c("td", {
+    staticClass: "thrdConTable"
+  }, [_vm._v("Дії")])])]);
+}];
 render._withStripped = true;
 
 

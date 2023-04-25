@@ -8,7 +8,12 @@
         <input type="password" v-model="password" class="form-control mb-2">
         pass conf
         <input type="password" v-model="password_confirm" class="form-control mb-2">
-        <input type="submit" value="add" @click.prevent="store">
+        <select v-model="role_id">
+            <template v-for="(role,roleId) in roles">
+                <option :value="roleId">{{role}}</option>
+            </template>
+        </select>
+        <input type="submit" value="add" @click.prevent="getId">
     </div>
 </template>
 
@@ -22,11 +27,26 @@ export default {
             name:'',
             email:null,
             password:null,
-            password_confirm:null
+            password_confirm:null,
+            roles:null,
+            role_id:1,
         }
     },
+    mounted() {
+        this.getRoles()
+    },
     methods:{
-
+        getId(){
+            console.log(this.role_id);
+        },
+        getRoles(){
+            api.get('/api/auth/admin/users/roles')
+                .then(res=>{
+                    this.roles=res.data
+                    this.keys=Object.keys(this.roles)
+                    console.log(this.keys);
+                })
+        }
     }
 }
 </script>

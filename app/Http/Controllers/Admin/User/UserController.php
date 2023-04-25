@@ -16,6 +16,9 @@ class UserController extends Controller
         $users= User::all();
         return UserResource::collection($users);
     }
+    public function getRoles(){
+        return User::getRole();
+    }
     public function store(StoreRequest $request){
         $data=$request->validated();
         $data["password"]=Hash::make($data["password"]);
