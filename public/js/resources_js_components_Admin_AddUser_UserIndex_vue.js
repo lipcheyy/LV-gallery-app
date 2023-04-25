@@ -44,6 +44,10 @@ __webpack_require__.r(__webpack_exports__);
   name: "UserIndex",
   components: {
     UserCreate: _UserCreate__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  mounted: function mounted() {},
+  methods: {
+    getUsers: function getUsers() {}
   }
 });
 

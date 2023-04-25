@@ -8,8 +8,12 @@
 import UserCreate from "./UserCreate";
 export default {
     name: "UserIndex",
-    components: {UserCreate}
-
+    components: {UserCreate},
+    mounted() {
+    },
+    methods:{
+        getUsers(){}
+    }
 }
 </script>
 
