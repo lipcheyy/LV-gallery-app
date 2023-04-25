@@ -65,7 +65,7 @@ a{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom:74px;
+    /*margin-bottom:74px;*/
 }
 .navbarL{
     text-decoration: none;
