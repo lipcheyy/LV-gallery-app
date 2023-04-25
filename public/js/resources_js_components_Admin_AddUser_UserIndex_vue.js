@@ -23,9 +23,7 @@ __webpack_require__.r(__webpack_exports__);
       password_confirm: null
     };
   },
-  methods: {
-    store: function store() {}
-  }
+  methods: {}
 });
 
 /***/ }),
@@ -151,6 +149,12 @@ var render = function render() {
     attrs: {
       type: "submit",
       value: "add"
+    },
+    on: {
+      click: function click($event) {
+        $event.preventDefault();
+        return _vm.store.apply(null, arguments);
+      }
     }
   })]);
 };

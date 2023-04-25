@@ -8,7 +8,7 @@
         <input type="password" v-model="password" class="form-control mb-2">
         pass conf
         <input type="password" v-model="password_confirm" class="form-control mb-2">
-        <input type="submit" value="add">
+        <input type="submit" value="add" @click.prevent="store">
     </div>
 </template>
 
@@ -26,9 +26,6 @@ export default {
         }
     },
     methods:{
-        store(){
-
-        }
     }
 }
 </script>

@@ -44,7 +44,7 @@ Route::group([
                 Route::delete('/category/{category}','CategoryController@destroy');
             });
             Route::group(['namespace' => 'User', 'prefix' => 'users'], function () {
-                Route::post('/','StoreController');
+                Route::post('/','UserController@store');
             });
         });
         Route::group(['namespace' => 'User', 'prefix' => 'user'], function () {
