@@ -46,7 +46,7 @@ var render = function render() {
     staticClass: "submit-btn inter",
     attrs: {
       to: {
-        name: "category.index"
+        name: "users.index"
       }
     }
   }, [_vm._v("Детальніше")])], 1)]), _vm._v(" "), _c("div", {

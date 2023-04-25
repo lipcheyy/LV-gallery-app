@@ -16,7 +16,7 @@
                 </div>
 
                 <div class="btn-wrapper">
-                    <router-link :to="{name:'category.index'}" class="submit-btn inter">Детальніше</router-link>
+                    <router-link :to="{name:'users.index'}" class="submit-btn inter">Детальніше</router-link>
                 </div>
             </div>
 
