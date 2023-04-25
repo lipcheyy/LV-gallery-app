@@ -76,6 +76,7 @@ a{
     align-items: center;
     flex-direction: column;
     margin: auto;
+    margin-top: 20px;
 }
 .form-container {
     margin-top: 51px;
