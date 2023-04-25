@@ -1,10 +1,15 @@
 <template>
-    <div>users</div>
+    <div>
+        <user-create></user-create>
+    </div>
 </template>
 
 <script>
+import UserCreate from "./UserCreate";
 export default {
-    name: "UserIndex"
+    name: "UserIndex",
+    components: {UserCreate}
+
 }
 </script>
 
