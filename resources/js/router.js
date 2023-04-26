@@ -40,6 +40,11 @@ const route =new VueRouter({
             path:'/',
             component:()=>import('./components/Post/PostsIndex'),
             name: 'post.index'
+        },
+        {
+            path:'/admin/users',
+            component:()=>import('./components/Admin/AddUser/UserIndex'),
+            name:'users.index'
         }
     ]
 })

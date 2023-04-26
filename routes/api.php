@@ -43,6 +43,13 @@ Route::group([
                 Route::patch('/category/{category}','CategoryController@update');
                 Route::delete('/category/{category}','CategoryController@destroy');
             });
+            Route::group(['namespace' => 'User', 'prefix' => 'users'], function () {
+                Route::post('/','UserController@store');
+                Route::get('/','UserController@index');
+                Route::get('/roles','UserController@getRoles');
+                Route::patch('/{user}','UserController@update');
+                Route::delete('/{user}','UserController@destroy');
+            });
         });
         Route::group(['namespace' => 'User', 'prefix' => 'user'], function () {
             Route::post('/userdata','DataController');
