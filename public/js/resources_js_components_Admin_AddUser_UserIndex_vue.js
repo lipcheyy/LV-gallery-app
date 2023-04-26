@@ -50,6 +50,10 @@ __webpack_require__.r(__webpack_exports__);
         role: this.role_id
       }).then(function (res) {
         _this2.$parent.getUsers();
+        _this2.name = '';
+        _this2.email = '';
+        _this2.password = '';
+        _this2.password_confirm = '';
       });
     }
   }
