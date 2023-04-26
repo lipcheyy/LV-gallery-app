@@ -13,7 +13,7 @@
                 <option :value="roleId">{{role}}</option>
             </template>
         </select>
-        <input type="submit" value="add" @click.prevent="getId">
+        <input type="submit" value="add" @click.prevent="store">
     </div>
 </template>
 
@@ -46,6 +46,16 @@ export default {
                     this.keys=Object.keys(this.roles)
                     console.log(this.keys);
                 })
+        },
+        store(){
+            api.post('/api/auth/admin/users', {
+                name:this.name,
+                email:this.email,
+                password:this.password,
+                password_confirm:this.password_confirm,
+                role:this.role_id
+            })
+
         }
     }
 }

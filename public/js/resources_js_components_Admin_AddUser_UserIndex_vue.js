@@ -39,6 +39,15 @@ __webpack_require__.r(__webpack_exports__);
         _this.keys = Object.keys(_this.roles);
         console.log(_this.keys);
       });
+    },
+    store: function store() {
+      _api__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/auth/admin/users', {
+        name: this.name,
+        email: this.email,
+        password: this.password,
+        password_confirm: this.password_confirm,
+        role: this.role_id
+      });
     }
   }
 });
@@ -72,15 +81,36 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
-    // this.getUsers()
+    this.getUsers();
   },
   methods: {
     getUserDataToEdit: function getUserDataToEdit(id, name) {
       this.toEdit = id;
       this.name = name;
     },
+    getUsers: function getUsers() {
+      var _this = this;
+      _api__WEBPACK_IMPORTED_MODULE_1__["default"].get('/api/auth/admin/users').then(function (res) {
+        _this.users = res.data.data;
+      });
+    },
     userToEdit: function userToEdit(id) {
       return this.toEdit === id;
+    },
+    update: function update(id) {
+      var _this2 = this;
+      this.toEdit = null;
+      _api__WEBPACK_IMPORTED_MODULE_1__["default"].patch("/api/auth/admin/users/".concat(id), {
+        name: this.name
+      }).then(function (res) {
+        _this2.getUsers();
+      });
+    },
+    destroy: function destroy(id) {
+      var _this3 = this;
+      _api__WEBPACK_IMPORTED_MODULE_1__["default"]["delete"]("/api/auth/admin/users/".concat(id)).then(function (res) {
+        _this3.getUsers();
+      });
     }
   }
 });
@@ -215,7 +245,7 @@ var render = function render() {
     on: {
       click: function click($event) {
         $event.preventDefault();
-        return _vm.getId.apply(null, arguments);
+        return _vm.store.apply(null, arguments);
       }
     }
   })]);
@@ -240,7 +270,9 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [_c("user-create"), _vm._v(" "), _c("table", {
+  return _c("div", [_c("user-create", {
+    ref: "user_create"
+  }), _vm._v(" "), _c("table", {
     staticClass: "table"
   }, [_vm._m(0), _vm._v(" "), _c("tbody", [_vm._l(_vm.users, function (user) {
     return [_c("tr", {
@@ -260,6 +292,19 @@ var render = function render() {
       }
     }, [_c("i", {
       staticClass: "fas fa-pencil"
+    })]), _vm._v(" "), _c("a", {
+      staticClass: "tableLogo",
+      attrs: {
+        href: "#"
+      },
+      on: {
+        click: function click($event) {
+          $event.preventDefault();
+          return _vm.destroy(user.id);
+        }
+      }
+    }, [_c("i", {
+      staticClass: "fas fa-trash"
     })])])])]), _c("tr", {
       "class": _vm.userToEdit(user.id) ? "" : "d-none"
     }, [_c("td", [_vm._v(_vm._s(user.id))]), _vm._v(" "), _c("td", [_c("input", {

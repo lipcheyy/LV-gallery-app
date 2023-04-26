@@ -1,6 +1,6 @@
 <template>
     <div>
-        <user-create></user-create>
+        <user-create ref="user_create"></user-create>
         <table class="table">
             <thead>
             <tr>
@@ -19,7 +19,7 @@
                     <td>
                         <div class="logoTable">
                             <a class="tableLogo" href="#" @click.prevent="getUserDataToEdit(user.id,user.name)"><i class="fas fa-pencil"></i></a>
-<!--                            <a class="tableLogo" @click.prevent="destroy(user.id)"  href="#"><i class="fas fa-trash"></i></a>-->
+                            <a class="tableLogo" @click.prevent="destroy(user.id)"  href="#"><i class="fas fa-trash"></i></a>
                         </div>
                     </td>
                 <tr :class="userToEdit(user.id)?'':'d-none'">
@@ -47,17 +47,37 @@ export default {
         }
     },
     mounted() {
-        // this.getUsers()
+        this.getUsers()
     },
     methods:{
         getUserDataToEdit(id,name){
             this.toEdit=id
             this.name=name
         },
+        getUsers() {
+            api.get('/api/auth/admin/users')
+                .then(res=>{
+                    this.users=res.data.data
+                })
+        },
         userToEdit(id){
             return this.toEdit===id
         },
-
+        update(id){
+            this.toEdit=null
+            api.patch(`/api/auth/admin/users/${id}`, {
+                name: this.name
+            })
+                .then(res=>{
+                    this.getUsers()
+                })
+        },
+        destroy(id){
+            api.delete(`/api/auth/admin/users/${id}`)
+                .then(res=>{
+                    this.getUsers()
+                })
+        }
 
     }
 }
