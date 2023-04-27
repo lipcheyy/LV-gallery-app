@@ -9,10 +9,13 @@
         </div>
         <div class="pagination-container">
             <div href="" class="pagination-btn closed control"><<</div>
-            <div href="" class="pagination-btn closed control"><</div>
-            <div href="" class="pagination-btn active">1</div>
-            <div href="" class="pagination-btn">2</div>
-            <div href="" class="pagination-btn">3</div>
+            <div v-if="pagination.current_page!==1" href="" class="pagination-btn closed control"><</div>
+            <div
+                href="" class="pagination-btn" :class="link.active? 'active' : ''" v-for="link in pagination.links">
+                {{link.label}}
+            </div>
+<!--            <div href="" class="pagination-btn">2</div>-->
+<!--            <div href="" class="pagination-btn">3</div>-->
             <div href="" class="pagination-btn control">></div>
             <div href="" class="pagination-btn control">>></div>
 
@@ -29,6 +32,7 @@ export default {
     data(){
         return{
             posts:null,
+            pagination:[]
         }
     },
     mounted() {
@@ -39,7 +43,9 @@ export default {
             api.get('/api/auth/posts')
                 .then(res=>{
                     this.posts=res.data.data
-                    console.log(this.posts);
+                    this.pagination=res.data.meta
+                    // console.log(res.data.meta);
+                    // console.log(this.posts);
                 })
         }
     }

@@ -59,7 +59,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      posts: null
+      posts: null,
+      pagination: []
     };
   },
   mounted: function mounted() {
@@ -70,7 +71,9 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
       _api__WEBPACK_IMPORTED_MODULE_1__["default"].get('/api/auth/posts').then(function (res) {
         _this.posts = res.data.data;
-        console.log(_this.posts);
+        _this.pagination = res.data.meta;
+        // console.log(res.data.meta);
+        // console.log(this.posts);
       });
     }
   }
@@ -163,39 +166,27 @@ var render = function render() {
         }
       })];
     })], 2);
-  }), _vm._v(" "), _vm._m(0)], 2);
-};
-var staticRenderFns = [function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("div", {
+  }), _vm._v(" "), _c("div", {
     staticClass: "pagination-container"
   }, [_c("div", {
     staticClass: "pagination-btn closed control",
     attrs: {
       href: ""
     }
-  }, [_vm._v("<<")]), _vm._v(" "), _c("div", {
+  }, [_vm._v("<<")]), _vm._v(" "), _vm.pagination.current_page !== 1 ? _c("div", {
     staticClass: "pagination-btn closed control",
     attrs: {
       href: ""
     }
-  }, [_vm._v("<")]), _vm._v(" "), _c("div", {
-    staticClass: "pagination-btn active",
-    attrs: {
-      href: ""
-    }
-  }, [_vm._v("1")]), _vm._v(" "), _c("div", {
-    staticClass: "pagination-btn",
-    attrs: {
-      href: ""
-    }
-  }, [_vm._v("2")]), _vm._v(" "), _c("div", {
-    staticClass: "pagination-btn",
-    attrs: {
-      href: ""
-    }
-  }, [_vm._v("3")]), _vm._v(" "), _c("div", {
+  }, [_vm._v("<")]) : _vm._e(), _vm._v(" "), _vm._l(_vm.pagination.links, function (link) {
+    return _c("div", {
+      staticClass: "pagination-btn",
+      "class": link.active ? "active" : "",
+      attrs: {
+        href: ""
+      }
+    }, [_vm._v("\n                " + _vm._s(link.label) + "\n            ")]);
+  }), _vm._v(" "), _c("div", {
     staticClass: "pagination-btn control",
     attrs: {
       href: ""
@@ -205,8 +196,9 @@ var staticRenderFns = [function () {
     attrs: {
       href: ""
     }
-  }, [_vm._v(">>")])]);
-}];
+  }, [_vm._v(">>")])], 2)], 2);
+};
+var staticRenderFns = [];
 render._withStripped = true;
 
 
