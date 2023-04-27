@@ -69,7 +69,8 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     getPosts: function getPosts() {
       var _this = this;
-      _api__WEBPACK_IMPORTED_MODULE_1__["default"].get('/api/auth/posts').then(function (res) {
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      _api__WEBPACK_IMPORTED_MODULE_1__["default"].post('/api/auth/posts/list').then(function (res) {
         _this.posts = res.data.data;
         _this.pagination = res.data.meta;
         // console.log(res.data.meta);

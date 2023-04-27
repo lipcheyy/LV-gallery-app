@@ -39,8 +39,8 @@ export default {
         this.getPosts()
     },
     methods:{
-        getPosts(){
-            api.get('/api/auth/posts')
+        getPosts(page=1){
+            api.post('/api/auth/posts/list')
                 .then(res=>{
                     this.posts=res.data.data
                     this.pagination=res.data.meta

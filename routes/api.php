@@ -56,7 +56,7 @@ Route::group([
         });
         Route::group(['namespace'=>'Post','prefix'=>'posts'],function () {
             Route::post('/', 'PostsController@store');
-            Route::get('/', 'PostsController@index');
+            Route::post('/list', 'PostsController@index');
         });
     });
 
