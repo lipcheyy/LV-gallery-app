@@ -11,10 +11,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../api */ "./resources/js/api.js");
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "PostLayout",
-  props: ['Likes'],
-  methods: {}
+  props: ['Likes', 'url', 'title']
+  // data(){
+  //     return{
+  //         posts:null
+  //     }
+  // },
+  // mounted() {
+  //     this.getPosts()
+  // },
+  // methods:{
+  //     getPosts(){
+  //         api.get('/api/auth/posts')
+  //             .then(res=>{
+  //                 this.posts=res.data.data
+  //                 console.log(this.posts);
+  //             })
+  //     }
+  // }
 });
 
 /***/ }),
@@ -31,11 +49,30 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _PostLayout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PostLayout */ "./resources/js/components/Post/PostLayout.vue");
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../api */ "./resources/js/api.js");
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "PostsIndex",
   components: {
     PostLayout: _PostLayout__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  data: function data() {
+    return {
+      posts: null
+    };
+  },
+  mounted: function mounted() {
+    this.getPosts();
+  },
+  methods: {
+    getPosts: function getPosts() {
+      var _this = this;
+      _api__WEBPACK_IMPORTED_MODULE_1__["default"].get('/api/auth/posts').then(function (res) {
+        _this.posts = res.data.data;
+        console.log(_this.posts);
+      });
+    }
   }
 });
 
@@ -56,21 +93,21 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _vm._m(0);
-};
-var staticRenderFns = [function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("div", {
+  return _c("div", [_c("div", {
     staticClass: "main-container"
   }, [_c("div", {
     staticClass: "img-container"
   }, [_c("img", {
     staticClass: "img",
     attrs: {
-      src: __webpack_require__(/*! ./Images/post_template.png */ "./resources/js/components/Post/Images/post_template.png")
+      src: _vm.url
     }
-  })]), _vm._v(" "), _c("div", {
+  })]), _vm._v(" "), _vm._m(0)])]);
+};
+var staticRenderFns = [function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("div", {
     staticClass: "buttons-container"
   }, [_c("a", {
     staticClass: "likes active",
@@ -92,7 +129,7 @@ var staticRenderFns = [function () {
       src: __webpack_require__(/*! ./Images/Save.png */ "./resources/js/components/Post/Images/Save.png"),
       alt: "Save"
     }
-  })])])]);
+  })])]);
 }];
 render._withStripped = true;
 
@@ -116,21 +153,17 @@ var render = function render() {
     _c = _vm._self._c;
   return _c("div", {
     staticClass: "main-container"
-  }, [_c("div", {
-    staticClass: "wrapper"
-  }, [_c("post-layout", {
-    attrs: {
-      Likes: "1"
-    }
-  }), _vm._v(" "), _c("post-layout", {
-    attrs: {
-      Likes: "2"
-    }
-  }), _vm._v(" "), _c("post-layout", {
-    attrs: {
-      Likes: "3"
-    }
-  })], 1), _vm._v(" "), _vm._m(0)]);
+  }, [_vm._l(_vm.posts, function (post) {
+    return _c("div", {
+      staticClass: "wrapper"
+    }, [_vm._l(post.images, function (image) {
+      return [_c("post-layout", {
+        attrs: {
+          url: image.url
+        }
+      })];
+    })], 2);
+  }), _vm._v(" "), _vm._m(0)], 2);
 };
 var staticRenderFns = [function () {
   var _vm = this,
@@ -244,16 +277,6 @@ module.exports = "/images/Like.png?db1601177f4e0bca839e6c372c35c752";
 /***/ ((module) => {
 
 module.exports = "/images/Save.png?b244d260aa100e711499c203d0d04b69";
-
-/***/ }),
-
-/***/ "./resources/js/components/Post/Images/post_template.png":
-/*!***************************************************************!*\
-  !*** ./resources/js/components/Post/Images/post_template.png ***!
-  \***************************************************************/
-/***/ ((module) => {
-
-module.exports = "/images/post_template.png?efcd61b2cb9a645baf5423c139f87f85";
 
 /***/ }),
 
