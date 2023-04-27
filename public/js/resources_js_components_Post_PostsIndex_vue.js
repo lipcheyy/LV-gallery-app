@@ -192,7 +192,7 @@ var render = function render() {
       attrs: {
         href: "#"
       }
-    }, [_vm._v(_vm._s(link.label) + " ")])] : _vm._e(), _vm._v(" "), Number(link.label) && _vm.pagination.current_page !== 3 && _vm.pagination.current_page - link.label === 2 || Number(link.label) && _vm.pagination.current_page - link.label === -2 ? [_c("a", {
+    }, [_vm._v(_vm._s(link.label) + " ")])] : _vm._e(), _vm._v(" "), Number(link.label) && _vm.pagination.current_page !== 3 && _vm.pagination.current_page - link.label === 2 || Number(link.label) && _vm.pagination.current_page !== _vm.pagination.last_page - 2 && _vm.pagination.current_page - link.label === -2 ? [_c("a", {
       attrs: {
         href: "#"
       }

@@ -25,7 +25,8 @@
                 <template v-if="Number(link.label)
                     && pagination.current_page!==3
                     &&(pagination.current_page-link.label===2)
-                    ||Number(link.label)
+                    ||Number(link.label) &&
+                    pagination.current_page!==pagination.last_page-2
                     &&(pagination.current_page-link.label===-2)">
                     <a href="#">...</a>
                 </template>
