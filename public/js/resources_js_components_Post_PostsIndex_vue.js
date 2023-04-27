@@ -196,7 +196,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.main-container[data-v-4eabf0be] {\r\n    height: 78vh;\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: center;\n}\n.img-container[data-v-4eabf0be] {\r\n    width: 100%;\r\n    height: 90%;\r\n    margin-bottom: 7px;\n}\n.img-container > .img[data-v-4eabf0be] {\r\n    width: 100%;\r\n    height: 100%;\n}\n.buttons-container[data-v-4eabf0be] {\r\n    width: 90%;\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: space-between;\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.main-container[data-v-4eabf0be] {\n    height: 78vh;\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n}\n.img-container[data-v-4eabf0be] {\n    width: 100%;\n    height: 90%;\n    margin-bottom: 7px;\n}\n.img-container > .img[data-v-4eabf0be] {\n    width: 100%;\n    height: 100%;\n}\n.buttons-container[data-v-4eabf0be] {\n    width: 90%;\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n}\n\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

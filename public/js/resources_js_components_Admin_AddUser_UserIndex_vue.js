@@ -41,12 +41,19 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     store: function store() {
+      var _this2 = this;
       _api__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/auth/admin/users', {
         name: this.name,
         email: this.email,
         password: this.password,
         password_confirm: this.password_confirm,
         role: this.role_id
+      }).then(function (res) {
+        _this2.$parent.getUsers();
+        _this2.name = '';
+        _this2.email = '';
+        _this2.password = '';
+        _this2.password_confirm = '';
       });
     }
   }

@@ -55,6 +55,13 @@ export default {
                 password_confirm:this.password_confirm,
                 role:this.role_id
             })
+                .then(res=>{
+                    this.$parent.getUsers()
+                    this.name=''
+                    this.email=''
+                    this.password=''
+                    this.password_confirm=''
+                })
 
         }
     }

@@ -20,15 +20,17 @@ export default {
         }
     },
     mounted() {
-        this.$refs.header_layout.getAccessToken()
+         this.$refs.header_layout.getAccessToken()
+
     },
     updated() {
-        this.$refs.header_layout.getAccessToken()
+         this.$refs.header_layout.getAccessToken()
+
     },
     methods:{
-        // getAccessToken(){
-        //     this.access_token=localStorage.getItem('access_token')
-        // },
+        getAccessToken(){
+            this.access_token=localStorage.getItem('access_token')
+        },
         // logout() {
         //     api.post('/api/auth/logout')
         //         .then(res=>{

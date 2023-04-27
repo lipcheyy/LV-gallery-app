@@ -28,8 +28,7 @@ class StoreRequest extends FormRequest
             'email'=>'required|string',
             'password'=>'required|string|same:password_confirm',
             'password_confirm'=>'required|string',
-            'role'=>'nullable'
-
+            'role'=>'required|integer',
         ];
     }
     public function messages()
