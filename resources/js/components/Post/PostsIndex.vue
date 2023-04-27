@@ -1,11 +1,10 @@
 <template>
     <div class="main-container">
-        <div class="wrapper">
-<!--            <post-layout Likes="1"></post-layout>-->
+        <div class="wrapper" v-for="post in posts">
+            <template v-for="image in post.images">
+                <post-layout :url="image.url"></post-layout>
 <!--            <post-layout Likes="2"></post-layout>-->
 <!--            <post-layout Likes="3"></post-layout>-->
-            <template v-for="post in posts">
-                <p>df{{post.title}}</p>
             </template>
         </div>
         <div class="pagination-container">

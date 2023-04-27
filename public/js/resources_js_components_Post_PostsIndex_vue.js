@@ -15,24 +15,24 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "PostLayout",
-  props: ['Likes'],
-  data: function data() {
-    return {
-      posts: null
-    };
-  },
-  mounted: function mounted() {
-    this.getPosts();
-  },
-  methods: {
-    getPosts: function getPosts() {
-      var _this = this;
-      _api__WEBPACK_IMPORTED_MODULE_0__["default"].get('/api/auth/posts').then(function (res) {
-        _this.posts = res.data.data;
-        console.log(_this.posts.title);
-      });
-    }
-  }
+  props: ['Likes', 'url', 'title']
+  // data(){
+  //     return{
+  //         posts:null
+  //     }
+  // },
+  // mounted() {
+  //     this.getPosts()
+  // },
+  // methods:{
+  //     getPosts(){
+  //         api.get('/api/auth/posts')
+  //             .then(res=>{
+  //                 this.posts=res.data.data
+  //                 console.log(this.posts);
+  //             })
+  //     }
+  // }
 });
 
 /***/ }),
@@ -93,20 +93,16 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", {
+  return _c("div", [_c("div", {
     staticClass: "main-container"
-  }, [_vm._l(_vm.posts, function (post) {
-    return _c("div", {
-      staticClass: "img-container"
-    }, [_vm._l(post.images, function (image) {
-      return [_c("img", {
-        staticClass: "img",
-        attrs: {
-          src: image.url
-        }
-      })];
-    })], 2);
-  }), _vm._v(" "), _c("p", [_vm._v(_vm._s(_vm.post.title))]), _vm._v(" "), _vm._m(0)], 2);
+  }, [_c("div", {
+    staticClass: "img-container"
+  }, [_c("img", {
+    staticClass: "img",
+    attrs: {
+      src: _vm.url
+    }
+  })]), _vm._v(" "), _vm._m(0)])]);
 };
 var staticRenderFns = [function () {
   var _vm = this,
@@ -157,11 +153,17 @@ var render = function render() {
     _c = _vm._self._c;
   return _c("div", {
     staticClass: "main-container"
-  }, [_c("div", {
-    staticClass: "wrapper"
   }, [_vm._l(_vm.posts, function (post) {
-    return [_c("p", [_vm._v("df" + _vm._s(post.title))])];
-  })], 2), _vm._v(" "), _vm._m(0)]);
+    return _c("div", {
+      staticClass: "wrapper"
+    }, [_vm._l(post.images, function (image) {
+      return [_c("post-layout", {
+        attrs: {
+          url: image.url
+        }
+      })];
+    })], 2);
+  }), _vm._v(" "), _vm._m(0)], 2);
 };
 var staticRenderFns = [function () {
   var _vm = this,
