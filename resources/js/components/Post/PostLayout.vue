@@ -1,23 +1,41 @@
 <template>
-    <div class="main-container">
-        <div class="img-container">
-            <img class="img" src="./Images/post_template.png">
-        </div>
-        <div class="buttons-container">
-            <a href="" class="likes active"><img src="./Images/Like.png" alt="Like"></a>
-            <a href="" class="save active"><img src="./Images/Save.png" alt="Save"></a>
-        </div>
+    <div>
+        <div class="main-container">
+            <div class="img-container">
+                <img class="img" :src="url">
+            </div>
+            <div class="buttons-container">
+                <a href="" class="likes active"><img src="./Images/Like.png" alt="Like"></a>
+                <a href="" class="save active"><img src="./Images/Save.png" alt="Save"></a>
+            </div>
 
+        </div>
     </div>
 </template>
 
 <script>
+import api from "../../api";
+
 export default {
     name: "PostLayout",
-    props: ['Likes'],
-    methods:{
-
-    }
+    props: ['Likes','url','title'],
+    // data(){
+    //     return{
+    //         posts:null
+    //     }
+    // },
+    // mounted() {
+    //     this.getPosts()
+    // },
+    // methods:{
+    //     getPosts(){
+    //         api.get('/api/auth/posts')
+    //             .then(res=>{
+    //                 this.posts=res.data.data
+    //                 console.log(this.posts);
+    //             })
+    //     }
+    // }
 }
 </script>
 
