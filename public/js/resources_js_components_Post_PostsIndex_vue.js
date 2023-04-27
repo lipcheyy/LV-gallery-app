@@ -188,11 +188,15 @@ var render = function render() {
           return _vm.getPosts(link.label);
         }
       }
-    }, [[_c("a", {
+    }, [Number(link.label) && _vm.pagination.current_page - link.label < 2 && _vm.pagination.current_page - link.label > -2 || Number(link.label) === 1 || Number(link.label) === _vm.pagination.last_page ? [_c("a", {
       attrs: {
         href: "#"
       }
-    }, [_vm._v(_vm._s(link.label) + " ")])]], 2) : _vm._e();
+    }, [_vm._v(_vm._s(link.label) + " ")])] : _vm._e(), _vm._v(" "), Number(link.label) && _vm.pagination.current_page !== 3 && _vm.pagination.current_page - link.label === 2 || Number(link.label) && _vm.pagination.current_page - link.label === -2 ? [_c("a", {
+      attrs: {
+        href: "#"
+      }
+    }, [_vm._v("...")])] : _vm._e()], 2) : _vm._e();
   }), _vm._v(" "), _vm.pagination.current_page !== _vm.pagination.last_page ? _c("li", {
     staticClass: "pagination-btn control",
     on: {

@@ -15,8 +15,19 @@
                 :class="link.active ? 'active' : ''"
                 v-for="link in pagination.links"
                 v-if="Number(link.label)">
-                <template >
+                <template v-if="Number(link.label)
+                     &&(pagination.current_page-link.label <2
+                     && pagination.current_page-link.label>-2)
+                     || Number(link.label)===1
+                     || Number(link.label)===pagination.last_page">
                     <a href="#" >{{link.label}} </a>
+                </template>
+                <template v-if="Number(link.label)
+                    && pagination.current_page!==3
+                    &&(pagination.current_page-link.label===2)
+                    ||Number(link.label)
+                    &&(pagination.current_page-link.label===-2)">
+                    <a href="#">...</a>
                 </template>
             </li>
             <li @click.prevent="getPosts(pagination.current_page+1)"
@@ -24,17 +35,7 @@
                 &gt;
             </li>
         </ul>
-<!--        <div class="col-12 d-flex justify-content-center">-->
-<!--            <ul class="pagination text-center">-->
-<!--                <li v-if="pagination.current_page!==1"-->
-<!--                    @click.prevent="getPosts(pagination.current_page-1)" class="closed control"><</li>-->
-<!--                <li v-for="link in pagination.links">-->
-<!--                    <a href="#" @click.prevent="getPosts(link.label)"-->
-<!--                    :class="link.active?'active':''">{{link.label}}</a>-->
-<!--                </li>-->
-<!--            </ul>-->
 
-<!--        </div>-->
     </div>
 </template>
 
