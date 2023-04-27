@@ -7,19 +7,34 @@
 <!--            <post-layout Likes="3"></post-layout>-->
             </template>
         </div>
-        <div class="pagination-container">
-            <div href="" class="pagination-btn closed control"><<</div>
-            <div v-if="pagination.current_page!==1" href="" class="pagination-btn closed control"><</div>
-            <div
-                href="" class="pagination-btn" :class="link.active? 'active' : ''" v-for="link in pagination.links">
-                <a href="#">{{link.label}}</a>
-            </div>
-<!--            <div href="" class="pagination-btn">2</div>-->
-<!--            <div href="" class="pagination-btn">3</div>-->
-            <div href="" class="pagination-btn control">></div>
-            <div href="" class="pagination-btn control">>></div>
+        <ul class="pagination-container">
+            <li v-if="pagination.current_page!==1"
+                 @click.prevent="getPosts(pagination.current_page-1)" class="closed control">&lt;</li>
+            <li
+                @click.prevent="getPosts(link.label)"
+                :class="link.active ? 'active' : ''"
+                v-for="link in pagination.links"
+                v-if="Number(link.label)">
+                <template >
+                    <a href="#" >{{link.label}} </a>
+                </template>
+            </li>
+            <li @click.prevent="getPosts(pagination.current_page+1)"
+                 v-if="pagination.current_page !== pagination.last_page" class="pagination-btn control">
+                &gt;
+            </li>
+        </ul>
+<!--        <div class="col-12 d-flex justify-content-center">-->
+<!--            <ul class="pagination text-center">-->
+<!--                <li v-if="pagination.current_page!==1"-->
+<!--                    @click.prevent="getPosts(pagination.current_page-1)" class="closed control"><</li>-->
+<!--                <li v-for="link in pagination.links">-->
+<!--                    <a href="#" @click.prevent="getPosts(link.label)"-->
+<!--                    :class="link.active?'active':''">{{link.label}}</a>-->
+<!--                </li>-->
+<!--            </ul>-->
 
-        </div>
+<!--        </div>-->
     </div>
 </template>
 
@@ -44,7 +59,7 @@ export default {
                 .then(res=>{
                     this.posts=res.data.data
                     this.pagination=res.data.meta
-                    // console.log(res.data.meta);
+                    console.log(res);
                     // console.log(this.posts);
                 })
         }
@@ -76,7 +91,11 @@ export default {
     justify-content: space-between;
 }
 
-.pagination-btn {
+a{
+    text-decoration: none;
+    color: black;
+}
+li {
     width: 3.2552083333333335vw;
     height: 6.925207756232687vh;
     border-radius: 50%;

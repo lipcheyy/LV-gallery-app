@@ -75,7 +75,7 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (res) {
         _this.posts = res.data.data;
         _this.pagination = res.data.meta;
-        // console.log(res.data.meta);
+        console.log(res);
         // console.log(this.posts);
       });
     }
@@ -169,41 +169,39 @@ var render = function render() {
         }
       })];
     })], 2);
-  }), _vm._v(" "), _c("div", {
+  }), _vm._v(" "), _c("ul", {
     staticClass: "pagination-container"
-  }, [_c("div", {
-    staticClass: "pagination-btn closed control",
-    attrs: {
-      href: ""
-    }
-  }, [_vm._v("<<")]), _vm._v(" "), _vm.pagination.current_page !== 1 ? _c("div", {
-    staticClass: "pagination-btn closed control",
-    attrs: {
-      href: ""
+  }, [_vm.pagination.current_page !== 1 ? _c("li", {
+    staticClass: "closed control",
+    on: {
+      click: function click($event) {
+        $event.preventDefault();
+        return _vm.getPosts(_vm.pagination.current_page - 1);
+      }
     }
   }, [_vm._v("<")]) : _vm._e(), _vm._v(" "), _vm._l(_vm.pagination.links, function (link) {
-    return _c("div", {
-      staticClass: "pagination-btn",
+    return Number(link.label) ? _c("li", {
       "class": link.active ? "active" : "",
-      attrs: {
-        href: ""
+      on: {
+        click: function click($event) {
+          $event.preventDefault();
+          return _vm.getPosts(link.label);
+        }
       }
-    }, [_c("a", {
+    }, [[_c("a", {
       attrs: {
         href: "#"
       }
-    }, [_vm._v(_vm._s(link.label))])]);
-  }), _vm._v(" "), _c("div", {
+    }, [_vm._v(_vm._s(link.label) + " ")])]], 2) : _vm._e();
+  }), _vm._v(" "), _vm.pagination.current_page !== _vm.pagination.last_page ? _c("li", {
     staticClass: "pagination-btn control",
-    attrs: {
-      href: ""
+    on: {
+      click: function click($event) {
+        $event.preventDefault();
+        return _vm.getPosts(_vm.pagination.current_page + 1);
+      }
     }
-  }, [_vm._v(">")]), _vm._v(" "), _c("div", {
-    staticClass: "pagination-btn control",
-    attrs: {
-      href: ""
-    }
-  }, [_vm._v(">>")])], 2)], 2);
+  }, [_vm._v("\n                >\n            ")]) : _vm._e()], 2)], 2);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -252,7 +250,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.main-container[data-v-7069c1da] {\n    margin-top: 10px;\n}\n.wrapper[data-v-7069c1da] {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    flex-wrap: wrap;\n    -moz-column-gap: 7.8vw;\n         column-gap: 7.8vw;\n    row-gap: 2vh;\n}\n.pagination-container[data-v-7069c1da] {\n    margin: 0 auto;\n    margin-top: 62px;\n    width: 34.505208333333336vw;\n    height: 6.925vh;\n    border: 1px solid red;\n    display: flex;\n    justify-content: space-between;\n}\n.pagination-btn[data-v-7069c1da] {\n    width: 3.2552083333333335vw;\n    height: 6.925207756232687vh;\n    border-radius: 50%;\n    border: 0.13850415512465375vh solid #B00000;\n    color: black;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n\n    font-family: 'Times New Roman', sans-serif;\n    font-style: normal;\n    font-weight: 400;\n    font-size: 4.43213296398892vh;\n    line-height: 37px;\n\n    cursor: pointer;\n}\n.active[data-v-7069c1da] {\n    background-color: #B00000;\n    color: white\n}\n.closed[data-v-7069c1da] {\n    border: 2px solid #BBBBBB;\n    color: #BBBBBB;\n}\n.control[data-v-7069c1da] {\n    font-size: 16px;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.main-container[data-v-7069c1da] {\n    margin-top: 10px;\n}\n.wrapper[data-v-7069c1da] {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    flex-wrap: wrap;\n    -moz-column-gap: 7.8vw;\n         column-gap: 7.8vw;\n    row-gap: 2vh;\n}\n.pagination-container[data-v-7069c1da] {\n    margin: 0 auto;\n    margin-top: 62px;\n    width: 34.505208333333336vw;\n    height: 6.925vh;\n    border: 1px solid red;\n    display: flex;\n    justify-content: space-between;\n}\na[data-v-7069c1da]{\n    text-decoration: none;\n    color: black;\n}\nli[data-v-7069c1da] {\n    width: 3.2552083333333335vw;\n    height: 6.925207756232687vh;\n    border-radius: 50%;\n    border: 0.13850415512465375vh solid #B00000;\n    color: black;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n\n    font-family: 'Times New Roman', sans-serif;\n    font-style: normal;\n    font-weight: 400;\n    font-size: 4.43213296398892vh;\n    line-height: 37px;\n\n    cursor: pointer;\n}\n.active[data-v-7069c1da] {\n    background-color: #B00000;\n    color: white\n}\n.closed[data-v-7069c1da] {\n    border: 2px solid #BBBBBB;\n    color: #BBBBBB;\n}\n.control[data-v-7069c1da] {\n    font-size: 16px;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
