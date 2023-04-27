@@ -37,7 +37,8 @@ __webpack_require__.r(__webpack_exports__);
     this.dropzone = new dropzone__WEBPACK_IMPORTED_MODULE_0__["default"](this.$refs.dropzone, {
       url: 'test',
       autoProcessQueue: false,
-      addRemoveLinks: true
+      addRemoveLinks: true,
+      maxFiles: 1
     });
     this.getCategories();
     this.getPost();

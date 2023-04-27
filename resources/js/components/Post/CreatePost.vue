@@ -72,7 +72,8 @@ export default {
         this.dropzone = new Dropzone(this.$refs.dropzone, {
             url: 'test',
             autoProcessQueue: false,
-            addRemoveLinks:true
+            addRemoveLinks:true,
+            maxFiles:1
         })
         this.getCategories()
         this.getPost()
