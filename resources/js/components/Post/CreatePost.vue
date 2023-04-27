@@ -1,4 +1,5 @@
 <template>
+
     <div class="dropzone_container">
         <div class="wrapper">
             <div ref="dropzone" class="dropzone_form">
@@ -12,12 +13,13 @@
         </div>
         <div class="data-wrapper">
             <input v-model="title" type="text" name="" class="file-title" id="" placeholder="Назва">
+<!--            <vue-editor v-model="title" class="file-title"></vue-editor>-->
             <div class="name-wrapper">
                 <img
                     src="./Images/Guest.png"
                     alt="Guest"
                 >
-                <p class="name">Ім'я</p>
+                <p class="name">{{username}}</p>
             </div>
             <div class="form-group">
                 <p class="category-title">
@@ -46,10 +48,14 @@
 
 <script>
 import Dropzone from 'dropzone'
-import api from "../../api";
 
+import api from "../../api";
+import {VueEditor} from "vue2-editor"
 export default {
     name: "CreatePost",
+    components:{
+        VueEditor
+    },
     data() {
         return {
             dropzone: null,
@@ -57,7 +63,8 @@ export default {
             categories: null,
             category_id:1,
             response:null,
-            post:null
+            post:null,
+            username:''
         }
     },
 
@@ -69,6 +76,7 @@ export default {
         })
         this.getCategories()
         this.getPost()
+        this.username=localStorage.getItem('username')
     },
     methods: {
         store() {

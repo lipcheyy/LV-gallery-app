@@ -5367,6 +5367,7 @@ __webpack_require__.r(__webpack_exports__);
         _api__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/auth/me').then(function (res) {
           var user = res.data;
           localStorage.setItem('user_role', user.role);
+          localStorage.setItem('username', user.name);
           _this2.userRole = parseInt(user.role);
         });
       }
