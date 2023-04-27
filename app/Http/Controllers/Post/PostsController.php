@@ -14,8 +14,8 @@ use Illuminate\Support\Facades\Storage;
 class   PostsController extends Controller
 {
     public function index(){
-        $post = Post::latest()->first();
-        return new PostResource($post);
+        $posts = Post::all();
+        return PostResource::collection($posts);
     }
     public function store(StoreRequest $request){
         $data=$request->validated();

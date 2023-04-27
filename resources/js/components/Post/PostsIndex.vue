@@ -1,9 +1,12 @@
 <template>
     <div class="main-container">
         <div class="wrapper">
-            <post-layout Likes="1"></post-layout>
-            <post-layout Likes="2"></post-layout>
-            <post-layout Likes="3"></post-layout>
+<!--            <post-layout Likes="1"></post-layout>-->
+<!--            <post-layout Likes="2"></post-layout>-->
+<!--            <post-layout Likes="3"></post-layout>-->
+            <template v-for="post in posts">
+                <p>df{{post.title}}</p>
+            </template>
         </div>
         <div class="pagination-container">
             <div href="" class="pagination-btn closed control"><<</div>
@@ -20,9 +23,27 @@
 
 <script>
 import PostLayout from "./PostLayout";
+import api from "../../api";
 export default {
     name: "PostsIndex",
-    components: {PostLayout}
+    components: {PostLayout},
+    data(){
+        return{
+            posts:null,
+        }
+    },
+    mounted() {
+        this.getPosts()
+    },
+    methods:{
+        getPosts(){
+            api.get('/api/auth/posts')
+                .then(res=>{
+                    this.posts=res.data.data
+                    console.log(this.posts);
+                })
+        }
+    }
 }
 
 </script>
