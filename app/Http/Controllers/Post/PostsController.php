@@ -15,7 +15,7 @@ class   PostsController extends Controller
 {
     public function index(){
         $data=\request()->validate(
-            ['page'=>'string']
+            ['page'=>'integer']
         );
         $posts = Post::paginate(3,['*'],'page',$data['page']);
         return PostResource::collection($posts);

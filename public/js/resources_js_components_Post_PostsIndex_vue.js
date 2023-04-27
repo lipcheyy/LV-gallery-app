@@ -70,7 +70,9 @@ __webpack_require__.r(__webpack_exports__);
     getPosts: function getPosts() {
       var _this = this;
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-      _api__WEBPACK_IMPORTED_MODULE_1__["default"].post('/api/auth/posts/list').then(function (res) {
+      _api__WEBPACK_IMPORTED_MODULE_1__["default"].post('/api/auth/posts/list', {
+        page: page
+      }).then(function (res) {
         _this.posts = res.data.data;
         _this.pagination = res.data.meta;
         // console.log(res.data.meta);
@@ -186,7 +188,11 @@ var render = function render() {
       attrs: {
         href: ""
       }
-    }, [_vm._v("\n                " + _vm._s(link.label) + "\n            ")]);
+    }, [_c("a", {
+      attrs: {
+        href: "#"
+      }
+    }, [_vm._v(_vm._s(link.label))])]);
   }), _vm._v(" "), _c("div", {
     staticClass: "pagination-btn control",
     attrs: {

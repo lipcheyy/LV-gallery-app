@@ -12,7 +12,7 @@
             <div v-if="pagination.current_page!==1" href="" class="pagination-btn closed control"><</div>
             <div
                 href="" class="pagination-btn" :class="link.active? 'active' : ''" v-for="link in pagination.links">
-                {{link.label}}
+                <a href="#">{{link.label}}</a>
             </div>
 <!--            <div href="" class="pagination-btn">2</div>-->
 <!--            <div href="" class="pagination-btn">3</div>-->
@@ -40,7 +40,7 @@ export default {
     },
     methods:{
         getPosts(page=1){
-            api.post('/api/auth/posts/list')
+            api.post('/api/auth/posts/list',{page:page})
                 .then(res=>{
                     this.posts=res.data.data
                     this.pagination=res.data.meta
