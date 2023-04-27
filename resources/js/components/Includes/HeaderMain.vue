@@ -12,7 +12,7 @@
 
             <div class="rightNav">
                 <ul class="navbarR">
-                    <li><a href="#" class="white_style_text">Адмін панель</a></li>
+                    <li><router-link v-if="access_token && userRole===1" :to="{name:'admin.statistic'}" class="white_style_text">Адмін панель</router-link></li>
                     <li><router-link v-if="access_token" :to="{name:'personal.page'}"><img class= "icoRighr" src="./Images/my_acc.png" alt="myAccount"></router-link></li>
                     <li><a href="#" v-if="access_token" @click.prevent="logout"><img class= "icoRighr" src="./Images/exit_ico.png" alt="EXIT"></a></li>
                 </ul>
@@ -28,8 +28,17 @@ export default {
     name: "header-layout",
     data(){
         return{
-            access_token:null
+            access_token:null,
+            userRole:null
         }
+    },
+    mounted() {
+       this.getAccessToken()
+       this.userdata()
+    },
+    updated() {
+        this.getAccessToken()
+        this.userdata()
     },
     methods:{
         getAccessToken(){
@@ -41,6 +50,17 @@ export default {
                     localStorage.clear()
                     this.$router.push({name:'user.login'})
                 })
+        },
+
+        userdata() {
+            if (this.access_token){
+                api.post('/api/auth/me')
+                    .then(res=>{
+                        const user =res.data
+                        localStorage.setItem('user_role',user.role)
+                        this.userRole= parseInt(user.role)
+                    })
+            }
         },
     }
 
