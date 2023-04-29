@@ -14,7 +14,10 @@ use Illuminate\Support\Facades\Storage;
 class   PostsController extends Controller
 {
     public function index(){
-        $posts = Post::paginate(3);
+        $data=\request()->validate(
+            ['page'=>'integer']
+        );
+        $posts = Post::paginate(2,['*'],'page',$data['page']);
         return PostResource::collection($posts);
     }
     public function store(StoreRequest $request){

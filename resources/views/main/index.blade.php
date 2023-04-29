@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
-    <div>
+    <div style="height: 100%; display: flex;">
         <index></index>
     </div>
 @endsection
