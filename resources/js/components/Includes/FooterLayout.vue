@@ -45,7 +45,6 @@ a{
     align-items: center;
     justify-content: center;
     gap: 43%;
-    margin-top: 70px;
 }
 
 .lInfoFooter{
