@@ -1,8 +1,14 @@
 <template>
-    <div>
-        <header-layout ref="header_layout"></header-layout>
-        <router-view></router-view>
-<!--        <footer-layout></footer-layout>-->
+    <div class="wrapper">
+        <div class="header">
+            <header-layout ref="header_layout"></header-layout>
+        </div>
+        <div class="main">
+            <router-view></router-view>
+        </div>
+        <div class="footer">
+            <footer-layout></footer-layout>
+        </div>
     </div>
 </template>
 
@@ -44,5 +50,13 @@ export default {
 </script>
 
 <style scoped>
-
+    .wrapper{
+        min-height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    .footer{
+        margin-top: auto;
+    }
 </style>
