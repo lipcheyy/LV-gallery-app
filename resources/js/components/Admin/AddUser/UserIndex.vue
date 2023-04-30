@@ -6,6 +6,7 @@
             <tr>
                 <td class="firstConTable">ID</td>
                 <td class="secConTable">Назва</td>
+                <td>email</td>
                 <td class="secConTable">role</td>
                 <td class="thrdConTable">Дії</td>
             </tr>
@@ -15,16 +16,25 @@
                 <tr :class="userToEdit(user.id)?'d-none':''">
                     <td>{{user.id}}</td>
                     <td>{{user.name}}</td>
+                    <td>{{user.email}}</td>
                     <td>{{user.role}}</td>
                     <td>
-                        <div class="logoTable">
-                            <a class="tableLogo" href="#" @click.prevent="getUserDataToEdit(user.id,user.name)"><i class="fas fa-pencil"></i></a>
-                            <a class="tableLogo" @click.prevent="destroy(user.id)"  href="#"><i class="fas fa-trash"></i></a>
-                        </div>
+                        <a href="#"
+                           @click.prevent="getUserDataToEdit(user.id,user.name,user.role)"
+                        >edit</a>
+                        <a href="#" @click.prevent="destroy(user.id)">destroy</a>
                     </td>
+                </tr>
                 <tr :class="userToEdit(user.id)?'':'d-none'">
                     <td>{{user.id}}</td>
                     <td><input v-model="name" type="text" class="form-control" ></td>
+                    <td>
+                        <select v-model="role_id">
+                            <template v-for="(role,roleId) in roles">
+                                <option :value="roleId">{{role}}</option>
+                            </template>
+                        </select>
+                    </td>
                     <td><a href="#" @click.prevent="update(user.id)">update</a></td>
                 </tr>
             </template>
@@ -43,16 +53,22 @@ export default {
         return{
             users:null,
             toEdit:null,
-            name:null
+            name:'',
+            role_id:null,
+            roles:null
         }
     },
     mounted() {
         this.getUsers()
+        this.getRoles()
     },
     methods:{
-        getUserDataToEdit(id,name){
-            this.toEdit=id
-            this.name=name
+
+        getRoles(){
+            api.get('/api/auth/admin/users/roles')
+                .then(res=>{
+                    this.roles=res.data
+                })
         },
         getUsers() {
             api.get('/api/auth/admin/users')
@@ -60,16 +76,24 @@ export default {
                     this.users=res.data.data
                 })
         },
+        getUserDataToEdit(id,name,role){
+            this.toEdit=id
+            this.name=name
+            this.role_id=role
+        },
         userToEdit(id){
             return this.toEdit===id
         },
         update(id){
             this.toEdit=null
-            api.patch(`/api/auth/admin/users/${id}`, {
-                name: this.name
-            })
+            api.patch(`/api/auth/admin/users/${id}`,
+                {
+                    name:this.name,
+                    role:this.role_id
+                })
                 .then(res=>{
                     this.getUsers()
+                    console.log(res.data.message);
                 })
         },
         destroy(id){
