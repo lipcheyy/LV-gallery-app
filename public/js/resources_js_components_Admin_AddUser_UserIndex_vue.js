@@ -84,39 +84,51 @@ __webpack_require__.r(__webpack_exports__);
     return {
       users: null,
       toEdit: null,
-      name: null
+      name: '',
+      role_id: null,
+      roles: null
     };
   },
   mounted: function mounted() {
     this.getUsers();
+    this.getRoles();
   },
   methods: {
-    getUserDataToEdit: function getUserDataToEdit(id, name) {
-      this.toEdit = id;
-      this.name = name;
+    getRoles: function getRoles() {
+      var _this = this;
+      _api__WEBPACK_IMPORTED_MODULE_1__["default"].get('/api/auth/admin/users/roles').then(function (res) {
+        _this.roles = res.data;
+      });
     },
     getUsers: function getUsers() {
-      var _this = this;
+      var _this2 = this;
       _api__WEBPACK_IMPORTED_MODULE_1__["default"].get('/api/auth/admin/users').then(function (res) {
-        _this.users = res.data.data;
+        _this2.users = res.data.data;
       });
+    },
+    getUserDataToEdit: function getUserDataToEdit(id, name, role) {
+      this.toEdit = id;
+      this.name = name;
+      this.role_id = role;
     },
     userToEdit: function userToEdit(id) {
       return this.toEdit === id;
     },
     update: function update(id) {
-      var _this2 = this;
+      var _this3 = this;
       this.toEdit = null;
       _api__WEBPACK_IMPORTED_MODULE_1__["default"].patch("/api/auth/admin/users/".concat(id), {
-        name: this.name
+        name: this.name,
+        role: this.role_id
       }).then(function (res) {
-        _this2.getUsers();
+        _this3.getUsers();
+        console.log(res.data.message);
       });
     },
     destroy: function destroy(id) {
-      var _this3 = this;
+      var _this4 = this;
       _api__WEBPACK_IMPORTED_MODULE_1__["default"]["delete"]("/api/auth/admin/users/".concat(id)).then(function (res) {
-        _this3.getUsers();
+        _this4.getUsers();
       });
     }
   }
@@ -284,23 +296,17 @@ var render = function render() {
   }, [_vm._m(0), _vm._v(" "), _c("tbody", [_vm._l(_vm.users, function (user) {
     return [_c("tr", {
       "class": _vm.userToEdit(user.id) ? "d-none" : ""
-    }, [_c("td", [_vm._v(_vm._s(user.id))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(user.name))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(user.role))]), _vm._v(" "), _c("td", [_c("div", {
-      staticClass: "logoTable"
-    }, [_c("a", {
-      staticClass: "tableLogo",
+    }, [_c("td", [_vm._v(_vm._s(user.id))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(user.name))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(user.email))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(user.role))]), _vm._v(" "), _c("td", [_c("a", {
       attrs: {
         href: "#"
       },
       on: {
         click: function click($event) {
           $event.preventDefault();
-          return _vm.getUserDataToEdit(user.id, user.name);
+          return _vm.getUserDataToEdit(user.id, user.name, user.role);
         }
       }
-    }, [_c("i", {
-      staticClass: "fas fa-pencil"
-    })]), _vm._v(" "), _c("a", {
-      staticClass: "tableLogo",
+    }, [_vm._v("edit")]), _vm._v(" "), _c("a", {
       attrs: {
         href: "#"
       },
@@ -310,9 +316,7 @@ var render = function render() {
           return _vm.destroy(user.id);
         }
       }
-    }, [_c("i", {
-      staticClass: "fas fa-trash"
-    })])])])]), _c("tr", {
+    }, [_vm._v("destroy")])])]), _vm._v(" "), _c("tr", {
       "class": _vm.userToEdit(user.id) ? "" : "d-none"
     }, [_c("td", [_vm._v(_vm._s(user.id))]), _vm._v(" "), _c("td", [_c("input", {
       directives: [{
@@ -334,7 +338,31 @@ var render = function render() {
           _vm.name = $event.target.value;
         }
       }
-    })]), _vm._v(" "), _c("td", [_c("a", {
+    })]), _vm._v(" "), _c("td", [_c("select", {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: _vm.role_id,
+        expression: "role_id"
+      }],
+      on: {
+        change: function change($event) {
+          var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
+            return o.selected;
+          }).map(function (o) {
+            var val = "_value" in o ? o._value : o.value;
+            return val;
+          });
+          _vm.role_id = $event.target.multiple ? $$selectedVal : $$selectedVal[0];
+        }
+      }
+    }, [_vm._l(_vm.roles, function (role, roleId) {
+      return [_c("option", {
+        domProps: {
+          value: roleId
+        }
+      }, [_vm._v(_vm._s(role))])];
+    })], 2)]), _vm._v(" "), _c("td", [_c("a", {
       attrs: {
         href: "#"
       },
@@ -354,7 +382,7 @@ var staticRenderFns = [function () {
     staticClass: "firstConTable"
   }, [_vm._v("ID")]), _vm._v(" "), _c("td", {
     staticClass: "secConTable"
-  }, [_vm._v("Назва")]), _vm._v(" "), _c("td", {
+  }, [_vm._v("Назва")]), _vm._v(" "), _c("td", [_vm._v("email")]), _vm._v(" "), _c("td", {
     staticClass: "secConTable"
   }, [_vm._v("role")]), _vm._v(" "), _c("td", {
     staticClass: "thrdConTable"

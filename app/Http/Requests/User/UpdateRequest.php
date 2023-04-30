@@ -24,7 +24,8 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>'string'
+            'name'=>'string',
+            'role'=>'integer'
         ];
     }
 }
