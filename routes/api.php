@@ -57,6 +57,9 @@ Route::group([
         Route::group(['namespace'=>'Post','prefix'=>'posts'],function () {
             Route::post('/', 'PostsController@store');
             Route::post('/list', 'PostsController@index');
+            Route::group(['namespace' => 'Like', 'prefix' => '{post}/likes'], function () {
+                Route::post('/','LikeController@store');
+            });
         });
     });
 
