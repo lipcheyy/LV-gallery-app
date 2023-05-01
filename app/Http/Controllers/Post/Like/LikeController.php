@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 class LikeController extends Controller
 {
     public function store(Post $post){
+        auth()->user()->likedPosts()->toggle($post->id);
         return dump($post->id);
     }
 }
