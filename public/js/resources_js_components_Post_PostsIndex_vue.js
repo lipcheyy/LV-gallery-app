@@ -15,24 +15,18 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "PostLayout",
-  props: ['Likes', 'url', 'title']
-  // data(){
-  //     return{
-  //         posts:null
-  //     }
-  // },
-  // mounted() {
-  //     this.getPosts()
-  // },
-  // methods:{
-  //     getPosts(){
-  //         api.get('/api/auth/posts')
-  //             .then(res=>{
-  //                 this.posts=res.data.data
-  //                 console.log(this.posts);
-  //             })
-  //     }
-  // }
+  props: ['Likes', 'url', 'title', 'id'],
+  data: function data() {
+    return {
+      posts: null
+    };
+  },
+  mounted: function mounted() {},
+  methods: {
+    store: function store() {
+      _api__WEBPACK_IMPORTED_MODULE_0__["default"].post("/api/auth/posts/".concat(this.id, "/likes"));
+    }
+  }
 });
 
 /***/ }),
@@ -108,24 +102,30 @@ var render = function render() {
     attrs: {
       src: _vm.url
     }
-  })]), _vm._v(" "), _vm._m(0)])]);
-};
-var staticRenderFns = [function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("div", {
+  })]), _vm._v(" "), _c("div", {
     staticClass: "buttons-container"
   }, [_c("a", {
     staticClass: "likes active",
     attrs: {
       href: ""
+    },
+    on: {
+      click: function click($event) {
+        $event.preventDefault();
+        return _vm.store.apply(null, arguments);
+      }
     }
   }, [_c("img", {
     attrs: {
       src: __webpack_require__(/*! ./Images/Like.png */ "./resources/js/components/Post/Images/Like.png"),
       alt: "Like"
     }
-  })]), _vm._v(" "), _c("a", {
+  })]), _vm._v(" "), _vm._m(0)])])]);
+};
+var staticRenderFns = [function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("a", {
     staticClass: "save active",
     attrs: {
       href: ""
@@ -135,7 +135,7 @@ var staticRenderFns = [function () {
       src: __webpack_require__(/*! ./Images/Save.png */ "./resources/js/components/Post/Images/Save.png"),
       alt: "Save"
     }
-  })])]);
+  })]);
 }];
 render._withStripped = true;
 
@@ -165,7 +165,8 @@ var render = function render() {
     }, [_vm._l(post.images, function (image) {
       return [_c("post-layout", {
         attrs: {
-          url: image.url
+          url: image.url,
+          id: post.id
         }
       })];
     })], 2);

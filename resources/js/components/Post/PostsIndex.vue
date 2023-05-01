@@ -2,7 +2,7 @@
     <div class="main-container">
         <div class="wrapper" v-for="post in posts">
             <template v-for="image in post.images">
-                <post-layout :url="image.url"></post-layout>
+                <post-layout :url="image.url" :id="post.id"></post-layout>
 <!--            <post-layout Likes="2"></post-layout>-->
 <!--            <post-layout Likes="3"></post-layout>-->
             </template>

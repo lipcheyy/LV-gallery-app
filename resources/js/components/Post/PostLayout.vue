@@ -5,7 +5,7 @@
                 <img class="img" :src="url">
             </div>
             <div class="buttons-container">
-                <a href="" class="likes active"><img src="./Images/Like.png" alt="Like"></a>
+                <a href="" @click.prevent="store" class="likes active"><img src="./Images/Like.png" alt="Like"></a>
                 <a href="" class="save active"><img src="./Images/Save.png" alt="Save"></a>
             </div>
 
@@ -18,24 +18,19 @@ import api from "../../api";
 
 export default {
     name: "PostLayout",
-    props: ['Likes','url','title'],
-    // data(){
-    //     return{
-    //         posts:null
-    //     }
-    // },
-    // mounted() {
-    //     this.getPosts()
-    // },
-    // methods:{
-    //     getPosts(){
-    //         api.get('/api/auth/posts')
-    //             .then(res=>{
-    //                 this.posts=res.data.data
-    //                 console.log(this.posts);
-    //             })
-    //     }
-    // }
+    props: ['Likes','url','title','id'],
+    data(){
+        return{
+            posts:null
+        }
+    },
+    mounted() {
+    },
+    methods:{
+        store(){
+            api.post(`/api/auth/posts/${this.id}/likes`)
+        }
+    }
 }
 </script>
 
