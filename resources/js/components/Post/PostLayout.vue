@@ -1,26 +1,29 @@
+Чому like_container не переміщається в ліво, а save_container вправо
 <template>
-    <div>
         <div class="main-container">
             <div class="img-container">
                 <img class="img" :src="url">
             </div>
             <div class="buttons-container">
-                <a href="" @click.prevent="store" class="likes">
-                    <img src="./Images/like.png" alt="Like">
-                </a>
-                <a href="" @click.prevent="store" class="save">
-                    <img src="./Images/save.png" alt="Save">
-                </a>
-                <a href="" @click.prevent="store" class="likes active">
-                    <img src="./Images/active_like.png" alt="Like">
-                </a>
-                <a href="" @click.prevent="store" class="save active">
-                    <img src="./Images/active_save.png" alt="Save">
-                </a>
+                <div class="like_container">
+                    <a href="" @click.prevent="store" class="likes">
+                        <i class="far fa-heart"></i>
+                    </a>
+                    <!--                <a href="" @click.prevent="store" class="likes active">-->
+                    <!--                    <i class="fas fa-heart"></i>-->
+                    <!--                </a>-->
+                    <span class="count_likes">100<span></span> позначок "Подобається"</span>
+                </div>
+                <div class="save_container">
+                    <a href="" @click.prevent="store" class="save">
+                        <i class="far fa-bookmark"></i>
+                    </a>
+                    <!--                <a href="" @click.prevent="store" class="save active">-->
+                    <!--                    <i class="fas fa-bookmark"></i>-->
+                    <!--                </a>-->
+                </div>
             </div>
-
         </div>
-    </div>
 </template>
 
 <script>
@@ -45,13 +48,12 @@ export default {
 </script>
 
 <style scoped>
+
 .main-container {
     height: 78vh;
     display: flex;
     flex-direction: column;
-    align-items: center;
 }
-
 .img-container {
     width: 100%;
     height: 90%;
@@ -61,12 +63,34 @@ export default {
     width: 100%;
     height: 100%;
 }
-
-.buttons-container {
-    width: 90%;
+.buttons-container{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.like_container{
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    order: 1;
+    margin-left: 10px;
+}
+.save_container{
+    display: flex;
+    align-items: center;
+    order: 2;
+    margin-right: 17px;
+}
+i{
+    font-size: 35px;
+    color: #000000;
+}
+.count_likes{
+    padding-left: 11px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    color: #000000;
 }
 
 
