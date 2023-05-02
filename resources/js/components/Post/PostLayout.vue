@@ -5,8 +5,18 @@
                 <img class="img" :src="url">
             </div>
             <div class="buttons-container">
-                <a href="" @click.prevent="store" class="likes active"><img src="./Images/Like.png" alt="Like"></a>
-                <a href="" class="save active"><img src="./Images/Save.png" alt="Save"></a>
+                <a href="" @click.prevent="store" class="likes">
+                    <img src="./Images/like.png" alt="Like">
+                </a>
+                <a href="" @click.prevent="store" class="save">
+                    <img src="./Images/save.png" alt="Save">
+                </a>
+                <a href="" @click.prevent="store" class="likes active">
+                    <img src="./Images/active_like.png" alt="Like">
+                </a>
+                <a href="" @click.prevent="store" class="save active">
+                    <img src="./Images/active_save.png" alt="Save">
+                </a>
             </div>
 
         </div>
