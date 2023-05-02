@@ -2,17 +2,20 @@
     <div class="asdas">
         <div class="header">
             <div class="leftNav">
+                <div class="main_logo"><a href="#" class="logo"> <img class= "logo" src="./Images/logo.png" alt="logo"> </a></div>
+                <input type="checkbox" id="check">
+                <label for="check" class="checkbtn">
+                    <i class="fas fa-bars"></i>
+                </label>
                 <ul class="navbarL">
-                    <li><a href="#" class="logo"> <img class= "logo" src="./Images/logo.png" alt="logo"> </a></li>
                     <li><router-link v-if="access_token" :to="{name:'post.index'}" class="white_style_text">Головна</router-link></li>
                     <li><router-link v-if="access_token" :to="{name:'post.create'}" class="white_style_text">Створити</router-link></li>
                     <li><a href="#" class="red_style_text">Категорії <img src="./Images/v.png" alt="v" class="v_ico"></a></li>
+                    <li><router-link v-if="access_token && userRole===1" :to="{name:'admin.statistic'}" class="white_style_text">Адмін панель</router-link></li>
                 </ul>
             </div>
-
             <div class="rightNav">
                 <ul class="navbarR">
-                    <li><router-link v-if="access_token && userRole===1" :to="{name:'admin.statistic'}" class="white_style_text">Адмін панель</router-link></li>
                     <li><router-link v-if="access_token" :to="{name:'personal.page'}"><img class= "icoRighr" src="./Images/my_acc.png" alt="myAccount"></router-link></li>
                     <li><a href="#" v-if="access_token" @click.prevent="logout"><img class= "icoRighr" src="./Images/exit_ico.png" alt="EXIT"></a></li>
                 </ul>
@@ -33,8 +36,8 @@ export default {
         }
     },
     mounted() {
-       this.getAccessToken()
-       this.userdata()
+        this.getAccessToken()
+        this.userdata()
     },
     updated() {
         this.getAccessToken()
@@ -80,6 +83,19 @@ a{
     outline: none;
     text-decoration: none;
 }
+.checkbtn{
+    position: absolute;
+    right: 15px;
+    font-size: 34px;
+    cursor: pointer;
+    float: right;
+    line-height: 80px;
+    margin-right: 30px;
+    display: none;
+}
+#check{
+    display: none;
+}
 .header{
     background: #D9D9D9;
     min-height: 135px;
@@ -88,12 +104,18 @@ a{
     justify-content: space-between;
     /*margin-bottom:74px;*/
 }
-.navbarL{
+.leftNav{
     text-decoration: none;
     display: flex;
     list-style: none;
     align-items: center;
     padding-left: 38px;
+}
+.navbarL{
+    text-decoration: none;
+    display: flex;
+    list-style: none;
+    align-items: center;;
 }
 .navbarR{
     text-decoration: none;
@@ -136,5 +158,53 @@ a{
 .red_style_text{
     color: #FFFFFF;
     background: #B00000;
+}
+#check{
+    display: none;
+}
+@media only screen and (max-width:1309px) {
+    .navbarL{
+        padding-left: 15px;
+    }
+    .navbarR{
+        padding-right: 15px;
+    }
+    .navbarR li,
+    .navbarL li{
+        padding-left: 15px;
+    }
+}
+@media only screen and (max-width:905px) {
+    .navbarR{
+        padding-right: 100px;
+    }
+    .checkbtn{
+        display: block;
+    }
+    .navbarL{
+        position: absolute;
+        width: 100%;
+        height: max-content;
+        padding: 20px 0;
+        background: #6c6b6b;
+        top: 136px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        left: -100%;
+        transition: all .5s;
+    }
+    .red_style_text,
+    .white_style_text{
+        border-radius: 10px;
+        width:360px;
+    }
+    .navbarL li{
+        padding-left: 0px;
+    }
+    #check:checked ~ .navbarL {
+        left: 0%;
+    }
 }
 </style>
