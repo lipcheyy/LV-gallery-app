@@ -12,19 +12,18 @@
                 <p class="wiget-title inter">Кількість користувачів</p>
                 <div class="data-container">
                     <p class="count inter">150</p>
-                    <img class="image" src="../Includes/Images/Users.png" alt="Users">
+                    <span class="ico_style"><i class="fas fa-users"></i></span>
                 </div>
-
                 <div class="btn-wrapper">
                     <router-link :to="{name:'users.index'}" class="submit-btn inter">Детальніше</router-link>
                 </div>
             </div>
 
             <div class="wiget red">
-                <p class="wiget-title inter">Кількість користувачів</p>
+                <p class="wiget-title inter">Кількість постів</p>
                 <div class="data-container">
                     <p class="count inter">150</p>
-                    <img class="image" src="../Includes/Images/Users.png" alt="Users">
+                    <span class="ico_style"><i class="fas fa-pager"></i></span>
                 </div>
 
                 <div class="btn-wrapper">
@@ -33,10 +32,10 @@
             </div>
 
             <div class="wiget yellow">
-                <p class="wiget-title inter">Кількість користувачів</p>
+                <p class="wiget-title inter">Кількість категорій</p>
                 <div class="data-container">
                     <p class="count inter">150</p>
-                    <img class="image" src="../Includes/Images/Items.png" alt="Items">
+                    <span class="ico_style"><i class="fas fa-list-ul"></i></span>
                 </div>
 
                 <div class="btn-wrapper">
@@ -45,14 +44,14 @@
             </div>
 
             <div class="wiget green">
-                <p class="wiget-title inter">Кількість користувачів</p>
+                <p class="wiget-title inter">Кількість зображень</p>
                 <div class="data-container">
                     <p class="count inter">150</p>
-                    <img class="image" src="../Includes/Images/Image.png" alt="Items">
+                    <span class="ico_style"><i class="fas fa-image"></i></span>
                 </div>
 
                 <div class="btn-wrapper">
-<!--                    <router-link :to="{name:'category.index'}" class="submit-btn green inter">Детальніше</router-link>-->
+                    <!--                    <router-link :to="{name:'category.index'}" class="submit-btn green inter">Детальніше</router-link>-->
                 </div>
             </div>
 
@@ -71,25 +70,25 @@ export default {
 <style scoped>
 
 @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
-
 p, h1 {
     margin: 0;
 }
-
 .inter {
     font-family: 'Inter';
     font-style: normal;
 }
-
+.wiget:hover{
+    transform: scale(1.03);
+    transition: all 0.5s ease;
+}
 .main-container {
     width: 100%;
-    height: 75vh;
-    margin-top: 20px;
+    margin-top: 50px;
+    margin-bottom: 130px;
 }
 
 .wigets-title {
     display: flex;
-    height: 7.228915662650603vh;
     width: 100%;
     flex-wrap: wrap;
     justify-content: center;
@@ -134,7 +133,7 @@ p, h1 {
     justify-content: center;
     align-items: center;
 
- }
+}
 
 .wiget-title {
     margin-top: 30px;
@@ -159,7 +158,10 @@ p, h1 {
     letter-spacing: 0.065em;
     color: #FFFFFF;
 }
-
+.ico_style{
+    color: rgba(0,0,0,.15);
+    font-size: 120px;
+}
 .btn-wrapper {
     height: 80px;
     background: rgba(0, 0, 0, 0.31);
