@@ -247,7 +247,7 @@ export default {
     width: 160px;
     border-radius: 20px;
     background: #B00000;
-
+    transition: all 0.5s ease;
     color: white;
     font-family: 'Praise', sans-serif;
     font-style: normal;
@@ -262,6 +262,11 @@ export default {
     justify-content: center;
 
     margin-top: 156px;
+}
+
+
+.button-create:hover {
+    animation: glowing 0.5s infinite;
 }
 
 .name-wrapper {
@@ -287,8 +292,10 @@ export default {
     margin-left: 12px;
 }
 
-.option {
-
+@keyframes glowing {
+    0% { border-radius: 20px; box-shadow: 0 0 3px #760c0c; }
+    50% { border-radius: 20px; box-shadow: 0 0 10px #ab1111; }
+    100% { border-radius: 20px; box-shadow: 0 0 3px #760c0c; }
 }
 
 @media only screen and (max-width: 1024px) {
