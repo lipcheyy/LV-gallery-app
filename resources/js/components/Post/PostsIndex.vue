@@ -86,9 +86,7 @@ export default {
 .pagination-container {
     margin: 0 auto;
     margin-top: 62px;
-    width: 34.505208333333336vw;
-    height: 6.925vh;
-    border: 1px solid red;
+    width: 20%;
     display: flex;
     justify-content: space-between;
 }
@@ -98,8 +96,8 @@ a{
     color: black;
 }
 li {
-    width: 3.2552083333333335vw;
-    height: 6.925207756232687vh;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     border: 0.13850415512465375vh solid #B00000;
     color: black;
@@ -130,4 +128,16 @@ li {
     font-size: 16px;
 }
 
+
+@media only screen and (max-width: 1024px) {
+    .pagination-container {
+        width: 50%;
+    }
+}
+
+@media only screen and (max-width: 543px) {
+    .pagination-container {
+        width: 60%;
+    }
+}
 </style>
