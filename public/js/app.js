@@ -5529,8 +5529,9 @@ var render = function render() {
   }), _vm._v(" "), _vm._m(1), _vm._v(" "), _c("ul", {
     staticClass: "navbarL"
   }, [_c("li", [_vm.access_token ? _c("router-link", {
-    staticClass: "white_style_text active",
+    staticClass: "white_style_text",
     attrs: {
+      "exact-active-class": "active",
       to: {
         name: "post.index"
       }
@@ -5538,6 +5539,7 @@ var render = function render() {
   }, [_vm._v("Головна")]) : _vm._e()], 1), _vm._v(" "), _c("li", [_vm.access_token ? _c("router-link", {
     staticClass: "white_style_text",
     attrs: {
+      "exact-active-class": "active",
       to: {
         name: "post.create"
       }
@@ -5545,6 +5547,7 @@ var render = function render() {
   }, [_vm._v("Створити")]) : _vm._e()], 1), _vm._v(" "), _vm._m(2), _vm._v(" "), _c("li", [_vm.access_token && _vm.userRole === 1 ? _c("router-link", {
     staticClass: "white_style_text",
     attrs: {
+      "exact-active-class": "active",
       to: {
         name: "admin.statistic"
       }
@@ -5615,7 +5618,7 @@ var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("li", [_c("a", {
-    staticClass: "white_style_text active",
+    staticClass: "white_style_text",
     attrs: {
       href: "#"
     }

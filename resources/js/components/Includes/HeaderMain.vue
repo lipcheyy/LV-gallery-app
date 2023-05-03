@@ -8,10 +8,10 @@
                     <i class="fas fa-bars"></i>
                 </label>
                 <ul class="navbarL">
-                    <li><router-link v-if="access_token" :to="{name:'post.index'}" class="white_style_text  active">Головна</router-link></li>
-                    <li><router-link v-if="access_token" :to="{name:'post.create'}" class="white_style_text">Створити</router-link></li>
-                    <li><a href="#" class="white_style_text active">Категорії <img src="./Images/v.png" alt="v" class="v_ico"></a></li>
-                    <li><router-link v-if="access_token && userRole===1" :to="{name:'admin.statistic'}" class="white_style_text">Адмін панель</router-link></li>
+                    <li><router-link exact-active-class="active" v-if="access_token" :to="{name:'post.index'}" class="white_style_text">Головна</router-link></li>
+                    <li><router-link exact-active-class="active" v-if="access_token" :to="{name:'post.create'}" class="white_style_text">Створити</router-link></li>
+                    <li><a href="#" class="white_style_text">Категорії <img src="./Images/v.png" alt="v" class="v_ico"></a></li>
+                    <li><router-link exact-active-class="active" v-if="access_token && userRole===1" :to="{name:'admin.statistic'}" class="white_style_text">Адмін панель</router-link></li>
                 </ul>
             </div>
             <div class="rightNav">
