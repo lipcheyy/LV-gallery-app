@@ -8,9 +8,12 @@
                         class="user_pic"
                         alt="user"
                     />
-                    <span class="username">Vasya</span>
+                    <a href='#' class="username">Vasya</a>
                 </div>
 
+                <div class="post-time">
+                    <a class="time">03.05.2023</a>
+                </div>
 
             </div>
             <img class="img" :src="url">
@@ -87,6 +90,10 @@ export default {
     order: 2;
     margin-right: 17px;
 }
+a {
+    text-decoration: none;
+    color: black;
+}
 
 i{
     font-size: 35px;
@@ -106,6 +113,7 @@ i{
     display: flex;
     align-items: center;
     padding: 0 10px;
+    justify-content: space-between;
 }
 
 .user {
