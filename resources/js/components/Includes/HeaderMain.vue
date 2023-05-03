@@ -10,7 +10,7 @@
                 <ul class="navbarL">
                     <li><router-link v-if="access_token" :to="{name:'post.index'}" class="white_style_text">Головна</router-link></li>
                     <li><router-link v-if="access_token" :to="{name:'post.create'}" class="white_style_text">Створити</router-link></li>
-                    <li><a href="#" class="red_style_text">Категорії <img src="./Images/v.png" alt="v" class="v_ico"></a></li>
+                    <li><a href="#" class="white_style_text active">Категорії <img src="./Images/v.png" alt="v" class="v_ico"></a></li>
                     <li><router-link v-if="access_token && userRole===1" :to="{name:'admin.statistic'}" class="white_style_text">Адмін панель</router-link></li>
                 </ul>
             </div>
@@ -136,7 +136,6 @@ a{
     width: 50px;
     height: 50px;
 }
-.red_style_text,
 .white_style_text{
     background: #FFFFFF;
     border-radius: 20px;
@@ -155,7 +154,7 @@ a{
     height: 8.04px;
     margin-left: 30px;
 }
-.red_style_text{
+.active{
     color: #FFFFFF;
     background: #B00000;
 }
