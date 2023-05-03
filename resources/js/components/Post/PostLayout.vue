@@ -1,6 +1,18 @@
 Чому like_container не переміщається в ліво, а save_container вправо
 <template>
         <div class="main-container">
+            <div class="postUser">
+                <div class="user">
+                    <img
+                        src="./Images/Guest.png"
+                        class="user_pic"
+                        alt="user"
+                    />
+                    <span class="username">Vasya</span>
+                </div>
+
+
+            </div>
             <img class="img" :src="url">
             <div class="buttons-container">
                 <div class="like_container">
@@ -84,9 +96,27 @@ i{
     padding-left: 11px;
     font-style: normal;
     font-weight: 400;
-    font-size: 15px;
-    line-height: 18px;
-    color: #000000;
+    font-size: 12px;
+    color: #383737;
+}
+
+.postUser {
+    height: 40px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.user {
+    height: 80%;
+    display: flex;
+    align-items: center;
+}
+
+.user_pic {
+    height: 100%;
+    margin-right: 5px;
 }
 
 
