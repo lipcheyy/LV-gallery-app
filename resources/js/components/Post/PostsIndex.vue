@@ -102,7 +102,7 @@ li {
     display: flex;
     justify-content: center;
     align-items: center;
-
+    transition: all 0.5s ease;
     font-family: 'Times New Roman', sans-serif;
     font-style: normal;
     font-weight: 400;
@@ -130,6 +130,15 @@ li {
     font-size: 16px;
 }
 
+li:hover {
+    transform: scale(1.1);
+    animation: glowing 0.5s infinite;
+}
+@keyframes glowing {
+    0% { border-radius: 50%; box-shadow: 0 0 3px #760c0c; }
+    50% { border-radius: 50%; box-shadow: 0 0 10px #ab1111; }
+    100% { border-radius: 50%; box-shadow: 0 0 3px #760c0c; }
+}
 
 
 
