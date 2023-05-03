@@ -10,7 +10,11 @@
                 <ul class="navbarL">
                     <li><router-link exact-active-class="active" v-if="access_token" :to="{name:'post.index'}" class="white_style_text">Головна</router-link></li>
                     <li><router-link exact-active-class="active" v-if="access_token" :to="{name:'post.create'}" class="white_style_text">Створити</router-link></li>
-                    <li><a href="#" class="white_style_text">Категорії <img src="./Images/v.png" alt="v" class="v_ico"></a></li>
+                    <li>
+                        <select class="white_style_text selector">
+                            <option value="" disabled selected>Категорії</option>
+                        </select>
+                    </li>
                     <li><router-link exact-active-class="active" v-if="access_token && userRole===1" :to="{name:'admin.statistic'}" class="white_style_text">Адмін панель</router-link></li>
                 </ul>
             </div>
@@ -32,7 +36,9 @@ export default {
     data(){
         return{
             access_token:null,
-            userRole:null
+            userRole:null,
+            categories: null,
+            category_id:1
         }
     },
     mounted() {
@@ -52,6 +58,13 @@ export default {
                 .then(res=>{
                     localStorage.clear()
                     this.$router.push({name:'user.login'})
+                })
+        },
+
+        getCategories() {
+            api.get('/api/auth/admin/category')
+                .then(res => {
+                    this.categories = res.data.data
                 })
         },
 
@@ -83,6 +96,8 @@ a{
     outline: none;
     text-decoration: none;
 }
+
+
 .checkbtn{
     position: absolute;
     right: 15px;
@@ -95,6 +110,16 @@ a{
 }
 #check{
     display: none;
+}
+.selector {
+    border: none;
+    outline: none;
+    height: 45px;
+}
+
+.selector > option {
+    flex: 25%;
+    box-sizing: border-box;
 }
 .header{
     background: #D9D9D9;
