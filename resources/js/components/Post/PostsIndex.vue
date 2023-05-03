@@ -73,7 +73,7 @@ export default {
 
 <style scoped>
 .main-container {
-    margin-top: 10px;
+    margin-top: 25px;
 }
 .posts-container {
     display: flex;
@@ -84,7 +84,7 @@ export default {
 }
 
 .pagination-container {
-    margin: 20px auto 50px auto;
+    margin: 0px auto 50px auto;
     width: 20%;
     display: flex;
     justify-content: space-between;
