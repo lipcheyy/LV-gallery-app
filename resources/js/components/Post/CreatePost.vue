@@ -114,8 +114,8 @@ export default {
 
 <style scoped>
 .dropzone_container {
-    height: 620px;
-    width: 575px;
+    padding: 30px 0;
+    width: 40%;
     left: 622px;
     top: 192px;
     border-radius: 14px;
@@ -132,9 +132,10 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 40%;
 }
 .dropzone_form {
-    width: 250px;
+    width: 100%;
     height: 450px;
     background: #FFFFFF;
     border-radius: 8px;
@@ -160,7 +161,7 @@ export default {
 }
 
 .data-wrapper {
-    width: 260px;
+    width: 40%;
     height: 500px;
     display: flex;
     flex-direction: column;
@@ -185,7 +186,7 @@ export default {
     border-style: solid;
     border-color: #7D7D7D;
     border-radius: 7px;
-    width: 260px;
+    width: 100%;
     height: 45px;
     padding-left: 10px;
     display: flex;
@@ -208,6 +209,9 @@ export default {
 
 }
 
+.form-group {
+    width: 100%;
+}
 .category-title {
     font-family: 'Inter', sans-serif;
     font-style: normal;
@@ -218,6 +222,7 @@ export default {
     align-items: center;
     color: #4B4B4B;
     margin-top: 20px;
+    width: 100%;
 }
 
 .selector {
@@ -226,7 +231,7 @@ export default {
     border-style: solid;
     border-color: #7D7D7D;
     border-radius: 7px;
-    width: 260px;
+    width: 100%;
     height: 45px;
     padding-left: 10px;
     display: flex;
@@ -281,7 +286,28 @@ export default {
     margin: auto 0;
     margin-left: 12px;
 }
+
 .option {
+
+}
+
+@media only screen and (max-width: 1024px) {
+    .dropzone_container {
+        flex-direction: column;
+        width: 60%;
+    }
+
+    .wrapper {
+        width: 90%;
+    }
+
+    .dropzone_form {
+        height: 200px;
+    }
+    .data-wrapper {
+        width: 90%;
+    }
+
 
 }
 </style>
