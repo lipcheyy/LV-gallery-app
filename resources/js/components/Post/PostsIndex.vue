@@ -1,12 +1,13 @@
 <template>
     <div class="main-container">
-        <div class="wrapper" v-for="post in posts">
-            <template v-for="image in post.images">
-                <post-layout :url="image.url" :id="post.id"></post-layout>
-<!--            <post-layout Likes="2"></post-layout>-->
-<!--            <post-layout Likes="3"></post-layout>-->
-            </template>
+        <div class="posts-container">
+            <div class="post-container" v-for="post in posts">
+                <template v-for="image in post.images">
+                    <post-layout :url="image.url" :id="post.id"></post-layout>
+                </template>
+            </div>
         </div>
+
         <ul class="pagination-container">
             <li v-if="pagination.current_page!==1"
                  @click.prevent="getPosts(pagination.current_page-1)" class="closed control">&lt;</li>
@@ -74,13 +75,12 @@ export default {
 .main-container {
     margin-top: 10px;
 }
-.wrapper {
+.posts-container {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    flex-wrap: wrap;
-    column-gap: 7.8vw;
-    row-gap: 2vh;
+    gap: 10px;
 }
 
 .pagination-container {

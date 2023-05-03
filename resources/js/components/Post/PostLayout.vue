@@ -1,9 +1,7 @@
 Чому like_container не переміщається в ліво, а save_container вправо
 <template>
         <div class="main-container">
-            <div class="img-container">
-                <img class="img" :src="url">
-            </div>
+            <img class="img" :src="url">
             <div class="buttons-container">
                 <div class="like_container">
                     <a href="" @click.prevent="store" class="likes">
@@ -51,17 +49,13 @@ export default {
 
 .main-container {
     height: 78vh;
+    width: 350px;
     display: flex;
     flex-direction: column;
 }
-.img-container {
+.img {
     width: 100%;
-    height: 90%;
-    margin-bottom: 7px;
-}
-.img-container > .img {
-    width: 100%;
-    height: 100%;
+    height: 80%;
 }
 .buttons-container{
     display: flex;

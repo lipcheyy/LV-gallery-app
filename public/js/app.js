@@ -5521,9 +5521,14 @@ var render = function render() {
     staticClass: "header"
   }, [_c("div", {
     staticClass: "leftNav"
-  }, [_c("ul", {
+  }, [_vm._m(0), _vm._v(" "), _c("input", {
+    attrs: {
+      type: "checkbox",
+      id: "check"
+    }
+  }), _vm._v(" "), _vm._m(1), _vm._v(" "), _c("ul", {
     staticClass: "navbarL"
-  }, [_vm._m(0), _vm._v(" "), _c("li", [_vm.access_token ? _c("router-link", {
+  }, [_c("li", [_vm.access_token ? _c("router-link", {
     staticClass: "white_style_text",
     attrs: {
       to: {
@@ -5537,18 +5542,18 @@ var render = function render() {
         name: "post.create"
       }
     }
-  }, [_vm._v("Створити")]) : _vm._e()], 1), _vm._v(" "), _vm._m(1)])]), _vm._v(" "), _c("div", {
-    staticClass: "rightNav"
-  }, [_c("ul", {
-    staticClass: "navbarR"
-  }, [_c("li", [_vm.access_token && _vm.userRole === 1 ? _c("router-link", {
+  }, [_vm._v("Створити")]) : _vm._e()], 1), _vm._v(" "), _vm._m(2), _vm._v(" "), _c("li", [_vm.access_token && _vm.userRole === 1 ? _c("router-link", {
     staticClass: "white_style_text",
     attrs: {
       to: {
         name: "admin.statistic"
       }
     }
-  }, [_vm._v("Адмін панель")]) : _vm._e()], 1), _vm._v(" "), _c("li", [_vm.access_token ? _c("router-link", {
+  }, [_vm._v("Адмін панель")]) : _vm._e()], 1)])]), _vm._v(" "), _c("div", {
+    staticClass: "rightNav"
+  }, [_c("ul", {
+    staticClass: "navbarR"
+  }, [_c("li", [_vm.access_token ? _c("router-link", {
     attrs: {
       to: {
         name: "personal.page"
@@ -5581,7 +5586,9 @@ var render = function render() {
 var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("li", [_c("a", {
+  return _c("div", {
+    staticClass: "main_logo"
+  }, [_c("a", {
     staticClass: "logo",
     attrs: {
       href: "#"
@@ -5593,6 +5600,17 @@ var staticRenderFns = [function () {
       alt: "logo"
     }
   })])]);
+}, function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("label", {
+    staticClass: "checkbtn",
+    attrs: {
+      "for": "check"
+    }
+  }, [_c("i", {
+    staticClass: "fas fa-bars"
+  })]);
 }, function () {
   var _vm = this,
     _c = _vm._self._c;
@@ -11142,7 +11160,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Praise&display=swap);"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n*[data-v-925172a2]{\n    margin:0px;\n    padding:0px;\n    box-sizing: border-box;\n}\na[data-v-925172a2]{\n    outline: none;\n    text-decoration: none;\n}\n.header[data-v-925172a2]{\n    background: #D9D9D9;\n    min-height: 135px;\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n    /*margin-bottom:74px;*/\n}\n.navbarL[data-v-925172a2]{\n    text-decoration: none;\n    display: flex;\n    list-style: none;\n    align-items: center;\n    padding-left: 38px;\n}\n.navbarR[data-v-925172a2]{\n    text-decoration: none;\n    display: flex;\n    list-style: none;\n    align-items: center;\n    padding-right: 85px;\n}\n.navbarR li[data-v-925172a2],\n.navbarL li[data-v-925172a2]{\n    padding-left: 37px;\n}\n.logo[data-v-925172a2]{\n    width: 60px;\n    height: 60px;\n}\n.icoRighr[data-v-925172a2]{\n    width: 50px;\n    height: 50px;\n}\n.red_style_text[data-v-925172a2],\n.white_style_text[data-v-925172a2]{\n    background: #FFFFFF;\n    border-radius: 20px;\n    font-style:normal;\n    font-weight: 400;\n    font-size: 24px;\n    line-height: 29px;\n    letter-spacing: 0.065em;\n    padding: 7px 20px;\n    color: #000000;\n    display: flex;\n    align-items: center;\n}\n.v_ico[data-v-925172a2]{\n    width: 12.5px;\n    height: 8.04px;\n    margin-left: 30px;\n}\n.red_style_text[data-v-925172a2]{\n    color: #FFFFFF;\n    background: #B00000;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n*[data-v-925172a2]{\r\n    margin:0px;\r\n    padding:0px;\r\n    box-sizing: border-box;\n}\na[data-v-925172a2]{\r\n    outline: none;\r\n    text-decoration: none;\n}\n.checkbtn[data-v-925172a2]{\r\n    position: absolute;\r\n    right: 15px;\r\n    font-size: 34px;\r\n    cursor: pointer;\r\n    float: right;\r\n    line-height: 80px;\r\n    margin-right: 30px;\r\n    display: none;\n}\n#check[data-v-925172a2]{\r\n    display: none;\n}\n.header[data-v-925172a2]{\r\n    background: #D9D9D9;\r\n    min-height: 135px;\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: space-between;\r\n    /*margin-bottom:74px;*/\n}\n.leftNav[data-v-925172a2]{\r\n    text-decoration: none;\r\n    display: flex;\r\n    list-style: none;\r\n    align-items: center;\r\n    padding-left: 38px;\n}\n.navbarL[data-v-925172a2]{\r\n    text-decoration: none;\r\n    display: flex;\r\n    list-style: none;\r\n    align-items: center;\n}\n.navbarR[data-v-925172a2]{\r\n    text-decoration: none;\r\n    display: flex;\r\n    list-style: none;\r\n    align-items: center;\r\n    padding-right: 85px;\n}\n.navbarR li[data-v-925172a2],\r\n.navbarL li[data-v-925172a2]{\r\n    padding-left: 37px;\n}\n.logo[data-v-925172a2]{\r\n    width: 60px;\r\n    height: 60px;\n}\n.icoRighr[data-v-925172a2]{\r\n    width: 50px;\r\n    height: 50px;\n}\n.red_style_text[data-v-925172a2],\r\n.white_style_text[data-v-925172a2]{\r\n    background: #FFFFFF;\r\n    border-radius: 20px;\r\n    font-style:normal;\r\n    font-weight: 400;\r\n    font-size: 24px;\r\n    line-height: 29px;\r\n    letter-spacing: 0.065em;\r\n    padding: 7px 20px;\r\n    color: #000000;\r\n    display: flex;\r\n    align-items: center;\n}\n.v_ico[data-v-925172a2]{\r\n    width: 12.5px;\r\n    height: 8.04px;\r\n    margin-left: 30px;\n}\n.red_style_text[data-v-925172a2]{\r\n    color: #FFFFFF;\r\n    background: #B00000;\n}\n#check[data-v-925172a2]{\r\n    display: none;\n}\n@media only screen and (max-width:1309px) {\n.navbarL[data-v-925172a2]{\r\n        padding-left: 15px;\n}\n.navbarR[data-v-925172a2]{\r\n        padding-right: 15px;\n}\n.navbarR li[data-v-925172a2],\r\n    .navbarL li[data-v-925172a2]{\r\n        padding-left: 15px;\n}\n}\n@media only screen and (max-width:905px) {\n.navbarR[data-v-925172a2]{\r\n        padding-right: 100px;\n}\n.checkbtn[data-v-925172a2]{\r\n        display: block;\n}\n.navbarL[data-v-925172a2]{\r\n        position: absolute;\r\n        width: 100%;\r\n        height: -moz-max-content;\r\n        height: max-content;\r\n        padding: 20px 0;\r\n        background: #6c6b6b;\r\n        top: 136px;\r\n        text-align: center;\r\n        display: flex;\r\n        flex-direction: column;\r\n        gap: 10px;\r\n        left: -100%;\r\n        transition: all .5s;\n}\n.red_style_text[data-v-925172a2],\r\n    .white_style_text[data-v-925172a2]{\r\n        border-radius: 10px;\r\n        width:360px;\n}\n.navbarL li[data-v-925172a2]{\r\n        padding-left: 0px;\n}\n#check:checked ~ .navbarL[data-v-925172a2] {\r\n        left: 0%;\n}\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
