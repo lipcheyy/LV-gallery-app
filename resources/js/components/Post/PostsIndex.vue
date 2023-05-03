@@ -84,14 +84,12 @@ export default {
 }
 
 .pagination-container {
-    margin: 0 auto;
-    margin-top: 62px;
+    margin: 62px auto 30px auto;
     width: 20%;
     display: flex;
     justify-content: space-between;
 }
-
-a{
+a {
     text-decoration: none;
     color: black;
 }
@@ -115,8 +113,12 @@ li {
 
 }
 .active {
-    background-color: #B00000;
-    color: white
+    color: white;
+    background-color: #760c0c;
+}
+
+.active > a {
+    color: white;
 }
 
 .closed {
@@ -127,6 +129,8 @@ li {
 .control {
     font-size: 16px;
 }
+
+
 
 
 @media only screen and (max-width: 1024px) {
