@@ -80,11 +80,11 @@ export default {
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 30px;
 }
 
 .pagination-container {
-    margin: 62px auto 30px auto;
+    margin: 20px auto 50px auto;
     width: 20%;
     display: flex;
     justify-content: space-between;
