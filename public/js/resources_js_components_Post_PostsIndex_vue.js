@@ -137,7 +137,7 @@ var staticRenderFns = [function () {
     _c = _vm._self._c;
   return _c("span", {
     staticClass: "count_likes"
-  }, [_vm._v("100"), _c("span"), _vm._v(' позначок "Подобається"')]);
+  }, [_c("span", [_vm._v("100")]), _vm._v(' позначок "Подобається"')]);
 }];
 render._withStripped = true;
 
@@ -233,7 +233,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.main-container[data-v-4eabf0be] {\n    height: 78vh;\n    width: 350px;\n    display: flex;\n    flex-direction: column;\n}\n.img[data-v-4eabf0be] {\n    width: 100%;\n    height: 80%;\n}\n.buttons-container[data-v-4eabf0be]{\n    display: flex;\n    justify-content: space-between;\n    width: 100%;\n}\n.like_container[data-v-4eabf0be]{\n    display: flex;\n    align-items: center;\n    order: 1;\n    margin-left: 10px;\n}\n.save_container[data-v-4eabf0be]{\n    display: flex;\n    align-items: center;\n    order: 2;\n    margin-right: 17px;\n}\ni[data-v-4eabf0be]{\n    font-size: 35px;\n    color: #000000;\n}\n.count_likes[data-v-4eabf0be]{\n    padding-left: 11px;\n    font-style: normal;\n    font-weight: 400;\n    font-size: 15px;\n    line-height: 18px;\n    color: #000000;\n}\n\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.main-container[data-v-4eabf0be] {\n    height: 78vh;\n    width: 350px;\n    display: flex;\n    flex-direction: column;\n}\n.img[data-v-4eabf0be] {\n    width: 100%;\n    height: 80%;\n}\n.buttons-container[data-v-4eabf0be]{\n    margin-top: 10px;\n    display: flex;\n    justify-content: space-between;\n    width: 100%;\n}\n.like_container[data-v-4eabf0be]{\n    display: flex;\n    align-items: center;\n    order: 1;\n    margin-left: 10px;\n}\n.save_container[data-v-4eabf0be]{\n    display: flex;\n    align-items: center;\n    order: 2;\n    margin-right: 17px;\n}\ni[data-v-4eabf0be]{\n    font-size: 35px;\n    color: #000000;\n}\n.count_likes[data-v-4eabf0be]{\n    padding-left: 11px;\n    font-style: normal;\n    font-weight: 400;\n    font-size: 15px;\n    line-height: 18px;\n    color: #000000;\n}\n\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

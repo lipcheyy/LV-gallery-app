@@ -10,7 +10,7 @@
                     <!--                <a href="" @click.prevent="store" class="likes active">-->
                     <!--                    <i class="fas fa-heart"></i>-->
                     <!--                </a>-->
-                    <span class="count_likes">100<span></span> позначок "Подобається"</span>
+                    <span class="count_likes"><span>100</span> позначок "Подобається"</span>
                 </div>
                 <div class="save_container">
                     <a href="" @click.prevent="store" class="save">
@@ -58,6 +58,7 @@ export default {
     height: 80%;
 }
 .buttons-container{
+    margin-top: 10px;
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -74,6 +75,7 @@ export default {
     order: 2;
     margin-right: 17px;
 }
+
 i{
     font-size: 35px;
     color: #000000;
