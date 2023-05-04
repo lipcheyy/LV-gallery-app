@@ -31,7 +31,7 @@
                     </template>
                 </select>
             </div>
-            <input @click.prevent="store" type="submit" class="button-create" value="Створити">
+            <input @click.prevent="success" type="submit" class="button-create" value="Створити">
             <!--        <div v-if="post">-->
             <!--            <p>{{post.title}}</p>-->
             <!--            <div v-for="image in post.images">-->
@@ -40,6 +40,7 @@
             <!--            </div>-->
 
             <!--        </div>-->
+            <success v-if="alertMessage" :message="alertMessage" @close="onAlertClose"></success>
             <div>{{response}}</div>
         </div>
 
@@ -48,13 +49,15 @@
 
 <script>
 import Dropzone from 'dropzone'
+import Success from './SuccessAlert.vue'
 
 import api from "../../api";
 import {VueEditor} from "vue2-editor"
 export default {
     name: "CreatePost",
     components:{
-        VueEditor
+        VueEditor,
+        Success
     },
     data() {
         return {
@@ -64,7 +67,8 @@ export default {
             category_id:1,
             response:null,
             post:null,
-            username:''
+            username:'',
+            alertMessage: ''
         }
     },
 
@@ -95,6 +99,16 @@ export default {
                     this.title=''
                     this.getPost()
                 })
+        },
+        success() {
+            this.store();
+            this.showAlert();
+        },
+        showAlert() {
+            this.alertMessage = 'Пост успішно додано!';
+        },
+        onAlertClose() {
+            this.alertMessage = '';
         },
         getCategories() {
             api.get('/api/auth/admin/category')
