@@ -1,5 +1,5 @@
 <template>
-    <div v-if="show" class="alert alert-success custom-alert">
+    <div v-if="show" class="alert alert-success custom-alert" :class="{ 'leave': !show }">
         {{ message }}
         <button @click="close" class="btn btn-success">Закрити</button>
     </div>
@@ -33,10 +33,10 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .custom-alert {
     position: fixed;
-    top: 10px;
+    top: -100%;
     left: 50%;
     transform: translateX(-50%);
     width: 30%;
@@ -44,11 +44,33 @@ export default {
     align-items: center;
     padding: 10px;
     justify-content: space-between;
+    animation: fade-in 0.3s ease-out forwards;
 }
-.close {
-     background-color: #760c0c;
- }
 
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        top: -100%;
+    }
+    to {
+        opacity: 1;
+        top: 10px;
+    }
+}
 
+.custom-alert.leave {
+    animation: fade-out 0.3s ease-out forwards;
+}
+
+@keyframes fade-out {
+    from {
+        opacity: 1;
+        top: 10px;
+    }
+    to {
+        opacity: 0;
+        top: -100%;
+    }
+}
 
 </style>
