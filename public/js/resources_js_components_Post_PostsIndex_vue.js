@@ -15,13 +15,16 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "PostLayout",
-  props: ['Likes', 'url', 'title', 'id'],
+  props: ['Likes', 'url', 'title', 'id', 'likedIds'],
   data: function data() {
     return {
       posts: null
+      // userLiked: null
     };
   },
-  mounted: function mounted() {},
+  mounted: function mounted() {
+    // console.log(this.likedIds);
+  },
   methods: {
     store: function store() {
       _api__WEBPACK_IMPORTED_MODULE_0__["default"].post("/api/auth/posts/".concat(this.id, "/likes"));
@@ -54,7 +57,9 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       posts: null,
-      pagination: []
+      pagination: [],
+      userLiked: null,
+      likedIds: []
     };
   },
   mounted: function mounted() {
@@ -74,8 +79,13 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     checkUser: function checkUser() {
+      var _this2 = this;
       _api__WEBPACK_IMPORTED_MODULE_1__["default"].get('/api/auth/posts').then(function (res) {
-        console.log(res);
+        _this2.userLiked = res.data;
+        // console.log(this.userLiked);
+        _this2.userLiked.forEach(function (liked) {
+          _this2.likedIds.push(liked.id);
+        });
       });
     }
   }
@@ -109,7 +119,7 @@ var render = function render() {
     staticClass: "buttons-container"
   }, [_c("div", {
     staticClass: "like_container"
-  }, [_c("a", {
+  }, [_vm.likedIds.includes(_vm.id) ? [_c("a", {
     staticClass: "likes",
     attrs: {
       href: ""
@@ -121,8 +131,23 @@ var render = function render() {
       }
     }
   }, [_c("i", {
+    staticClass: "fas fa-heart"
+  })])] : [_c("a", {
+    staticClass: "likes active",
+    attrs: {
+      href: ""
+    },
+    on: {
+      click: function click($event) {
+        $event.preventDefault();
+        return _vm.store.apply(null, arguments);
+      }
+    }
+  }, [_c("i", {
     staticClass: "far fa-heart"
-  })]), _vm._v(" "), _vm._m(1)]), _vm._v(" "), _c("div", {
+  })])], _vm._v(" "), _c("span", {
+    staticClass: "count_likes"
+  }, [_c("span", [_vm._v("100")]), _vm._v(' позначок "Подобається"' + _vm._s(_vm.id))])], 2), _vm._v(" "), _c("div", {
     staticClass: "save_container"
   }, [_c("a", {
     staticClass: "save",
@@ -162,12 +187,6 @@ var staticRenderFns = [function () {
   }, [_c("a", {
     staticClass: "time"
   }, [_vm._v("03.05.2023")])])]);
-}, function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("span", {
-    staticClass: "count_likes"
-  }, [_c("span", [_vm._v("100")]), _vm._v(' позначок "Подобається"')]);
 }];
 render._withStripped = true;
 
@@ -200,7 +219,8 @@ var render = function render() {
       return [_c("post-layout", {
         attrs: {
           url: image.url,
-          id: post.id
+          id: post.id,
+          likedIds: _vm.likedIds
         }
       })];
     })], 2);
@@ -214,7 +234,7 @@ var render = function render() {
         return _vm.getPosts(_vm.pagination.current_page - 1);
       }
     }
-  }, [_vm._v("<")]) : _vm._e(), _vm._v(" "), _vm._l(_vm.pagination.links, function (link) {
+  }, [_vm._v("<\n        ")]) : _vm._e(), _vm._v(" "), _vm._l(_vm.pagination.links, function (link) {
     return Number(link.label) ? _c("li", {
       "class": link.active ? "active" : "",
       on: {
@@ -265,7 +285,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.main-container[data-v-4eabf0be] {\n    height: 78vh;\n    width: 350px;\n    display: flex;\n    flex-direction: column;\n}\n.img[data-v-4eabf0be] {\n    width: 100%;\n    height: 80%;\n}\n.buttons-container[data-v-4eabf0be]{\n    margin-top: 10px;\n    display: flex;\n    justify-content: space-between;\n    width: 100%;\n}\n.like_container[data-v-4eabf0be]{\n    display: flex;\n    align-items: center;\n    order: 1;\n    margin-left: 10px;\n}\n.save_container[data-v-4eabf0be]{\n    display: flex;\n    align-items: center;\n    order: 2;\n    margin-right: 17px;\n}\na[data-v-4eabf0be] {\n    text-decoration: none;\n    color: black;\n}\ni[data-v-4eabf0be]{\n    font-size: 35px;\n    color: #000000;\n}\n.count_likes[data-v-4eabf0be]{\n    padding-left: 11px;\n    font-style: normal;\n    font-weight: 400;\n    font-size: 12px;\n    color: #383737;\n}\n.postUser[data-v-4eabf0be] {\n    height: 40px;\n    width: 100%;\n    display: flex;\n    align-items: center;\n    padding: 0 10px;\n    justify-content: space-between;\n}\n.user[data-v-4eabf0be] {\n    height: 80%;\n    display: flex;\n    align-items: center;\n}\n.user_pic[data-v-4eabf0be] {\n    height: 100%;\n    margin-right: 5px;\n}\n\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.main-container[data-v-4eabf0be] {\n    height: 78vh;\n    width: 350px;\n    display: flex;\n    flex-direction: column;\n}\n.img[data-v-4eabf0be] {\n    width: 100%;\n    height: 80%;\n}\n.buttons-container[data-v-4eabf0be] {\n    margin-top: 10px;\n    display: flex;\n    justify-content: space-between;\n    width: 100%;\n}\n.like_container[data-v-4eabf0be] {\n    display: flex;\n    align-items: center;\n    order: 1;\n    margin-left: 10px;\n}\n.save_container[data-v-4eabf0be] {\n    display: flex;\n    align-items: center;\n    order: 2;\n    margin-right: 17px;\n}\na[data-v-4eabf0be] {\n    text-decoration: none;\n    color: black;\n}\ni[data-v-4eabf0be] {\n    font-size: 35px;\n    color: #000000;\n}\n.count_likes[data-v-4eabf0be] {\n    padding-left: 11px;\n    font-style: normal;\n    font-weight: 400;\n    font-size: 12px;\n    color: #383737;\n}\n.postUser[data-v-4eabf0be] {\n    height: 40px;\n    width: 100%;\n    display: flex;\n    align-items: center;\n    padding: 0 10px;\n    justify-content: space-between;\n}\n.user[data-v-4eabf0be] {\n    height: 80%;\n    display: flex;\n    align-items: center;\n}\n.user_pic[data-v-4eabf0be] {\n    height: 100%;\n    margin-right: 5px;\n}\n\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -289,7 +309,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.main-container[data-v-7069c1da] {\n    margin-top: 25px;\n}\n.posts-container[data-v-7069c1da] {\n    display: flex;\n    flex-wrap: wrap;\n    align-items: center;\n    justify-content: center;\n    gap: 40px;\n}\n.pagination-container[data-v-7069c1da] {\n    margin: 0 auto;\n    width: 20%;\n    display: flex;\n    justify-content: space-between;\n}\na[data-v-7069c1da] {\n    text-decoration: none;\n    color: black;\n}\nli[data-v-7069c1da] {\n    width: 50px;\n    height: 50px;\n    border-radius: 50%;\n    border: 0.13850415512465375vh solid #B00000;\n    color: black;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    transition: all 0.5s ease;\n    font-family: 'Times New Roman', sans-serif;\n    font-style: normal;\n    font-weight: 400;\n    font-size: 4.43213296398892vh;\n    line-height: 37px;\n\n    cursor: pointer;\n}\n.active[data-v-7069c1da] {\n    color: white;\n    background-color: #760c0c;\n}\n.active > a[data-v-7069c1da] {\n    color: white;\n}\n.closed[data-v-7069c1da] {\n    border: 2px solid #BBBBBB;\n    color: #BBBBBB;\n}\n.control[data-v-7069c1da] {\n    font-size: 16px;\n}\nli[data-v-7069c1da]:hover {\n    transform: scale(1.1);\n    animation: glowing-7069c1da 0.5s infinite;\n}\n@keyframes glowing-7069c1da {\n0% { border-radius: 50%; box-shadow: 0 0 3px #760c0c;\n}\n50% { border-radius: 50%; box-shadow: 0 0 10px #ab1111;\n}\n100% { border-radius: 50%; box-shadow: 0 0 3px #760c0c;\n}\n}\n@media only screen and (max-width: 1024px) {\n.pagination-container[data-v-7069c1da] {\n        width: 50%;\n}\n}\n@media only screen and (max-width: 543px) {\n.pagination-container[data-v-7069c1da] {\n        width: 60%;\n}\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.main-container[data-v-7069c1da] {\n    margin-top: 25px;\n}\n.posts-container[data-v-7069c1da] {\n    display: flex;\n    flex-wrap: wrap;\n    align-items: center;\n    justify-content: center;\n    gap: 40px;\n}\n.pagination-container[data-v-7069c1da] {\n    margin: 0 auto;\n    width: 20%;\n    display: flex;\n    justify-content: space-between;\n}\na[data-v-7069c1da] {\n    text-decoration: none;\n    color: black;\n}\nli[data-v-7069c1da] {\n    width: 50px;\n    height: 50px;\n    border-radius: 50%;\n    border: 0.13850415512465375vh solid #B00000;\n    color: black;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    transition: all 0.5s ease;\n    font-family: 'Times New Roman', sans-serif;\n    font-style: normal;\n    font-weight: 400;\n    font-size: 4.43213296398892vh;\n    line-height: 37px;\n\n    cursor: pointer;\n}\n.active[data-v-7069c1da] {\n    color: white;\n    background-color: #760c0c;\n}\n.active > a[data-v-7069c1da] {\n    color: white;\n}\n.closed[data-v-7069c1da] {\n    border: 2px solid #BBBBBB;\n    color: #BBBBBB;\n}\n.control[data-v-7069c1da] {\n    font-size: 16px;\n}\nli[data-v-7069c1da]:hover {\n    transform: scale(1.1);\n    animation: glowing-7069c1da 0.5s infinite;\n}\n@keyframes glowing-7069c1da {\n0% {\n        border-radius: 50%;\n        box-shadow: 0 0 3px #760c0c;\n}\n50% {\n        border-radius: 50%;\n        box-shadow: 0 0 10px #ab1111;\n}\n100% {\n        border-radius: 50%;\n        box-shadow: 0 0 3px #760c0c;\n}\n}\n@media only screen and (max-width: 1024px) {\n.pagination-container[data-v-7069c1da] {\n        width: 50%;\n}\n}\n@media only screen and (max-width: 543px) {\n.pagination-container[data-v-7069c1da] {\n        width: 60%;\n}\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
