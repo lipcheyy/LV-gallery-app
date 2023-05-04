@@ -84,7 +84,7 @@ export default {
 }
 
 .pagination-container {
-    margin: 0px auto 50px auto;
+    margin: 0 auto;
     width: 20%;
     display: flex;
     justify-content: space-between;

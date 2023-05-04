@@ -103,7 +103,6 @@ a{
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    font-size: calc(24px + (100vw / 1280));
     text-align: center;
     font-family: 'Inter', sans-serif;
     font-style: normal;

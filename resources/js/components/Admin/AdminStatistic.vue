@@ -83,8 +83,6 @@ p, h1 {
 }
 .main-container {
     width: 100%;
-    margin-top: 50px;
-    margin-bottom: 130px;
 }
 
 .wigets-title {
