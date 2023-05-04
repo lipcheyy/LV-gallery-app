@@ -1,12 +1,13 @@
 <template>
     <div class="main-container">
-        <div class="wrapper" v-for="post in posts">
-            <template v-for="image in post.images">
-                <post-layout :url="image.url" :id="post.id"></post-layout>
-<!--            <post-layout Likes="2"></post-layout>-->
-<!--            <post-layout Likes="3"></post-layout>-->
-            </template>
+        <div class="posts-container">
+            <div class="post-container" v-for="post in posts">
+                <template v-for="image in post.images">
+                    <post-layout :url="image.url" :id="post.id"></post-layout>
+                </template>
+            </div>
         </div>
+
         <ul class="pagination-container">
             <li v-if="pagination.current_page!==1"
                  @click.prevent="getPosts(pagination.current_page-1)" class="closed control">&lt;</li>
@@ -72,41 +73,36 @@ export default {
 
 <style scoped>
 .main-container {
-    margin-top: 10px;
+    margin-top: 25px;
 }
-.wrapper {
+.posts-container {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    flex-wrap: wrap;
-    column-gap: 7.8vw;
-    row-gap: 2vh;
+    gap: 40px;
 }
 
 .pagination-container {
     margin: 0 auto;
-    margin-top: 62px;
-    width: 34.505208333333336vw;
-    height: 6.925vh;
-    border: 1px solid red;
+    width: 20%;
     display: flex;
     justify-content: space-between;
 }
-
-a{
+a {
     text-decoration: none;
     color: black;
 }
 li {
-    width: 3.2552083333333335vw;
-    height: 6.925207756232687vh;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     border: 0.13850415512465375vh solid #B00000;
     color: black;
     display: flex;
     justify-content: center;
     align-items: center;
-
+    transition: all 0.5s ease;
     font-family: 'Times New Roman', sans-serif;
     font-style: normal;
     font-weight: 400;
@@ -117,8 +113,12 @@ li {
 
 }
 .active {
-    background-color: #B00000;
-    color: white
+    color: white;
+    background-color: #760c0c;
+}
+
+.active > a {
+    color: white;
 }
 
 .closed {
@@ -130,4 +130,27 @@ li {
     font-size: 16px;
 }
 
+li:hover {
+    transform: scale(1.1);
+    animation: glowing 0.5s infinite;
+}
+@keyframes glowing {
+    0% { border-radius: 50%; box-shadow: 0 0 3px #760c0c; }
+    50% { border-radius: 50%; box-shadow: 0 0 10px #ab1111; }
+    100% { border-radius: 50%; box-shadow: 0 0 3px #760c0c; }
+}
+
+
+
+@media only screen and (max-width: 1024px) {
+    .pagination-container {
+        width: 50%;
+    }
+}
+
+@media only screen and (max-width: 543px) {
+    .pagination-container {
+        width: 60%;
+    }
+}
 </style>

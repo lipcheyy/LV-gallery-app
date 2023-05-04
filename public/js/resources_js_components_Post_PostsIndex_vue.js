@@ -93,19 +93,19 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [_c("div", {
+  return _c("div", {
     staticClass: "main-container"
-  }, [_c("div", {
-    staticClass: "img-container"
-  }, [_c("img", {
+  }, [_vm._m(0), _vm._v(" "), _c("img", {
     staticClass: "img",
     attrs: {
       src: _vm.url
     }
-  })]), _vm._v(" "), _c("div", {
+  }), _vm._v(" "), _c("div", {
     staticClass: "buttons-container"
+  }, [_c("div", {
+    staticClass: "like_container"
   }, [_c("a", {
-    staticClass: "likes active",
+    staticClass: "likes",
     attrs: {
       href: ""
     },
@@ -115,27 +115,54 @@ var render = function render() {
         return _vm.store.apply(null, arguments);
       }
     }
-  }, [_c("img", {
+  }, [_c("i", {
+    staticClass: "far fa-heart"
+  })]), _vm._v(" "), _vm._m(1)]), _vm._v(" "), _c("div", {
+    staticClass: "save_container"
+  }, [_c("a", {
+    staticClass: "save",
     attrs: {
-      src: __webpack_require__(/*! ./Images/Like.png */ "./resources/js/components/Post/Images/Like.png"),
-      alt: "Like"
+      href: ""
+    },
+    on: {
+      click: function click($event) {
+        $event.preventDefault();
+        return _vm.store.apply(null, arguments);
+      }
     }
-  })]), _vm._v(" "), _vm._m(0)])])]);
+  }, [_c("i", {
+    staticClass: "far fa-bookmark"
+  })])])])]);
 };
 var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("a", {
-    staticClass: "save active",
-    attrs: {
-      href: ""
-    }
+  return _c("div", {
+    staticClass: "postUser"
+  }, [_c("div", {
+    staticClass: "user"
   }, [_c("img", {
+    staticClass: "user_pic",
     attrs: {
-      src: __webpack_require__(/*! ./Images/Save.png */ "./resources/js/components/Post/Images/Save.png"),
-      alt: "Save"
+      src: __webpack_require__(/*! ./Images/Guest.png */ "./resources/js/components/Post/Images/Guest.png"),
+      alt: "user"
     }
-  })]);
+  }), _vm._v(" "), _c("a", {
+    staticClass: "username",
+    attrs: {
+      href: "#"
+    }
+  }, [_vm._v("Vasya")])]), _vm._v(" "), _c("div", {
+    staticClass: "post-time"
+  }, [_c("a", {
+    staticClass: "time"
+  }, [_vm._v("03.05.2023")])])]);
+}, function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("span", {
+    staticClass: "count_likes"
+  }, [_c("span", [_vm._v("100")]), _vm._v(' позначок "Подобається"')]);
 }];
 render._withStripped = true;
 
@@ -159,9 +186,11 @@ var render = function render() {
     _c = _vm._self._c;
   return _c("div", {
     staticClass: "main-container"
-  }, [_vm._l(_vm.posts, function (post) {
+  }, [_c("div", {
+    staticClass: "posts-container"
+  }, _vm._l(_vm.posts, function (post) {
     return _c("div", {
-      staticClass: "wrapper"
+      staticClass: "post-container"
     }, [_vm._l(post.images, function (image) {
       return [_c("post-layout", {
         attrs: {
@@ -170,7 +199,7 @@ var render = function render() {
         }
       })];
     })], 2);
-  }), _vm._v(" "), _c("ul", {
+  }), 0), _vm._v(" "), _c("ul", {
     staticClass: "pagination-container"
   }, [_vm.pagination.current_page !== 1 ? _c("li", {
     staticClass: "closed control",
@@ -206,7 +235,7 @@ var render = function render() {
         return _vm.getPosts(_vm.pagination.current_page + 1);
       }
     }
-  }, [_vm._v("\n                >\n            ")]) : _vm._e()], 2)], 2);
+  }, [_vm._v("\n            >\n        ")]) : _vm._e()], 2)]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -231,7 +260,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.main-container[data-v-4eabf0be] {\n    height: 78vh;\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n}\n.img-container[data-v-4eabf0be] {\n    width: 100%;\n    height: 90%;\n    margin-bottom: 7px;\n}\n.img-container > .img[data-v-4eabf0be] {\n    width: 100%;\n    height: 100%;\n}\n.buttons-container[data-v-4eabf0be] {\n    width: 90%;\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n}\n\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.main-container[data-v-4eabf0be] {\n    height: 78vh;\n    width: 350px;\n    display: flex;\n    flex-direction: column;\n}\n.img[data-v-4eabf0be] {\n    width: 100%;\n    height: 80%;\n}\n.buttons-container[data-v-4eabf0be]{\n    margin-top: 10px;\n    display: flex;\n    justify-content: space-between;\n    width: 100%;\n}\n.like_container[data-v-4eabf0be]{\n    display: flex;\n    align-items: center;\n    order: 1;\n    margin-left: 10px;\n}\n.save_container[data-v-4eabf0be]{\n    display: flex;\n    align-items: center;\n    order: 2;\n    margin-right: 17px;\n}\na[data-v-4eabf0be] {\n    text-decoration: none;\n    color: black;\n}\ni[data-v-4eabf0be]{\n    font-size: 35px;\n    color: #000000;\n}\n.count_likes[data-v-4eabf0be]{\n    padding-left: 11px;\n    font-style: normal;\n    font-weight: 400;\n    font-size: 12px;\n    color: #383737;\n}\n.postUser[data-v-4eabf0be] {\n    height: 40px;\n    width: 100%;\n    display: flex;\n    align-items: center;\n    padding: 0 10px;\n    justify-content: space-between;\n}\n.user[data-v-4eabf0be] {\n    height: 80%;\n    display: flex;\n    align-items: center;\n}\n.user_pic[data-v-4eabf0be] {\n    height: 100%;\n    margin-right: 5px;\n}\n\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -255,30 +284,20 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.main-container[data-v-7069c1da] {\n    margin-top: 10px;\n}\n.wrapper[data-v-7069c1da] {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    flex-wrap: wrap;\n    -moz-column-gap: 7.8vw;\n         column-gap: 7.8vw;\n    row-gap: 2vh;\n}\n.pagination-container[data-v-7069c1da] {\n    margin: 0 auto;\n    margin-top: 62px;\n    width: 34.505208333333336vw;\n    height: 6.925vh;\n    border: 1px solid red;\n    display: flex;\n    justify-content: space-between;\n}\na[data-v-7069c1da]{\n    text-decoration: none;\n    color: black;\n}\nli[data-v-7069c1da] {\n    width: 3.2552083333333335vw;\n    height: 6.925207756232687vh;\n    border-radius: 50%;\n    border: 0.13850415512465375vh solid #B00000;\n    color: black;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n\n    font-family: 'Times New Roman', sans-serif;\n    font-style: normal;\n    font-weight: 400;\n    font-size: 4.43213296398892vh;\n    line-height: 37px;\n\n    cursor: pointer;\n}\n.active[data-v-7069c1da] {\n    background-color: #B00000;\n    color: white\n}\n.closed[data-v-7069c1da] {\n    border: 2px solid #BBBBBB;\n    color: #BBBBBB;\n}\n.control[data-v-7069c1da] {\n    font-size: 16px;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.main-container[data-v-7069c1da] {\r\n    margin-top: 25px;\n}\n.posts-container[data-v-7069c1da] {\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    align-items: center;\r\n    justify-content: center;\r\n    gap: 40px;\n}\n.pagination-container[data-v-7069c1da] {\r\n    margin: 0 auto;\r\n    width: 20%;\r\n    display: flex;\r\n    justify-content: space-between;\n}\na[data-v-7069c1da] {\r\n    text-decoration: none;\r\n    color: black;\n}\nli[data-v-7069c1da] {\r\n    width: 50px;\r\n    height: 50px;\r\n    border-radius: 50%;\r\n    border: 0.13850415512465375vh solid #B00000;\r\n    color: black;\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    transition: all 0.5s ease;\r\n    font-family: 'Times New Roman', sans-serif;\r\n    font-style: normal;\r\n    font-weight: 400;\r\n    font-size: 4.43213296398892vh;\r\n    line-height: 37px;\r\n\r\n    cursor: pointer;\n}\n.active[data-v-7069c1da] {\r\n    color: white;\r\n    background-color: #760c0c;\n}\n.active > a[data-v-7069c1da] {\r\n    color: white;\n}\n.closed[data-v-7069c1da] {\r\n    border: 2px solid #BBBBBB;\r\n    color: #BBBBBB;\n}\n.control[data-v-7069c1da] {\r\n    font-size: 16px;\n}\nli[data-v-7069c1da]:hover {\r\n    transform: scale(1.1);\r\n    animation: glowing-7069c1da 0.5s infinite;\n}\n@keyframes glowing-7069c1da {\n0% { border-radius: 50%; box-shadow: 0 0 3px #760c0c;\n}\n50% { border-radius: 50%; box-shadow: 0 0 10px #ab1111;\n}\n100% { border-radius: 50%; box-shadow: 0 0 3px #760c0c;\n}\n}\n@media only screen and (max-width: 1024px) {\n.pagination-container[data-v-7069c1da] {\r\n        width: 50%;\n}\n}\n@media only screen and (max-width: 543px) {\n.pagination-container[data-v-7069c1da] {\r\n        width: 60%;\n}\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
 
 /***/ }),
 
-/***/ "./resources/js/components/Post/Images/Like.png":
-/*!******************************************************!*\
-  !*** ./resources/js/components/Post/Images/Like.png ***!
-  \******************************************************/
+/***/ "./resources/js/components/Post/Images/Guest.png":
+/*!*******************************************************!*\
+  !*** ./resources/js/components/Post/Images/Guest.png ***!
+  \*******************************************************/
 /***/ ((module) => {
 
-module.exports = "/images/Like.png?db1601177f4e0bca839e6c372c35c752";
-
-/***/ }),
-
-/***/ "./resources/js/components/Post/Images/Save.png":
-/*!******************************************************!*\
-  !*** ./resources/js/components/Post/Images/Save.png ***!
-  \******************************************************/
-/***/ ((module) => {
-
-module.exports = "/images/Save.png?b244d260aa100e711499c203d0d04b69";
+module.exports = "/images/Guest.png?3cc06a01b2dcf7e06d4125df24547bf9";
 
 /***/ }),
 

@@ -1,9 +1,22 @@
 Чому like_container не переміщається в ліво, а save_container вправо
 <template>
         <div class="main-container">
-            <div class="img-container">
-                <img class="img" :src="url">
+            <div class="postUser">
+                <div class="user">
+                    <img
+                        src="./Images/Guest.png"
+                        class="user_pic"
+                        alt="user"
+                    />
+                    <a href='#' class="username">Vasya</a>
+                </div>
+
+                <div class="post-time">
+                    <a class="time">03.05.2023</a>
+                </div>
+
             </div>
+            <img class="img" :src="url">
             <div class="buttons-container">
                 <div class="like_container">
                     <a href="" @click.prevent="store" class="likes">
@@ -12,7 +25,7 @@
                     <!--                <a href="" @click.prevent="store" class="likes active">-->
                     <!--                    <i class="fas fa-heart"></i>-->
                     <!--                </a>-->
-                    <span class="count_likes">100<span></span> позначок "Подобається"</span>
+                    <span class="count_likes"><span>100</span> позначок "Подобається"</span>
                 </div>
                 <div class="save_container">
                     <a href="" @click.prevent="store" class="save">
@@ -51,19 +64,16 @@ export default {
 
 .main-container {
     height: 78vh;
+    width: 350px;
     display: flex;
     flex-direction: column;
 }
-.img-container {
+.img {
     width: 100%;
-    height: 90%;
-    margin-bottom: 7px;
-}
-.img-container > .img {
-    width: 100%;
-    height: 100%;
+    height: 80%;
 }
 .buttons-container{
+    margin-top: 10px;
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -80,6 +90,11 @@ export default {
     order: 2;
     margin-right: 17px;
 }
+a {
+    text-decoration: none;
+    color: black;
+}
+
 i{
     font-size: 35px;
     color: #000000;
@@ -88,9 +103,28 @@ i{
     padding-left: 11px;
     font-style: normal;
     font-weight: 400;
-    font-size: 15px;
-    line-height: 18px;
-    color: #000000;
+    font-size: 12px;
+    color: #383737;
+}
+
+.postUser {
+    height: 40px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    justify-content: space-between;
+}
+
+.user {
+    height: 80%;
+    display: flex;
+    align-items: center;
+}
+
+.user_pic {
+    height: 100%;
+    margin-right: 5px;
 }
 
 

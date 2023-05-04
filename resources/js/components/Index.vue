@@ -50,6 +50,11 @@ export default {
 </script>
 
 <style scoped>
+    .main{
+        margin-top: 50px;
+        margin-bottom: 140px;
+        position: relative;
+    }
     .wrapper{
         min-height: 100%;
         width: 100%;

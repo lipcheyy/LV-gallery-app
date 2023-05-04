@@ -5337,7 +5337,9 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       access_token: null,
-      userRole: null
+      userRole: null,
+      categories: null,
+      category_id: 1
     };
   },
   mounted: function mounted() {
@@ -5361,14 +5363,20 @@ __webpack_require__.r(__webpack_exports__);
         });
       });
     },
-    userdata: function userdata() {
+    getCategories: function getCategories() {
       var _this2 = this;
+      _api__WEBPACK_IMPORTED_MODULE_0__["default"].get('/api/auth/admin/category').then(function (res) {
+        _this2.categories = res.data.data;
+      });
+    },
+    userdata: function userdata() {
+      var _this3 = this;
       if (this.access_token) {
         _api__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/auth/me').then(function (res) {
           var user = res.data;
           localStorage.setItem('user_role', user.role);
           localStorage.setItem('username', user.name);
-          _this2.userRole = parseInt(user.role);
+          _this3.userRole = parseInt(user.role);
         });
       }
     }
@@ -5521,11 +5529,17 @@ var render = function render() {
     staticClass: "header"
   }, [_c("div", {
     staticClass: "leftNav"
-  }, [_c("ul", {
+  }, [_vm._m(0), _vm._v(" "), _c("input", {
+    attrs: {
+      type: "checkbox",
+      id: "check"
+    }
+  }), _vm._v(" "), _vm._m(1), _vm._v(" "), _c("ul", {
     staticClass: "navbarL"
-  }, [_vm._m(0), _vm._v(" "), _c("li", [_vm.access_token ? _c("router-link", {
+  }, [_c("li", [_vm.access_token ? _c("router-link", {
     staticClass: "white_style_text",
     attrs: {
+      "exact-active-class": "active",
       to: {
         name: "post.index"
       }
@@ -5533,22 +5547,24 @@ var render = function render() {
   }, [_vm._v("Головна")]) : _vm._e()], 1), _vm._v(" "), _c("li", [_vm.access_token ? _c("router-link", {
     staticClass: "white_style_text",
     attrs: {
+      "exact-active-class": "active",
       to: {
         name: "post.create"
       }
     }
-  }, [_vm._v("Створити")]) : _vm._e()], 1), _vm._v(" "), _vm._m(1)])]), _vm._v(" "), _c("div", {
-    staticClass: "rightNav"
-  }, [_c("ul", {
-    staticClass: "navbarR"
-  }, [_c("li", [_vm.access_token && _vm.userRole === 1 ? _c("router-link", {
+  }, [_vm._v("Створити")]) : _vm._e()], 1), _vm._v(" "), _vm._m(2), _vm._v(" "), _c("li", [_vm.access_token && _vm.userRole === 1 ? _c("router-link", {
     staticClass: "white_style_text",
     attrs: {
+      "exact-active-class": "active",
       to: {
         name: "admin.statistic"
       }
     }
-  }, [_vm._v("Адмін панель")]) : _vm._e()], 1), _vm._v(" "), _c("li", [_vm.access_token ? _c("router-link", {
+  }, [_vm._v("Адмін панель")]) : _vm._e()], 1)])]), _vm._v(" "), _c("div", {
+    staticClass: "rightNav"
+  }, [_c("ul", {
+    staticClass: "navbarR"
+  }, [_c("li", [_vm.access_token ? _c("router-link", {
     attrs: {
       to: {
         name: "personal.page"
@@ -5581,7 +5597,9 @@ var render = function render() {
 var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("li", [_c("a", {
+  return _c("div", {
+    staticClass: "main_logo"
+  }, [_c("a", {
     staticClass: "logo",
     attrs: {
       href: "#"
@@ -5596,18 +5614,26 @@ var staticRenderFns = [function () {
 }, function () {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("li", [_c("a", {
-    staticClass: "red_style_text",
+  return _c("label", {
+    staticClass: "checkbtn",
     attrs: {
-      href: "#"
+      "for": "check"
     }
-  }, [_vm._v("Категорії "), _c("img", {
-    staticClass: "v_ico",
+  }, [_c("i", {
+    staticClass: "fas fa-bars"
+  })]);
+}, function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("li", [_c("select", {
+    staticClass: "white_style_text selector"
+  }, [_c("option", {
     attrs: {
-      src: __webpack_require__(/*! ./Images/v.png */ "./resources/js/components/Includes/Images/v.png"),
-      alt: "v"
+      value: "",
+      disabled: "",
+      selected: ""
     }
-  })])]);
+  }, [_vm._v("Категорії")])])]);
 }];
 render._withStripped = true;
 
@@ -11142,7 +11168,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Praise&display=swap);"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n*[data-v-925172a2]{\n    margin:0px;\n    padding:0px;\n    box-sizing: border-box;\n}\na[data-v-925172a2]{\n    outline: none;\n    text-decoration: none;\n}\n.header[data-v-925172a2]{\n    background: #D9D9D9;\n    min-height: 135px;\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n    /*margin-bottom:74px;*/\n}\n.navbarL[data-v-925172a2]{\n    text-decoration: none;\n    display: flex;\n    list-style: none;\n    align-items: center;\n    padding-left: 38px;\n}\n.navbarR[data-v-925172a2]{\n    text-decoration: none;\n    display: flex;\n    list-style: none;\n    align-items: center;\n    padding-right: 85px;\n}\n.navbarR li[data-v-925172a2],\n.navbarL li[data-v-925172a2]{\n    padding-left: 37px;\n}\n.logo[data-v-925172a2]{\n    width: 60px;\n    height: 60px;\n}\n.icoRighr[data-v-925172a2]{\n    width: 50px;\n    height: 50px;\n}\n.red_style_text[data-v-925172a2],\n.white_style_text[data-v-925172a2]{\n    background: #FFFFFF;\n    border-radius: 20px;\n    font-style:normal;\n    font-weight: 400;\n    font-size: 24px;\n    line-height: 29px;\n    letter-spacing: 0.065em;\n    padding: 7px 20px;\n    color: #000000;\n    display: flex;\n    align-items: center;\n}\n.v_ico[data-v-925172a2]{\n    width: 12.5px;\n    height: 8.04px;\n    margin-left: 30px;\n}\n.red_style_text[data-v-925172a2]{\n    color: #FFFFFF;\n    background: #B00000;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n*[data-v-925172a2]{\n    margin:0px;\n    padding:0px;\n    box-sizing: border-box;\n}\na[data-v-925172a2]{\n    outline: none;\n    text-decoration: none;\n}\n.checkbtn[data-v-925172a2]{\n    position: absolute;\n    right: 15px;\n    font-size: 34px;\n    cursor: pointer;\n    float: right;\n    line-height: 80px;\n    margin-right: 30px;\n    display: none;\n}\n#check[data-v-925172a2]{\n    display: none;\n}\n.selector[data-v-925172a2] {\n    border: none;\n    outline: none;\n    height: 45px;\n}\n.selector > option[data-v-925172a2] {\n    flex: 25%;\n    box-sizing: border-box;\n}\n.header[data-v-925172a2]{\n    background: #D9D9D9;\n    min-height: 135px;\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n    /*margin-bottom:74px;*/\n}\n.leftNav[data-v-925172a2]{\n    text-decoration: none;\n    display: flex;\n    list-style: none;\n    align-items: center;\n    padding-left: 38px;\n}\n.navbarL[data-v-925172a2]{\n    text-decoration: none;\n    display: flex;\n    list-style: none;\n    align-items: center;\n}\n.navbarR[data-v-925172a2]{\n    text-decoration: none;\n    display: flex;\n    list-style: none;\n    align-items: center;\n    padding-right: 85px;\n}\n.navbarR li[data-v-925172a2],\n.navbarL li[data-v-925172a2]{\n    padding-left: 37px;\n}\n.logo[data-v-925172a2]{\n    width: 60px;\n    height: 60px;\n}\n.icoRighr[data-v-925172a2]{\n    width: 50px;\n    height: 50px;\n}\n.white_style_text[data-v-925172a2]{\n    background: #FFFFFF;\n    border-radius: 20px;\n    font-style:normal;\n    font-weight: 400;\n    font-size: 24px;\n    line-height: 29px;\n    letter-spacing: 0.065em;\n    padding: 7px 20px;\n    color: #000000;\n    display: flex;\n    align-items: center;\n}\n.v_ico[data-v-925172a2]{\n    width: 12.5px;\n    height: 8.04px;\n    margin-left: 30px;\n    color: black;\n}\n.active[data-v-925172a2]{\n    color: #FFFFFF;\n    background: #B00000;\n}\n#check[data-v-925172a2]{\n    display: none;\n}\n@media only screen and (max-width:1309px) {\n.navbarL[data-v-925172a2]{\n        padding-left: 15px;\n}\n.navbarR[data-v-925172a2]{\n        padding-right: 15px;\n}\n.navbarR li[data-v-925172a2],\n    .navbarL li[data-v-925172a2]{\n        padding-left: 15px;\n}\n}\n@media only screen and (max-width:905px) {\n.navbarR[data-v-925172a2]{\n        padding-right: 100px;\n}\n.checkbtn[data-v-925172a2]{\n        display: block;\n}\n.navbarL[data-v-925172a2]{\n        position: absolute;\n        width: 100%;\n        height: -moz-max-content;\n        height: max-content;\n        padding: 20px 0;\n        background: #6c6b6b;\n        top: 136px;\n        text-align: center;\n        display: flex;\n        flex-direction: column;\n        gap: 10px;\n        left: -100%;\n        transition: all .5s;\n}\n.red_style_text[data-v-925172a2],\n    .white_style_text[data-v-925172a2]{\n        border-radius: 10px;\n        width:360px;\n}\n.navbarL li[data-v-925172a2]{\n        padding-left: 0px;\n}\n#check:checked ~ .navbarL[data-v-925172a2] {\n        left: 0%;\n}\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11166,7 +11192,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.wrapper[data-v-2ac2c897]{\n    min-height: 100%;\n    width: 100%;\n    display: flex;\n    flex-direction: column;\n}\n.footer[data-v-2ac2c897]{\n    margin-top: auto;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.main[data-v-2ac2c897]{\n    margin-top: 50px;\n    margin-bottom: 140px;\n}\n.wrapper[data-v-2ac2c897]{\n    min-height: 100%;\n    width: 100%;\n    display: flex;\n    flex-direction: column;\n}\n.footer[data-v-2ac2c897]{\n    margin-top: auto;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11276,16 +11302,6 @@ module.exports = "/images/logo.png?298386799054dac214cedf89da5cf468";
 /***/ ((module) => {
 
 module.exports = "/images/my_acc.png?6ed38e4fa5d7f2303faac487997dbe29";
-
-/***/ }),
-
-/***/ "./resources/js/components/Includes/Images/v.png":
-/*!*******************************************************!*\
-  !*** ./resources/js/components/Includes/Images/v.png ***!
-  \*******************************************************/
-/***/ ((module) => {
-
-module.exports = "/images/v.png?270853f7013ab5c58c1d41d45bc7f112";
 
 /***/ }),
 

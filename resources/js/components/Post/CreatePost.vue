@@ -1,60 +1,63 @@
 <template>
-
-    <div class="dropzone_container">
-        <div class="wrapper">
-            <div ref="dropzone" class="dropzone_form">
-                <p class="drop-title">
-                    Натисніть або перетягніть зображення
-                </p>
+    <div class="main-wrapper">
+        <div class="dropzone_container">
+            <div class="wrapper">
+                <div ref="dropzone" class="dropzone_form">
+                    <p class="drop-title">
+                        Натисніть або перетягніть зображення
+                    </p>
+                </div>
+                <div class="advice-container">
+                    <p class="advice">Рекомендуємо використовувати файли високої якості у форматі .jpg (розміром менше 20 МГ)</p>
+                </div>
             </div>
-            <div class="advice-container">
-                <p class="advice">Рекомендуємо використовувати файли високої якості у форматі .jpg (розміром менше 20 МГ)</p>
+            <div class="data-wrapper">
+                <input v-model="title" type="text" name="" class="file-title" id="" placeholder="Назва">
+                <!--            <vue-editor v-model="title" class="file-title"></vue-editor>-->
+                <div class="name-wrapper">
+                    <img
+                        src="./Images/Guest.png"
+                        alt="Guest"
+                    >
+                    <p class="name">{{username}}</p>
+                </div>
+                <div class="form-group">
+                    <p class="category-title">
+                        Вибрати категорію
+                    </p>
+                    <select v-model="category_id" class="selector">
+                        <template v-for="category in categories">
+                            <option  :value="category.id" class="option">{{category.title}}</option>
+                        </template>
+                    </select>
+                </div>
+                <input @click.prevent="success" type="submit" class="button-create" value="Створити">
+                <!--        <div v-if="post">-->
+                <!--            <p>{{post.title}}</p>-->
+                <!--            <div v-for="image in post.images">-->
+                <!--                <img  :src="image.preview_url" alt="">-->
+                <!--                <img  :src="image.url" alt="">-->
+                <!--            </div>-->
+
+                <!--        </div>-->
+                <div>{{response}}</div>
             </div>
         </div>
-        <div class="data-wrapper">
-            <input v-model="title" type="text" name="" class="file-title" id="" placeholder="Назва">
-<!--            <vue-editor v-model="title" class="file-title"></vue-editor>-->
-            <div class="name-wrapper">
-                <img
-                    src="./Images/Guest.png"
-                    alt="Guest"
-                >
-                <p class="name">{{username}}</p>
-            </div>
-            <div class="form-group">
-                <p class="category-title">
-                    Вибрати категорію
-                </p>
-                <select v-model="category_id" class="selector">
-                    <template v-for="category in categories">
-                        <option  :value="category.id" class="option">{{category.title}}</option>
-                    </template>
-                </select>
-            </div>
-            <input @click.prevent="store" type="submit" class="button-create" value="Створити">
-            <!--        <div v-if="post">-->
-            <!--            <p>{{post.title}}</p>-->
-            <!--            <div v-for="image in post.images">-->
-            <!--                <img  :src="image.preview_url" alt="">-->
-            <!--                <img  :src="image.url" alt="">-->
-            <!--            </div>-->
-
-            <!--        </div>-->
-            <div>{{response}}</div>
-        </div>
-
+        <success v-if="alertMessage" :message="alertMessage" @close="onAlertClose"></success>
     </div>
 </template>
 
 <script>
 import Dropzone from 'dropzone'
+import Success from './SuccessAlert.vue'
 
 import api from "../../api";
 import {VueEditor} from "vue2-editor"
 export default {
     name: "CreatePost",
     components:{
-        VueEditor
+        VueEditor,
+        Success
     },
     data() {
         return {
@@ -64,7 +67,8 @@ export default {
             category_id:1,
             response:null,
             post:null,
-            username:''
+            username:'',
+            alertMessage: ''
         }
     },
 
@@ -96,6 +100,16 @@ export default {
                     this.getPost()
                 })
         },
+        success() {
+            this.store();
+            this.showAlert();
+        },
+        showAlert() {
+            this.alertMessage = 'Пост успішно додано!';
+        },
+        onAlertClose() {
+            this.alertMessage = '';
+        },
         getCategories() {
             api.get('/api/auth/admin/category')
                 .then(res => {
@@ -113,9 +127,13 @@ export default {
 </script>
 
 <style scoped>
+.main-wrapper {
+    position: relative;
+}
+
 .dropzone_container {
-    height: 620px;
-    width: 575px;
+    padding: 30px 0;
+    width: 40%;
     left: 622px;
     top: 192px;
     border-radius: 14px;
@@ -127,14 +145,16 @@ export default {
     align-items: center;
     margin-top: 20px;
 }
+
 .wrapper {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 40%;
 }
 .dropzone_form {
-    width: 250px;
+    width: 100%;
     height: 450px;
     background: #FFFFFF;
     border-radius: 8px;
@@ -160,7 +180,7 @@ export default {
 }
 
 .data-wrapper {
-    width: 260px;
+    width: 40%;
     height: 500px;
     display: flex;
     flex-direction: column;
@@ -185,7 +205,7 @@ export default {
     border-style: solid;
     border-color: #7D7D7D;
     border-radius: 7px;
-    width: 260px;
+    width: 100%;
     height: 45px;
     padding-left: 10px;
     display: flex;
@@ -208,6 +228,9 @@ export default {
 
 }
 
+.form-group {
+    width: 100%;
+}
 .category-title {
     font-family: 'Inter', sans-serif;
     font-style: normal;
@@ -218,6 +241,7 @@ export default {
     align-items: center;
     color: #4B4B4B;
     margin-top: 20px;
+    width: 100%;
 }
 
 .selector {
@@ -226,7 +250,7 @@ export default {
     border-style: solid;
     border-color: #7D7D7D;
     border-radius: 7px;
-    width: 260px;
+    width: 100%;
     height: 45px;
     padding-left: 10px;
     display: flex;
@@ -242,7 +266,7 @@ export default {
     width: 160px;
     border-radius: 20px;
     background: #B00000;
-
+    transition: all 0.5s ease;
     color: white;
     font-family: 'Praise', sans-serif;
     font-style: normal;
@@ -257,6 +281,11 @@ export default {
     justify-content: center;
 
     margin-top: 156px;
+}
+
+
+.button-create:hover {
+    animation: glowing 0.5s infinite;
 }
 
 .name-wrapper {
@@ -281,7 +310,30 @@ export default {
     margin: auto 0;
     margin-left: 12px;
 }
-.option {
+
+@keyframes glowing {
+    0% { border-radius: 20px; box-shadow: 0 0 3px #760c0c; }
+    50% { border-radius: 20px; box-shadow: 0 0 10px #ab1111; }
+    100% { border-radius: 20px; box-shadow: 0 0 3px #760c0c; }
+}
+
+@media only screen and (max-width: 1024px) {
+    .dropzone_container {
+        flex-direction: column;
+        width: 60%;
+    }
+
+    .wrapper {
+        width: 90%;
+    }
+
+    .dropzone_form {
+        height: 200px;
+    }
+    .data-wrapper {
+        width: 90%;
+    }
+
 
 }
 </style>
