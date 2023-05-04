@@ -1,42 +1,39 @@
-Чому like_container не переміщається в ліво, а save_container вправо
 <template>
-        <div class="main-container">
-            <div class="postUser">
-                <div class="user">
-                    <img
-                        src="./Images/Guest.png"
-                        class="user_pic"
-                        alt="user"
-                    />
-                    <a href='#' class="username">Vasya</a>
-                </div>
-
-                <div class="post-time">
-                    <a class="time">03.05.2023</a>
-                </div>
-
+    <div class="main-container">
+        <div class="postUser">
+            <div class="user">
+                <img
+                    src="./Images/Guest.png"
+                    class="user_pic"
+                    alt="user"
+                />
+                <a href='#' class="username">Vasya</a>
             </div>
-            <img class="img" :src="url">
-            <div class="buttons-container">
-                <div class="like_container">
-                    <a href="" @click.prevent="store" class="likes">
-                        <i class="far fa-heart"></i>
-                    </a>
-                    <!--                <a href="" @click.prevent="store" class="likes active">-->
-                    <!--                    <i class="fas fa-heart"></i>-->
-                    <!--                </a>-->
-                    <span class="count_likes"><span>100</span> позначок "Подобається"</span>
-                </div>
-                <div class="save_container">
-                    <a href="" @click.prevent="store" class="save">
-                        <i class="far fa-bookmark"></i>
-                    </a>
-                    <!--                <a href="" @click.prevent="store" class="save active">-->
-                    <!--                    <i class="fas fa-bookmark"></i>-->
-                    <!--                </a>-->
-                </div>
+
+            <div class="post-time">
+                <a class="time">03.05.2023</a>
             </div>
+
         </div>
+        <img class="img" :src="url">
+        <div class="buttons-container">
+            <div class="like_container">
+                <a href="" @click.prevent="toggleLike(id)">
+                    <i class="far fa-heart" :class="{'fas fa-heart': likedIds.includes(id)}"></i>
+                </a>
+                <span class="count_likes"><span>100</span> позначок "Подобається"{{id}}</span>
+            </div>
+            <div class="save_container">
+                <a href="" @click.prevent="store" class="save">
+                    <i class="far fa-bookmark"></i>
+                </a>
+                <!--                <a href="" @click.prevent="store" class="save active">-->
+                <!--                    <i class="fas fa-bookmark"></i>-->
+                <!--                </a>-->
+            </div>
+
+        </div>
+    </div>
 </template>
 
 <script>
@@ -44,62 +41,78 @@ import api from "../../api";
 
 export default {
     name: "PostLayout",
-    props: ['Likes','url','title','id'],
-    data(){
-        return{
-            posts:null
+    props: ['Likes', 'url', 'title', 'id','likedIds'],
+    data() {
+        return {
+            posts: null,
         }
     },
     mounted() {
     },
-    methods:{
-        store(){
+    methods: {
+        store() {
             api.post(`/api/auth/posts/${this.id}/likes`)
-        }
+                .then(res=>{
+                })
+        },
+        toggleLike(id) {
+            if (this.likedIds.includes(id)){
+                this.likedIds.pop(id)
+            }
+            else {
+                this.likedIds.push(id)
+            }
+            this.store()
+        },
     }
 }
 </script>
 
 <style scoped>
-
 .main-container {
     height: 78vh;
     width: 350px;
     display: flex;
     flex-direction: column;
 }
+
 .img {
     width: 100%;
     height: 80%;
 }
-.buttons-container{
+
+.buttons-container {
     margin-top: 10px;
     display: flex;
     justify-content: space-between;
     width: 100%;
 }
-.like_container{
+
+.like_container {
     display: flex;
     align-items: center;
     order: 1;
     margin-left: 10px;
 }
-.save_container{
+
+.save_container {
     display: flex;
     align-items: center;
     order: 2;
     margin-right: 17px;
 }
+
 a {
     text-decoration: none;
     color: black;
 }
 
-i{
+i {
     font-size: 35px;
     color: #000000;
 }
-.count_likes{
+
+.count_likes {
     padding-left: 11px;
     font-style: normal;
     font-weight: 400;

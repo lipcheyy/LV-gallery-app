@@ -3,14 +3,20 @@
         <div class="posts-container">
             <div class="post-container" v-for="post in posts">
                 <template v-for="image in post.images">
-                    <post-layout :url="image.url" :id="post.id"></post-layout>
+                    <post-layout
+                        :key="someKey"
+                        :url="image.url"
+                        :id="post.id"
+                        :likedIds="likedIds">
+                    </post-layout>
                 </template>
             </div>
         </div>
 
         <ul class="pagination-container">
             <li v-if="pagination.current_page!==1"
-                 @click.prevent="getPosts(pagination.current_page-1)" class="closed control">&lt;</li>
+                @click.prevent="getPosts(pagination.current_page-1)" class="closed control">&lt;
+            </li>
             <li
                 @click.prevent="getPosts(link.label)"
                 :class="link.active ? 'active' : ''"
@@ -21,7 +27,7 @@
                      && pagination.current_page-link.label>-2)
                      || Number(link.label)===1
                      || Number(link.label)===pagination.last_page">
-                    <a href="#" >{{link.label}} </a>
+                    <a href="#">{{ link.label }} </a>
                 </template>
                 <template v-if="Number(link.label)
                     && pagination.current_page!==3
@@ -33,7 +39,7 @@
                 </template>
             </li>
             <li @click.prevent="getPosts(pagination.current_page+1)"
-                 v-if="pagination.current_page !== pagination.last_page" class="pagination-btn control">
+                v-if="pagination.current_page !== pagination.last_page" class="pagination-btn control">
                 &gt;
             </li>
         </ul>
@@ -44,28 +50,45 @@
 <script>
 import PostLayout from "./PostLayout";
 import api from "../../api";
+
 export default {
     name: "PostsIndex",
     components: {PostLayout},
-    data(){
-        return{
-            posts:null,
-            pagination:[]
+    data() {
+        return {
+            posts: null,
+            pagination: [],
+            userLiked:null,
+            likedIds:[],
+            someKey:0
         }
     },
     mounted() {
         this.getPosts()
+        this.getUserLikes()
     },
-    methods:{
-        getPosts(page=1){
-            api.post('/api/auth/posts/list',{page:page})
-                .then(res=>{
-                    this.posts=res.data.data
-                    this.pagination=res.data.meta
-                    console.log(res);
+    methods: {
+        getPosts(page = 1) {
+            api.post('/api/auth/posts/list', {page: page})
+                .then(res => {
+                    this.posts = res.data.data
+                    this.pagination = res.data.meta
                     // console.log(this.posts);
                 })
+        },
+        getUserLikes() {
+            api.get('/api/auth/posts')
+                .then(res => {
+                    this.userLiked = res.data
+                    // console.log(this.userLiked);
+                    this.userLiked.forEach(liked=>{
+                        this.likedIds.push(liked.id)
+                    })
+
+                })
+
         }
+
     }
 }
 
@@ -75,6 +98,7 @@ export default {
 .main-container {
     margin-top: 25px;
 }
+
 .posts-container {
     display: flex;
     flex-wrap: wrap;
@@ -89,10 +113,12 @@ export default {
     display: flex;
     justify-content: space-between;
 }
+
 a {
     text-decoration: none;
     color: black;
 }
+
 li {
     width: 50px;
     height: 50px;
@@ -112,6 +138,7 @@ li {
     cursor: pointer;
 
 }
+
 .active {
     color: white;
     background-color: #760c0c;
@@ -134,12 +161,21 @@ li:hover {
     transform: scale(1.1);
     animation: glowing 0.5s infinite;
 }
-@keyframes glowing {
-    0% { border-radius: 50%; box-shadow: 0 0 3px #760c0c; }
-    50% { border-radius: 50%; box-shadow: 0 0 10px #ab1111; }
-    100% { border-radius: 50%; box-shadow: 0 0 3px #760c0c; }
-}
 
+@keyframes glowing {
+    0% {
+        border-radius: 50%;
+        box-shadow: 0 0 3px #760c0c;
+    }
+    50% {
+        border-radius: 50%;
+        box-shadow: 0 0 10px #ab1111;
+    }
+    100% {
+        border-radius: 50%;
+        box-shadow: 0 0 3px #760c0c;
+    }
+}
 
 
 @media only screen and (max-width: 1024px) {
