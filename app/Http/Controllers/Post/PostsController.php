@@ -20,6 +20,10 @@ class   PostsController extends Controller
         $posts = Post::paginate(3,['*'],'page',$data['page']);
         return PostResource::collection($posts);
     }
+    public function checkUser(){
+        $isLiked=auth()->user()->likedPosts;
+        return $isLiked;
+    }
     public function store(StoreRequest $request){
         $data=$request->validated();
         $images=$data['images'];

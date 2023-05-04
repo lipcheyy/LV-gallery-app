@@ -12,4 +12,5 @@ class LikeController extends Controller
         auth()->user()->likedPosts()->toggle($post->id);
         return dump($post->id);
     }
+
 }

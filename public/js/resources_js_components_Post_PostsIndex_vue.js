@@ -59,6 +59,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.getPosts();
+    this.checkUser();
   },
   methods: {
     getPosts: function getPosts() {
@@ -69,8 +70,12 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (res) {
         _this.posts = res.data.data;
         _this.pagination = res.data.meta;
-        console.log(res);
         // console.log(this.posts);
+      });
+    },
+    checkUser: function checkUser() {
+      _api__WEBPACK_IMPORTED_MODULE_1__["default"].get('/api/auth/posts').then(function (res) {
+        console.log(res);
       });
     }
   }
@@ -284,7 +289,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.main-container[data-v-7069c1da] {\r\n    margin-top: 25px;\n}\n.posts-container[data-v-7069c1da] {\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    align-items: center;\r\n    justify-content: center;\r\n    gap: 40px;\n}\n.pagination-container[data-v-7069c1da] {\r\n    margin: 0 auto;\r\n    width: 20%;\r\n    display: flex;\r\n    justify-content: space-between;\n}\na[data-v-7069c1da] {\r\n    text-decoration: none;\r\n    color: black;\n}\nli[data-v-7069c1da] {\r\n    width: 50px;\r\n    height: 50px;\r\n    border-radius: 50%;\r\n    border: 0.13850415512465375vh solid #B00000;\r\n    color: black;\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    transition: all 0.5s ease;\r\n    font-family: 'Times New Roman', sans-serif;\r\n    font-style: normal;\r\n    font-weight: 400;\r\n    font-size: 4.43213296398892vh;\r\n    line-height: 37px;\r\n\r\n    cursor: pointer;\n}\n.active[data-v-7069c1da] {\r\n    color: white;\r\n    background-color: #760c0c;\n}\n.active > a[data-v-7069c1da] {\r\n    color: white;\n}\n.closed[data-v-7069c1da] {\r\n    border: 2px solid #BBBBBB;\r\n    color: #BBBBBB;\n}\n.control[data-v-7069c1da] {\r\n    font-size: 16px;\n}\nli[data-v-7069c1da]:hover {\r\n    transform: scale(1.1);\r\n    animation: glowing-7069c1da 0.5s infinite;\n}\n@keyframes glowing-7069c1da {\n0% { border-radius: 50%; box-shadow: 0 0 3px #760c0c;\n}\n50% { border-radius: 50%; box-shadow: 0 0 10px #ab1111;\n}\n100% { border-radius: 50%; box-shadow: 0 0 3px #760c0c;\n}\n}\n@media only screen and (max-width: 1024px) {\n.pagination-container[data-v-7069c1da] {\r\n        width: 50%;\n}\n}\n@media only screen and (max-width: 543px) {\n.pagination-container[data-v-7069c1da] {\r\n        width: 60%;\n}\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.main-container[data-v-7069c1da] {\n    margin-top: 25px;\n}\n.posts-container[data-v-7069c1da] {\n    display: flex;\n    flex-wrap: wrap;\n    align-items: center;\n    justify-content: center;\n    gap: 40px;\n}\n.pagination-container[data-v-7069c1da] {\n    margin: 0 auto;\n    width: 20%;\n    display: flex;\n    justify-content: space-between;\n}\na[data-v-7069c1da] {\n    text-decoration: none;\n    color: black;\n}\nli[data-v-7069c1da] {\n    width: 50px;\n    height: 50px;\n    border-radius: 50%;\n    border: 0.13850415512465375vh solid #B00000;\n    color: black;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    transition: all 0.5s ease;\n    font-family: 'Times New Roman', sans-serif;\n    font-style: normal;\n    font-weight: 400;\n    font-size: 4.43213296398892vh;\n    line-height: 37px;\n\n    cursor: pointer;\n}\n.active[data-v-7069c1da] {\n    color: white;\n    background-color: #760c0c;\n}\n.active > a[data-v-7069c1da] {\n    color: white;\n}\n.closed[data-v-7069c1da] {\n    border: 2px solid #BBBBBB;\n    color: #BBBBBB;\n}\n.control[data-v-7069c1da] {\n    font-size: 16px;\n}\nli[data-v-7069c1da]:hover {\n    transform: scale(1.1);\n    animation: glowing-7069c1da 0.5s infinite;\n}\n@keyframes glowing-7069c1da {\n0% { border-radius: 50%; box-shadow: 0 0 3px #760c0c;\n}\n50% { border-radius: 50%; box-shadow: 0 0 10px #ab1111;\n}\n100% { border-radius: 50%; box-shadow: 0 0 3px #760c0c;\n}\n}\n@media only screen and (max-width: 1024px) {\n.pagination-container[data-v-7069c1da] {\n        width: 50%;\n}\n}\n@media only screen and (max-width: 543px) {\n.pagination-container[data-v-7069c1da] {\n        width: 60%;\n}\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

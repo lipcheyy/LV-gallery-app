@@ -55,6 +55,7 @@ export default {
     },
     mounted() {
         this.getPosts()
+        this.checkUser()
     },
     methods:{
         getPosts(page=1){
@@ -62,8 +63,13 @@ export default {
                 .then(res=>{
                     this.posts=res.data.data
                     this.pagination=res.data.meta
-                    console.log(res);
                     // console.log(this.posts);
+                })
+        },
+        checkUser(){
+            api.get('/api/auth/posts')
+                .then(res=>{
+                    console.log(res);
                 })
         }
     }
