@@ -35,7 +35,7 @@ export default {
 
 <style scoped>
 .custom-alert {
-    position: fixed;
+    position: absolute;
     top: -100%;
     left: 50%;
     transform: translateX(-50%);
@@ -59,17 +59,18 @@ export default {
 }
 
 .custom-alert.leave {
-    animation: fade-out 0.3s ease-out forwards;
+    animation: fade-out 0.8s ease-out forwards;
 }
 
 @keyframes fade-out {
-    from {
+    0% {
         opacity: 1;
-        top: 10px;
     }
-    to {
+    50% {
+        opacity: 0.5;
+    }
+    100% {
         opacity: 0;
-        top: -100%;
     }
 }
 

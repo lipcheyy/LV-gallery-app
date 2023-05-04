@@ -1,49 +1,49 @@
 <template>
-
-    <div class="dropzone_container">
-        <div class="wrapper">
-            <div ref="dropzone" class="dropzone_form">
-                <p class="drop-title">
-                    Натисніть або перетягніть зображення
-                </p>
+    <div class="main-wrapper">
+        <div class="dropzone_container">
+            <div class="wrapper">
+                <div ref="dropzone" class="dropzone_form">
+                    <p class="drop-title">
+                        Натисніть або перетягніть зображення
+                    </p>
+                </div>
+                <div class="advice-container">
+                    <p class="advice">Рекомендуємо використовувати файли високої якості у форматі .jpg (розміром менше 20 МГ)</p>
+                </div>
             </div>
-            <div class="advice-container">
-                <p class="advice">Рекомендуємо використовувати файли високої якості у форматі .jpg (розміром менше 20 МГ)</p>
+            <div class="data-wrapper">
+                <input v-model="title" type="text" name="" class="file-title" id="" placeholder="Назва">
+                <!--            <vue-editor v-model="title" class="file-title"></vue-editor>-->
+                <div class="name-wrapper">
+                    <img
+                        src="./Images/Guest.png"
+                        alt="Guest"
+                    >
+                    <p class="name">{{username}}</p>
+                </div>
+                <div class="form-group">
+                    <p class="category-title">
+                        Вибрати категорію
+                    </p>
+                    <select v-model="category_id" class="selector">
+                        <template v-for="category in categories">
+                            <option  :value="category.id" class="option">{{category.title}}</option>
+                        </template>
+                    </select>
+                </div>
+                <input @click.prevent="success" type="submit" class="button-create" value="Створити">
+                <!--        <div v-if="post">-->
+                <!--            <p>{{post.title}}</p>-->
+                <!--            <div v-for="image in post.images">-->
+                <!--                <img  :src="image.preview_url" alt="">-->
+                <!--                <img  :src="image.url" alt="">-->
+                <!--            </div>-->
+
+                <!--        </div>-->
+                <div>{{response}}</div>
             </div>
         </div>
-        <div class="data-wrapper">
-            <input v-model="title" type="text" name="" class="file-title" id="" placeholder="Назва">
-<!--            <vue-editor v-model="title" class="file-title"></vue-editor>-->
-            <div class="name-wrapper">
-                <img
-                    src="./Images/Guest.png"
-                    alt="Guest"
-                >
-                <p class="name">{{username}}</p>
-            </div>
-            <div class="form-group">
-                <p class="category-title">
-                    Вибрати категорію
-                </p>
-                <select v-model="category_id" class="selector">
-                    <template v-for="category in categories">
-                        <option  :value="category.id" class="option">{{category.title}}</option>
-                    </template>
-                </select>
-            </div>
-            <input @click.prevent="success" type="submit" class="button-create" value="Створити">
-            <!--        <div v-if="post">-->
-            <!--            <p>{{post.title}}</p>-->
-            <!--            <div v-for="image in post.images">-->
-            <!--                <img  :src="image.preview_url" alt="">-->
-            <!--                <img  :src="image.url" alt="">-->
-            <!--            </div>-->
-
-            <!--        </div>-->
-            <success v-if="alertMessage" :message="alertMessage" @close="onAlertClose"></success>
-            <div>{{response}}</div>
-        </div>
-
+        <success v-if="alertMessage" :message="alertMessage" @close="onAlertClose"></success>
     </div>
 </template>
 
@@ -127,6 +127,10 @@ export default {
 </script>
 
 <style scoped>
+.main-wrapper {
+    position: relative;
+}
+
 .dropzone_container {
     padding: 30px 0;
     width: 40%;
@@ -141,6 +145,7 @@ export default {
     align-items: center;
     margin-top: 20px;
 }
+
 .wrapper {
     display: flex;
     flex-direction: column;
