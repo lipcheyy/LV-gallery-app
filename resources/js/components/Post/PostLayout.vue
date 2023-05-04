@@ -1,4 +1,3 @@
-Чому like_container не переміщається в ліво, а save_container вправо
 <template>
     <div class="main-container">
         <div class="postUser">
@@ -19,16 +18,9 @@
         <img class="img" :src="url">
         <div class="buttons-container">
             <div class="like_container">
-                    <template v-if="likedIds.includes(id)">
-                    <a href="" @click.prevent="store" class="likes">
-                        <i class="fas fa-heart"></i>
-                    </a>
-                </template>
-                <template v-else>
-                    <a href="" @click.prevent="store" class="likes active">
-                        <i class="far fa-heart"></i>
-                    </a>
-                </template>
+                <a href="" @click.prevent="toggleLike(id)">
+                    <i class="far fa-heart" :class="{'fas fa-heart': likedIds.includes(id)}"></i>
+                </a>
                 <span class="count_likes"><span>100</span> позначок "Подобається"{{id}}</span>
             </div>
             <div class="save_container">
@@ -53,23 +45,30 @@ export default {
     data() {
         return {
             posts: null,
-            // userLiked: null
         }
     },
     mounted() {
-        // console.log(this.likedIds);
     },
     methods: {
         store() {
             api.post(`/api/auth/posts/${this.id}/likes`)
+                .then(res=>{
+                })
         },
-
+        toggleLike(id) {
+            if (this.likedIds.includes(id)){
+                this.likedIds.pop(id)
+            }
+            else {
+                this.likedIds.push(id)
+            }
+            this.store()
+        },
     }
 }
 </script>
 
 <style scoped>
-
 .main-container {
     height: 78vh;
     width: 350px;

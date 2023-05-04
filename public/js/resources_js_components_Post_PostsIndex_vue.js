@@ -19,15 +19,20 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       posts: null
-      // userLiked: null
     };
   },
-  mounted: function mounted() {
-    // console.log(this.likedIds);
-  },
+  mounted: function mounted() {},
   methods: {
     store: function store() {
-      _api__WEBPACK_IMPORTED_MODULE_0__["default"].post("/api/auth/posts/".concat(this.id, "/likes"));
+      _api__WEBPACK_IMPORTED_MODULE_0__["default"].post("/api/auth/posts/".concat(this.id, "/likes")).then(function (res) {});
+    },
+    toggleLike: function toggleLike(id) {
+      if (this.likedIds.includes(id)) {
+        this.likedIds.pop(id);
+      } else {
+        this.likedIds.push(id);
+      }
+      this.store();
     }
   }
 });
@@ -59,12 +64,13 @@ __webpack_require__.r(__webpack_exports__);
       posts: null,
       pagination: [],
       userLiked: null,
-      likedIds: []
+      likedIds: [],
+      someKey: 0
     };
   },
   mounted: function mounted() {
     this.getPosts();
-    this.checkUser();
+    this.getUserLikes();
   },
   methods: {
     getPosts: function getPosts() {
@@ -78,7 +84,7 @@ __webpack_require__.r(__webpack_exports__);
         // console.log(this.posts);
       });
     },
-    checkUser: function checkUser() {
+    getUserLikes: function getUserLikes() {
       var _this2 = this;
       _api__WEBPACK_IMPORTED_MODULE_1__["default"].get('/api/auth/posts').then(function (res) {
         _this2.userLiked = res.data;
@@ -119,35 +125,24 @@ var render = function render() {
     staticClass: "buttons-container"
   }, [_c("div", {
     staticClass: "like_container"
-  }, [_vm.likedIds.includes(_vm.id) ? [_c("a", {
-    staticClass: "likes",
+  }, [_c("a", {
     attrs: {
       href: ""
     },
     on: {
       click: function click($event) {
         $event.preventDefault();
-        return _vm.store.apply(null, arguments);
+        return _vm.toggleLike(_vm.id);
       }
     }
   }, [_c("i", {
-    staticClass: "fas fa-heart"
-  })])] : [_c("a", {
-    staticClass: "likes active",
-    attrs: {
-      href: ""
-    },
-    on: {
-      click: function click($event) {
-        $event.preventDefault();
-        return _vm.store.apply(null, arguments);
-      }
+    staticClass: "far fa-heart",
+    "class": {
+      "fas fa-heart": _vm.likedIds.includes(_vm.id)
     }
-  }, [_c("i", {
-    staticClass: "far fa-heart"
-  })])], _vm._v(" "), _c("span", {
+  })]), _vm._v(" "), _c("span", {
     staticClass: "count_likes"
-  }, [_c("span", [_vm._v("100")]), _vm._v(' позначок "Подобається"' + _vm._s(_vm.id))])], 2), _vm._v(" "), _c("div", {
+  }, [_c("span", [_vm._v("100")]), _vm._v(' позначок "Подобається"' + _vm._s(_vm.id))])]), _vm._v(" "), _c("div", {
     staticClass: "save_container"
   }, [_c("a", {
     staticClass: "save",
@@ -217,6 +212,7 @@ var render = function render() {
       staticClass: "post-container"
     }, [_vm._l(post.images, function (image) {
       return [_c("post-layout", {
+        key: _vm.someKey,
         attrs: {
           url: image.url,
           id: post.id,

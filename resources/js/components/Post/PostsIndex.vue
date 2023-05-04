@@ -4,6 +4,7 @@
             <div class="post-container" v-for="post in posts">
                 <template v-for="image in post.images">
                     <post-layout
+                        :key="someKey"
                         :url="image.url"
                         :id="post.id"
                         :likedIds="likedIds">
@@ -58,12 +59,13 @@ export default {
             posts: null,
             pagination: [],
             userLiked:null,
-            likedIds:[]
+            likedIds:[],
+            someKey:0
         }
     },
     mounted() {
         this.getPosts()
-        this.checkUser()
+        this.getUserLikes()
     },
     methods: {
         getPosts(page = 1) {
@@ -74,7 +76,7 @@ export default {
                     // console.log(this.posts);
                 })
         },
-        checkUser() {
+        getUserLikes() {
             api.get('/api/auth/posts')
                 .then(res => {
                     this.userLiked = res.data
