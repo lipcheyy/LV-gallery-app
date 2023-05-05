@@ -1,6 +1,6 @@
 <template>
     <div class="main-container">
-<!--        <router-link v-if="userRole===1" :to="{name:'admin.statistic'}">Admin panel</router-link>-->
+        <!--        <router-link v-if="userRole===1" :to="{name:'admin.statistic'}">Admin panel</router-link>-->
         <div class="user-info">
             <div class="circle">
                 <img
@@ -19,11 +19,15 @@
                 <div class="subline"></div>
             </div>
             <div class="buttons-container">
-                <button class="control" exact-active-class="active">
+                <button class="control" exact-active-class="active"
+                        @click.prevent="showOwnPosts=true,
+                                        showSavedPosts=false">
                     <i class="fa-regular fa-pen-to-square"></i>
                     <h3>Створені</h3>
                 </button>
-                <button class="control" exact-active-class="active">
+                <button class="control" exact-active-class="active"
+                        @click.prevent="showSavedPosts=true,
+                                        showOwnPosts=false">
                     <i class="far fa-bookmark"></i>
                     <h3>Збережені</h3>
 
@@ -31,58 +35,40 @@
             </div>
 
         </div>
-
-        <div class="posts">
-            <img
-                class="post"
-                src="../Includes/Images/Post.png"
-                alt="Post"
-            >
-            <img
-                class="post"
-                src="../Includes/Images/Post.png"
-                alt="Post"
-            >
-            <img
-                class="post"
-                src="../Includes/Images/Post.png"
-                alt="Post"
-            >
-            <img
-                class="post"
-                src="../Includes/Images/Post.png"
-                alt="Post"
-            >
-            <img
-                class="post"
-                src="../Includes/Images/Post.png"
-                alt="Post"
-            >
-        </div>
-
+        <user-posts v-if="showOwnPosts"></user-posts>
+        <user-saved v-if="showSavedPosts"></user-saved>
     </div>
 </template>
 
 <script>
 import api from "../../api";
+import UserPosts from "./UserPosts";
+import UserSaved from "./UserSaved";
 export default {
-    data(){
-        return{
-            userRole:null,
-            username:null,
+    components: {
+        UserPosts,
+        UserSaved
+    },
+
+    data() {
+        return {
+            userRole: null,
+            username: null,
+            showOwnPosts: true,
+            showSavedPosts: false
         }
     },
     name: "Personal",
     mounted() {
         this.userdata()
     },
-    methods:{
+    methods: {
         userdata() {
             api.post('/api/auth/me')
-                .then(res=>{
-                    const user =res.data
-                    localStorage.setItem('user_role',user.role)
-                    this.userRole= parseInt(user.role)
+                .then(res => {
+                    const user = res.data
+                    localStorage.setItem('user_role', user.role)
+                    this.userRole = parseInt(user.role)
                 })
         },
     },
@@ -98,6 +84,7 @@ p, h1, h2, h3 {
     margin: 0;
     padding: 0;
 }
+
 .main-container {
     width: 100%;
     display: flex;
@@ -106,6 +93,7 @@ p, h1, h2, h3 {
     flex-direction: column;
     align-items: center;
 }
+
 .control-page {
     width: 70%;
     display: flex;
@@ -113,6 +101,7 @@ p, h1, h2, h3 {
     align-items: center;
     flex-direction: column;
 }
+
 .line {
     width: 100%;
     height: 4px;
@@ -122,22 +111,27 @@ p, h1, h2, h3 {
     justify-content: center;
     gap: 34px;
 }
+
 .subline {
     width: 200px;
     height: 100%;
 }
+
 .subline.active {
     background-color: black;
 }
+
 .buttons-container {
     margin-top: 20px;
-    display:flex;
+    display: flex;
     gap: 34px;
     margin-bottom: 50px;
 }
+
 i {
     font-size: 24px;
 }
+
 .control {
     width: 200px;
     height: 45px;
@@ -155,6 +149,7 @@ i {
     border: none;
     color: white;
 }
+
 .circle {
     width: 120px;
     height: 120px;
@@ -173,6 +168,7 @@ i {
     width: 75%;
     height: 75%;
 }
+
 .user-info {
     display: flex;
     flex-direction: column;
@@ -210,8 +206,6 @@ i {
     height: 250px;
     cursor: pointer;
 }
-
-
 
 
 </style>

@@ -129,7 +129,6 @@ export default {
 }
 
 
-/* Создаем анимацию для перехода между far fa-heart и fas fa-heart */
 .far.fa-heart.fas-heart-animation {
     animation: heart-pulse 0.3s ease-in-out;
 }
