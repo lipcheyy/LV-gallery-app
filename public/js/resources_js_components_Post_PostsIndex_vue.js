@@ -15,13 +15,15 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "PostLayout",
-  props: ['Likes', 'url', 'title', 'id', 'likedIds'],
+  props: ['Likes', 'url', 'title', 'id', 'likedIds', 'savedIds', 'likesCount'],
   data: function data() {
     return {
       posts: null
     };
   },
-  mounted: function mounted() {},
+  mounted: function mounted() {
+    console.log(this.savedIds);
+  },
   methods: {
     store: function store() {
       _api__WEBPACK_IMPORTED_MODULE_0__["default"].post("/api/auth/posts/".concat(this.id, "/likes")).then(function (res) {});
@@ -33,11 +35,26 @@ __webpack_require__.r(__webpack_exports__);
     },
     toggleLike: function toggleLike(id) {
       if (this.likedIds.includes(id)) {
-        this.likedIds.pop(id);
+        var index = this.likedIds.indexOf(id);
+        this.likedIds.splice(index, 1);
       } else {
         this.likedIds.push(id);
       }
       this.store();
+    },
+    toggleSave: function toggleSave(id) {
+      if (this.savedIds.includes(id)) {
+        var index = this.savedIds.indexOf(id);
+        this.savedIds.splice(index, 1);
+      } else {
+        this.savedIds.push(id);
+      }
+      this.save();
+    }
+  },
+  computed: {
+    computedLikedCount: function computedLikedCount() {
+      return this.likesCount;
     }
   }
 });
@@ -70,12 +87,14 @@ __webpack_require__.r(__webpack_exports__);
       pagination: [],
       userLiked: null,
       likedIds: [],
+      savedIds: [],
       someKey: 0
     };
   },
   mounted: function mounted() {
     this.getPosts();
     this.getUserLikes();
+    this.getUserSaves();
   },
   methods: {
     getPosts: function getPosts() {
@@ -86,16 +105,23 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (res) {
         _this.posts = res.data.data;
         _this.pagination = res.data.meta;
-        // console.log(this.posts);
       });
     },
     getUserLikes: function getUserLikes() {
       var _this2 = this;
-      _api__WEBPACK_IMPORTED_MODULE_1__["default"].get('/api/auth/posts').then(function (res) {
+      _api__WEBPACK_IMPORTED_MODULE_1__["default"].get('/api/auth/posts/liked').then(function (res) {
         _this2.userLiked = res.data;
         // console.log(this.userLiked);
         _this2.userLiked.forEach(function (liked) {
           _this2.likedIds.push(liked.id);
+        });
+      });
+    },
+    getUserSaves: function getUserSaves() {
+      var _this3 = this;
+      _api__WEBPACK_IMPORTED_MODULE_1__["default"].get('/api/auth/posts/saved').then(function (res) {
+        res.data.forEach(function (saved) {
+          _this3.savedIds.push(saved.id);
         });
       });
     }
@@ -147,21 +173,25 @@ var render = function render() {
     }
   })]), _vm._v(" "), _c("span", {
     staticClass: "count_likes"
-  }, [_c("span", [_vm._v("100")]), _vm._v(' позначок "Подобається"' + _vm._s(_vm.id))])]), _vm._v(" "), _c("div", {
+  }, [_c("span", {
+    staticClass: "likesCount"
+  }, [_vm._v(_vm._s(_vm.likesCount))]), _vm._v(' позначок "Подобається"')])]), _vm._v(" "), _c("div", {
     staticClass: "save_container"
   }, [_c("a", {
-    staticClass: "save",
     attrs: {
-      href: ""
+      href: "#"
     },
     on: {
       click: function click($event) {
         $event.preventDefault();
-        return _vm.save.apply(null, arguments);
+        return _vm.toggleSave(_vm.id);
       }
     }
   }, [_c("i", {
-    staticClass: "far fa-bookmark"
+    staticClass: "far fa-bookmark",
+    "class": {
+      "fas fa-bookmark": _vm.savedIds.includes(_vm.id)
+    }
   })])])])]);
 };
 var staticRenderFns = [function () {
@@ -217,11 +247,12 @@ var render = function render() {
       staticClass: "post-container"
     }, [_vm._l(post.images, function (image) {
       return [_c("post-layout", {
-        key: _vm.someKey,
         attrs: {
           url: image.url,
           id: post.id,
-          likedIds: _vm.likedIds
+          likesCount: post.likesCount,
+          likedIds: _vm.likedIds,
+          savedIds: _vm.savedIds
         }
       })];
     })], 2);

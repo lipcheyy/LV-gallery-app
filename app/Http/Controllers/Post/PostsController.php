@@ -20,9 +20,13 @@ class   PostsController extends Controller
         $posts = Post::paginate(5,['*'],'page',$data['page']);
         return PostResource::collection($posts);
     }
-    public function checkUser(){
+    public function checkUserLiked(){
         $isLiked=auth()->user()->likedPosts;
         return $isLiked;
+    }
+    public function checkUserSaved(){
+        $isSaved=auth()->user()->savedPosts;
+        return $isSaved;
     }
     public function store(StoreRequest $request){
         $data=$request->validated();
