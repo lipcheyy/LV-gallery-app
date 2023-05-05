@@ -15,7 +15,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "PostLayout",
-  props: ['Likes', 'url', 'title', 'id', 'likedIds', 'savedIds'],
+  props: ['Likes', 'url', 'title', 'id', 'likedIds', 'savedIds', 'likesCount'],
   data: function data() {
     return {
       posts: null
@@ -100,7 +100,6 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (res) {
         _this.posts = res.data.data;
         _this.pagination = res.data.meta;
-        console.log(_this.posts);
       });
     },
     getUserLikes: function getUserLikes() {
@@ -169,7 +168,7 @@ var render = function render() {
     }
   })]), _vm._v(" "), _c("span", {
     staticClass: "count_likes"
-  }, [_c("span", [_vm._v("100")]), _vm._v(' позначок "Подобається"' + _vm._s(_vm.id))])]), _vm._v(" "), _c("div", {
+  }, [_c("span", [_vm._v(_vm._s(_vm.likesCount))]), _vm._v(' позначок "Подобається"')])]), _vm._v(" "), _c("div", {
     staticClass: "save_container"
   }, [_c("a", {
     attrs: {
@@ -245,6 +244,7 @@ var render = function render() {
         attrs: {
           url: image.url,
           id: post.id,
+          likesCount: post.likesCount,
           likedIds: _vm.likedIds,
           savedIds: _vm.savedIds
         }

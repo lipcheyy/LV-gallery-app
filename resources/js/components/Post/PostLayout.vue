@@ -21,7 +21,7 @@
                 <a href="" @click.prevent="toggleLike(id)">
                     <i class="far fa-heart" :class="{'fas fa-heart': likedIds.includes(id)}"></i>
                 </a>
-                <span class="count_likes"><span>100</span> позначок "Подобається"{{ id }}</span>
+                <span class="count_likes"><span>{{likesCount}}</span> позначок "Подобається"</span>
             </div>
             <div class="save_container">
                 <a href="#" @click.prevent="toggleSave(id)">
@@ -38,7 +38,7 @@ import api from "../../api";
 
 export default {
     name: "PostLayout",
-    props: ['Likes', 'url', 'title', 'id', 'likedIds', 'savedIds'],
+    props: ['Likes', 'url', 'title', 'id', 'likedIds', 'savedIds','likesCount'],
     data() {
         return {
             posts: null,

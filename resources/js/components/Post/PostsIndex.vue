@@ -7,6 +7,7 @@
                         :key="someKey"
                         :url="image.url"
                         :id="post.id"
+                        :likesCount="post.likesCount"
                         :likedIds="likedIds"
                         :savedIds="savedIds">
                     </post-layout>
@@ -76,7 +77,6 @@ export default {
                 .then(res => {
                     this.posts = res.data.data
                     this.pagination = res.data.meta
-                    console.log(this.posts);
                 })
         },
         getUserLikes() {
