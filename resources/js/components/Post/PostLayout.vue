@@ -21,15 +21,12 @@
                 <a href="" @click.prevent="toggleLike(id)">
                     <i class="far fa-heart" :class="{'fas fa-heart': likedIds.includes(id)}"></i>
                 </a>
-                <span class="count_likes"><span>100</span> позначок "Подобається"{{id}}</span>
+                <span class="count_likes"><span>100</span> позначок "Подобається"{{ id }}</span>
             </div>
             <div class="save_container">
-                <a href="" @click.prevent="save" class="save">
-                    <i class="far fa-bookmark"></i>
+                <a href="#" @click.prevent="toggleSave(id)">
+                    <i class="far fa-bookmark" :class="{'fas fa-bookmark':savedIds.includes(id)}"></i>
                 </a>
-                <!--                <a href="" @click.prevent="store" class="save active">-->
-                <!--                    <i class="fas fa-bookmark"></i>-->
-                <!--                </a>-->
             </div>
 
         </div>
@@ -41,7 +38,7 @@ import api from "../../api";
 
 export default {
     name: "PostLayout",
-    props: ['Likes', 'url', 'title', 'id','likedIds','savedIds'],
+    props: ['Likes', 'url', 'title', 'id', 'likedIds', 'savedIds'],
     data() {
         return {
             posts: null,
@@ -53,24 +50,33 @@ export default {
     methods: {
         store() {
             api.post(`/api/auth/posts/${this.id}/likes`)
-                .then(res=>{
+                .then(res => {
                 })
         },
-        save(){
+        save() {
             api.post(`/api/auth/posts/${this.id}/saves`)
-                .then(res=>{
+                .then(res => {
                     console.log(res.data.message);
                 })
         },
         toggleLike(id) {
-            if (this.likedIds.includes(id)){
-                this.likedIds.pop(id)
-            }
-            else {
+            if (this.likedIds.includes(id)) {
+                const index=this.likedIds.indexOf(id)
+                this.likedIds.splice(index,1)
+            } else {
                 this.likedIds.push(id)
             }
             this.store()
         },
+        toggleSave(id){
+            if (this.savedIds.includes(id)) {
+                const index=this.savedIds.indexOf(id)
+                this.savedIds.splice(index,1)
+            } else {
+                this.savedIds.push(id)
+            }
+            this.save()
+        }
     }
 }
 </script>

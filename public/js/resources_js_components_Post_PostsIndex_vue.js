@@ -35,11 +35,21 @@ __webpack_require__.r(__webpack_exports__);
     },
     toggleLike: function toggleLike(id) {
       if (this.likedIds.includes(id)) {
-        this.likedIds.pop(id);
+        var index = this.likedIds.indexOf(id);
+        this.likedIds.splice(index, 1);
       } else {
         this.likedIds.push(id);
       }
       this.store();
+    },
+    toggleSave: function toggleSave(id) {
+      if (this.savedIds.includes(id)) {
+        var index = this.savedIds.indexOf(id);
+        this.savedIds.splice(index, 1);
+      } else {
+        this.savedIds.push(id);
+      }
+      this.save();
     }
   }
 });
@@ -162,18 +172,20 @@ var render = function render() {
   }, [_c("span", [_vm._v("100")]), _vm._v(' позначок "Подобається"' + _vm._s(_vm.id))])]), _vm._v(" "), _c("div", {
     staticClass: "save_container"
   }, [_c("a", {
-    staticClass: "save",
     attrs: {
-      href: ""
+      href: "#"
     },
     on: {
       click: function click($event) {
         $event.preventDefault();
-        return _vm.save.apply(null, arguments);
+        return _vm.toggleSave(_vm.id);
       }
     }
   }, [_c("i", {
-    staticClass: "far fa-bookmark"
+    staticClass: "far fa-bookmark",
+    "class": {
+      "fas fa-bookmark": _vm.savedIds.includes(_vm.id)
+    }
   })])])])]);
 };
 var staticRenderFns = [function () {
