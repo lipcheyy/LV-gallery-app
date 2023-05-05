@@ -21,7 +21,7 @@
                 <a href="" @click.prevent="toggleLike(id)">
                     <i class="far fa-heart" :class="{'fas fa-heart': likedIds.includes(id)}"></i>
                 </a>
-                <span class="count_likes"><span>{{likesCount}}</span> позначок "Подобається"</span>
+                <span class="count_likes"><span class="likesCount">{{likesCount}}</span> позначок "Подобається"</span>
             </div>
             <div class="save_container">
                 <a href="#" @click.prevent="toggleSave(id)">
@@ -76,6 +76,12 @@ export default {
                 this.savedIds.push(id)
             }
             this.save()
+        },
+
+    },
+    computed:{
+        computedLikedCount(){
+            return this.likesCount
         }
     }
 }

@@ -4,7 +4,6 @@
             <div class="post-container" v-for="post in posts">
                 <template v-for="image in post.images">
                     <post-layout
-                        :key="someKey"
                         :url="image.url"
                         :id="post.id"
                         :likesCount="post.likesCount"

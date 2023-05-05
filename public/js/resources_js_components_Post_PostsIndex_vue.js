@@ -51,6 +51,11 @@ __webpack_require__.r(__webpack_exports__);
       }
       this.save();
     }
+  },
+  computed: {
+    computedLikedCount: function computedLikedCount() {
+      return this.likesCount;
+    }
   }
 });
 
@@ -168,7 +173,9 @@ var render = function render() {
     }
   })]), _vm._v(" "), _c("span", {
     staticClass: "count_likes"
-  }, [_c("span", [_vm._v(_vm._s(_vm.likesCount))]), _vm._v(' позначок "Подобається"')])]), _vm._v(" "), _c("div", {
+  }, [_c("span", {
+    staticClass: "likesCount"
+  }, [_vm._v(_vm._s(_vm.likesCount))]), _vm._v(' позначок "Подобається"')])]), _vm._v(" "), _c("div", {
     staticClass: "save_container"
   }, [_c("a", {
     attrs: {
@@ -240,7 +247,6 @@ var render = function render() {
       staticClass: "post-container"
     }, [_vm._l(post.images, function (image) {
       return [_c("post-layout", {
-        key: _vm.someKey,
         attrs: {
           url: image.url,
           id: post.id,
