@@ -21,7 +21,16 @@ class User extends Authenticatable implements JWTSubject
         ];
     }
     public function likedPosts(){
-        return $this->belongsToMany(Post::class,'post_user_likes','user_id','post_id');
+        return $this->belongsToMany(Post::class,
+            'post_user_likes',
+            'user_id',
+            'post_id');
+    }
+    public function savedPosts(){
+        return $this->belongsToMany(Post::class,
+            'post_user_saves',
+            'user_id',
+            'post_id');
     }
     /**
      * The attributes that are mass assignable.

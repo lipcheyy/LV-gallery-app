@@ -1,0 +1,42 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreatePostUserSavesTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('post_user_saves', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+            $table->unsignedBigInteger('post_id');
+            $table->unsignedBigInteger('user_id');
+            $table->index('post_id', 'pus_post_idx');
+            $table->index('user_id', 'pus_user_idx');
+
+            $table->foreign('post_id', 'pus_post_fk')
+                ->on('posts')
+                ->references('id');
+            $table->foreign('user_id','pus_user_fk')
+                ->on('users')
+                ->references('id');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('post_user_saves');
+    }
+}
