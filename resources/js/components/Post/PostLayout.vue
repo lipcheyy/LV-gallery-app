@@ -41,13 +41,14 @@ import api from "../../api";
 
 export default {
     name: "PostLayout",
-    props: ['Likes', 'url', 'title', 'id','likedIds'],
+    props: ['Likes', 'url', 'title', 'id','likedIds','savedIds'],
     data() {
         return {
             posts: null,
         }
     },
     mounted() {
+        console.log(this.savedIds);
     },
     methods: {
         store() {

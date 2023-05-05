@@ -15,13 +15,15 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "PostLayout",
-  props: ['Likes', 'url', 'title', 'id', 'likedIds'],
+  props: ['Likes', 'url', 'title', 'id', 'likedIds', 'savedIds'],
   data: function data() {
     return {
       posts: null
     };
   },
-  mounted: function mounted() {},
+  mounted: function mounted() {
+    console.log(this.savedIds);
+  },
   methods: {
     store: function store() {
       _api__WEBPACK_IMPORTED_MODULE_0__["default"].post("/api/auth/posts/".concat(this.id, "/likes")).then(function (res) {});
@@ -70,12 +72,14 @@ __webpack_require__.r(__webpack_exports__);
       pagination: [],
       userLiked: null,
       likedIds: [],
+      savedIds: [],
       someKey: 0
     };
   },
   mounted: function mounted() {
     this.getPosts();
     this.getUserLikes();
+    this.getUserSaves();
   },
   methods: {
     getPosts: function getPosts() {
@@ -91,11 +95,19 @@ __webpack_require__.r(__webpack_exports__);
     },
     getUserLikes: function getUserLikes() {
       var _this2 = this;
-      _api__WEBPACK_IMPORTED_MODULE_1__["default"].get('/api/auth/posts').then(function (res) {
+      _api__WEBPACK_IMPORTED_MODULE_1__["default"].get('/api/auth/posts/liked').then(function (res) {
         _this2.userLiked = res.data;
         // console.log(this.userLiked);
         _this2.userLiked.forEach(function (liked) {
           _this2.likedIds.push(liked.id);
+        });
+      });
+    },
+    getUserSaves: function getUserSaves() {
+      var _this3 = this;
+      _api__WEBPACK_IMPORTED_MODULE_1__["default"].get('/api/auth/posts/saved').then(function (res) {
+        res.data.forEach(function (saved) {
+          _this3.savedIds.push(saved.id);
         });
       });
     }
@@ -221,7 +233,8 @@ var render = function render() {
         attrs: {
           url: image.url,
           id: post.id,
-          likedIds: _vm.likedIds
+          likedIds: _vm.likedIds,
+          savedIds: _vm.savedIds
         }
       })];
     })], 2);

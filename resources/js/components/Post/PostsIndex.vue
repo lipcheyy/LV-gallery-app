@@ -7,7 +7,8 @@
                         :key="someKey"
                         :url="image.url"
                         :id="post.id"
-                        :likedIds="likedIds">
+                        :likedIds="likedIds"
+                        :savedIds="savedIds">
                     </post-layout>
                 </template>
             </div>
@@ -60,12 +61,14 @@ export default {
             pagination: [],
             userLiked:null,
             likedIds:[],
+            savedIds:[],
             someKey:0
         }
     },
     mounted() {
         this.getPosts()
         this.getUserLikes()
+        this.getUserSaves()
     },
     methods: {
         getPosts(page = 1) {
@@ -77,7 +80,7 @@ export default {
                 })
         },
         getUserLikes() {
-            api.get('/api/auth/posts')
+            api.get('/api/auth/posts/liked')
                 .then(res => {
                     this.userLiked = res.data
                     // console.log(this.userLiked);
@@ -87,6 +90,14 @@ export default {
 
                 })
 
+        },
+        getUserSaves(){
+            api.get('/api/auth/posts/saved')
+                .then(res=>{
+                    res.data.forEach(saved=>{
+                        this.savedIds.push(saved.id)
+                    })
+                })
         }
 
     }
