@@ -72,11 +72,31 @@ var staticRenderFns = [function () {
     }
   })]), _vm._v(" "), _c("h1", {
     staticClass: "name"
-  }, [_vm._v("Ім'я")]), _vm._v(" "), _c("p", {
-    staticClass: "posts-count-title"
-  }, [_vm._v("Кількість ваших постів")]), _vm._v(" "), _c("p", {
-    staticClass: "posts-count"
-  }, [_vm._v("10")])]), _vm._v(" "), _c("div", {
+  }, [_vm._v("Ім'я")])]), _vm._v(" "), _c("div", {
+    staticClass: "control-page"
+  }, [_c("div", {
+    staticClass: "line"
+  }, [_c("div", {
+    staticClass: "subline active"
+  }), _vm._v(" "), _c("div", {
+    staticClass: "subline"
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "buttons-container"
+  }, [_c("button", {
+    staticClass: "control",
+    attrs: {
+      "exact-active-class": "active"
+    }
+  }, [_c("i", {
+    staticClass: "fa-regular fa-pen-to-square"
+  }), _vm._v(" "), _c("h3", [_vm._v("Створені")])]), _vm._v(" "), _c("button", {
+    staticClass: "control",
+    attrs: {
+      "exact-active-class": "active"
+    }
+  }, [_c("i", {
+    staticClass: "far fa-bookmark"
+  }), _vm._v(" "), _c("h3", [_vm._v("Збережені")])])])]), _vm._v(" "), _c("div", {
     staticClass: "posts"
   }, [_c("img", {
     staticClass: "post",
@@ -133,7 +153,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Inter&display=swap);"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\np[data-v-a5ad4a18], h1[data-v-a5ad4a18] {\n    margin: 0;\n    padding: 0;\n}\n.main-container[data-v-a5ad4a18] {\n    width: 100%;\n    display: flex;\n    justify-content: center;\n    margin-top: 30px;\n    flex-direction: column;\n    align-items: center;\n}\n.circle[data-v-a5ad4a18] {\n    width: 120px;\n    height: 120px;\n    border-radius: 50%;\n    background: #D9D9D9;\n    box-shadow: 3px -6px 10px rgba(60, 60, 60, 0.14);\n\n    display: flex;\n    justify-content: center;\n    align-items: center;\n\n    margin-bottom: 5px;\n}\n.user-icon[data-v-a5ad4a18] {\n    width: 75%;\n    height: 75%;\n}\n.user-info[data-v-a5ad4a18] {\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n}\n.name[data-v-a5ad4a18] {\n    font-family: 'Inter';\n    font-style: normal;\n    font-weight: 500;\n    font-size: 48px;\n    color: #000000;\n    margin-bottom: 5px;\n}\n.posts-count-title[data-v-a5ad4a18] {\n    font-family: 'Inter';\n    font-style: normal;\n    font-weight: 500;\n    font-size: 32px;\n    color: #000000;\n    margin-bottom: 3px;\n}\n.posts-count[data-v-a5ad4a18] {\n    font-family: 'Inter';\n    font-style: normal;\n    font-weight: 500;\n    font-size: 32px;\n    color: #000000;\n    margin-bottom: 5px;\n}\n.posts[data-v-a5ad4a18] {\n    width: 80%;\n    background: rgba(183, 183, 183, 0.14);\n    border: 4px dashed #C5C5C5;\n    border-radius: 8px;\n    display: flex;\n    flex-wrap: wrap;\n    /*height: 47.50692520775623vh;*/\n    -moz-column-gap: 30px;\n         column-gap: 30px;\n    row-gap: 20px;\n    justify-content: center;\n    align-items: center;\n    padding: 30px 0 30px 0;\n}\n.post[data-v-a5ad4a18] {\n    width: 200px;\n    height: 250px;\n    cursor: pointer;\n}\n\n\n\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\np[data-v-a5ad4a18], h1[data-v-a5ad4a18], h2[data-v-a5ad4a18], h3[data-v-a5ad4a18] {\n    margin: 0;\n    padding: 0;\n}\n.main-container[data-v-a5ad4a18] {\n    width: 100%;\n    display: flex;\n    justify-content: center;\n    margin-top: 30px;\n    flex-direction: column;\n    align-items: center;\n}\n.control-page[data-v-a5ad4a18] {\n    width: 70%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    flex-direction: column;\n}\n.line[data-v-a5ad4a18] {\n    width: 100%;\n    height: 4px;\n    border-radius: 10%;\n    background-color: #D9D9D9;\n    display: flex;\n    justify-content: center;\n    gap: 34px;\n}\n.subline[data-v-a5ad4a18] {\n    width: 200px;\n    height: 100%;\n}\n.subline.active[data-v-a5ad4a18] {\n    background-color: black;\n}\n.buttons-container[data-v-a5ad4a18] {\n    margin-top: 20px;\n    display:flex;\n    gap: 34px;\n    margin-bottom: 50px;\n}\ni[data-v-a5ad4a18] {\n    font-size: 24px;\n}\n.control[data-v-a5ad4a18] {\n    width: 200px;\n    height: 45px;\n    background-color: white;\n    border: 2px solid #000000;\n    border-radius: 7px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    gap: 10px;\n}\n.control.active[data-v-a5ad4a18] {\n    background: #B00000;\n    border: none;\n    color: white;\n}\n.circle[data-v-a5ad4a18] {\n    width: 120px;\n    height: 120px;\n    border-radius: 50%;\n    background: #D9D9D9;\n    box-shadow: 3px -6px 10px rgba(60, 60, 60, 0.14);\n\n    display: flex;\n    justify-content: center;\n    align-items: center;\n\n    margin-bottom: 5px;\n}\n.user-icon[data-v-a5ad4a18] {\n    width: 75%;\n    height: 75%;\n}\n.user-info[data-v-a5ad4a18] {\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n}\n.name[data-v-a5ad4a18] {\n    font-family: 'Inter';\n    font-style: normal;\n    font-weight: 500;\n    font-size: 48px;\n    color: #000000;\n    margin-bottom: 5px;\n}\n.posts[data-v-a5ad4a18] {\n    width: 80%;\n    background: rgba(183, 183, 183, 0.14);\n    border: 4px dashed #C5C5C5;\n    border-radius: 8px;\n    display: flex;\n    flex-wrap: wrap;\n    /*height: 47.50692520775623vh;*/\n    -moz-column-gap: 30px;\n         column-gap: 30px;\n    row-gap: 20px;\n    justify-content: center;\n    align-items: center;\n    padding: 30px 0 30px 0;\n}\n.post[data-v-a5ad4a18] {\n    width: 200px;\n    height: 250px;\n    cursor: pointer;\n}\n\n\n\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

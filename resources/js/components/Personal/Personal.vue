@@ -11,8 +11,25 @@
             </div>
 
             <h1 class="name">Ім'я</h1>
-            <p class="posts-count-title">Кількість ваших постів</p>
-            <p class="posts-count">10</p>
+        </div>
+
+        <div class="control-page">
+            <div class="line">
+                <div class="subline active"></div>
+                <div class="subline"></div>
+            </div>
+            <div class="buttons-container">
+                <button class="control" exact-active-class="active">
+                    <i class="fa-regular fa-pen-to-square"></i>
+                    <h3>Створені</h3>
+                </button>
+                <button class="control" exact-active-class="active">
+                    <i class="far fa-bookmark"></i>
+                    <h3>Збережені</h3>
+
+                </button>
+            </div>
+
         </div>
 
         <div class="posts">
@@ -77,7 +94,7 @@ export default {
 
 @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 
-p, h1 {
+p, h1, h2, h3 {
     margin: 0;
     padding: 0;
 }
@@ -89,7 +106,55 @@ p, h1 {
     flex-direction: column;
     align-items: center;
 }
+.control-page {
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.line {
+    width: 100%;
+    height: 4px;
+    border-radius: 10%;
+    background-color: #D9D9D9;
+    display: flex;
+    justify-content: center;
+    gap: 34px;
+}
+.subline {
+    width: 200px;
+    height: 100%;
+}
+.subline.active {
+    background-color: black;
+}
+.buttons-container {
+    margin-top: 20px;
+    display:flex;
+    gap: 34px;
+    margin-bottom: 50px;
+}
+i {
+    font-size: 24px;
+}
+.control {
+    width: 200px;
+    height: 45px;
+    background-color: white;
+    border: 2px solid #000000;
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
 
+.control.active {
+    background: #B00000;
+    border: none;
+    color: white;
+}
 .circle {
     width: 120px;
     height: 120px;
@@ -124,23 +189,6 @@ p, h1 {
     margin-bottom: 5px;
 }
 
-.posts-count-title {
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 32px;
-    color: #000000;
-    margin-bottom: 3px;
-}
-
-.posts-count {
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 32px;
-    color: #000000;
-    margin-bottom: 5px;
-}
 
 .posts {
     width: 80%;
