@@ -19,6 +19,7 @@ class PostResource extends JsonResource
         return [
             'id'=>$this->id,
             'title'=>$this->title,
+            'likesCount'=>$this->liked_users_count,
             'images'=>ImageResource::collection($this->images)
         ];
     }

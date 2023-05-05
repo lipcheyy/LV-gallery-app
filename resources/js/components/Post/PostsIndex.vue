@@ -76,7 +76,7 @@ export default {
                 .then(res => {
                     this.posts = res.data.data
                     this.pagination = res.data.meta
-                    // console.log(this.posts);
+                    console.log(this.posts);
                 })
         },
         getUserLikes() {
