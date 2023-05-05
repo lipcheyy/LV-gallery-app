@@ -24,7 +24,7 @@
                 <span class="count_likes"><span>100</span> позначок "Подобається"{{id}}</span>
             </div>
             <div class="save_container">
-                <a href="" @click.prevent="store" class="save">
+                <a href="" @click.prevent="save" class="save">
                     <i class="far fa-bookmark"></i>
                 </a>
                 <!--                <a href="" @click.prevent="store" class="save active">-->
@@ -53,6 +53,12 @@ export default {
         store() {
             api.post(`/api/auth/posts/${this.id}/likes`)
                 .then(res=>{
+                })
+        },
+        save(){
+            api.post(`/api/auth/posts/${this.id}/saves`)
+                .then(res=>{
+                    console.log(res.data.message);
                 })
         },
         toggleLike(id) {
