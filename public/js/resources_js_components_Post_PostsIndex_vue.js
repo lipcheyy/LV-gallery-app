@@ -26,6 +26,11 @@ __webpack_require__.r(__webpack_exports__);
     store: function store() {
       _api__WEBPACK_IMPORTED_MODULE_0__["default"].post("/api/auth/posts/".concat(this.id, "/likes")).then(function (res) {});
     },
+    save: function save() {
+      _api__WEBPACK_IMPORTED_MODULE_0__["default"].post("/api/auth/posts/".concat(this.id, "/saves")).then(function (res) {
+        console.log(res.data.message);
+      });
+    },
     toggleLike: function toggleLike(id) {
       if (this.likedIds.includes(id)) {
         this.likedIds.pop(id);
@@ -152,7 +157,7 @@ var render = function render() {
     on: {
       click: function click($event) {
         $event.preventDefault();
-        return _vm.store.apply(null, arguments);
+        return _vm.save.apply(null, arguments);
       }
     }
   }, [_c("i", {

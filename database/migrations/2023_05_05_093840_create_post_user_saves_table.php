@@ -15,7 +15,6 @@ class CreatePostUserSavesTable extends Migration
     {
         Schema::create('post_user_saves', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->unsignedBigInteger('post_id');
             $table->unsignedBigInteger('user_id');
             $table->index('post_id', 'pus_post_idx');
@@ -27,6 +26,7 @@ class CreatePostUserSavesTable extends Migration
             $table->foreign('user_id','pus_user_fk')
                 ->on('users')
                 ->references('id');
+            $table->timestamps();
         });
     }
 
