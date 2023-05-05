@@ -19,7 +19,7 @@
         <div class="buttons-container">
             <div class="like_container">
                 <a href="" @click.prevent="toggleLike(id)">
-                    <i class="far fa-heart" :class="{'fas fa-heart': likedIds.includes(id)}"></i>
+                    <i class="far fa-heart" :class="{'fas fa-heart': likedIds.includes(id), 'fas-heart-animation': likedIds.includes(id)}"></i>
                 </a>
                 <span class="count_likes"><span class="likesCount">{{likesCount}}</span> позначок "Подобається"</span>
             </div>
@@ -119,6 +119,28 @@ export default {
     align-items: center;
     order: 2;
     margin-right: 17px;
+}
+
+.fa-heart {
+    transition: color 0.2s ease-in-out;
+}
+
+
+/* Создаем анимацию для перехода между far fa-heart и fas fa-heart */
+.far.fa-heart.fas-heart-animation {
+    animation: heart-pulse 0.3s ease-in-out;
+}
+
+@keyframes heart-pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
 }
 
 a {

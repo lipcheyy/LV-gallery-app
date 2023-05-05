@@ -12,7 +12,7 @@
                     <li><router-link exact-active-class="active" v-if="access_token" :to="{name:'post.create'}" class="white_style_text">Створити</router-link></li>
                     <li>
                         <select class="white_style_text selector">
-                            <option value="" disabled selected>Категорії</option>
+                                <option value="" disabled selected>Категорії</option>
                         </select>
                     </li>
                     <li><router-link exact-active-class="active" v-if="access_token && userRole===1" :to="{name:'admin.statistic'}" class="white_style_text">Адмін панель</router-link></li>
@@ -111,16 +111,9 @@ a{
 #check{
     display: none;
 }
-.selector {
-    border: none;
-    outline: none;
-    height: 45px;
-}
 
-.selector > option {
-    flex: 25%;
-    box-sizing: border-box;
-}
+
+
 .header{
     background: #D9D9D9;
     min-height: 135px;
