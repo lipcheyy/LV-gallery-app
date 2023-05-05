@@ -25,7 +25,7 @@
             </div>
             <div class="save_container">
                 <a href="#" @click.prevent="toggleSave(id)">
-                    <i class="far fa-bookmark" :class="{'fas fa-bookmark':savedIds.includes(id)}"></i>
+                    <i class="far fa-bookmark" :class="{'fas fa-bookmark':savedIds.includes(id), 'fas-bookmark-animation': savedIds.includes(id)} "></i>
                 </a>
             </div>
 
@@ -124,10 +124,16 @@ export default {
 .fa-heart {
     transition: color 0.2s ease-in-out;
 }
+.fa-bookmark {
+    transition: color 0.2s ease-in-out;
+}
 
 
 /* Создаем анимацию для перехода между far fa-heart и fas fa-heart */
 .far.fa-heart.fas-heart-animation {
+    animation: heart-pulse 0.3s ease-in-out;
+}
+.far.fa-bookmark.fas-bookmark-animation {
     animation: heart-pulse 0.3s ease-in-out;
 }
 
