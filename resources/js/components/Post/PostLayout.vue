@@ -19,9 +19,9 @@
         <div class="buttons-container">
             <div class="like_container">
                 <a href="" @click.prevent="toggleLike(id)">
-                    <i class="far fa-heart" :class="{'fas fa-heart': likedIds.includes(id), 'fas-heart-animation': likedIds.includes(id)}"></i>
+                    <i class="far fa-heart likeBtn" :class="{'fas fa-heart': likedIds.includes(id), 'fas-heart-animation likeBtn': likedIds.includes(id)}"></i>
                 </a>
-                <span class="count_likes"><span class="likesCount">{{likesCount}}</span> позначок "Подобається"</span>
+                <span class="count_likes"><span :class="`likesCount-${id}`" >{{likesCount}}</span> позначок "Подобається"</span>
             </div>
             <div class="save_container">
                 <a href="#" @click.prevent="toggleSave(id)">
@@ -38,35 +38,34 @@ import api from "../../api";
 
 export default {
     name: "PostLayout",
-    props: ['Likes', 'url', 'title', 'id', 'likedIds', 'savedIds','likesCount'],
+    props: ['url', 'title', 'id', 'likedIds', 'savedIds','likesCount'],
     data() {
         return {
             posts: null,
         }
     },
     mounted() {
-        console.log(this.savedIds);
     },
     methods: {
-        store() {
+        like() {
             api.post(`/api/auth/posts/${this.id}/likes`)
-                .then(res => {
-                })
         },
         save() {
             api.post(`/api/auth/posts/${this.id}/saves`)
-                .then(res => {
-                    console.log(res.data.message);
-                })
         },
         toggleLike(id) {
+            let content=parseInt(document.querySelector(`.likesCount-${id}`).textContent)
             if (this.likedIds.includes(id)) {
                 const index=this.likedIds.indexOf(id)
                 this.likedIds.splice(index,1)
+                content-=1
+                document.querySelector(`.likesCount-${id}`).textContent=content
             } else {
                 this.likedIds.push(id)
+                content+=1
+                document.querySelector(`.likesCount-${id}`).textContent=content
             }
-            this.store()
+            this.like()
         },
         toggleSave(id){
             if (this.savedIds.includes(id)) {
@@ -76,13 +75,9 @@ export default {
                 this.savedIds.push(id)
             }
             this.save()
+
         },
 
-    },
-    computed:{
-        computedLikedCount(){
-            return this.likesCount
-        }
     }
 }
 </script>

@@ -62,7 +62,6 @@ export default {
             userLiked:null,
             likedIds:[],
             savedIds:[],
-            someKey:0
         }
     },
     mounted() {

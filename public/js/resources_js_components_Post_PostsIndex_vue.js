@@ -15,32 +15,33 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "PostLayout",
-  props: ['Likes', 'url', 'title', 'id', 'likedIds', 'savedIds', 'likesCount'],
+  props: ['url', 'title', 'id', 'likedIds', 'savedIds', 'likesCount'],
   data: function data() {
     return {
       posts: null
     };
   },
-  mounted: function mounted() {
-    console.log(this.savedIds);
-  },
+  mounted: function mounted() {},
   methods: {
-    store: function store() {
-      _api__WEBPACK_IMPORTED_MODULE_0__["default"].post("/api/auth/posts/".concat(this.id, "/likes")).then(function (res) {});
+    like: function like() {
+      _api__WEBPACK_IMPORTED_MODULE_0__["default"].post("/api/auth/posts/".concat(this.id, "/likes"));
     },
     save: function save() {
-      _api__WEBPACK_IMPORTED_MODULE_0__["default"].post("/api/auth/posts/".concat(this.id, "/saves")).then(function (res) {
-        console.log(res.data.message);
-      });
+      _api__WEBPACK_IMPORTED_MODULE_0__["default"].post("/api/auth/posts/".concat(this.id, "/saves"));
     },
     toggleLike: function toggleLike(id) {
+      var content = parseInt(document.querySelector(".likesCount-".concat(id)).textContent);
       if (this.likedIds.includes(id)) {
         var index = this.likedIds.indexOf(id);
         this.likedIds.splice(index, 1);
+        content -= 1;
+        document.querySelector(".likesCount-".concat(id)).textContent = content;
       } else {
         this.likedIds.push(id);
+        content += 1;
+        document.querySelector(".likesCount-".concat(id)).textContent = content;
       }
-      this.store();
+      this.like();
     },
     toggleSave: function toggleSave(id) {
       if (this.savedIds.includes(id)) {
@@ -50,11 +51,6 @@ __webpack_require__.r(__webpack_exports__);
         this.savedIds.push(id);
       }
       this.save();
-    }
-  },
-  computed: {
-    computedLikedCount: function computedLikedCount() {
-      return this.likesCount;
     }
   }
 });
@@ -87,8 +83,7 @@ __webpack_require__.r(__webpack_exports__);
       pagination: [],
       userLiked: null,
       likedIds: [],
-      savedIds: [],
-      someKey: 0
+      savedIds: []
     };
   },
   mounted: function mounted() {
@@ -167,15 +162,15 @@ var render = function render() {
       }
     }
   }, [_c("i", {
-    staticClass: "far fa-heart",
+    staticClass: "far fa-heart likeBtn",
     "class": {
       "fas fa-heart": _vm.likedIds.includes(_vm.id),
-      "fas-heart-animation": _vm.likedIds.includes(_vm.id)
+      "fas-heart-animation likeBtn": _vm.likedIds.includes(_vm.id)
     }
   })]), _vm._v(" "), _c("span", {
     staticClass: "count_likes"
   }, [_c("span", {
-    staticClass: "likesCount"
+    "class": "likesCount-".concat(_vm.id)
   }, [_vm._v(_vm._s(_vm.likesCount))]), _vm._v(' позначок "Подобається"')])]), _vm._v(" "), _c("div", {
     staticClass: "save_container"
   }, [_c("a", {
