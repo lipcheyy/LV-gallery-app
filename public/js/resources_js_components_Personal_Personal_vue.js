@@ -130,10 +130,11 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "PostLayout",
-  props: ['url', 'title', 'id', 'likedIds', 'savedIds', 'likesCount'],
+  props: ['url', 'title', 'id', 'likedIds', 'savedIds', 'likesCount', 'user'],
   data: function data() {
     return {
-      posts: null
+      posts: null,
+      username: ''
     };
   },
   mounted: function mounted() {},
@@ -370,7 +371,22 @@ var render = function render() {
     _c = _vm._self._c;
   return _c("div", {
     staticClass: "main-container"
-  }, [_vm._m(0), _vm._v(" "), _c("img", {
+  }, [_c("div", {
+    staticClass: "postUser"
+  }, [_c("div", {
+    staticClass: "user"
+  }, [_c("img", {
+    staticClass: "user_pic",
+    attrs: {
+      src: __webpack_require__(/*! ./Images/Guest.png */ "./resources/js/components/Post/Images/Guest.png"),
+      alt: "user"
+    }
+  }), _vm._v(" "), _vm.user ? [_c("a", {
+    staticClass: "username",
+    attrs: {
+      href: "#"
+    }
+  }, [_vm._v(_vm._s(_vm.user.name))])] : _vm._e()], 2), _vm._v(" "), _vm._m(0)]), _vm._v(" "), _c("img", {
     staticClass: "img",
     attrs: {
       src: _vm.url
@@ -423,25 +439,10 @@ var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
-    staticClass: "postUser"
-  }, [_c("div", {
-    staticClass: "user"
-  }, [_c("img", {
-    staticClass: "user_pic",
-    attrs: {
-      src: __webpack_require__(/*! ./Images/Guest.png */ "./resources/js/components/Post/Images/Guest.png"),
-      alt: "user"
-    }
-  }), _vm._v(" "), _c("a", {
-    staticClass: "username",
-    attrs: {
-      href: "#"
-    }
-  }, [_vm._v("Vasya")])]), _vm._v(" "), _c("div", {
     staticClass: "post-time"
   }, [_c("a", {
     staticClass: "time"
-  }, [_vm._v("03.05.2023")])])]);
+  }, [_vm._v("03.05.2023")])]);
 }];
 render._withStripped = true;
 
