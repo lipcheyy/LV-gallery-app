@@ -71,10 +71,13 @@ export default {
     },
     methods: {
         getPosts(page = 1) {
+            this.$Progress.start()
             api.post('/api/auth/posts/list', {page: page})
                 .then(res => {
                     this.posts = res.data.data
                     this.pagination = res.data.meta
+                    this.$Progress.finish()
+
                 })
         },
         getUserLikes() {
