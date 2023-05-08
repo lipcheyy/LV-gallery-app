@@ -11,8 +11,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../api */ "./resources/js/api.js");
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "ShowPost"
+  name: "ShowPost",
+  data: function data() {
+    return {
+      post: null
+    };
+  },
+  mounted: function mounted() {
+    console.log(this.$route.params.id);
+    this.getPost();
+  },
+  methods: {
+    getPost: function getPost() {
+      var _this = this;
+      _api__WEBPACK_IMPORTED_MODULE_0__["default"].get("/api/auth/posts/".concat(this.$route.params.id)).then(function (res) {
+        _this.post = res.data.data;
+        console.log(_this.post);
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -32,20 +52,22 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _vm._m(0);
+  return _c("div", {
+    staticClass: "main-container"
+  }, [_vm.post && _vm.post.images ? [_vm._l(_vm.post.images, function (image) {
+    return [_c("img", {
+      staticClass: "post",
+      attrs: {
+        src: image.url,
+        alt: "Post"
+      }
+    })];
+  })] : _vm._e(), _vm._v(" "), _vm._m(0)], 2);
 };
 var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
-    staticClass: "main-container"
-  }, [_c("img", {
-    staticClass: "post",
-    attrs: {
-      src: __webpack_require__(/*! ../Includes/Images/Post.png */ "./resources/js/components/Includes/Images/Post.png"),
-      alt: "Post"
-    }
-  }), _vm._v(" "), _c("div", {
     staticClass: "commentaries-container"
   }, [_c("div", {
     staticClass: "post-user-info"
@@ -94,7 +116,7 @@ var staticRenderFns = [function () {
     }
   }, [_c("i", {
     staticClass: "fa-sharp fa-solid fa-paper-plane"
-  })])])])]);
+  })])])]);
 }];
 render._withStripped = true;
 
@@ -118,20 +140,10 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nh1[data-v-e50970de],h2[data-v-e50970de],p[data-v-e50970de],i[data-v-e50970de] {\n    margin: 0;\n}\n.main-container[data-v-e50970de] {\n    width: 70%;\n    margin: 0 auto;\n    border: 1px solid black;\n    padding: 15px;\n    display:flex;\n}\n.commentaries-container[data-v-e50970de] {\n    margin-left: 3%;\n    width: 52%;\n    display: flex;\n    flex-direction: column;\n    justify-content: space-between;\n}\n.post[data-v-e50970de] {\n    width: 45%;\n}\n.post-user-info[data-v-e50970de] {\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n}\n.line[data-v-e50970de] {\n    width: 100%;\n    height: 3px;\n    background-color: #D9D9D9;\n    border-radius: 10%;\n    margin-top: 5px;\n}\n.user[data-v-e50970de] {\n    width: 10%;\n    border-radius: 50%;\n    border: 1px solid black;\n    margin-right: 10px;\n}\n.commentaries[data-v-e50970de] {\n    padding: 10px;\n    margin-top: 10px;\n    height: 75%;\n    overflow: auto;\n}\n.comment[data-v-e50970de] {\n    width: 100%;\n    border: 1px solid black;\n    border-radius: 10px;\n    padding: 5px;\n    margin: 5px 0;\n}\n.comment-user[data-v-e50970de] {\n    height: 20px;\n    border: 1px solid black;\n    border-radius: 50%;\n}\n.user-info[data-v-e50970de] {\n    display: flex;\n    width: 70%;\n}\n.send-container[data-v-e50970de] {\n    display: flex;\n    align-items: center;\n    width: 100%;\n    height: 10%;\n    justify-content: space-between;\n}\n.send-comment[data-v-e50970de] {\n    width: 75%;\n    height: 100%;\n    border: 1px solid grey;\n    font-size: 32px;\n    border-radius: 10px;\n}\n.send-btn[data-v-e50970de] {\n    width: 20%;\n    height: 100%;\n    font-size: 24px;\n    border: 1px solid grey;\n    border-radius: 10px;\n    padding: 0;\n}\n.fa-paper-plane[data-v-e50970de] {\n    margin: 0 auto;\n}\n.post-interaction[data-v-e50970de] {\n    height: 100%;\n    width: 15%;\n    display: flex;\n    align-items: center;\n    font-size: 32px;\n    justify-content: space-between;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nh1[data-v-e50970de], h2[data-v-e50970de], p[data-v-e50970de], i[data-v-e50970de] {\n    margin: 0;\n}\n.main-container[data-v-e50970de] {\n    width: 70%;\n    margin: 0 auto;\n    border: 1px solid black;\n    padding: 15px;\n    display: flex;\n}\n.commentaries-container[data-v-e50970de] {\n    margin-left: 3%;\n    width: 52%;\n    display: flex;\n    flex-direction: column;\n    justify-content: space-between;\n}\n.post[data-v-e50970de] {\n    width: 45%;\n}\n.post-user-info[data-v-e50970de] {\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n}\n.line[data-v-e50970de] {\n    width: 100%;\n    height: 3px;\n    background-color: #D9D9D9;\n    border-radius: 10%;\n    margin-top: 5px;\n}\n.user[data-v-e50970de] {\n    width: 10%;\n    border-radius: 50%;\n    border: 1px solid black;\n    margin-right: 10px;\n}\n.commentaries[data-v-e50970de] {\n    padding: 10px;\n    margin-top: 10px;\n    height: 75%;\n    overflow: auto;\n}\n.comment[data-v-e50970de] {\n    width: 100%;\n    border: 1px solid black;\n    border-radius: 10px;\n    padding: 5px;\n    margin: 5px 0;\n}\n.comment-user[data-v-e50970de] {\n    height: 20px;\n    border: 1px solid black;\n    border-radius: 50%;\n}\n.user-info[data-v-e50970de] {\n    display: flex;\n    width: 70%;\n}\n.send-container[data-v-e50970de] {\n    display: flex;\n    align-items: center;\n    width: 100%;\n    height: 10%;\n    justify-content: space-between;\n}\n.send-comment[data-v-e50970de] {\n    width: 75%;\n    height: 100%;\n    border: 1px solid grey;\n    font-size: 32px;\n    border-radius: 10px;\n}\n.send-btn[data-v-e50970de] {\n    width: 20%;\n    height: 100%;\n    font-size: 24px;\n    border: 1px solid grey;\n    border-radius: 10px;\n    padding: 0;\n}\n.fa-paper-plane[data-v-e50970de] {\n    margin: 0 auto;\n}\n.post-interaction[data-v-e50970de] {\n    height: 100%;\n    width: 15%;\n    display: flex;\n    align-items: center;\n    font-size: 32px;\n    justify-content: space-between;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
-
-/***/ }),
-
-/***/ "./resources/js/components/Includes/Images/Post.png":
-/*!**********************************************************!*\
-  !*** ./resources/js/components/Includes/Images/Post.png ***!
-  \**********************************************************/
-/***/ ((module) => {
-
-module.exports = "/images/Post.png?efcd61b2cb9a645baf5423c139f87f85";
 
 /***/ }),
 

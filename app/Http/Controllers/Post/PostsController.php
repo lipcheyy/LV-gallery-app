@@ -17,12 +17,15 @@ class   PostsController extends Controller
         $data=\request()->validate(
             ['page'=>'integer']
         );
-        $posts = Post::paginate(5,['*'],'page',$data['page']);
+        $posts = Post::paginate(12,['*'],'page',$data['page']);
         return PostResource::collection($posts);
     }
     public function checkUserLiked(){
         $isLiked=auth()->user()->likedPosts;
         return $isLiked;
+    }
+    public function show(Post $post){
+        return new PostResource($post);
     }
     public function checkUserSaved(){
         $isSaved=auth()->user()->savedPosts;
@@ -32,6 +35,7 @@ class   PostsController extends Controller
         $data=$request->validated();
         $images=$data['images'];
         unset($data['images']);
+        $data['user_id']=auth()->user()->id;
         $post=Post::create($data);
         foreach ($images as $image){
             $imageName=md5(Carbon::now().'_'.$image->getClientOriginalName()). '.' . $image->getClientOriginalExtension();
