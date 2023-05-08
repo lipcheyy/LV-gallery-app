@@ -96,8 +96,10 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     getRoles: function getRoles() {
       var _this = this;
+      this.$Progress.start();
       _api__WEBPACK_IMPORTED_MODULE_1__["default"].get('/api/auth/admin/users/roles').then(function (res) {
         _this.roles = res.data;
+        _this.$Progress.finish();
       });
     },
     getUsers: function getUsers() {

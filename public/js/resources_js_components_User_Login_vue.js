@@ -20,24 +20,30 @@ __webpack_require__.r(__webpack_exports__);
       error: null
     };
   },
+  mounted: function mounted() {
+    var _this = this;
+    this.$Progress.start();
+    setTimeout(function () {
+      _this.$Progress.finish();
+    }, 350);
+  },
   methods: {
     login: function login() {
-      var _this = this;
+      var _this2 = this;
       axios.post('/api/auth/login', {
         'email': this.email,
         'password': this.password
       }).then(function (res) {
         var access_token = res.data.access_token;
         localStorage.setItem('access_token', access_token);
-        _this.$router.push({
+        _this2.$router.push({
           name: 'post.index'
         });
       })["catch"](function (error) {
-        _this.error = error.response.data.error;
+        _this2.error = error.response.data.error;
       });
     }
-  },
-  mounted: function mounted() {}
+  }
 });
 
 /***/ }),

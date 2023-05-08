@@ -111,9 +111,11 @@ export default {
             this.alertMessage = '';
         },
         getCategories() {
+            this.$Progress.start()
             api.get('/api/auth/admin/category')
                 .then(res => {
                     this.categories = res.data.data
+                    this.$Progress.finish()
                 })
             },
         getPost(){

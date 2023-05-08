@@ -22,9 +22,16 @@ __webpack_require__.r(__webpack_exports__);
       error: null
     };
   },
+  mounted: function mounted() {
+    var _this = this;
+    this.$Progress.start();
+    setTimeout(function () {
+      _this.$Progress.finish();
+    }, 350);
+  },
   methods: {
     storeUser: function storeUser() {
-      var _this = this;
+      var _this2 = this;
       axios.post('/api/users/registration', {
         name: this.name,
         email: this.email,
@@ -32,11 +39,11 @@ __webpack_require__.r(__webpack_exports__);
         password_confirm: this.password_confirm
       }).then(function (res) {
         localStorage.setItem('access_token', res.data.access_token);
-        _this.$router.push({
+        _this2.$router.push({
           name: 'personal.page'
         });
       })["catch"](function (error) {
-        _this.error = error.response.data.message;
+        _this2.error = error.response.data.message;
         //this.error=error.response.data.errors.password[0];
       });
     }

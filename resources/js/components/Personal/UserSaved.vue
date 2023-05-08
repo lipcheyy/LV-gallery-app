@@ -6,7 +6,13 @@
 
 <script>
 export default {
-    name: "UserSaved"
+    name: "UserSaved",
+    mounted() {
+        this.$Progress.start()
+        setTimeout(()=>{
+            this.$Progress.finish()
+        },350)
+    }
 }
 </script>
 

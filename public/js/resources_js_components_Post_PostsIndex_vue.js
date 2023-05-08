@@ -95,11 +95,13 @@ __webpack_require__.r(__webpack_exports__);
     getPosts: function getPosts() {
       var _this = this;
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      this.$Progress.start();
       _api__WEBPACK_IMPORTED_MODULE_1__["default"].post('/api/auth/posts/list', {
         page: page
       }).then(function (res) {
         _this.posts = res.data.data;
         _this.pagination = res.data.meta;
+        _this.$Progress.finish();
       });
     },
     getUserLikes: function getUserLikes() {

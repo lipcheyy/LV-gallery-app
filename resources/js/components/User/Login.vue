@@ -33,6 +33,12 @@ export default {
             error:null,
         }
     },
+    mounted() {
+        this.$Progress.start()
+        setTimeout(()=>{
+            this.$Progress.finish()
+        },350)
+    },
     methods:{
         login(){
             axios.post('/api/auth/login',
@@ -51,9 +57,6 @@ export default {
                 })
         }
     },
-    mounted() {
-
-    }
 }
 </script>
 

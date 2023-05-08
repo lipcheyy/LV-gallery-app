@@ -34,8 +34,10 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     getCategories: function getCategories() {
       var _this = this;
+      this.$Progress.start();
       _api__WEBPACK_IMPORTED_MODULE_0__["default"].get('/api/auth/admin/category').then(function (res) {
         _this.data = res.data.data;
+        _this.$Progress.finish();
       });
     },
     getCategoryDataToEdit: function getCategoryDataToEdit(id, title) {
