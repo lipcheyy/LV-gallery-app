@@ -19,13 +19,13 @@
                 <div class="subline"></div>
             </div>
             <div class="buttons-container">
-                <button class="control" exact-active-class="active"
+                <button class="control" :class="{ active: showOwnPosts === true }"
                         @click.prevent="showOwnPosts=true,
                                         showSavedPosts=false">
                     <i class="fa-regular fa-pen-to-square"></i>
                     <h3>Створені</h3>
                 </button>
-                <button class="control" exact-active-class="active"
+                <button class="control" :class="{ active: showSavedPosts === true }"
                         @click.prevent="showSavedPosts=true,
                                         showOwnPosts=false">
                     <i class="far fa-bookmark"></i>
