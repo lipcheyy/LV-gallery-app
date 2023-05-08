@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Post;
 
 use App\Http\Resources\Image\ImageResource;
+use App\Http\Resources\User\UserResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 use function Symfony\Component\Translation\t;
 
@@ -20,7 +21,8 @@ class PostResource extends JsonResource
             'id'=>$this->id,
             'title'=>$this->title,
             'likesCount'=>$this->liked_users_count,
-            'images'=>ImageResource::collection($this->images)
+            'images'=>ImageResource::collection($this->images),
+            'user'=>new UserResource($this->userCreated)
         ];
     }
 }

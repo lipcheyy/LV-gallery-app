@@ -35,6 +35,7 @@ class   PostsController extends Controller
         $data=$request->validated();
         $images=$data['images'];
         unset($data['images']);
+        $data['user_id']=auth()->user()->id;
         $post=Post::create($data);
         foreach ($images as $image){
             $imageName=md5(Carbon::now().'_'.$image->getClientOriginalName()). '.' . $image->getClientOriginalExtension();

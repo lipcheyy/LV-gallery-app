@@ -1,21 +1,24 @@
 <template>
-<div class="main-container">
-    <img class="post" src="../Includes/Images/Post.png" alt="Post">
+    <div class="main-container">
+        <template v-if="post && post.images">
+            <template v-for="image in post.images">
+                <img class="post" :src="image.url" alt="Post">
+            </template>
+        </template>
+        <div class="commentaries-container">
+            <div class="post-user-info">
+                <div class="user-info">
+                    <img class="user" src="../Includes/Images/User.png" alt="User">
+                    <h2 class="username">Vasya</h2>
+                </div>
 
-    <div class="commentaries-container">
-        <div class="post-user-info">
-            <div class="user-info">
-                <img class="user" src="../Includes/Images/User.png" alt="User">
-                <h2 class="username">Vasya</h2>
+
+                <div class="post-interaction">
+                    <i class="far fa-heart likeBtn"></i>
+                    <i class="far fa-bookmark"></i>
+                </div>
             </div>
-
-
-            <div class="post-interaction">
-                <i class="far fa-heart likeBtn"></i>
-                <i class="far fa-bookmark"></i>
-            </div>
-        </div>
-        <div class="line"></div>
+            <div class="line"></div>
             <div class="commentaries">
                 <div class="comment">
                     <img class="comment-user" src="../Includes/Images/User.png" alt="User">
@@ -24,16 +27,16 @@
 
 
             </div>
-        <div class="send-container">
-            <input type="text" class="send-comment" placeholder="Enter the message">
-            <button type="submit" class="send-btn">
-                <i class="fa-sharp fa-solid fa-paper-plane"></i>
-            </button>
+            <div class="send-container">
+                <input type="text" class="send-comment" placeholder="Enter the message">
+                <button type="submit" class="send-btn">
+                    <i class="fa-sharp fa-solid fa-paper-plane"></i>
+                </button>
+            </div>
+
+
         </div>
-
-
     </div>
-</div>
 </template>
 
 <script>
@@ -41,20 +44,20 @@ import api from "../../api";
 
 export default {
     name: "ShowPost",
-    data(){
-        return{
-            post:null
+    data() {
+        return {
+            post: null
         }
     },
     mounted() {
         console.log(this.$route.params.id);
         this.getPost()
     },
-    methods:{
-        getPost(){
+    methods: {
+        getPost() {
             api.get(`/api/auth/posts/${this.$route.params.id}`)
-                .then(res=>{
-                    this.post=res.data
+                .then(res => {
+                    this.post = res.data.data
                     console.log(this.post);
                 })
         }
@@ -63,16 +66,18 @@ export default {
 </script>
 
 <style scoped>
-h1,h2,p,i {
+h1, h2, p, i {
     margin: 0;
 }
+
 .main-container {
     width: 70%;
     margin: 0 auto;
     border: 1px solid black;
     padding: 15px;
-    display:flex;
+    display: flex;
 }
+
 .commentaries-container {
     margin-left: 3%;
     width: 52%;
@@ -80,9 +85,11 @@ h1,h2,p,i {
     flex-direction: column;
     justify-content: space-between;
 }
+
 .post {
     width: 45%;
 }
+
 .post-user-info {
     display: flex;
     align-items: center;
@@ -96,18 +103,21 @@ h1,h2,p,i {
     border-radius: 10%;
     margin-top: 5px;
 }
+
 .user {
     width: 10%;
     border-radius: 50%;
     border: 1px solid black;
     margin-right: 10px;
 }
+
 .commentaries {
     padding: 10px;
     margin-top: 10px;
     height: 75%;
     overflow: auto;
 }
+
 .comment {
     width: 100%;
     border: 1px solid black;
@@ -115,16 +125,19 @@ h1,h2,p,i {
     padding: 5px;
     margin: 5px 0;
 }
+
 .comment-user {
     height: 20px;
     border: 1px solid black;
     border-radius: 50%;
 
 }
+
 .user-info {
     display: flex;
     width: 70%;
 }
+
 .send-container {
     display: flex;
     align-items: center;
@@ -132,6 +145,7 @@ h1,h2,p,i {
     height: 10%;
     justify-content: space-between;
 }
+
 .send-comment {
     width: 75%;
     height: 100%;
@@ -153,6 +167,7 @@ h1,h2,p,i {
 .fa-paper-plane {
     margin: 0 auto;
 }
+
 .post-interaction {
     height: 100%;
     width: 15%;
