@@ -77,8 +77,10 @@ __webpack_require__.r(__webpack_exports__);
     },
     getCategories: function getCategories() {
       var _this2 = this;
+      this.$Progress.start();
       _api__WEBPACK_IMPORTED_MODULE_2__["default"].get('/api/auth/admin/category').then(function (res) {
         _this2.categories = res.data.data;
+        _this2.$Progress.finish();
       });
     },
     getPost: function getPost() {

@@ -3,9 +3,9 @@ import Index from "./components";
 import router from "./router";
 import VueProgrssBar from 'vue-progressbar'
 Vue.use(VueProgrssBar,{
-    color:'rgb(143,255,199)',
+    color:'rgb(212,97,243)',
     failedColor:'red',
-    height:'2px'
+    thickness:'4px'
 })
 require('./bootstrap');
 

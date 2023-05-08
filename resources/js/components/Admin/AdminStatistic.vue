@@ -63,7 +63,13 @@
 
 <script>
 export default {
-    name: "AdminStatistic"
+    name: "AdminStatistic",
+    mounted() {
+        this.$Progress.start()
+        setTimeout(()=>{
+            this.$Progress.finish()
+        },350)
+    }
 }
 </script>
 

@@ -5749,9 +5749,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 vue__WEBPACK_IMPORTED_MODULE_3__["default"].use((vue_progressbar__WEBPACK_IMPORTED_MODULE_2___default()), {
-  color: 'rgb(143,255,199)',
+  color: 'rgb(212,97,243)',
   failedColor: 'red',
-  height: '2px'
+  thickness: '4px'
 });
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 var app = new vue__WEBPACK_IMPORTED_MODULE_3__["default"]({

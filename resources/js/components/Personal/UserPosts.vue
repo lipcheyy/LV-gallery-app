@@ -32,7 +32,13 @@
 
 <script>
 export default {
-    name: "UserPosts"
+    name: "UserPosts",
+    mounted() {
+        this.$Progress.start()
+        setTimeout(()=>{
+            this.$Progress.finish()
+        },350)
+    }
 }
 </script>
 

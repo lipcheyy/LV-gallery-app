@@ -32,15 +32,20 @@ __webpack_require__.r(__webpack_exports__);
   },
   name: "Personal",
   mounted: function mounted() {
+    var _this = this;
     this.userdata();
+    this.$Progress.start();
+    setTimeout(function () {
+      _this.$Progress.finish();
+    }, 500);
   },
   methods: {
     userdata: function userdata() {
-      var _this = this;
+      var _this2 = this;
       _api__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/auth/me').then(function (res) {
         var user = res.data;
         localStorage.setItem('user_role', user.role);
-        _this.userRole = parseInt(user.role);
+        _this2.userRole = parseInt(user.role);
       });
     }
   }
@@ -60,7 +65,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "UserPosts"
+  name: "UserPosts",
+  mounted: function mounted() {
+    var _this = this;
+    this.$Progress.start();
+    setTimeout(function () {
+      _this.$Progress.finish();
+    }, 350);
+  }
 });
 
 /***/ }),
@@ -77,7 +89,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "UserSaved"
+  name: "UserSaved",
+  mounted: function mounted() {
+    var _this = this;
+    this.$Progress.start();
+    setTimeout(function () {
+      _this.$Progress.finish();
+    }, 350);
+  }
 });
 
 /***/ }),

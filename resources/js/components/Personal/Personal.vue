@@ -61,6 +61,10 @@ export default {
     name: "Personal",
     mounted() {
         this.userdata()
+        this.$Progress.start()
+        setTimeout(()=>{
+            this.$Progress.finish()
+        },500)
     },
     methods: {
         userdata() {
