@@ -15,8 +15,8 @@
 
         <div class="control-page">
             <div class="line">
-                <div class="subline active"></div>
-                <div class="subline"></div>
+                <div class="subline" :class="{ active: showOwnPosts === true }"></div>
+                <div class="subline" :class="{ active: showSavedPosts === true }"></div>
             </div>
             <div class="buttons-container">
                 <button class="control" :class="{ active: showOwnPosts === true }"

@@ -191,7 +191,19 @@ var render = function render() {
     staticClass: "main-container"
   }, [_vm._m(0), _vm._v(" "), _c("div", {
     staticClass: "control-page"
-  }, [_vm._m(1), _vm._v(" "), _c("div", {
+  }, [_c("div", {
+    staticClass: "line"
+  }, [_c("div", {
+    staticClass: "subline",
+    "class": {
+      active: _vm.showOwnPosts === true
+    }
+  }), _vm._v(" "), _c("div", {
+    staticClass: "subline",
+    "class": {
+      active: _vm.showSavedPosts === true
+    }
+  })]), _vm._v(" "), _c("div", {
     staticClass: "buttons-container"
   }, [_c("button", {
     staticClass: "control",
@@ -237,16 +249,6 @@ var staticRenderFns = [function () {
   })]), _vm._v(" "), _c("h1", {
     staticClass: "name"
   }, [_vm._v("Ім'я")])]);
-}, function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("div", {
-    staticClass: "line"
-  }, [_c("div", {
-    staticClass: "subline active"
-  }), _vm._v(" "), _c("div", {
-    staticClass: "subline"
-  })]);
 }];
 render._withStripped = true;
 
