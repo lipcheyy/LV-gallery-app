@@ -24,6 +24,9 @@ class   PostsController extends Controller
         $isLiked=auth()->user()->likedPosts;
         return $isLiked;
     }
+    public function show(Post $post){
+        return new PostResource($post);
+    }
     public function checkUserSaved(){
         $isSaved=auth()->user()->savedPosts;
         return $isSaved;

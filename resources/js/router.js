@@ -16,7 +16,7 @@ const route =new VueRouter({
             name:'user.registration'
         },
         {
-            path:'/post',
+            path:'/:id/post',
             component: ()=> import('./components/Post/ShowPost'),
             name:'post.show'
         },

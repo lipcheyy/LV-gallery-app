@@ -37,8 +37,28 @@
 </template>
 
 <script>
+import api from "../../api";
+
 export default {
-    name: "ShowPost"
+    name: "ShowPost",
+    data(){
+        return{
+            post:null
+        }
+    },
+    mounted() {
+        console.log(this.$route.params.id);
+        this.getPost()
+    },
+    methods:{
+        getPost(){
+            api.get(`/api/auth/posts/${this.$route.params.id}`)
+                .then(res=>{
+                    this.post=res.data
+                    console.log(this.post);
+                })
+        }
+    }
 }
 </script>
 

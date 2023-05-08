@@ -11,8 +11,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../api */ "./resources/js/api.js");
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "ShowPost"
+  name: "ShowPost",
+  data: function data() {
+    return {
+      post: null
+    };
+  },
+  mounted: function mounted() {
+    console.log(this.$route.params.id);
+    this.getPost();
+  },
+  methods: {
+    getPost: function getPost() {
+      var _this = this;
+      _api__WEBPACK_IMPORTED_MODULE_0__["default"].get("/api/auth/posts/".concat(this.$route.params.id)).then(function (res) {
+        _this.post = res.data;
+        console.log(_this.post);
+      });
+    }
+  }
 });
 
 /***/ }),
