@@ -62,4 +62,8 @@ export default {
     flex-wrap: wrap;
     gap: 15px;
 }
+
+img {
+    height: 600px;
+}
 </style>

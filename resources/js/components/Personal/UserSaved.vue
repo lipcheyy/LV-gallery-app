@@ -1,7 +1,13 @@
 <template>
-<div>
-    saved
-</div>
+    <div class="main-container">
+        <div class="posts">
+            <img
+                class="post"
+                src="../Includes/Images/Post.png"
+                alt="Post"
+            >
+        </div>
+    </div>
 </template>
 
 <script>
@@ -17,5 +23,15 @@ export default {
 </script>
 
 <style scoped>
+.posts {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
 
+img {
+    height: 600px;
+}
 </style>
