@@ -22,9 +22,16 @@ __webpack_require__.r(__webpack_exports__);
       error: null
     };
   },
+  mounted: function mounted() {
+    var _this = this;
+    this.$Progress.start();
+    setTimeout(function () {
+      _this.$Progress.finish();
+    }, 350);
+  },
   methods: {
     storeUser: function storeUser() {
-      var _this = this;
+      var _this2 = this;
       axios.post('/api/users/registration', {
         name: this.name,
         email: this.email,
@@ -32,11 +39,11 @@ __webpack_require__.r(__webpack_exports__);
         password_confirm: this.password_confirm
       }).then(function (res) {
         localStorage.setItem('access_token', res.data.access_token);
-        _this.$router.push({
+        _this2.$router.push({
           name: 'personal.page'
         });
       })["catch"](function (error) {
-        _this.error = error.response.data.message;
+        _this2.error = error.response.data.message;
         //this.error=error.response.data.errors.password[0];
       });
     }
@@ -207,7 +214,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\na[data-v-02ea7b42]{\n    text-decoration: none;\n}\n.main-container[data-v-02ea7b42] {\n    width: 490px;\n    height: 600px;\n    background: rgba(251, 251, 251, 0.91);\n    box-shadow: 20px -20px 30px -2px #F4F4F4, -20px 20px 30px -2px #F4F4F4;\n    border-radius: 35px;\n    display: flex;\n    align-items: center;\n    flex-direction: column;\n    margin: auto;\n    margin-top: 20px;\n}\n.form-container[data-v-02ea7b42] {\n    margin-top: 51px;\n}\n.btn-container[data-v-02ea7b42] {\n    width: 299px;\n    display: flex;\n    justify-content: space-between;\n}\n.route-btn[data-v-02ea7b42] {\n    width: 143px;\n    height: 25px;\n    background: #FBFBFB;\n    border: 2px solid #000000;\n    border-radius: 7px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    font-family: 'Inter', sans-serif;\n    font-style: normal;\n    font-weight: 500;\n    font-size: 16px;\n    line-height: 19px;\n    letter-spacing: 0.065em;\n    color: black\n}\n.route-btn.active[data-v-02ea7b42] {\n    background-color: red;\n    color: white;\n    border: 2px solid red;\n}\n.title[data-v-02ea7b42] {\n    font-family: 'Inter', sans-serif;\n    font-style: normal;\n    font-weight: 500;\n    font-size: 15px;\n    line-height: 18px;\n    letter-spacing: 0.065em;\n    margin: 0 0 10px 0;\n    padding: 0;\n    color: #000000;\n}\n.inputs-container[data-v-02ea7b42] {\n    margin-top: 87px;\n}\n.form-control[data-v-02ea7b42] {\n    margin-bottom: 9px;\n    border: 1px solid #000000;\n    border-radius: 7px;\n    background-color: rgba(251, 251, 251, 0.91);\n}\n.submit-container[data-v-02ea7b42] {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n.btn[data-v-02ea7b42] {\n    margin-top: 29px;\n    background: #B00000;\n    border-bottom: 1px solid #4F0000;\n    border-radius: 7px;\n    width: 162px;\n    height: 32px;\n    font-family: 'Inter', sans-serif;\n    font-style: normal;\n    font-weight: 500;\n    font-size: 14px;\n    line-height: 17px;\n    color: #FFF6F6;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\na[data-v-02ea7b42]{\r\n    text-decoration: none;\n}\n.main-container[data-v-02ea7b42] {\r\n    width: 490px;\r\n    height: 600px;\r\n    background: rgba(251, 251, 251, 0.91);\r\n    box-shadow: 20px -20px 30px -2px #F4F4F4, -20px 20px 30px -2px #F4F4F4;\r\n    border-radius: 35px;\r\n    display: flex;\r\n    align-items: center;\r\n    flex-direction: column;\r\n    margin: auto;\r\n    margin-top: 20px;\n}\n.form-container[data-v-02ea7b42] {\r\n    margin-top: 51px;\n}\n.btn-container[data-v-02ea7b42] {\r\n    width: 299px;\r\n    display: flex;\r\n    justify-content: space-between;\n}\n.route-btn[data-v-02ea7b42] {\r\n    width: 143px;\r\n    height: 25px;\r\n    background: #FBFBFB;\r\n    border: 2px solid #000000;\r\n    border-radius: 7px;\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    font-family: 'Inter', sans-serif;\r\n    font-style: normal;\r\n    font-weight: 500;\r\n    font-size: 16px;\r\n    line-height: 19px;\r\n    letter-spacing: 0.065em;\r\n    color: black\n}\n.route-btn.active[data-v-02ea7b42] {\r\n    background-color: red;\r\n    color: white;\r\n    border: 2px solid red;\n}\n.title[data-v-02ea7b42] {\r\n    font-family: 'Inter', sans-serif;\r\n    font-style: normal;\r\n    font-weight: 500;\r\n    font-size: 15px;\r\n    line-height: 18px;\r\n    letter-spacing: 0.065em;\r\n    margin: 0 0 10px 0;\r\n    padding: 0;\r\n    color: #000000;\n}\n.inputs-container[data-v-02ea7b42] {\r\n    margin-top: 87px;\n}\n.form-control[data-v-02ea7b42] {\r\n    margin-bottom: 9px;\r\n    border: 1px solid #000000;\r\n    border-radius: 7px;\r\n    background-color: rgba(251, 251, 251, 0.91);\n}\n.submit-container[data-v-02ea7b42] {\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\n}\n.btn[data-v-02ea7b42] {\r\n    margin-top: 29px;\r\n    background: #B00000;\r\n    border-bottom: 1px solid #4F0000;\r\n    border-radius: 7px;\r\n    width: 162px;\r\n    height: 32px;\r\n    font-family: 'Inter', sans-serif;\r\n    font-style: normal;\r\n    font-weight: 500;\r\n    font-size: 14px;\r\n    line-height: 17px;\r\n    color: #FFF6F6;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

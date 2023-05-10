@@ -37,6 +37,12 @@ export default {
             error:null,
         }
     },
+    mounted() {
+        this.$Progress.start()
+        setTimeout(()=>{
+            this.$Progress.finish()
+        },350)
+    },
     methods: {
         storeUser() {
             axios.post('/api/users/registration',

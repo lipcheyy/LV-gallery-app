@@ -15,32 +15,34 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "PostLayout",
-  props: ['Likes', 'url', 'title', 'id', 'likedIds', 'savedIds', 'likesCount'],
+  props: ['url', 'title', 'id', 'likedIds', 'savedIds', 'likesCount', 'user'],
   data: function data() {
     return {
-      posts: null
+      posts: null,
+      username: ''
     };
   },
-  mounted: function mounted() {
-    console.log(this.savedIds);
-  },
+  mounted: function mounted() {},
   methods: {
-    store: function store() {
-      _api__WEBPACK_IMPORTED_MODULE_0__["default"].post("/api/auth/posts/".concat(this.id, "/likes")).then(function (res) {});
+    like: function like() {
+      _api__WEBPACK_IMPORTED_MODULE_0__["default"].post("/api/auth/posts/".concat(this.id, "/likes"));
     },
     save: function save() {
-      _api__WEBPACK_IMPORTED_MODULE_0__["default"].post("/api/auth/posts/".concat(this.id, "/saves")).then(function (res) {
-        console.log(res.data.message);
-      });
+      _api__WEBPACK_IMPORTED_MODULE_0__["default"].post("/api/auth/posts/".concat(this.id, "/saves"));
     },
     toggleLike: function toggleLike(id) {
+      var content = parseInt(document.querySelector(".likesCount-".concat(id)).textContent);
       if (this.likedIds.includes(id)) {
         var index = this.likedIds.indexOf(id);
         this.likedIds.splice(index, 1);
+        content -= 1;
+        document.querySelector(".likesCount-".concat(id)).textContent = content;
       } else {
         this.likedIds.push(id);
+        content += 1;
+        document.querySelector(".likesCount-".concat(id)).textContent = content;
       }
-      this.store();
+      this.like();
     },
     toggleSave: function toggleSave(id) {
       if (this.savedIds.includes(id)) {
@@ -50,11 +52,6 @@ __webpack_require__.r(__webpack_exports__);
         this.savedIds.push(id);
       }
       this.save();
-    }
-  },
-  computed: {
-    computedLikedCount: function computedLikedCount() {
-      return this.likesCount;
     }
   }
 });
@@ -87,8 +84,7 @@ __webpack_require__.r(__webpack_exports__);
       pagination: [],
       userLiked: null,
       likedIds: [],
-      savedIds: [],
-      someKey: 0
+      savedIds: []
     };
   },
   mounted: function mounted() {
@@ -100,11 +96,13 @@ __webpack_require__.r(__webpack_exports__);
     getPosts: function getPosts() {
       var _this = this;
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      this.$Progress.start();
       _api__WEBPACK_IMPORTED_MODULE_1__["default"].post('/api/auth/posts/list', {
         page: page
       }).then(function (res) {
         _this.posts = res.data.data;
         _this.pagination = res.data.meta;
+        _this.$Progress.finish();
       });
     },
     getUserLikes: function getUserLikes() {
@@ -147,7 +145,22 @@ var render = function render() {
     _c = _vm._self._c;
   return _c("div", {
     staticClass: "main-container"
-  }, [_vm._m(0), _vm._v(" "), _c("img", {
+  }, [_c("div", {
+    staticClass: "postUser"
+  }, [_c("div", {
+    staticClass: "user"
+  }, [_c("img", {
+    staticClass: "user_pic",
+    attrs: {
+      src: __webpack_require__(/*! ./Images/Guest.png */ "./resources/js/components/Post/Images/Guest.png"),
+      alt: "user"
+    }
+  }), _vm._v(" "), _vm.user ? [_c("a", {
+    staticClass: "username",
+    attrs: {
+      href: "#"
+    }
+  }, [_vm._v(_vm._s(_vm.user.name))])] : _vm._e()], 2), _vm._v(" "), _vm._m(0)]), _vm._v(" "), _c("img", {
     staticClass: "img",
     attrs: {
       src: _vm.url
@@ -167,14 +180,15 @@ var render = function render() {
       }
     }
   }, [_c("i", {
-    staticClass: "far fa-heart",
+    staticClass: "far fa-heart likeBtn",
     "class": {
-      "fas fa-heart": _vm.likedIds.includes(_vm.id)
+      "fas fa-heart": _vm.likedIds.includes(_vm.id),
+      "fas-heart-animation likeBtn": _vm.likedIds.includes(_vm.id)
     }
   })]), _vm._v(" "), _c("span", {
     staticClass: "count_likes"
   }, [_c("span", {
-    staticClass: "likesCount"
+    "class": "likesCount-".concat(_vm.id)
   }, [_vm._v(_vm._s(_vm.likesCount))]), _vm._v(' позначок "Подобається"')])]), _vm._v(" "), _c("div", {
     staticClass: "save_container"
   }, [_c("a", {
@@ -190,7 +204,8 @@ var render = function render() {
   }, [_c("i", {
     staticClass: "far fa-bookmark",
     "class": {
-      "fas fa-bookmark": _vm.savedIds.includes(_vm.id)
+      "fas fa-bookmark": _vm.savedIds.includes(_vm.id),
+      "fas-bookmark-animation": _vm.savedIds.includes(_vm.id)
     }
   })])])])]);
 };
@@ -198,25 +213,10 @@ var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
-    staticClass: "postUser"
-  }, [_c("div", {
-    staticClass: "user"
-  }, [_c("img", {
-    staticClass: "user_pic",
-    attrs: {
-      src: __webpack_require__(/*! ./Images/Guest.png */ "./resources/js/components/Post/Images/Guest.png"),
-      alt: "user"
-    }
-  }), _vm._v(" "), _c("a", {
-    staticClass: "username",
-    attrs: {
-      href: "#"
-    }
-  }, [_vm._v("Vasya")])]), _vm._v(" "), _c("div", {
     staticClass: "post-time"
   }, [_c("a", {
     staticClass: "time"
-  }, [_vm._v("03.05.2023")])])]);
+  }, [_vm._v("03.05.2023")])]);
 }];
 render._withStripped = true;
 
@@ -252,7 +252,8 @@ var render = function render() {
           id: post.id,
           likesCount: post.likesCount,
           likedIds: _vm.likedIds,
-          savedIds: _vm.savedIds
+          savedIds: _vm.savedIds,
+          user: post.user
         }
       })];
     })], 2);
@@ -317,7 +318,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.main-container[data-v-4eabf0be] {\n    height: 78vh;\n    width: 350px;\n    display: flex;\n    flex-direction: column;\n}\n.img[data-v-4eabf0be] {\n    width: 100%;\n    height: 80%;\n}\n.buttons-container[data-v-4eabf0be] {\n    margin-top: 10px;\n    display: flex;\n    justify-content: space-between;\n    width: 100%;\n}\n.like_container[data-v-4eabf0be] {\n    display: flex;\n    align-items: center;\n    order: 1;\n    margin-left: 10px;\n}\n.save_container[data-v-4eabf0be] {\n    display: flex;\n    align-items: center;\n    order: 2;\n    margin-right: 17px;\n}\na[data-v-4eabf0be] {\n    text-decoration: none;\n    color: black;\n}\ni[data-v-4eabf0be] {\n    font-size: 35px;\n    color: #000000;\n}\n.count_likes[data-v-4eabf0be] {\n    padding-left: 11px;\n    font-style: normal;\n    font-weight: 400;\n    font-size: 12px;\n    color: #383737;\n}\n.postUser[data-v-4eabf0be] {\n    height: 40px;\n    width: 100%;\n    display: flex;\n    align-items: center;\n    padding: 0 10px;\n    justify-content: space-between;\n}\n.user[data-v-4eabf0be] {\n    height: 80%;\n    display: flex;\n    align-items: center;\n}\n.user_pic[data-v-4eabf0be] {\n    height: 100%;\n    margin-right: 5px;\n}\n\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.main-container[data-v-4eabf0be] {\n    height: 78vh;\n    width: 350px;\n    display: flex;\n    flex-direction: column;\n}\n.img[data-v-4eabf0be] {\n    width: 100%;\n    height: 80%;\n}\n.buttons-container[data-v-4eabf0be] {\n    margin-top: 10px;\n    display: flex;\n    justify-content: space-between;\n    width: 100%;\n}\n.like_container[data-v-4eabf0be] {\n    display: flex;\n    align-items: center;\n    order: 1;\n    margin-left: 10px;\n}\n.save_container[data-v-4eabf0be] {\n    display: flex;\n    align-items: center;\n    order: 2;\n    margin-right: 17px;\n}\n.fa-heart[data-v-4eabf0be] {\n    transition: color 0.2s ease-in-out;\n}\n.fa-bookmark[data-v-4eabf0be] {\n    transition: color 0.2s ease-in-out;\n}\n.far.fa-heart.fas-heart-animation[data-v-4eabf0be] {\n    animation: heart-pulse-4eabf0be 0.3s ease-in-out;\n}\n.far.fa-bookmark.fas-bookmark-animation[data-v-4eabf0be] {\n    animation: heart-pulse-4eabf0be 0.3s ease-in-out;\n}\n@keyframes heart-pulse-4eabf0be {\n0% {\n        transform: scale(1);\n}\n50% {\n        transform: scale(1.2);\n}\n100% {\n        transform: scale(1);\n}\n}\na[data-v-4eabf0be] {\n    text-decoration: none;\n    color: black;\n}\ni[data-v-4eabf0be] {\n    font-size: 35px;\n    color: #000000;\n}\n.count_likes[data-v-4eabf0be] {\n    padding-left: 11px;\n    font-style: normal;\n    font-weight: 400;\n    font-size: 12px;\n    color: #383737;\n}\n.postUser[data-v-4eabf0be] {\n    height: 40px;\n    width: 100%;\n    display: flex;\n    align-items: center;\n    padding: 0 10px;\n    justify-content: space-between;\n}\n.user[data-v-4eabf0be] {\n    height: 80%;\n    display: flex;\n    align-items: center;\n}\n.user_pic[data-v-4eabf0be] {\n    height: 100%;\n    margin-right: 5px;\n}\n\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

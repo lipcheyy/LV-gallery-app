@@ -8,7 +8,8 @@
                         :id="post.id"
                         :likesCount="post.likesCount"
                         :likedIds="likedIds"
-                        :savedIds="savedIds">
+                        :savedIds="savedIds"
+                        :user="post.user">
                     </post-layout>
                 </template>
             </div>
@@ -62,7 +63,6 @@ export default {
             userLiked:null,
             likedIds:[],
             savedIds:[],
-            someKey:0
         }
     },
     mounted() {
@@ -72,10 +72,12 @@ export default {
     },
     methods: {
         getPosts(page = 1) {
+            this.$Progress.start()
             api.post('/api/auth/posts/list', {page: page})
                 .then(res => {
                     this.posts = res.data.data
                     this.pagination = res.data.meta
+                    this.$Progress.finish()
                 })
         },
         getUserLikes() {

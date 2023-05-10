@@ -16,6 +16,11 @@ const route =new VueRouter({
             name:'user.registration'
         },
         {
+            path:'/:id/post',
+            component: ()=> import('./components/Post/ShowPost'),
+            name:'post.show'
+        },
+        {
             path:'/personal',
             component: ()=> import('./components/Personal/Personal'),
             name:'personal.page'

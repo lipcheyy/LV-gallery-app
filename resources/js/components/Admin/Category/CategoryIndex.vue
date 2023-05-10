@@ -55,10 +55,13 @@ export default {
         this.getCategories()
     },
     methods: {
+
         getCategories() {
+            this.$Progress.start()
             api.get('/api/auth/admin/category')
                 .then(res => {
                     this.data=res.data.data
+                    this.$Progress.finish()
                 })
         },
         getCategoryDataToEdit(id,title){

@@ -7,7 +7,9 @@
                     class="user_pic"
                     alt="user"
                 />
-                <a href='#' class="username">Vasya</a>
+                <template v-if="user">
+                    <a href='#' class="username">{{ user.name }}</a>
+                </template>
             </div>
 
             <div class="post-time">
@@ -19,13 +21,15 @@
         <div class="buttons-container">
             <div class="like_container">
                 <a href="" @click.prevent="toggleLike(id)">
-                    <i class="far fa-heart" :class="{'fas fa-heart': likedIds.includes(id)}"></i>
+                    <i class="far fa-heart likeBtn"
+                       :class="{'fas fa-heart': likedIds.includes(id), 'fas-heart-animation likeBtn': likedIds.includes(id)}"></i>
                 </a>
-                <span class="count_likes"><span class="likesCount">{{likesCount}}</span> позначок "Подобається"</span>
+                <span class="count_likes"><span :class="`likesCount-${id}`">{{ likesCount }}</span> позначок "Подобається"</span>
             </div>
             <div class="save_container">
                 <a href="#" @click.prevent="toggleSave(id)">
-                    <i class="far fa-bookmark" :class="{'fas fa-bookmark':savedIds.includes(id)}"></i>
+                    <i class="far fa-bookmark"
+                       :class="{'fas fa-bookmark':savedIds.includes(id), 'fas-bookmark-animation': savedIds.includes(id)} "></i>
                 </a>
             </div>
 
@@ -38,51 +42,47 @@ import api from "../../api";
 
 export default {
     name: "PostLayout",
-    props: ['Likes', 'url', 'title', 'id', 'likedIds', 'savedIds','likesCount'],
+    props: ['url', 'title', 'id', 'likedIds', 'savedIds', 'likesCount', 'user'],
     data() {
         return {
             posts: null,
+            username:''
         }
     },
     mounted() {
-        console.log(this.savedIds);
     },
     methods: {
-        store() {
+        like() {
             api.post(`/api/auth/posts/${this.id}/likes`)
-                .then(res => {
-                })
         },
         save() {
             api.post(`/api/auth/posts/${this.id}/saves`)
-                .then(res => {
-                    console.log(res.data.message);
-                })
         },
         toggleLike(id) {
+            let content = parseInt(document.querySelector(`.likesCount-${id}`).textContent)
             if (this.likedIds.includes(id)) {
-                const index=this.likedIds.indexOf(id)
-                this.likedIds.splice(index,1)
+                const index = this.likedIds.indexOf(id)
+                this.likedIds.splice(index, 1)
+                content -= 1
+                document.querySelector(`.likesCount-${id}`).textContent = content
             } else {
                 this.likedIds.push(id)
+                content += 1
+                document.querySelector(`.likesCount-${id}`).textContent = content
             }
-            this.store()
+            this.like()
         },
-        toggleSave(id){
+        toggleSave(id) {
             if (this.savedIds.includes(id)) {
-                const index=this.savedIds.indexOf(id)
-                this.savedIds.splice(index,1)
+                const index = this.savedIds.indexOf(id)
+                this.savedIds.splice(index, 1)
             } else {
                 this.savedIds.push(id)
             }
             this.save()
+
         },
 
-    },
-    computed:{
-        computedLikedCount(){
-            return this.likesCount
-        }
     }
 }
 </script>
@@ -119,6 +119,35 @@ export default {
     align-items: center;
     order: 2;
     margin-right: 17px;
+}
+
+.fa-heart {
+    transition: color 0.2s ease-in-out;
+}
+
+.fa-bookmark {
+    transition: color 0.2s ease-in-out;
+}
+
+
+.far.fa-heart.fas-heart-animation {
+    animation: heart-pulse 0.3s ease-in-out;
+}
+
+.far.fa-bookmark.fas-bookmark-animation {
+    animation: heart-pulse 0.3s ease-in-out;
+}
+
+@keyframes heart-pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
 }
 
 a {

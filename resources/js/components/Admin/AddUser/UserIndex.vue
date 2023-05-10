@@ -71,9 +71,11 @@ export default {
     methods:{
 
         getRoles(){
+            this.$Progress.start()
             api.get('/api/auth/admin/users/roles')
                 .then(res=>{
                     this.roles=res.data
+                    this.$Progress.finish()
                 })
         },
         getUsers() {

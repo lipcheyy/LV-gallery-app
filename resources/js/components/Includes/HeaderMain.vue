@@ -10,11 +10,14 @@
                 <ul class="navbarL">
                     <li><router-link exact-active-class="active" v-if="access_token" :to="{name:'post.index'}" class="white_style_text">Головна</router-link></li>
                     <li><router-link exact-active-class="active" v-if="access_token" :to="{name:'post.create'}" class="white_style_text">Створити</router-link></li>
-                    <li>
-                        <select class="white_style_text selector">
-                            <option value="" disabled selected>Категорії</option>
-                        </select>
-                    </li>
+                    <div class="category_block" id="categoryy">
+                        <li id="categoryy"><a class="white_style_text" id="categoryy">Категорії </a></li>
+                    </div>
+                    <div class="category_list">
+                        <ul>
+                            <a>ct1</a>
+                        </ul>
+                    </div>
                     <li><router-link exact-active-class="active" v-if="access_token && userRole===1" :to="{name:'admin.statistic'}" class="white_style_text">Адмін панель</router-link></li>
                 </ul>
             </div>
@@ -96,8 +99,6 @@ a{
     outline: none;
     text-decoration: none;
 }
-
-
 .checkbtn{
     position: absolute;
     right: 15px;
@@ -111,22 +112,13 @@ a{
 #check{
     display: none;
 }
-.selector {
-    border: none;
-    outline: none;
-    height: 45px;
-}
-
-.selector > option {
-    flex: 25%;
-    box-sizing: border-box;
-}
 .header{
     background: #D9D9D9;
     min-height: 135px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    z-index: 13;
     /*margin-bottom:74px;*/
 }
 .leftNav{
@@ -152,6 +144,7 @@ a{
 .navbarR li,
 .navbarL li{
     padding-left: 37px;
+    z-index: 2;
 }
 .logo{
     width: 60px;
@@ -187,6 +180,53 @@ a{
 #check{
     display: none;
 }
+#categoryy {
+    position: relative;
+}
+.category_list {
+    position: absolute;
+    top: 135px;
+    z-index: 1;
+    display: none;
+    max-width:80%;
+    background: #D9D9D9;
+    border: 1px solid black;
+    border-top: none;
+    padding:0px 15px 15px 15px;
+    flex-direction:column;
+    width: 100%;
+    flex-wrap: wrap;
+}
+.category_list ul{
+    display:flex;
+    flex-direction:column;
+    max-height:600px;
+    gap:20px;
+    flex-wrap: wrap;
+}
+.category_list a {
+    list-style: none;
+    font-size: 18px;
+    text-align: center;
+    background: #FFFFFF;
+    border-radius: 5px;
+    font-style:normal;
+    padding: 7px 20px;
+    color: #000000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.category_block{
+    padding-bottom: 45px;
+    margin-top: 46px;
+}
+#categoryy:hover + .category_list {
+    display: flex;
+}
+.category_list:hover{
+    display: flex;
+}
 @media only screen and (max-width:1309px) {
     .navbarL{
         padding-left: 15px;
@@ -200,6 +240,10 @@ a{
     }
 }
 @media only screen and (max-width:905px) {
+    .category_block{
+        padding-bottom: 0px;
+        margin-top: 0px;
+    }
     .navbarR{
         padding-right: 100px;
     }
@@ -211,7 +255,7 @@ a{
         width: 100%;
         height: max-content;
         padding: 20px 0;
-        background: #6c6b6b;
+        background-color: rgba(128,128,128, 0.9);
         top: 136px;
         text-align: center;
         display: flex;
@@ -219,6 +263,7 @@ a{
         gap: 10px;
         left: -100%;
         transition: all .5s;
+        z-index: 1;
     }
     .red_style_text,
     .white_style_text{
@@ -230,6 +275,38 @@ a{
     }
     #check:checked ~ .navbarL {
         left: 0%;
+    }
+    .category_list {
+        top: 198px;
+        border: none;
+        max-width: 100%;
+        width: 100%;
+        gap: 10px;
+        background-color: rgba(128,128,128, 0.9);
+        transition: all .5s;
+        justify-content: center;
+        align-items: center;
+        padding:15px;
+        transition: all .5s;
+    }
+    .category_list ul{
+        display:flex;
+        flex-direction:column;
+        max-height:max-content;
+        width:300px;
+        gap:20px;
+        flex-wrap: wrap;
+        padding:0px;
+    }
+    .category_list a {
+        list-style: none;
+        font-size: 18px;
+        text-align: center;
+        background: #FFFFFF;
+        border-radius: 5px;
+        font-style:normal;
+        padding: 7px 20px;
+        color: #000000;
     }
 }
 </style>
