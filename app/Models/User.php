@@ -32,6 +32,9 @@ class User extends Authenticatable implements JWTSubject
             'user_id',
             'post_id');
     }
+    public function posts(){
+        return $this->hasMany(Post::class);
+    }
     /**
      * The attributes that are mass assignable.
      *

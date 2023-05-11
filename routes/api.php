@@ -33,7 +33,8 @@ Route::group([
     Route::group(['middleware'=>'jwt.auth'],function (){
         //лише для авторизованих
         Route::group(['namespace' => 'User', 'prefix' => 'users'], function () {
-            Route::get('/','DataController@getSavedPosts');
+            Route::get('/saved','DataController@getSavedPosts');
+            Route::get('/own','DataController@getOwnPosts');
         });
         Route::group(['namespace' => 'Personal'], function () {
             Route::post('personal','IndexController');

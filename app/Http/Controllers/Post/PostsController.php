@@ -18,11 +18,11 @@ class   PostsController extends Controller
         $data=\request()->validate(
             ['page'=>'integer']
         );
-        $posts = Post::paginate(12,['*'],'page',$data['page']);
+        $posts = Post::orderByDesc('id')->paginate(12,['*'],'page',$data['page']);
         return PostResource::collection($posts);
     }
     public function postsByCategory(Category $category){
-        $posts=$category->posts;
+        $posts=$category->posts()->orderByDesc('id')->get();
         return PostResource::collection($posts);
     }
     public function checkUserLiked(){
