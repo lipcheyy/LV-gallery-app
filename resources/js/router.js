@@ -23,7 +23,7 @@ const route =new VueRouter({
         {
             path:'/category/:id/posts',
             component: ()=> import('./components/PostByCategory/PostByCategory'),
-            name:'post.show'
+            name:'category.posts'
         },
         {
             path:'/personal',

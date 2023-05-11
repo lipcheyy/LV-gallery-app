@@ -5556,9 +5556,14 @@ var render = function render() {
   }, [_vm._v("Створити\n                    ")]) : _vm._e()], 1), _vm._v(" "), _vm._m(2), _vm._v(" "), _c("div", {
     staticClass: "category_list"
   }, [_c("ul", [_vm._l(_vm.categories, function (category) {
-    return [_c("button", {
+    return [_c("router-link", {
       attrs: {
-        value: category.id
+        to: {
+          name: "category.posts",
+          params: {
+            id: category.id
+          }
+        }
       }
     }, [_vm._v(_vm._s(category.title))])];
   })], 2)]), _vm._v(" "), _c("li", [_vm.access_token && _vm.userRole === 1 ? _c("router-link", {
@@ -5859,7 +5864,7 @@ var route = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     component: function component() {
       return __webpack_require__.e(/*! import() */ "resources_js_components_PostByCategory_PostByCategory_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/PostByCategory/PostByCategory */ "./resources/js/components/PostByCategory/PostByCategory.vue"));
     },
-    name: 'post.show'
+    name: 'category.posts'
   }, {
     path: '/personal',
     component: function component() {

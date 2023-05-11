@@ -25,7 +25,7 @@
                     <div class="category_list">
                         <ul>
                             <template v-for="category in categories">
-                                <button :value="category.id">{{ category.title}}</button>
+                                <router-link :to="{name:'category.posts',params:{id:category.id}}">{{ category.title}}</router-link>
                             </template>
                         </ul>
                     </div>
