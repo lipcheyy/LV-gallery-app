@@ -46,12 +46,14 @@ export default {
     },
     methods: {
         getPosts() {
-            this.$Progress.start()
-            api.get(`/api/auth/posts/${this.$route.params.id}/posts`, )
-                .then(res => {
-                    this.posts = res.data.data
-                    this.$Progress.finish()
-                })
+            if (this.$route.params.id){
+                this.$Progress.start()
+                api.get(`/api/auth/posts/${this.$route.params.id}/posts`, )
+                    .then(res => {
+                        this.posts = res.data.data
+                        this.$Progress.finish()
+                    })
+            }
         },
         getUserLikes() {
             api.get('/api/auth/posts/liked')
