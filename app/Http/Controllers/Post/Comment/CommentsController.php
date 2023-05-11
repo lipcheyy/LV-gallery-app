@@ -17,4 +17,8 @@ class CommentsController extends Controller
         Comment::create($data);
         return $data;
     }
+    public function destroy($postId,Comment $comment){
+        $comment->delete();
+        return $comment;
+    }
 }

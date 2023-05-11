@@ -33,12 +33,18 @@ __webpack_require__.r(__webpack_exports__);
     },
     storeComment: function storeComment() {
       var _this2 = this;
-      _api__WEBPACK_IMPORTED_MODULE_0__["default"].post("/api/auth/posts/".concat(this.$route.params.id, "/comment"), {
+      _api__WEBPACK_IMPORTED_MODULE_0__["default"].post("/api/auth/posts/".concat(this.$route.params.id, "/comments"), {
         content: this.content,
         post_id: this.$route.params.id
       }).then(function () {
         _this2.getPost();
         _this2.content = '';
+      });
+    },
+    destroy: function destroy(id) {
+      var _this3 = this;
+      _api__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"]("/api/auth/posts/".concat(this.$route.params.id, "/comments/").concat(id)).then(function () {
+        _this3.getPost();
       });
     }
   }
@@ -100,7 +106,14 @@ var render = function render() {
       }
     }), _vm._v(_vm._s(comment.writer.name))]), _vm._v(" "), _c("i", {
       staticClass: "comment-title"
-    }, [_vm._v(_vm._s(comment.content))])]);
+    }, [_vm._v(_vm._s(comment.content))]), _vm._v(" "), _c("p", {
+      on: {
+        click: function click($event) {
+          $event.preventDefault();
+          return _vm.destroy(comment.id);
+        }
+      }
+    }, [_vm._v("delete")])]);
   }), 0), _vm._v(" "), _c("div", {
     staticClass: "send-container"
   }, [_c("input", {

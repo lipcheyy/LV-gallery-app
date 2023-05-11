@@ -23,6 +23,7 @@
                 <div class="comment" v-for="comment in post.comments">
                     <div><img class="comment-user" src="../Includes/Images/User.png" alt="User">{{ comment.writer.name }}</div>
                     <i class="comment-title">{{comment.content}}</i>
+                    <p @click.prevent="destroy(comment.id)">delete</p>
                 </div>
 
 
@@ -61,13 +62,19 @@ export default {
                 })
         },
         storeComment(){
-            api.post(`/api/auth/posts/${this.$route.params.id}/comment`,{
+            api.post(`/api/auth/posts/${this.$route.params.id}/comments`,{
                 content:this.content,
                 post_id:this.$route.params.id
             })
                 .then(()=>{
                     this.getPost()
                     this.content=''
+                })
+        },
+        destroy(id){
+            api.delete(`/api/auth/posts/${this.$route.params.id}/comments/${id}`)
+                .then(()=>{
+                    this.getPost()
                 })
         }
     }
