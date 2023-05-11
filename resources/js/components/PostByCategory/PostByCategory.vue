@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import PostLayout from './PostLayout'
+import PostLayout from '../Post/PostLayout'
 import api from "../../api";
 
 export default {
