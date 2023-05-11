@@ -359,7 +359,8 @@ var render = function render() {
           likedIds: _vm.likedIds,
           savedIds: _vm.savedIds,
           user: post.user,
-          title: post.title
+          title: post.title,
+          date: post.date
         }
       })];
     })], 2);
@@ -402,7 +403,8 @@ var render = function render() {
           likedIds: _vm.likedIds,
           savedIds: _vm.savedIds,
           user: post.user,
-          title: post.title
+          title: post.title,
+          date: post.date
         }
       })];
     })], 2);
@@ -497,7 +499,17 @@ var render = function render() {
       "fas fa-bookmark": _vm.savedIds.includes(_vm.id),
       "fas-bookmark-animation": _vm.savedIds.includes(_vm.id)
     }
-  })])])])]);
+  })])])]), _vm._v(" "), _c("router-link", {
+    staticClass: "btn btn-primary",
+    attrs: {
+      to: {
+        name: "post.show",
+        params: {
+          id: _vm.id
+        }
+      }
+    }
+  }, [_vm._v("детальніше")])], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;

@@ -1,6 +1,6 @@
 <template>
-    <div class="main-container">
-        <template v-if="post && post.images">
+    <div class="main-container" v-if="post && post.images">
+        <template>
             <template v-for="image in post.images">
                 <img class="post" :src="image.url" alt="Post">
             </template>
@@ -9,7 +9,7 @@
             <div class="post-user-info">
                 <div class="user-info">
                     <img class="user" src="../Includes/Images/User.png" alt="User">
-                    <h2 class="username">Vasya</h2>
+                    <h2 class="username">{{ post.user.name }}</h2>
                 </div>
 
 
@@ -20,16 +20,33 @@
             </div>
             <div class="line"></div>
             <div class="commentaries">
-                <div class="comment">
-                    <img class="comment-user" src="../Includes/Images/User.png" alt="User">
-                    <i class="comment-title">Gavnoi vonyaet</i>
+                <div class="comment" v-for="comment in post.comments">
+                    <div><img class="comment-user" src="../Includes/Images/User.png" alt="User">{{
+                            comment.writer.name
+                        }}
+                    </div>
+                    <span :class="commentToEdit(comment.id)?'d-none':''">
+                        <i class="comment-title">{{ comment.content }}</i>
+                    </span>
+                    <template v-if="comment.writer.id===user_id">
+                        <div @click.prevent="destroy(comment.id)">
+                            <i class="fas fa-trash"></i>
+                        </div>
+                        <div @click.prevent="getCommentDataToEdit(comment.id,comment.content)">
+                            <i class="fas fa-pencil"></i>
+                        </div>
+                    </template>
+                    <span :class="commentToEdit(comment.id)?'':'d-none'">
+                        <input v-model="contentToEdit">
+                        <a href="" @click.prevent="update(comment.id)">upd</a>
+                    </span>
                 </div>
 
 
             </div>
             <div class="send-container">
-                <input type="text" class="send-comment" placeholder="Enter the message">
-                <button type="submit" class="send-btn">
+                <input type="text" class="send-comment" placeholder="Enter the message" v-model="content">
+                <button type="submit" class="send-btn" @click.prevent="storeComment">
                     <i class="fa-sharp fa-solid fa-paper-plane"></i>
                 </button>
             </div>
@@ -46,11 +63,14 @@ export default {
     name: "ShowPost",
     data() {
         return {
-            post: null
+            post: null,
+            content: '',
+            user_id: parseInt(localStorage.getItem('id')),
+            toEdit: null,
+            contentToEdit: ''
         }
     },
     mounted() {
-        console.log(this.$route.params.id);
         this.getPost()
     },
     methods: {
@@ -58,7 +78,39 @@ export default {
             api.get(`/api/auth/posts/${this.$route.params.id}`)
                 .then(res => {
                     this.post = res.data.data
-                    console.log(this.post);
+                })
+        },
+        storeComment() {
+            api.post(`/api/auth/posts/${this.$route.params.id}/comments`, {
+                content: this.content,
+                post_id: this.$route.params.id
+            })
+                .then(() => {
+                    this.getPost()
+                    this.content = ''
+                })
+        },
+        destroy(id) {
+            api.delete(`/api/auth/posts/${this.$route.params.id}/comments/${id}`)
+                .then(() => {
+                    this.getPost()
+                })
+        },
+        commentToEdit(id) {
+            return this.toEdit === id
+        },
+        getCommentDataToEdit(id, content) {
+            this.toEdit = id
+            this.contentToEdit = content
+        },
+        update(id) {
+            this.toEdit=null
+            api.patch(`/api/auth/posts/${this.$route.params.id}/comments/${id}`,
+                {
+                    content:this.contentToEdit
+                })
+                .then(res=>{
+                    this.getPost()
                 })
         }
     }

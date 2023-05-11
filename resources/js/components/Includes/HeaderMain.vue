@@ -101,6 +101,7 @@ export default {
                         const user = res.data
                         localStorage.setItem('user_role', user.role)
                         localStorage.setItem('username', user.name)
+                        localStorage.setItem('id', user.id)
                         this.userRole = parseInt(user.role)
                     })
             }

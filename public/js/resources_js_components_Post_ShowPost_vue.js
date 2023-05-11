@@ -17,11 +17,14 @@ __webpack_require__.r(__webpack_exports__);
   name: "ShowPost",
   data: function data() {
     return {
-      post: null
+      post: null,
+      content: '',
+      user_id: parseInt(localStorage.getItem('id')),
+      toEdit: null,
+      contentToEdit: ''
     };
   },
   mounted: function mounted() {
-    console.log(this.$route.params.id);
     this.getPost();
   },
   methods: {
@@ -29,7 +32,38 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
       _api__WEBPACK_IMPORTED_MODULE_0__["default"].get("/api/auth/posts/".concat(this.$route.params.id)).then(function (res) {
         _this.post = res.data.data;
-        console.log(_this.post);
+      });
+    },
+    storeComment: function storeComment() {
+      var _this2 = this;
+      _api__WEBPACK_IMPORTED_MODULE_0__["default"].post("/api/auth/posts/".concat(this.$route.params.id, "/comments"), {
+        content: this.content,
+        post_id: this.$route.params.id
+      }).then(function () {
+        _this2.getPost();
+        _this2.content = '';
+      });
+    },
+    destroy: function destroy(id) {
+      var _this3 = this;
+      _api__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"]("/api/auth/posts/".concat(this.$route.params.id, "/comments/").concat(id)).then(function () {
+        _this3.getPost();
+      });
+    },
+    commentToEdit: function commentToEdit(id) {
+      return this.toEdit === id;
+    },
+    getCommentDataToEdit: function getCommentDataToEdit(id, content) {
+      this.toEdit = id;
+      this.contentToEdit = content;
+    },
+    update: function update(id) {
+      var _this4 = this;
+      this.toEdit = null;
+      _api__WEBPACK_IMPORTED_MODULE_0__["default"].patch("/api/auth/posts/".concat(this.$route.params.id, "/comments/").concat(id), {
+        content: this.contentToEdit
+      }).then(function (res) {
+        _this4.getPost();
       });
     }
   }
@@ -52,9 +86,9 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", {
+  return _vm.post && _vm.post.images ? _c("div", {
     staticClass: "main-container"
-  }, [_vm.post && _vm.post.images ? [_vm._l(_vm.post.images, function (image) {
+  }, [[_vm._l(_vm.post.images, function (image) {
     return [_c("img", {
       staticClass: "post",
       attrs: {
@@ -62,12 +96,7 @@ var render = function render() {
         alt: "Post"
       }
     })];
-  })] : _vm._e(), _vm._v(" "), _vm._m(0)], 2);
-};
-var staticRenderFns = [function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("div", {
+  })], _vm._v(" "), _c("div", {
     staticClass: "commentaries-container"
   }, [_c("div", {
     staticClass: "post-user-info"
@@ -81,42 +110,118 @@ var staticRenderFns = [function () {
     }
   }), _vm._v(" "), _c("h2", {
     staticClass: "username"
-  }, [_vm._v("Vasya")])]), _vm._v(" "), _c("div", {
-    staticClass: "post-interaction"
-  }, [_c("i", {
-    staticClass: "far fa-heart likeBtn"
-  }), _vm._v(" "), _c("i", {
-    staticClass: "far fa-bookmark"
-  })])]), _vm._v(" "), _c("div", {
+  }, [_vm._v(_vm._s(_vm.post.user.name))])]), _vm._v(" "), _vm._m(0)]), _vm._v(" "), _c("div", {
     staticClass: "line"
   }), _vm._v(" "), _c("div", {
     staticClass: "commentaries"
-  }, [_c("div", {
-    staticClass: "comment"
-  }, [_c("img", {
-    staticClass: "comment-user",
-    attrs: {
-      src: __webpack_require__(/*! ../Includes/Images/User.png */ "./resources/js/components/Includes/Images/User.png"),
-      alt: "User"
-    }
-  }), _vm._v(" "), _c("i", {
-    staticClass: "comment-title"
-  }, [_vm._v("Gavnoi vonyaet")])])]), _vm._v(" "), _c("div", {
+  }, _vm._l(_vm.post.comments, function (comment) {
+    return _c("div", {
+      staticClass: "comment"
+    }, [_c("div", [_c("img", {
+      staticClass: "comment-user",
+      attrs: {
+        src: __webpack_require__(/*! ../Includes/Images/User.png */ "./resources/js/components/Includes/Images/User.png"),
+        alt: "User"
+      }
+    }), _vm._v(_vm._s(comment.writer.name) + "\n                ")]), _vm._v(" "), _c("span", {
+      "class": _vm.commentToEdit(comment.id) ? "d-none" : ""
+    }, [_c("i", {
+      staticClass: "comment-title"
+    }, [_vm._v(_vm._s(comment.content))])]), _vm._v(" "), comment.writer.id === _vm.user_id ? [_c("div", {
+      on: {
+        click: function click($event) {
+          $event.preventDefault();
+          return _vm.destroy(comment.id);
+        }
+      }
+    }, [_c("i", {
+      staticClass: "fas fa-trash"
+    })]), _vm._v(" "), _c("div", {
+      on: {
+        click: function click($event) {
+          $event.preventDefault();
+          return _vm.getCommentDataToEdit(comment.id, comment.content);
+        }
+      }
+    }, [_c("i", {
+      staticClass: "fas fa-pencil"
+    })])] : _vm._e(), _vm._v(" "), _c("span", {
+      "class": _vm.commentToEdit(comment.id) ? "" : "d-none"
+    }, [_c("input", {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: _vm.contentToEdit,
+        expression: "contentToEdit"
+      }],
+      domProps: {
+        value: _vm.contentToEdit
+      },
+      on: {
+        input: function input($event) {
+          if ($event.target.composing) return;
+          _vm.contentToEdit = $event.target.value;
+        }
+      }
+    }), _vm._v(" "), _c("a", {
+      attrs: {
+        href: ""
+      },
+      on: {
+        click: function click($event) {
+          $event.preventDefault();
+          return _vm.update(comment.id);
+        }
+      }
+    }, [_vm._v("upd")])])], 2);
+  }), 0), _vm._v(" "), _c("div", {
     staticClass: "send-container"
   }, [_c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.content,
+      expression: "content"
+    }],
     staticClass: "send-comment",
     attrs: {
       type: "text",
       placeholder: "Enter the message"
+    },
+    domProps: {
+      value: _vm.content
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.content = $event.target.value;
+      }
     }
   }), _vm._v(" "), _c("button", {
     staticClass: "send-btn",
     attrs: {
       type: "submit"
+    },
+    on: {
+      click: function click($event) {
+        $event.preventDefault();
+        return _vm.storeComment.apply(null, arguments);
+      }
     }
   }, [_c("i", {
     staticClass: "fa-sharp fa-solid fa-paper-plane"
-  })])])]);
+  })])])])], 2) : _vm._e();
+};
+var staticRenderFns = [function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("div", {
+    staticClass: "post-interaction"
+  }, [_c("i", {
+    staticClass: "far fa-heart likeBtn"
+  }), _vm._v(" "), _c("i", {
+    staticClass: "far fa-bookmark"
+  })]);
 }];
 render._withStripped = true;
 
