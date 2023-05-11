@@ -28,8 +28,8 @@
 
             </div>
             <div class="send-container">
-                <input type="text" class="send-comment" placeholder="Enter the message">
-                <button type="submit" class="send-btn">
+                <input type="text" class="send-comment" placeholder="Enter the message" v-model="content">
+                <button type="submit" class="send-btn" @click.prevent="storeComment">
                     <i class="fa-sharp fa-solid fa-paper-plane"></i>
                 </button>
             </div>
@@ -46,11 +46,11 @@ export default {
     name: "ShowPost",
     data() {
         return {
-            post: null
+            post: null,
+            content:''
         }
     },
     mounted() {
-        console.log(this.$route.params.id);
         this.getPost()
     },
     methods: {
@@ -58,8 +58,13 @@ export default {
             api.get(`/api/auth/posts/${this.$route.params.id}`)
                 .then(res => {
                     this.post = res.data.data
-                    console.log(this.post);
                 })
+        },
+        storeComment(){
+            api.post(`/api/auth/posts/${this.$route.params.id}/comment`,{
+                content:this.content,
+                post_id:this.$route.params.id
+            })
         }
     }
 }

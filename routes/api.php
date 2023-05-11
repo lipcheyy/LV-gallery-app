@@ -69,6 +69,9 @@ Route::group([
             Route::group(['namespace'=>'Save','prefix'=>'/{post}/saves'], function (){
                 Route::post('/','SaveController@store');
             });
+            Route::group(['namespace' => 'Comment', 'prefix' => '{post}/comment'], function () {
+                Route::post('/','CommentsController@store');
+            });
         });
     });
 

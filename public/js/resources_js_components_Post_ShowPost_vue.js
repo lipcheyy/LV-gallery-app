@@ -17,11 +17,11 @@ __webpack_require__.r(__webpack_exports__);
   name: "ShowPost",
   data: function data() {
     return {
-      post: null
+      post: null,
+      content: ''
     };
   },
   mounted: function mounted() {
-    console.log(this.$route.params.id);
     this.getPost();
   },
   methods: {
@@ -29,7 +29,12 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
       _api__WEBPACK_IMPORTED_MODULE_0__["default"].get("/api/auth/posts/".concat(this.$route.params.id)).then(function (res) {
         _this.post = res.data.data;
-        console.log(_this.post);
+      });
+    },
+    storeComment: function storeComment() {
+      _api__WEBPACK_IMPORTED_MODULE_0__["default"].post("/api/auth/posts/".concat(this.$route.params.id, "/comment"), {
+        content: this.content,
+        post_id: this.$route.params.id
       });
     }
   }
@@ -62,14 +67,52 @@ var render = function render() {
         alt: "Post"
       }
     })];
-  })] : _vm._e(), _vm._v(" "), _vm._m(0)], 2);
+  })] : _vm._e(), _vm._v(" "), _c("div", {
+    staticClass: "commentaries-container"
+  }, [_vm._m(0), _vm._v(" "), _c("div", {
+    staticClass: "line"
+  }), _vm._v(" "), _vm._m(1), _vm._v(" "), _c("div", {
+    staticClass: "send-container"
+  }, [_c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.content,
+      expression: "content"
+    }],
+    staticClass: "send-comment",
+    attrs: {
+      type: "text",
+      placeholder: "Enter the message"
+    },
+    domProps: {
+      value: _vm.content
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.content = $event.target.value;
+      }
+    }
+  }), _vm._v(" "), _c("button", {
+    staticClass: "send-btn",
+    attrs: {
+      type: "submit"
+    },
+    on: {
+      click: function click($event) {
+        $event.preventDefault();
+        return _vm.storeComment.apply(null, arguments);
+      }
+    }
+  }, [_c("i", {
+    staticClass: "fa-sharp fa-solid fa-paper-plane"
+  })])])])], 2);
 };
 var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
-    staticClass: "commentaries-container"
-  }, [_c("div", {
     staticClass: "post-user-info"
   }, [_c("div", {
     staticClass: "user-info"
@@ -87,9 +130,11 @@ var staticRenderFns = [function () {
     staticClass: "far fa-heart likeBtn"
   }), _vm._v(" "), _c("i", {
     staticClass: "far fa-bookmark"
-  })])]), _vm._v(" "), _c("div", {
-    staticClass: "line"
-  }), _vm._v(" "), _c("div", {
+  })])]);
+}, function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("div", {
     staticClass: "commentaries"
   }, [_c("div", {
     staticClass: "comment"
@@ -101,22 +146,7 @@ var staticRenderFns = [function () {
     }
   }), _vm._v(" "), _c("i", {
     staticClass: "comment-title"
-  }, [_vm._v("Gavnoi vonyaet")])])]), _vm._v(" "), _c("div", {
-    staticClass: "send-container"
-  }, [_c("input", {
-    staticClass: "send-comment",
-    attrs: {
-      type: "text",
-      placeholder: "Enter the message"
-    }
-  }), _vm._v(" "), _c("button", {
-    staticClass: "send-btn",
-    attrs: {
-      type: "submit"
-    }
-  }, [_c("i", {
-    staticClass: "fa-sharp fa-solid fa-paper-plane"
-  })])])]);
+  }, [_vm._v("Gavnoi vonyaet")])])]);
 }];
 render._withStripped = true;
 
