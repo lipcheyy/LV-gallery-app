@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Post;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Post\StoreRequest;
 use App\Http\Resources\Post\PostResource;
+use App\Models\Category;
 use App\Models\Image;
 use App\Models\Post;
 use Carbon\Carbon;
@@ -18,6 +19,10 @@ class   PostsController extends Controller
             ['page'=>'integer']
         );
         $posts = Post::paginate(12,['*'],'page',$data['page']);
+        return PostResource::collection($posts);
+    }
+    public function postsByCategory(Category $category){
+        $posts=$category->posts;
         return PostResource::collection($posts);
     }
     public function checkUserLiked(){
