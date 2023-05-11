@@ -41,11 +41,13 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     getPosts: function getPosts() {
       var _this2 = this;
-      this.$Progress.start();
-      _api__WEBPACK_IMPORTED_MODULE_1__["default"].get("/api/auth/posts/".concat(this.$route.params.id, "/posts")).then(function (res) {
-        _this2.posts = res.data.data;
-        _this2.$Progress.finish();
-      });
+      if (this.$route.params.id) {
+        this.$Progress.start();
+        _api__WEBPACK_IMPORTED_MODULE_1__["default"].get("/api/auth/posts/".concat(this.$route.params.id, "/posts")).then(function (res) {
+          _this2.posts = res.data.data;
+          _this2.$Progress.finish();
+        });
+      }
     },
     getUserLikes: function getUserLikes() {
       var _this3 = this;
