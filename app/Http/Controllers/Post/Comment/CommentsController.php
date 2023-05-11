@@ -11,7 +11,7 @@ class CommentsController extends Controller
     public function store(){
         $data=\request()->validate([
             'content'=>'required|string',
-            'post_id'=>'required|string',
+            'post_id'=>'required|integer',
         ]);
         $data['user_id']=auth()->user()->id;
         Comment::create($data);
@@ -20,5 +20,12 @@ class CommentsController extends Controller
     public function destroy($postId,Comment $comment){
         $comment->delete();
         return $comment;
+    }
+    public function update($postId,Comment $comment){
+        $data=\request()->validate([
+            'content'=>'required|string',
+        ]);
+        $comment->update($data);
+        return response()->json('success');
     }
 }

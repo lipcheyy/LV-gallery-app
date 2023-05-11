@@ -25,10 +25,21 @@
                             comment.writer.name
                         }}
                     </div>
-                    <i class="comment-title">{{ comment.content }}</i>
+                    <span :class="commentToEdit(comment.id)?'d-none':''">
+                        <i class="comment-title">{{ comment.content }}</i>
+                    </span>
                     <template v-if="comment.writer.id===user_id">
-                        <div @click.prevent="destroy(comment.id)"><i class="fas fa-trash"></i></div>
+                        <div @click.prevent="destroy(comment.id)">
+                            <i class="fas fa-trash"></i>
+                        </div>
+                        <div @click.prevent="getCommentDataToEdit(comment.id,comment.content)">
+                            <i class="fas fa-pencil"></i>
+                        </div>
                     </template>
+                    <span :class="commentToEdit(comment.id)?'':'d-none'">
+                        <input v-model="contentToEdit">
+                        <a href="" @click.prevent="update(comment.id)">upd</a>
+                    </span>
                 </div>
 
 
@@ -54,12 +65,13 @@ export default {
         return {
             post: null,
             content: '',
-            user_id: localStorage.getItem('id')
+            user_id: parseInt(localStorage.getItem('id')),
+            toEdit: null,
+            contentToEdit: ''
         }
     },
     mounted() {
         this.getPost()
-        this.me()
     },
     methods: {
         getPost() {
@@ -84,6 +96,23 @@ export default {
                     this.getPost()
                 })
         },
+        commentToEdit(id) {
+            return this.toEdit === id
+        },
+        getCommentDataToEdit(id, content) {
+            this.toEdit = id
+            this.contentToEdit = content
+        },
+        update(id) {
+            this.toEdit=null
+            api.patch(`/api/auth/posts/${this.$route.params.id}/comments/${id}`,
+                {
+                    content:this.contentToEdit
+                })
+                .then(res=>{
+                    this.getPost()
+                })
+        }
     }
 }
 </script>

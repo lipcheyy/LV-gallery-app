@@ -19,12 +19,13 @@ __webpack_require__.r(__webpack_exports__);
     return {
       post: null,
       content: '',
-      user_id: localStorage.getItem('id')
+      user_id: parseInt(localStorage.getItem('id')),
+      toEdit: null,
+      contentToEdit: ''
     };
   },
   mounted: function mounted() {
     this.getPost();
-    this.me();
   },
   methods: {
     getPost: function getPost() {
@@ -47,6 +48,22 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
       _api__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"]("/api/auth/posts/".concat(this.$route.params.id, "/comments/").concat(id)).then(function () {
         _this3.getPost();
+      });
+    },
+    commentToEdit: function commentToEdit(id) {
+      return this.toEdit === id;
+    },
+    getCommentDataToEdit: function getCommentDataToEdit(id, content) {
+      this.toEdit = id;
+      this.contentToEdit = content;
+    },
+    update: function update(id) {
+      var _this4 = this;
+      this.toEdit = null;
+      _api__WEBPACK_IMPORTED_MODULE_0__["default"].patch("/api/auth/posts/".concat(this.$route.params.id, "/comments/").concat(id), {
+        content: this.contentToEdit
+      }).then(function (res) {
+        _this4.getPost();
       });
     }
   }
@@ -106,9 +123,11 @@ var render = function render() {
         src: __webpack_require__(/*! ../Includes/Images/User.png */ "./resources/js/components/Includes/Images/User.png"),
         alt: "User"
       }
-    }), _vm._v(_vm._s(comment.writer.name) + "\n                ")]), _vm._v(" "), _c("i", {
+    }), _vm._v(_vm._s(comment.writer.name) + "\n                ")]), _vm._v(" "), _c("span", {
+      "class": _vm.commentToEdit(comment.id) ? "d-none" : ""
+    }, [_c("i", {
       staticClass: "comment-title"
-    }, [_vm._v(_vm._s(comment.content))]), _vm._v(" "), comment.writer.id === _vm.user_id ? [_c("div", {
+    }, [_vm._v(_vm._s(comment.content))])]), _vm._v(" "), comment.writer.id === _vm.user_id ? [_c("div", {
       on: {
         click: function click($event) {
           $event.preventDefault();
@@ -117,7 +136,44 @@ var render = function render() {
       }
     }, [_c("i", {
       staticClass: "fas fa-trash"
-    })])] : _vm._e()], 2);
+    })]), _vm._v(" "), _c("div", {
+      on: {
+        click: function click($event) {
+          $event.preventDefault();
+          return _vm.getCommentDataToEdit(comment.id, comment.content);
+        }
+      }
+    }, [_c("i", {
+      staticClass: "fas fa-pencil"
+    })])] : _vm._e(), _vm._v(" "), _c("span", {
+      "class": _vm.commentToEdit(comment.id) ? "" : "d-none"
+    }, [_c("input", {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: _vm.contentToEdit,
+        expression: "contentToEdit"
+      }],
+      domProps: {
+        value: _vm.contentToEdit
+      },
+      on: {
+        input: function input($event) {
+          if ($event.target.composing) return;
+          _vm.contentToEdit = $event.target.value;
+        }
+      }
+    }), _vm._v(" "), _c("a", {
+      attrs: {
+        href: ""
+      },
+      on: {
+        click: function click($event) {
+          $event.preventDefault();
+          return _vm.update(comment.id);
+        }
+      }
+    }, [_vm._v("upd")])])], 2);
   }), 0), _vm._v(" "), _c("div", {
     staticClass: "send-container"
   }, [_c("input", {
