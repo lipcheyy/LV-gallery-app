@@ -1,6 +1,6 @@
 <template>
-    <div class="main-container">
-        <template v-if="post && post.images">
+    <div class="main-container" v-if="post && post.images">
+        <template >
             <template v-for="image in post.images">
                 <img class="post" :src="image.url" alt="Post">
             </template>
@@ -9,7 +9,7 @@
             <div class="post-user-info">
                 <div class="user-info">
                     <img class="user" src="../Includes/Images/User.png" alt="User">
-                    <h2 class="username">Vasya</h2>
+                    <h2 class="username">{{ post.user.name }}</h2>
                 </div>
 
 
@@ -19,10 +19,10 @@
                 </div>
             </div>
             <div class="line"></div>
-            <div class="commentaries">
-                <div class="comment">
-                    <img class="comment-user" src="../Includes/Images/User.png" alt="User">
-                    <i class="comment-title">Gavnoi vonyaet</i>
+            <div class="commentaries" >
+                <div class="comment" v-for="comment in post.comments">
+                    <div><img class="comment-user" src="../Includes/Images/User.png" alt="User">{{ comment.writer.name }}</div>
+                    <i class="comment-title">{{comment.content}}</i>
                 </div>
 
 
@@ -65,6 +65,10 @@ export default {
                 content:this.content,
                 post_id:this.$route.params.id
             })
+                .then(()=>{
+                    this.getPost()
+                    this.content=''
+                })
         }
     }
 }

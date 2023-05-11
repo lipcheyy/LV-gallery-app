@@ -32,9 +32,13 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     storeComment: function storeComment() {
+      var _this2 = this;
       _api__WEBPACK_IMPORTED_MODULE_0__["default"].post("/api/auth/posts/".concat(this.$route.params.id, "/comment"), {
         content: this.content,
         post_id: this.$route.params.id
+      }).then(function () {
+        _this2.getPost();
+        _this2.content = '';
       });
     }
   }
@@ -57,9 +61,9 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", {
+  return _vm.post && _vm.post.images ? _c("div", {
     staticClass: "main-container"
-  }, [_vm.post && _vm.post.images ? [_vm._l(_vm.post.images, function (image) {
+  }, [[_vm._l(_vm.post.images, function (image) {
     return [_c("img", {
       staticClass: "post",
       attrs: {
@@ -67,11 +71,37 @@ var render = function render() {
         alt: "Post"
       }
     })];
-  })] : _vm._e(), _vm._v(" "), _c("div", {
+  })], _vm._v(" "), _c("div", {
     staticClass: "commentaries-container"
-  }, [_vm._m(0), _vm._v(" "), _c("div", {
+  }, [_c("div", {
+    staticClass: "post-user-info"
+  }, [_c("div", {
+    staticClass: "user-info"
+  }, [_c("img", {
+    staticClass: "user",
+    attrs: {
+      src: __webpack_require__(/*! ../Includes/Images/User.png */ "./resources/js/components/Includes/Images/User.png"),
+      alt: "User"
+    }
+  }), _vm._v(" "), _c("h2", {
+    staticClass: "username"
+  }, [_vm._v(_vm._s(_vm.post.user.name))])]), _vm._v(" "), _vm._m(0)]), _vm._v(" "), _c("div", {
     staticClass: "line"
-  }), _vm._v(" "), _vm._m(1), _vm._v(" "), _c("div", {
+  }), _vm._v(" "), _c("div", {
+    staticClass: "commentaries"
+  }, _vm._l(_vm.post.comments, function (comment) {
+    return _c("div", {
+      staticClass: "comment"
+    }, [_c("div", [_c("img", {
+      staticClass: "comment-user",
+      attrs: {
+        src: __webpack_require__(/*! ../Includes/Images/User.png */ "./resources/js/components/Includes/Images/User.png"),
+        alt: "User"
+      }
+    }), _vm._v(_vm._s(comment.writer.name))]), _vm._v(" "), _c("i", {
+      staticClass: "comment-title"
+    }, [_vm._v(_vm._s(comment.content))])]);
+  }), 0), _vm._v(" "), _c("div", {
     staticClass: "send-container"
   }, [_c("input", {
     directives: [{
@@ -107,46 +137,18 @@ var render = function render() {
     }
   }, [_c("i", {
     staticClass: "fa-sharp fa-solid fa-paper-plane"
-  })])])])], 2);
+  })])])])], 2) : _vm._e();
 };
 var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
-    staticClass: "post-user-info"
-  }, [_c("div", {
-    staticClass: "user-info"
-  }, [_c("img", {
-    staticClass: "user",
-    attrs: {
-      src: __webpack_require__(/*! ../Includes/Images/User.png */ "./resources/js/components/Includes/Images/User.png"),
-      alt: "User"
-    }
-  }), _vm._v(" "), _c("h2", {
-    staticClass: "username"
-  }, [_vm._v("Vasya")])]), _vm._v(" "), _c("div", {
     staticClass: "post-interaction"
   }, [_c("i", {
     staticClass: "far fa-heart likeBtn"
   }), _vm._v(" "), _c("i", {
     staticClass: "far fa-bookmark"
-  })])]);
-}, function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("div", {
-    staticClass: "commentaries"
-  }, [_c("div", {
-    staticClass: "comment"
-  }, [_c("img", {
-    staticClass: "comment-user",
-    attrs: {
-      src: __webpack_require__(/*! ../Includes/Images/User.png */ "./resources/js/components/Includes/Images/User.png"),
-      alt: "User"
-    }
-  }), _vm._v(" "), _c("i", {
-    staticClass: "comment-title"
-  }, [_vm._v("Gavnoi vonyaet")])])]);
+  })]);
 }];
 render._withStripped = true;
 
