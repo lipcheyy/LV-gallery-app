@@ -9,7 +9,10 @@
                         :likesCount="post.likesCount"
                         :likedIds="likedIds"
                         :savedIds="savedIds"
-                        :user="post.user">
+                        :user="post.user"
+                        :title="post.title"
+                        :date="post.date">
+
                     </post-layout>
                 </template>
             </div>
@@ -78,6 +81,7 @@ export default {
                     this.posts = res.data.data
                     this.pagination = res.data.meta
                     this.$Progress.finish()
+                    console.log(this.posts);
                 })
         },
         getUserLikes() {
