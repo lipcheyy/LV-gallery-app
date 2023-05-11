@@ -40,6 +40,9 @@ export default {
         this.getPosts()
         this.getUserLikes()
         this.getUserSaves()
+        this.$router.afterEach((to,from)=>{
+            this.getPosts()
+        })
     },
     methods: {
         getPosts() {

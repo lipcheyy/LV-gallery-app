@@ -30,34 +30,38 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
+    var _this = this;
     this.getPosts();
     this.getUserLikes();
     this.getUserSaves();
+    this.$router.afterEach(function (to, from) {
+      _this.getPosts();
+    });
   },
   methods: {
     getPosts: function getPosts() {
-      var _this = this;
+      var _this2 = this;
       this.$Progress.start();
       _api__WEBPACK_IMPORTED_MODULE_1__["default"].get("/api/auth/posts/".concat(this.$route.params.id, "/posts")).then(function (res) {
-        _this.posts = res.data.data;
-        _this.$Progress.finish();
+        _this2.posts = res.data.data;
+        _this2.$Progress.finish();
       });
     },
     getUserLikes: function getUserLikes() {
-      var _this2 = this;
+      var _this3 = this;
       _api__WEBPACK_IMPORTED_MODULE_1__["default"].get('/api/auth/posts/liked').then(function (res) {
-        _this2.userLiked = res.data;
+        _this3.userLiked = res.data;
         // console.log(this.userLiked);
-        _this2.userLiked.forEach(function (liked) {
-          _this2.likedIds.push(liked.id);
+        _this3.userLiked.forEach(function (liked) {
+          _this3.likedIds.push(liked.id);
         });
       });
     },
     getUserSaves: function getUserSaves() {
-      var _this3 = this;
+      var _this4 = this;
       _api__WEBPACK_IMPORTED_MODULE_1__["default"].get('/api/auth/posts/saved').then(function (res) {
         res.data.forEach(function (saved) {
-          _this3.savedIds.push(saved.id);
+          _this4.savedIds.push(saved.id);
         });
       });
     }
