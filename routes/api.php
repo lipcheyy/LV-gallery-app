@@ -32,7 +32,9 @@ Route::group([
     Route::post('refresh', 'AuthController@refresh');
     Route::group(['middleware'=>'jwt.auth'],function (){
         //лише для авторизованих
-
+        Route::group(['namespace' => 'User', 'prefix' => 'users'], function () {
+            Route::get('/','DataController@getSavedPosts');
+        });
         Route::group(['namespace' => 'Personal'], function () {
             Route::post('personal','IndexController');
         });
@@ -51,19 +53,18 @@ Route::group([
                 Route::delete('/{user}','UserController@destroy');
             });
         });
-        Route::group(['namespace' => 'User', 'prefix' => 'user'], function () {
-            Route::post('/userdata','DataController');
-        });
         Route::group(['namespace'=>'Post','prefix'=>'posts'],function () {
             Route::post('/', 'PostsController@store');
             Route::post('/list', 'PostsController@index');
             Route::get('/liked','PostsController@checkUserLiked');
             Route::get('/saved','PostsController@checkUserSaved');
             Route::get('/{post}','PostsController@show');
+
             Route::group(['namespace' => 'Like', 'prefix' => '{post}/likes'], function () {
                 Route::post('/','LikeController@store');
             });
-            Route::group(['namespace'=>'Save','prefix'=>'{post}/saves'], function (){
+
+            Route::group(['namespace'=>'Save','prefix'=>'/{post}/saves'], function (){
                 Route::post('/','SaveController@store');
             });
         });

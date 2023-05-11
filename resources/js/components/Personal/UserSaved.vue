@@ -11,6 +11,7 @@
 </template>
 
 <script>
+import api from "../../api"
 export default {
     name: "UserSaved",
     mounted() {
@@ -18,6 +19,12 @@ export default {
         setTimeout(()=>{
             this.$Progress.finish()
         },350)
+        this.getSavedPosts()
+    },
+    methods:{
+        getSavedPosts(){
+
+        }
     }
 }
 </script>

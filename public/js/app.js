@@ -5552,7 +5552,7 @@ var render = function render() {
         name: "post.create"
       }
     }
-  }, [_vm._v("Створити")]) : _vm._e()], 1), _vm._v(" "), _vm._m(2), _vm._v(" "), _c("li", [_vm.access_token && _vm.userRole === 1 ? _c("router-link", {
+  }, [_vm._v("Створити")]) : _vm._e()], 1), _vm._v(" "), _vm._m(2), _vm._v(" "), _vm._m(3), _vm._v(" "), _c("li", [_vm.access_token && _vm.userRole === 1 ? _c("router-link", {
     staticClass: "white_style_text",
     attrs: {
       "exact-active-class": "active",
@@ -5625,15 +5625,27 @@ var staticRenderFns = [function () {
 }, function () {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("li", [_c("select", {
-    staticClass: "white_style_text selector"
-  }, [_c("option", {
+  return _c("div", {
+    staticClass: "category_block",
     attrs: {
-      value: "",
-      disabled: "",
-      selected: ""
+      id: "categoryy"
     }
-  }, [_vm._v("Категорії")])])]);
+  }, [_c("li", {
+    attrs: {
+      id: "categoryy"
+    }
+  }, [_c("a", {
+    staticClass: "white_style_text",
+    attrs: {
+      id: "categoryy"
+    }
+  }, [_vm._v("Категорії ")])])]);
+}, function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("div", {
+    staticClass: "category_list"
+  }, [_c("ul", [_c("a", [_vm._v("ct1")])])]);
 }];
 render._withStripped = true;
 
@@ -11182,7 +11194,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Praise&display=swap);"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n*[data-v-925172a2]{\n    margin:0px;\n    padding:0px;\n    box-sizing: border-box;\n}\na[data-v-925172a2]{\n    outline: none;\n    text-decoration: none;\n}\n.checkbtn[data-v-925172a2]{\n    position: absolute;\n    right: 15px;\n    font-size: 34px;\n    cursor: pointer;\n    float: right;\n    line-height: 80px;\n    margin-right: 30px;\n    display: none;\n}\n#check[data-v-925172a2]{\n    display: none;\n}\n.header[data-v-925172a2]{\n    background: #D9D9D9;\n    min-height: 135px;\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n    /*margin-bottom:74px;*/\n}\n.leftNav[data-v-925172a2]{\n    text-decoration: none;\n    display: flex;\n    list-style: none;\n    align-items: center;\n    padding-left: 38px;\n}\n.navbarL[data-v-925172a2]{\n    text-decoration: none;\n    display: flex;\n    list-style: none;\n    align-items: center;\n}\n.navbarR[data-v-925172a2]{\n    text-decoration: none;\n    display: flex;\n    list-style: none;\n    align-items: center;\n    padding-right: 85px;\n}\n.navbarR li[data-v-925172a2],\n.navbarL li[data-v-925172a2]{\n    padding-left: 37px;\n}\n.logo[data-v-925172a2]{\n    width: 60px;\n    height: 60px;\n}\n.icoRighr[data-v-925172a2]{\n    width: 50px;\n    height: 50px;\n}\n.white_style_text[data-v-925172a2]{\n    background: #FFFFFF;\n    border-radius: 20px;\n    font-style:normal;\n    font-weight: 400;\n    font-size: 24px;\n    line-height: 29px;\n    letter-spacing: 0.065em;\n    padding: 7px 20px;\n    color: #000000;\n    display: flex;\n    align-items: center;\n}\n.v_ico[data-v-925172a2]{\n    width: 12.5px;\n    height: 8.04px;\n    margin-left: 30px;\n    color: black;\n}\n.active[data-v-925172a2]{\n    color: #FFFFFF;\n    background: #B00000;\n}\n#check[data-v-925172a2]{\n    display: none;\n}\n@media only screen and (max-width:1309px) {\n.navbarL[data-v-925172a2]{\n        padding-left: 15px;\n}\n.navbarR[data-v-925172a2]{\n        padding-right: 15px;\n}\n.navbarR li[data-v-925172a2],\n    .navbarL li[data-v-925172a2]{\n        padding-left: 15px;\n}\n}\n@media only screen and (max-width:905px) {\n.navbarR[data-v-925172a2]{\n        padding-right: 100px;\n}\n.checkbtn[data-v-925172a2]{\n        display: block;\n}\n.navbarL[data-v-925172a2]{\n        position: absolute;\n        width: 100%;\n        height: -moz-max-content;\n        height: max-content;\n        padding: 20px 0;\n        background: #6c6b6b;\n        top: 136px;\n        text-align: center;\n        display: flex;\n        flex-direction: column;\n        gap: 10px;\n        left: -100%;\n        transition: all .5s;\n}\n.red_style_text[data-v-925172a2],\n    .white_style_text[data-v-925172a2]{\n        border-radius: 10px;\n        width:360px;\n}\n.navbarL li[data-v-925172a2]{\n        padding-left: 0px;\n}\n#check:checked ~ .navbarL[data-v-925172a2] {\n        left: 0%;\n}\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n*[data-v-925172a2]{\n    margin:0px;\n    padding:0px;\n    box-sizing: border-box;\n}\na[data-v-925172a2]{\n    outline: none;\n    text-decoration: none;\n}\n.checkbtn[data-v-925172a2]{\n    position: absolute;\n    right: 15px;\n    font-size: 34px;\n    cursor: pointer;\n    float: right;\n    line-height: 80px;\n    margin-right: 30px;\n    display: none;\n}\n#check[data-v-925172a2]{\n    display: none;\n}\n.header[data-v-925172a2]{\n    background: #D9D9D9;\n    min-height: 135px;\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n    z-index: 13;\n    /*margin-bottom:74px;*/\n}\n.leftNav[data-v-925172a2]{\n    text-decoration: none;\n    display: flex;\n    list-style: none;\n    align-items: center;\n    padding-left: 38px;\n}\n.navbarL[data-v-925172a2]{\n    text-decoration: none;\n    display: flex;\n    list-style: none;\n    align-items: center;\n}\n.navbarR[data-v-925172a2]{\n    text-decoration: none;\n    display: flex;\n    list-style: none;\n    align-items: center;\n    padding-right: 85px;\n}\n.navbarR li[data-v-925172a2],\n.navbarL li[data-v-925172a2]{\n    padding-left: 37px;\n    z-index: 2;\n}\n.logo[data-v-925172a2]{\n    width: 60px;\n    height: 60px;\n}\n.icoRighr[data-v-925172a2]{\n    width: 50px;\n    height: 50px;\n}\n.white_style_text[data-v-925172a2]{\n    background: #FFFFFF;\n    border-radius: 20px;\n    font-style:normal;\n    font-weight: 400;\n    font-size: 24px;\n    line-height: 29px;\n    letter-spacing: 0.065em;\n    padding: 7px 20px;\n    color: #000000;\n    display: flex;\n    align-items: center;\n}\n.v_ico[data-v-925172a2]{\n    width: 12.5px;\n    height: 8.04px;\n    margin-left: 30px;\n    color: black;\n}\n.active[data-v-925172a2]{\n    color: #FFFFFF;\n    background: #B00000;\n}\n#check[data-v-925172a2]{\n    display: none;\n}\n#categoryy[data-v-925172a2] {\n    position: relative;\n}\n.category_list[data-v-925172a2] {\n    position: absolute;\n    top: 135px;\n    z-index: 1;\n    display: none;\n    max-width:80%;\n    background: #D9D9D9;\n    border: 1px solid black;\n    border-top: none;\n    padding:0px 15px 15px 15px;\n    flex-direction:column;\n    width: 100%;\n    flex-wrap: wrap;\n}\n.category_list ul[data-v-925172a2]{\n    display:flex;\n    flex-direction:column;\n    max-height:600px;\n    gap:20px;\n    flex-wrap: wrap;\n}\n.category_list a[data-v-925172a2] {\n    list-style: none;\n    font-size: 18px;\n    text-align: center;\n    background: #FFFFFF;\n    border-radius: 5px;\n    font-style:normal;\n    padding: 7px 20px;\n    color: #000000;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.category_block[data-v-925172a2]{\n    padding-bottom: 45px;\n    margin-top: 46px;\n}\n#categoryy:hover + .category_list[data-v-925172a2] {\n    display: flex;\n}\n.category_list[data-v-925172a2]:hover{\n    display: flex;\n}\n@media only screen and (max-width:1309px) {\n.navbarL[data-v-925172a2]{\n        padding-left: 15px;\n}\n.navbarR[data-v-925172a2]{\n        padding-right: 15px;\n}\n.navbarR li[data-v-925172a2],\n    .navbarL li[data-v-925172a2]{\n        padding-left: 15px;\n}\n}\n@media only screen and (max-width:905px) {\n.category_block[data-v-925172a2]{\n        padding-bottom: 0px;\n        margin-top: 0px;\n}\n.navbarR[data-v-925172a2]{\n        padding-right: 100px;\n}\n.checkbtn[data-v-925172a2]{\n        display: block;\n}\n.navbarL[data-v-925172a2]{\n        position: absolute;\n        width: 100%;\n        height: -moz-max-content;\n        height: max-content;\n        padding: 20px 0;\n        background-color: rgba(128,128,128, 0.9);\n        top: 136px;\n        text-align: center;\n        display: flex;\n        flex-direction: column;\n        gap: 10px;\n        left: -100%;\n        transition: all .5s;\n        z-index: 1;\n}\n.red_style_text[data-v-925172a2],\n    .white_style_text[data-v-925172a2]{\n        border-radius: 10px;\n        width:360px;\n}\n.navbarL li[data-v-925172a2]{\n        padding-left: 0px;\n}\n#check:checked ~ .navbarL[data-v-925172a2] {\n        left: 0%;\n}\n.category_list[data-v-925172a2] {\n        top: 198px;\n        border: none;\n        max-width: 100%;\n        width: 100%;\n        gap: 10px;\n        background-color: rgba(128,128,128, 0.9);\n        transition: all .5s;\n        justify-content: center;\n        align-items: center;\n        padding:15px;\n        transition: all .5s;\n}\n.category_list ul[data-v-925172a2]{\n        display:flex;\n        flex-direction:column;\n        max-height:-moz-max-content;\n        max-height:max-content;\n        width:300px;\n        gap:20px;\n        flex-wrap: wrap;\n        padding:0px;\n}\n.category_list a[data-v-925172a2] {\n        list-style: none;\n        font-size: 18px;\n        text-align: center;\n        background: #FFFFFF;\n        border-radius: 5px;\n        font-style:normal;\n        padding: 7px 20px;\n        color: #000000;\n}\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
