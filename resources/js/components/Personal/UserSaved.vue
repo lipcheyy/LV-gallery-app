@@ -44,7 +44,7 @@ export default {
     methods: {
         getPosts() {
             this.$Progress.start()
-                api.get(`/api/auth/users`, )
+                api.get(`/api/auth/users/saved`, )
                     .then(res => {
                         console.log(132);
                         this.posts = res.data.data

@@ -15,4 +15,8 @@ class DataController extends Controller
         $savedPosts=auth()->user()->savedPosts;
         return PostResource::collection($savedPosts);
     }
+    public function getOwnPosts(){
+        $ownPosts=auth()->user()->posts;
+        return PostResource::collection($ownPosts);
+    }
 }
