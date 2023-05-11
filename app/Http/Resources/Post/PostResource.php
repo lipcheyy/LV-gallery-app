@@ -22,6 +22,7 @@ class PostResource extends JsonResource
             'title'=>$this->title,
             'likesCount'=>$this->liked_users_count,
             'images'=>ImageResource::collection($this->images),
+            'date'=>$this->created_at->diffForHumans(),
             'user'=>new UserResource($this->userCreated)
         ];
     }

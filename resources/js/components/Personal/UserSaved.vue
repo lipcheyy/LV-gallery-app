@@ -9,7 +9,8 @@
                         :likesCount="post.likesCount"
                         :likedIds="likedIds"
                         :savedIds="savedIds"
-                        :user="post.user">
+                        :user="post.user"
+                        :title="post.title">
                     </post-layout>
                 </template>
             </div>

@@ -15,7 +15,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "PostLayout",
-  props: ['url', 'title', 'id', 'likedIds', 'savedIds', 'likesCount', 'user'],
+  props: ['url', 'title', 'id', 'likedIds', 'savedIds', 'likesCount', 'user', 'date'],
   data: function data() {
     return {
       posts: null,
@@ -103,6 +103,7 @@ __webpack_require__.r(__webpack_exports__);
         _this.posts = res.data.data;
         _this.pagination = res.data.meta;
         _this.$Progress.finish();
+        console.log(_this.posts);
       });
     },
     getUserLikes: function getUserLikes() {
@@ -160,14 +161,18 @@ var render = function render() {
     attrs: {
       href: "#"
     }
-  }, [_vm._v(_vm._s(_vm.user.name))])] : _vm._e()], 2), _vm._v(" "), _vm._m(0)]), _vm._v(" "), _c("img", {
+  }, [_vm._v(_vm._s(_vm.user.name))])] : _vm._e()], 2), _vm._v(" "), _c("div", {
+    staticClass: "post-time"
+  }, [_c("a", {
+    staticClass: "time"
+  }, [_vm._v(_vm._s(_vm.date))])])]), _vm._v(" "), _c("img", {
     staticClass: "img",
     attrs: {
       src: _vm.url
     }
   }), _vm._v(" "), _c("div", {
     staticClass: "buttons-container"
-  }, [_c("div", {
+  }, [_c("div", [_vm._v(_vm._s(_vm.title))]), _vm._v(" "), _c("div", {
     staticClass: "like_container"
   }, [_c("a", {
     attrs: {
@@ -209,15 +214,7 @@ var render = function render() {
     }
   })])])])]);
 };
-var staticRenderFns = [function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("div", {
-    staticClass: "post-time"
-  }, [_c("a", {
-    staticClass: "time"
-  }, [_vm._v("03.05.2023")])]);
-}];
+var staticRenderFns = [];
 render._withStripped = true;
 
 
@@ -253,7 +250,9 @@ var render = function render() {
           likesCount: post.likesCount,
           likedIds: _vm.likedIds,
           savedIds: _vm.savedIds,
-          user: post.user
+          user: post.user,
+          title: post.title,
+          date: post.date
         }
       })];
     })], 2);

@@ -13,12 +13,13 @@
             </div>
 
             <div class="post-time">
-                <a class="time">03.05.2023</a>
+                <a class="time">{{ date }}</a>
             </div>
 
         </div>
         <img class="img" :src="url">
         <div class="buttons-container">
+            <div>{{ title }}</div>
             <div class="like_container">
                 <a href="" @click.prevent="toggleLike(id)">
                     <i class="far fa-heart likeBtn"
@@ -42,7 +43,7 @@ import api from "../../api";
 
 export default {
     name: "PostLayout",
-    props: ['url', 'title', 'id', 'likedIds', 'savedIds', 'likesCount', 'user'],
+    props: ['url', 'title', 'id', 'likedIds', 'savedIds', 'likesCount', 'user','date'],
     data() {
         return {
             posts: null,
