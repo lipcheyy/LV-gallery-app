@@ -251,8 +251,7 @@ var render = function render() {
           likedIds: _vm.likedIds,
           savedIds: _vm.savedIds,
           user: post.user,
-          title: post.title,
-          date: post.date
+          title: post.title
         }
       })];
     })], 2);

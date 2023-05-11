@@ -21,5 +21,8 @@ class Post extends Model
             'post_id',
             'user_id');
     }
+    public function comments(){
+        return $this->hasMany(Comment::class);
+    }
     protected $withCount=['likedUsers'];
 }

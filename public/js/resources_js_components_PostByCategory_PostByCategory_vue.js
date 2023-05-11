@@ -252,7 +252,8 @@ var render = function render() {
           likedIds: _vm.likedIds,
           savedIds: _vm.savedIds,
           user: post.user,
-          title: post.title
+          title: post.title,
+          date: post.date
         }
       })];
     })], 2);

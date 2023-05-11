@@ -10,7 +10,8 @@
                         :likedIds="likedIds"
                         :savedIds="savedIds"
                         :user="post.user"
-                        :title="post.title">
+                        :title="post.title"
+                        :date="post.date">
                     </post-layout>
                 </template>
             </div>
