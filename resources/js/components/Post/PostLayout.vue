@@ -35,6 +35,7 @@
             </div>
 
         </div>
+        <router-link :to="{name:'post.show',params:{id:id}}" class="btn btn-primary">детальніше</router-link>
     </div>
 </template>
 

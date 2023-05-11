@@ -1,6 +1,6 @@
 <template>
     <div class="main-container" v-if="post && post.images">
-        <template >
+        <template>
             <template v-for="image in post.images">
                 <img class="post" :src="image.url" alt="Post">
             </template>
@@ -19,11 +19,16 @@
                 </div>
             </div>
             <div class="line"></div>
-            <div class="commentaries" >
+            <div class="commentaries">
                 <div class="comment" v-for="comment in post.comments">
-                    <div><img class="comment-user" src="../Includes/Images/User.png" alt="User">{{ comment.writer.name }}</div>
-                    <i class="comment-title">{{comment.content}}</i>
-                    <p @click.prevent="destroy(comment.id)">delete</p>
+                    <div><img class="comment-user" src="../Includes/Images/User.png" alt="User">{{
+                            comment.writer.name
+                        }}
+                    </div>
+                    <i class="comment-title">{{ comment.content }}</i>
+                    <template v-if="comment.writer.id===user_id">
+                        <div @click.prevent="destroy(comment.id)"><i class="fas fa-trash"></i></div>
+                    </template>
                 </div>
 
 
@@ -48,11 +53,13 @@ export default {
     data() {
         return {
             post: null,
-            content:''
+            content: '',
+            user_id: localStorage.getItem('id')
         }
     },
     mounted() {
         this.getPost()
+        this.me()
     },
     methods: {
         getPost() {
@@ -61,22 +68,22 @@ export default {
                     this.post = res.data.data
                 })
         },
-        storeComment(){
-            api.post(`/api/auth/posts/${this.$route.params.id}/comments`,{
-                content:this.content,
-                post_id:this.$route.params.id
+        storeComment() {
+            api.post(`/api/auth/posts/${this.$route.params.id}/comments`, {
+                content: this.content,
+                post_id: this.$route.params.id
             })
-                .then(()=>{
+                .then(() => {
                     this.getPost()
-                    this.content=''
+                    this.content = ''
                 })
         },
-        destroy(id){
+        destroy(id) {
             api.delete(`/api/auth/posts/${this.$route.params.id}/comments/${id}`)
-                .then(()=>{
+                .then(() => {
                     this.getPost()
                 })
-        }
+        },
     }
 }
 </script>

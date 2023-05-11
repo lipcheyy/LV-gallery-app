@@ -5377,6 +5377,7 @@ __webpack_require__.r(__webpack_exports__);
           var user = res.data;
           localStorage.setItem('user_role', user.role);
           localStorage.setItem('username', user.name);
+          localStorage.setItem('id', user.id);
           _this3.userRole = parseInt(user.role);
         });
       }

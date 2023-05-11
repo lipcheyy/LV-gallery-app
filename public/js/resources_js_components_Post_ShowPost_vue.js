@@ -18,11 +18,13 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       post: null,
-      content: ''
+      content: '',
+      user_id: localStorage.getItem('id')
     };
   },
   mounted: function mounted() {
     this.getPost();
+    this.me();
   },
   methods: {
     getPost: function getPost() {
@@ -104,16 +106,18 @@ var render = function render() {
         src: __webpack_require__(/*! ../Includes/Images/User.png */ "./resources/js/components/Includes/Images/User.png"),
         alt: "User"
       }
-    }), _vm._v(_vm._s(comment.writer.name))]), _vm._v(" "), _c("i", {
+    }), _vm._v(_vm._s(comment.writer.name) + "\n                ")]), _vm._v(" "), _c("i", {
       staticClass: "comment-title"
-    }, [_vm._v(_vm._s(comment.content))]), _vm._v(" "), _c("p", {
+    }, [_vm._v(_vm._s(comment.content))]), _vm._v(" "), comment.writer.id === _vm.user_id ? [_c("div", {
       on: {
         click: function click($event) {
           $event.preventDefault();
           return _vm.destroy(comment.id);
         }
       }
-    }, [_vm._v("delete")])]);
+    }, [_c("i", {
+      staticClass: "fas fa-trash"
+    })])] : _vm._e()], 2);
   }), 0), _vm._v(" "), _c("div", {
     staticClass: "send-container"
   }, [_c("input", {
