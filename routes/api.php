@@ -59,6 +59,7 @@ Route::group([
             Route::get('/liked','PostsController@checkUserLiked');
             Route::get('/saved','PostsController@checkUserSaved');
             Route::get('/{post}','PostsController@show');
+            Route::get('{category}/posts','PostsController@postsByCategory');
 
             Route::group(['namespace' => 'Like', 'prefix' => '{post}/likes'], function () {
                 Route::post('/','LikeController@store');

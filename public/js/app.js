@@ -5855,6 +5855,12 @@ var route = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     },
     name: 'post.show'
   }, {
+    path: '/category/:id/posts',
+    component: function component() {
+      return __webpack_require__.e(/*! import() */ "resources_js_components_PostByCategory_PostByCategory_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/PostByCategory/PostByCategory */ "./resources/js/components/PostByCategory/PostByCategory.vue"));
+    },
+    name: 'post.show'
+  }, {
     path: '/personal',
     component: function component() {
       return __webpack_require__.e(/*! import() */ "resources_js_components_Personal_Personal_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Personal/Personal */ "./resources/js/components/Personal/Personal.vue"));
@@ -44743,7 +44749,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_User_Login_vue":1,"resources_js_components_User_Registration_vue":1,"resources_js_components_Post_ShowPost_vue":1,"resources_js_components_Personal_Personal_vue":1,"resources_js_components_Admin_AdminStatistic_vue":1,"resources_js_components_Admin_Category_CategoryIndex_vue":1,"resources_js_components_Post_CreatePost_vue":1,"resources_js_components_Post_PostsIndex_vue":1,"resources_js_components_Admin_AddUser_UserIndex_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_User_Login_vue":1,"resources_js_components_User_Registration_vue":1,"resources_js_components_Post_ShowPost_vue":1,"resources_js_components_PostByCategory_PostByCategory_vue":1,"resources_js_components_Personal_Personal_vue":1,"resources_js_components_Admin_AdminStatistic_vue":1,"resources_js_components_Admin_Category_CategoryIndex_vue":1,"resources_js_components_Post_CreatePost_vue":1,"resources_js_components_Post_PostsIndex_vue":1,"resources_js_components_Admin_AddUser_UserIndex_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

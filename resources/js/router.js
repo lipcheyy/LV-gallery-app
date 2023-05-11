@@ -21,6 +21,11 @@ const route =new VueRouter({
             name:'post.show'
         },
         {
+            path:'/category/:id/posts',
+            component: ()=> import('./components/PostByCategory/PostByCategory'),
+            name:'post.show'
+        },
+        {
             path:'/personal',
             component: ()=> import('./components/Personal/Personal'),
             name:'personal.page'
