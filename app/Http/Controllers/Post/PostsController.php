@@ -29,11 +29,11 @@ class   PostsController extends Controller
     }
     public function update(UpdateRequest $request, Post $post){
         $data = $request->validated();
-        return dump($data);
-        $images = $data['images'];
-        unset($data['images']);
+        $images = $data['images'] ?? null;
+        $imagesToDelete=$data['imgToDelete']??null;
+        unset($data['images'],$data['imgToDelete']);
         $data['user_id'] = auth()->user()->id;
-        $post = Post::create($data);
+        $post->update($data);
         foreach ($images as $image) {
             $imageName = md5(Carbon::now() . '_' . $image->getClientOriginalName()) . '.' . $image->getClientOriginalExtension();
             $filePath = Storage::disk('public')->putFileAs('/images', $image, $imageName);
