@@ -80,7 +80,7 @@ export default {
             maxFiles:1
         })
         this.getCategories()
-        this.getPost()
+
         this.username=localStorage.getItem('username')
     },
     methods: {
@@ -118,12 +118,7 @@ export default {
                     this.$Progress.finish()
                 })
             },
-        getPost(){
-            api.get('/api/auth/posts')
-                .then(res=>{
-                    this.post=res.data.data
-                })
-        }
+
     }
 }
 </script>
