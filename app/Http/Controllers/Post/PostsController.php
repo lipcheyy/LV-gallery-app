@@ -25,13 +25,39 @@ class   PostsController extends Controller
         });
         return PostResource::collection($posts);
     }
+    public function update(StoreRequest $request){
+        $data = $request->validated();
+        $images = $data['images'];
+        unset($data['images']);
+        $data['user_id'] = auth()->user()->id;
+        $post = Post::create($data);
+        foreach ($images as $image) {
+            $imageName = md5(Carbon::now() . '_' . $image->getClientOriginalName()) . '.' . $image->getClientOriginalExtension();
+            $filePath = Storage::disk('public')->putFileAs('/images', $image, $imageName);
+            $previewName = 'prev_' . $imageName;
+            Image::create([
+                'path' => $filePath,
+                'url' => url('storage/' . $filePath),
+                'post_id' => $post->id
+            ]);
 
+        }
+        return response()->json(['message' => 'image successfully edited']);
+    }
     public function postsByCategory(Category $category)
     {
         $posts = $category->posts()->orderByDesc('id')->get();
         return PostResource::collection($posts);
     }
-
+    public function destroy(Post $post){
+        $postImages=$post->images;
+        foreach ($postImages as $postImage){
+            Storage::disk('public')->delete($postImage->path);
+            $postImage->delete();
+        }
+        $post->delete();
+        return response()->json(['message'=>'deleted']);
+    }
     public function checkUserLiked()
     {
         $isLiked = auth()->user()->likedPosts;

@@ -61,6 +61,21 @@ __webpack_require__.r(__webpack_exports__);
         _this2.categories = res.data.data;
         _this2.$Progress.finish();
       });
+    },
+    uodate: function uodate(id) {
+      var _this3 = this;
+      var data = new FormData();
+      var files = this.dropzone.getAcceptedFiles();
+      files.forEach(function (file) {
+        data.append('images[]', file);
+        _this3.dropzone.removeFile(file);
+      });
+      data.append('title', this.title);
+      data.append('category_id', this.category_id);
+      data.append('_method', 'PATCH');
+      _api__WEBPACK_IMPORTED_MODULE_0__["default"].post("/api/auth/posts/".concat(id, "/update"), data).then(function (res) {
+        // this.$router.push({name:'post.show',params:{id:this.postId}})
+      });
     }
   }
 });

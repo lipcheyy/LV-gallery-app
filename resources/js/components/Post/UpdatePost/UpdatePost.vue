@@ -85,6 +85,21 @@ export default {
                     this.$Progress.finish()
                 })
         },
+        uodate(id) {
+            const data = new FormData
+            const files = this.dropzone.getAcceptedFiles()
+            files.forEach(file => {
+                data.append('images[]', file)
+                this.dropzone.removeFile(file)
+            })
+            data.append('title',this.title)
+            data.append('category_id',this.category_id)
+            data.append('_method','PATCH')
+            api.post(`/api/auth/posts/${id}/update`, data)
+                .then(res => {
+                    // this.$router.push({name:'post.show',params:{id:this.postId}})
+                })
+        },
     }
 
 }

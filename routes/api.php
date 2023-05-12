@@ -60,6 +60,8 @@ Route::group([
             Route::get('/liked','PostsController@checkUserLiked');
             Route::get('/saved','PostsController@checkUserSaved');
             Route::get('/{post}','PostsController@show');
+            Route::patch('/{post}/update','PostsController@update');
+            Route::delete('/{post}','PostsController@destroy');
             Route::get('{category}/posts','PostsController@postsByCategory');
 
             Route::group(['namespace' => 'Like', 'prefix' => '{post}/likes'], function () {
