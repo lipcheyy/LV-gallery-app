@@ -34,6 +34,7 @@ Route::group([
         //лише для авторизованих
         Route::group(['namespace' => 'User', 'prefix' => 'users'], function () {
             Route::get('/saved','DataController@getSavedPosts');
+            Route::get('/data','DataController@getData');
             Route::get('/own','DataController@getOwnPosts');
         });
         Route::group(['namespace' => 'Personal'], function () {
