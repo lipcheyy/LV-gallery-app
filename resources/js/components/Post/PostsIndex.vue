@@ -81,7 +81,7 @@ export default {
                     this.posts = res.data.data
                     this.pagination = res.data.meta
                     this.$Progress.finish()
-                    // console.log(this.posts);
+                    console.log(this.posts);
                 })
         },
         getUserLikes() {

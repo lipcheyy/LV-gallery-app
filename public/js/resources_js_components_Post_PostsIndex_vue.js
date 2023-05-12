@@ -110,7 +110,7 @@ __webpack_require__.r(__webpack_exports__);
         _this.posts = res.data.data;
         _this.pagination = res.data.meta;
         _this.$Progress.finish();
-        // console.log(this.posts);
+        console.log(_this.posts);
       });
     },
     getUserLikes: function getUserLikes() {

@@ -34,11 +34,10 @@ __webpack_require__.r(__webpack_exports__);
     this.dropzone = new dropzone__WEBPACK_IMPORTED_MODULE_1__["default"](this.$refs.dropzone, {
       url: 'test',
       autoProcessQueue: false,
-      addRemoveLinks: true,
       maxFiles: 1
     });
     this.dropzone.on('removedfile', function (file) {
-      _this.imgToDelete = file.id;
+      _this.imgToDelete = parseInt(file.id);
     });
     this.getPost();
     this.getCategories();
@@ -82,7 +81,12 @@ __webpack_require__.r(__webpack_exports__);
       data.append('category_id', this.category_id);
       data.append('_method', 'PATCH');
       _api__WEBPACK_IMPORTED_MODULE_0__["default"].post("/api/auth/posts/".concat(id, "/update"), data).then(function (res) {
-        // this.$router.push({name:'post.show',params:{id:this.postId}})
+        _this4.$router.push({
+          name: 'post.show',
+          params: {
+            id: _this4.postId
+          }
+        });
       });
     }
   }

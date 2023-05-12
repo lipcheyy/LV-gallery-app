@@ -59,11 +59,10 @@ export default {
         this.dropzone = new Dropzone(this.$refs.dropzone, {
             url: 'test',
             autoProcessQueue: false,
-            addRemoveLinks:true,
             maxFiles:1
         })
         this.dropzone.on('removedfile',(file)=>{
-           this.imgToDelete=file.id
+           this.imgToDelete=parseInt(file.id)
         })
         this.getPost()
         this.getCategories()
@@ -103,7 +102,7 @@ export default {
             data.append('_method','PATCH')
             api.post(`/api/auth/posts/${id}/update`, data)
                 .then(res => {
-                    // this.$router.push({name:'post.show',params:{id:this.postId}})
+                    this.$router.push({name:'post.show',params:{id:this.postId}})
                 })
         },
     }

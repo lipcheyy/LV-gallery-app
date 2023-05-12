@@ -97,7 +97,6 @@ export default {
                 .then(res => {
                     this.response=res.data.message
                     this.title=''
-                    this.getPost()
                 })
         },
         success() {

@@ -30,20 +30,28 @@ class   PostsController extends Controller
     public function update(UpdateRequest $request, Post $post){
         $data = $request->validated();
         $images = $data['images'] ?? null;
-        $imagesToDelete=$data['imgToDelete']??null;
+        $imagesToDelete = isset($data['imgToDelete']) ? intval($data['imgToDelete']) : null;
         unset($data['images'],$data['imgToDelete']);
-        $data['user_id'] = auth()->user()->id;
+        $postImages=$post->images;
+        foreach ($postImages as $postImage){
+            if($imagesToDelete){
+                Storage::disk('public')->delete($postImage->path);
+                $postImage->delete();
+            }
+        }
         $post->update($data);
-        foreach ($images as $image) {
-            $imageName = md5(Carbon::now() . '_' . $image->getClientOriginalName()) . '.' . $image->getClientOriginalExtension();
-            $filePath = Storage::disk('public')->putFileAs('/images', $image, $imageName);
-            $previewName = 'prev_' . $imageName;
-            Image::create([
-                'path' => $filePath,
-                'url' => url('storage/' . $filePath),
-                'post_id' => $post->id
-            ]);
+        if ($images){
+            foreach ($images as $image) {
+                $imageName = md5(Carbon::now() . '_' . $image->getClientOriginalName()) . '.' . $image->getClientOriginalExtension();
+                $filePath = Storage::disk('public')->putFileAs('/images', $image, $imageName);
+                $previewName = 'prev_' . $imageName;
+                Image::create([
+                    'path' => $filePath,
+                    'url' => url('storage/' . $filePath),
+                    'post_id' => $post->id
+                ]);
 
+            }
         }
         return response()->json(['message' => 'image successfully edited']);
     }

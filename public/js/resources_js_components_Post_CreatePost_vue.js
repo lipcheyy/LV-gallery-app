@@ -61,7 +61,6 @@ __webpack_require__.r(__webpack_exports__);
       _api__WEBPACK_IMPORTED_MODULE_2__["default"].post('/api/auth/posts', data).then(function (res) {
         _this.response = res.data.message;
         _this.title = '';
-        _this.getPost();
       });
     },
     success: function success() {
