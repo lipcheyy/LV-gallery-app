@@ -45,7 +45,6 @@ __webpack_require__.r(__webpack_exports__);
       maxFiles: 1
     });
     this.getCategories();
-    this.getPost();
     this.username = localStorage.getItem('username');
   },
   methods: {
@@ -62,7 +61,6 @@ __webpack_require__.r(__webpack_exports__);
       _api__WEBPACK_IMPORTED_MODULE_2__["default"].post('/api/auth/posts', data).then(function (res) {
         _this.response = res.data.message;
         _this.title = '';
-        _this.getPost();
       });
     },
     success: function success() {
@@ -81,12 +79,6 @@ __webpack_require__.r(__webpack_exports__);
       _api__WEBPACK_IMPORTED_MODULE_2__["default"].get('/api/auth/admin/category').then(function (res) {
         _this2.categories = res.data.data;
         _this2.$Progress.finish();
-      });
-    },
-    getPost: function getPost() {
-      var _this3 = this;
-      _api__WEBPACK_IMPORTED_MODULE_2__["default"].get('/api/auth/posts').then(function (res) {
-        _this3.post = res.data.data;
       });
     }
   }

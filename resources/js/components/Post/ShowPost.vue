@@ -21,6 +21,12 @@
                     <i @click.prevent="save" class="far fa-bookmark" :class="{'fas fa-bookmark':savedIds.includes(id)}"></i>
                 </div>
             </div>
+            <span v-if="post.user.id===user_id">
+            <router-link :to="{name:'post.edit',params:{id:id}}" class="btn btn-success">
+                <i class="fas fa-pencil"></i>
+            </router-link>
+            <a href="#" class="btn btn-danger" @click.prevent="destroyPost(id)"><i class="fas fa-trash"></i></a>
+        </span>
             <div class="line"></div>
             <div class="commentaries">
                 <div class="comment" v-for="comment in post.comments">
@@ -87,7 +93,6 @@ export default {
                 api.get(`/api/auth/posts/${this.id}`)
                     .then(res => {
                         this.post = res.data.data
-                        console.log(this.post);
                     })
             }
         },
@@ -113,6 +118,12 @@ export default {
         getCommentDataToEdit(id, content) {
             this.toEdit = id
             this.contentToEdit = content
+        },
+        destroyPost(id){
+            api.delete(`/api/auth/posts/${id}`)
+                .then(()=>{
+                    this.$router.push({name:'post.index'})
+                })
         },
         update(id) {
             this.toEdit = null

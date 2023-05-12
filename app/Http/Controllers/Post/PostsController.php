@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Post;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Post\StoreRequest;
+use App\Http\Requests\Post\UpdateRequest;
 use App\Http\Resources\Post\PostResource;
 use App\Models\Category;
 use App\Models\Image;
 use App\Models\Post;
 use Carbon\Carbon;
+use http\Message\Body;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -25,13 +27,48 @@ class   PostsController extends Controller
         });
         return PostResource::collection($posts);
     }
+    public function update(UpdateRequest $request, Post $post){
+        $data = $request->validated();
+        $images = $data['images'] ?? null;
+        $imagesToDelete = isset($data['imgToDelete']) ? intval($data['imgToDelete']) : null;
+        unset($data['images'],$data['imgToDelete']);
+        $postImages=$post->images;
+        foreach ($postImages as $postImage){
+            if($imagesToDelete){
+                Storage::disk('public')->delete($postImage->path);
+                $postImage->delete();
+            }
+        }
+        $post->update($data);
+        if ($images){
+            foreach ($images as $image) {
+                $imageName = md5(Carbon::now() . '_' . $image->getClientOriginalName()) . '.' . $image->getClientOriginalExtension();
+                $filePath = Storage::disk('public')->putFileAs('/images', $image, $imageName);
+                $previewName = 'prev_' . $imageName;
+                Image::create([
+                    'path' => $filePath,
+                    'url' => url('storage/' . $filePath),
+                    'post_id' => $post->id
+                ]);
 
+            }
+        }
+        return response()->json(['message' => 'image successfully edited']);
+    }
     public function postsByCategory(Category $category)
     {
         $posts = $category->posts()->orderByDesc('id')->get();
         return PostResource::collection($posts);
     }
-
+    public function destroy(Post $post){
+        $postImages=$post->images;
+        foreach ($postImages as $postImage){
+            Storage::disk('public')->delete($postImage->path);
+            $postImage->delete();
+        }
+        $post->delete();
+        return response()->json(['message'=>'deleted']);
+    }
     public function checkUserLiked()
     {
         $isLiked = auth()->user()->likedPosts;
@@ -59,16 +96,11 @@ class   PostsController extends Controller
         foreach ($images as $image) {
             $imageName = md5(Carbon::now() . '_' . $image->getClientOriginalName()) . '.' . $image->getClientOriginalExtension();
             $filePath = Storage::disk('public')->putFileAs('/images', $image, $imageName);
-            $previewName = 'prev_' . $imageName;
             Image::create([
                 'path' => $filePath,
                 'url' => url('storage/' . $filePath),
-                'preview_url' => url('storage/images/' . $previewName),
                 'post_id' => $post->id
             ]);
-            \Intervention\Image\Facades\Image::make($image)
-                ->fit(100, 100)
-                ->save(storage_path('app/public/images/' . $previewName));
         }
         return response()->json(['message' => 'image successfully uploaded']);
 

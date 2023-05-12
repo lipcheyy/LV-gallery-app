@@ -34,6 +34,7 @@ Route::group([
         //лише для авторизованих
         Route::group(['namespace' => 'User', 'prefix' => 'users'], function () {
             Route::get('/saved','DataController@getSavedPosts');
+            Route::get('/data','DataController@getData');
             Route::get('/own','DataController@getOwnPosts');
         });
         Route::group(['namespace' => 'Personal'], function () {
@@ -60,6 +61,8 @@ Route::group([
             Route::get('/liked','PostsController@checkUserLiked');
             Route::get('/saved','PostsController@checkUserSaved');
             Route::get('/{post}','PostsController@show');
+            Route::patch('/{post}/update','PostsController@update');
+            Route::delete('/{post}','PostsController@destroy');
             Route::get('{category}/posts','PostsController@postsByCategory');
 
             Route::group(['namespace' => 'Like', 'prefix' => '{post}/likes'], function () {

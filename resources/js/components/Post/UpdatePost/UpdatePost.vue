@@ -16,7 +16,7 @@
                 <!--            <vue-editor v-model="title" class="file-title"></vue-editor>-->
                 <div class="name-wrapper">
                     <img
-                        src="./Images/Guest.png"
+                        src="../Images/Guest.png"
                         alt="Guest"
                     >
                     <p class="name">{{username}}</p>
@@ -31,60 +31,65 @@
                         </template>
                     </select>
                 </div>
-                <input @click.prevent="success" type="submit" class="button-create" value="Створити">
-                <!--        <div v-if="post">-->
-                <!--            <p>{{post.title}}</p>-->
-                <!--            <div v-for="image in post.images">-->
-                <!--                <img  :src="image.preview_url" alt="">-->
-                <!--                <img  :src="image.url" alt="">-->
-                <!--            </div>-->
-
-                <!--        </div>-->
-                <div>{{response}}</div>
+                <input @click.prevent="update(post.id)" type="submit" class="button-create" value="updat">
             </div>
         </div>
-        <success v-if="alertMessage" :message="alertMessage" @close="onAlertClose"></success>
     </div>
 </template>
 
 <script>
-import Dropzone from 'dropzone'
-import Success from './SuccessAlert.vue'
+import api from "../../../api";
+import Dropzone from "dropzone";
 
-import api from "../../api";
-import {VueEditor} from "vue2-editor"
 export default {
-    name: "CreatePost",
-    components:{
-        VueEditor,
-        Success
-    },
+    name: "UpdatePost",
     data() {
         return {
-            dropzone: null,
-            title: null,
-            categories: null,
+            postId: parseInt(this.$route.params.id),
+            post: null,
+            categories:null,
+            title:'',
             category_id:1,
-            response:null,
-            post:null,
+            dropzone:null,
             username:'',
-            alertMessage: ''
+            imgToDelete:null
         }
     },
-
     mounted() {
         this.dropzone = new Dropzone(this.$refs.dropzone, {
             url: 'test',
             autoProcessQueue: false,
-            addRemoveLinks:true,
             maxFiles:1
         })
+        this.dropzone.on('removedfile',(file)=>{
+           this.imgToDelete=parseInt(file.id)
+        })
+        this.getPost()
         this.getCategories()
-
-        this.username=localStorage.getItem('username')
     },
     methods: {
-        store() {
+        getPost() {
+            api.get(`/api/auth/posts/${this.postId}`)
+                .then(res => {
+                    this.post = res.data.data
+                    this.title=this.post.title
+                    this.username=this.post.user.name
+                    this.post.images.forEach(image=>{
+                        let file = {id:image.id ,name: "Filename 2", size: 12345 };
+                        this.dropzone.displayExistingFile(file,image.url );
+                    })
+
+                })
+        },getCategories() {
+            this.$Progress.start()
+            api.get('/api/auth/admin/category')
+                .then(res => {
+                    this.categories = res.data.data
+                    this.$Progress.finish()
+                })
+        },
+        update(id) {
+            console.log(this.imgToDelete);
             const data = new FormData
             const files = this.dropzone.getAcceptedFiles()
             files.forEach(file => {
@@ -92,33 +97,16 @@ export default {
                 this.dropzone.removeFile(file)
             })
             data.append('title',this.title)
+            data.append('imgToDelete',this.imgToDelete)
             data.append('category_id',this.category_id)
-            api.post('/api/auth/posts', data)
+            data.append('_method','PATCH')
+            api.post(`/api/auth/posts/${id}/update`, data)
                 .then(res => {
-                    this.response=res.data.message
-                    this.title=''
+                    this.$router.push({name:'post.show',params:{id:this.postId}})
                 })
         },
-        success() {
-            this.store();
-            this.showAlert();
-        },
-        showAlert() {
-            this.alertMessage = 'Пост успішно додано!';
-        },
-        onAlertClose() {
-            this.alertMessage = '';
-        },
-        getCategories() {
-            this.$Progress.start()
-            api.get('/api/auth/admin/category')
-                .then(res => {
-                    this.categories = res.data.data
-                    this.$Progress.finish()
-                })
-            },
-
     }
+
 }
 </script>
 

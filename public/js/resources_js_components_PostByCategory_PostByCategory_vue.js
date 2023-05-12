@@ -19,7 +19,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       posts: null,
-      username: ''
+      username: '',
+      userId: parseInt(localStorage.getItem('id'))
     };
   },
   mounted: function mounted() {},
@@ -52,6 +53,12 @@ __webpack_require__.r(__webpack_exports__);
         this.savedIds.push(id);
       }
       this.save();
+    },
+    destroy: function destroy(id) {
+      var _this = this;
+      _api__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"]("/api/auth/posts/".concat(id)).then(function () {
+        _this.$parent.getPosts();
+      });
     }
   }
 });
@@ -225,7 +232,32 @@ var render = function render() {
         }
       }
     }
-  }, [_vm._v("детальніше")])], 1);
+  }, [_vm._v("детальніше")]), _vm._v(" "), _vm.user.id === _vm.userId ? _c("span", [_c("router-link", {
+    staticClass: "btn btn-success",
+    attrs: {
+      to: {
+        name: "post.edit",
+        params: {
+          id: _vm.id
+        }
+      }
+    }
+  }, [_c("i", {
+    staticClass: "fas fa-pencil"
+  })]), _vm._v(" "), _c("a", {
+    staticClass: "btn btn-danger",
+    attrs: {
+      href: "#"
+    },
+    on: {
+      click: function click($event) {
+        $event.preventDefault();
+        return _vm.destroy(_vm.id);
+      }
+    }
+  }, [_c("i", {
+    staticClass: "fas fa-trash"
+  })])], 1) : _vm._e()], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;

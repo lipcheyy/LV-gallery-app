@@ -11,14 +11,31 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../api */ "./resources/js/api.js");
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "AdminStatistic",
+  data: function data() {
+    return {
+      data: {}
+    };
+  },
   mounted: function mounted() {
     var _this = this;
     this.$Progress.start();
     setTimeout(function () {
       _this.$Progress.finish();
     }, 350);
+    this.getData();
+  },
+  methods: {
+    getData: function getData() {
+      var _this2 = this;
+      _api__WEBPACK_IMPORTED_MODULE_0__["default"].get('/api/auth/users/data').then(function (res) {
+        _this2.data = res.data;
+        console.log(_this2.data);
+      });
+    }
   }
 });
 
@@ -46,7 +63,11 @@ var render = function render() {
     staticClass: "wiget"
   }, [_c("p", {
     staticClass: "wiget-title inter"
-  }, [_vm._v("Кількість користувачів")]), _vm._v(" "), _vm._m(1), _vm._v(" "), _c("div", {
+  }, [_vm._v("Кількість користувачів")]), _vm._v(" "), _c("div", {
+    staticClass: "data-container"
+  }, [_c("p", {
+    staticClass: "count inter"
+  }, [_vm._v(_vm._s(_vm.data.usersCount))]), _vm._v(" "), _vm._m(1)]), _vm._v(" "), _c("div", {
     staticClass: "btn-wrapper"
   }, [_c("router-link", {
     staticClass: "submit-btn inter",
@@ -59,7 +80,11 @@ var render = function render() {
     staticClass: "wiget red"
   }, [_c("p", {
     staticClass: "wiget-title inter"
-  }, [_vm._v("Кількість постів")]), _vm._v(" "), _vm._m(2), _vm._v(" "), _c("div", {
+  }, [_vm._v("Кількість постів")]), _vm._v(" "), _c("div", {
+    staticClass: "data-container"
+  }, [_c("p", {
+    staticClass: "count inter"
+  }, [_vm._v(_vm._s(_vm.data.postsCount))]), _vm._v(" "), _vm._m(2)]), _vm._v(" "), _c("div", {
     staticClass: "btn-wrapper"
   }, [_c("router-link", {
     staticClass: "submit-btn red inter",
@@ -72,7 +97,11 @@ var render = function render() {
     staticClass: "wiget yellow"
   }, [_c("p", {
     staticClass: "wiget-title inter"
-  }, [_vm._v("Кількість категорій")]), _vm._v(" "), _vm._m(3), _vm._v(" "), _c("div", {
+  }, [_vm._v("Кількість категорій")]), _vm._v(" "), _c("div", {
+    staticClass: "data-container"
+  }, [_c("p", {
+    staticClass: "count inter"
+  }, [_vm._v(_vm._s(_vm.data.categoriesCount))]), _vm._v(" "), _vm._m(3)]), _vm._v(" "), _c("div", {
     staticClass: "btn-wrapper"
   }, [_c("router-link", {
     staticClass: "submit-btn yellow inter",
@@ -81,7 +110,17 @@ var render = function render() {
         name: "category.index"
       }
     }
-  }, [_vm._v("Детальніше")])], 1)]), _vm._v(" "), _vm._m(4)])]);
+  }, [_vm._v("Детальніше")])], 1)]), _vm._v(" "), _c("div", {
+    staticClass: "wiget green"
+  }, [_c("p", {
+    staticClass: "wiget-title inter"
+  }, [_vm._v("Кількість зображень")]), _vm._v(" "), _c("div", {
+    staticClass: "data-container"
+  }, [_c("p", {
+    staticClass: "count inter"
+  }, [_vm._v(_vm._s(_vm.data.imagesCount))]), _vm._v(" "), _vm._m(4)]), _vm._v(" "), _c("div", {
+    staticClass: "btn-wrapper"
+  })])])]);
 };
 var staticRenderFns = [function () {
   var _vm = this,
@@ -96,56 +135,34 @@ var staticRenderFns = [function () {
 }, function () {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", {
-    staticClass: "data-container"
-  }, [_c("p", {
-    staticClass: "count inter"
-  }, [_vm._v("150")]), _vm._v(" "), _c("span", {
+  return _c("span", {
     staticClass: "ico_style"
   }, [_c("i", {
     staticClass: "fas fa-users"
-  })])]);
+  })]);
 }, function () {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", {
-    staticClass: "data-container"
-  }, [_c("p", {
-    staticClass: "count inter"
-  }, [_vm._v("150")]), _vm._v(" "), _c("span", {
+  return _c("span", {
     staticClass: "ico_style"
   }, [_c("i", {
     staticClass: "fas fa-pager"
-  })])]);
+  })]);
 }, function () {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", {
-    staticClass: "data-container"
-  }, [_c("p", {
-    staticClass: "count inter"
-  }, [_vm._v("150")]), _vm._v(" "), _c("span", {
+  return _c("span", {
     staticClass: "ico_style"
   }, [_c("i", {
     staticClass: "fas fa-list-ul"
-  })])]);
+  })]);
 }, function () {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", {
-    staticClass: "wiget green"
-  }, [_c("p", {
-    staticClass: "wiget-title inter"
-  }, [_vm._v("Кількість зображень")]), _vm._v(" "), _c("div", {
-    staticClass: "data-container"
-  }, [_c("p", {
-    staticClass: "count inter"
-  }, [_vm._v("150")]), _vm._v(" "), _c("span", {
+  return _c("span", {
     staticClass: "ico_style"
   }, [_c("i", {
     staticClass: "fas fa-image"
-  })])]), _vm._v(" "), _c("div", {
-    staticClass: "btn-wrapper"
   })]);
 }];
 render._withStripped = true;

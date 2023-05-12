@@ -11,7 +11,7 @@
             <div class="wiget">
                 <p class="wiget-title inter">Кількість користувачів</p>
                 <div class="data-container">
-                    <p class="count inter">150</p>
+                    <p class="count inter">{{ data.usersCount }}</p>
                     <span class="ico_style"><i class="fas fa-users"></i></span>
                 </div>
                 <div class="btn-wrapper">
@@ -22,7 +22,7 @@
             <div class="wiget red">
                 <p class="wiget-title inter">Кількість постів</p>
                 <div class="data-container">
-                    <p class="count inter">150</p>
+                    <p class="count inter">{{ data.postsCount }}</p>
                     <span class="ico_style"><i class="fas fa-pager"></i></span>
                 </div>
 
@@ -34,7 +34,7 @@
             <div class="wiget yellow">
                 <p class="wiget-title inter">Кількість категорій</p>
                 <div class="data-container">
-                    <p class="count inter">150</p>
+                    <p class="count inter">{{data.categoriesCount}}</p>
                     <span class="ico_style"><i class="fas fa-list-ul"></i></span>
                 </div>
 
@@ -46,7 +46,7 @@
             <div class="wiget green">
                 <p class="wiget-title inter">Кількість зображень</p>
                 <div class="data-container">
-                    <p class="count inter">150</p>
+                    <p class="count inter">{{ data.imagesCount }}</p>
                     <span class="ico_style"><i class="fas fa-image"></i></span>
                 </div>
 
@@ -62,13 +62,30 @@
 </template>
 
 <script>
+import api from "../../api";
+
 export default {
     name: "AdminStatistic",
+    data(){
+        return{
+            data:{}
+        }
+    },
     mounted() {
         this.$Progress.start()
         setTimeout(()=>{
             this.$Progress.finish()
         },350)
+        this.getData()
+    },
+    methods:{
+        getData(){
+            api.get('/api/auth/users/data')
+                .then(res=>{
+                    this.data=res.data
+                    console.log(this.data);
+                })
+        }
     }
 }
 </script>

@@ -36,6 +36,13 @@
 
         </div>
         <router-link :to="{name:'post.show',params:{id:id}}" class="btn btn-primary">детальніше</router-link>
+        <span v-if="user.id===userId">
+            <router-link :to="{name:'post.edit',params:{id:id}}" class="btn btn-success">
+                <i class="fas fa-pencil"></i>
+            </router-link>
+            <a href="#" class="btn btn-danger" @click.prevent="destroy(id)"><i class="fas fa-trash"></i></a>
+        </span>
+
     </div>
 </template>
 
@@ -44,11 +51,12 @@ import api from "../../api";
 
 export default {
     name: "PostLayout",
-    props: ['url', 'title', 'id', 'likedIds', 'savedIds', 'likesCount', 'user','date'],
+    props: ['url', 'title', 'id', 'likedIds', 'savedIds', 'likesCount', 'user', 'date'],
     data() {
         return {
             posts: null,
-            username:''
+            username: '',
+            userId: parseInt(localStorage.getItem('id'))
         }
     },
     mounted() {
@@ -82,9 +90,13 @@ export default {
                 this.savedIds.push(id)
             }
             this.save()
-
         },
-
+        destroy(id){
+            api.delete(`/api/auth/posts/${id}`)
+                .then(()=>{
+                    this.$parent.getPosts()
+                })
+        }
     }
 }
 </script>
