@@ -9,14 +9,15 @@
             <div class="post-user-info">
                 <div class="user-info">
                     <img class="user" src="../Includes/Images/User.png" alt="User">
-                    <template v-if="post.user.name!==''">
-                        <h2  class="username">{{ post.user.name }}</h2>
-                    </template>
+                    <h2 class="username">{{ post.user.name }}</h2>
+                    <div>title {{ post.title }}</div>
                 </div>
 
-
+                like cnt<span class="likesCount">{{ post.likesCount }}</span>
                 <div class="post-interaction">
-                    <i class="far fa-heart likeBtn"></i>
+                    <span @click.prevent="like">
+                        <i class="far fa-heart" :class="{'fas fa-heart':likedIds.includes(id)}"></i>
+                    </span>
                     <i class="far fa-bookmark"></i>
                 </div>
             </div>
@@ -69,23 +70,28 @@ export default {
             content: '',
             user_id: parseInt(localStorage.getItem('id')),
             toEdit: null,
-            contentToEdit: ''
+            contentToEdit: '',
+            id: parseInt(this.$route.params.id),
+            likedIds: []
         }
     },
     mounted() {
         this.getPost()
+        this.getUserLikes()
+        console.log(this.likedIds);
     },
     methods: {
         getPost() {
             if (this.$route.params.id) {
-                api.get(`/api/auth/posts/${this.$route.params.id}`)
+                api.get(`/api/auth/posts/${this.id}`)
                     .then(res => {
                         this.post = res.data.data
+                        console.log(this.post);
                     })
             }
         },
         storeComment() {
-            api.post(`/api/auth/posts/${this.$route.params.id}/comments`, {
+            api.post(`/api/auth/posts/${this.id}/comments`, {
                 content: this.content,
                 post_id: this.$route.params.id
             })
@@ -95,7 +101,7 @@ export default {
                 })
         },
         destroy(id) {
-            api.delete(`/api/auth/posts/${this.$route.params.id}/comments/${id}`)
+            api.delete(`/api/auth/posts/${this.id}/comments/${id}`)
                 .then(() => {
                     this.getPost()
                 })
@@ -108,15 +114,57 @@ export default {
             this.contentToEdit = content
         },
         update(id) {
-            this.toEdit=null
-            api.patch(`/api/auth/posts/${this.$route.params.id}/comments/${id}`,
+            this.toEdit = null
+            api.patch(`/api/auth/posts/${this.id}/comments/${id}`,
                 {
-                    content:this.contentToEdit
+                    content: this.contentToEdit
                 })
-                .then(res=>{
+                .then(res => {
                     this.getPost()
                 })
-        }
+        },
+        getUserLikes() {
+            api.get('/api/auth/posts/liked')
+                .then(res => {
+                    this.userLiked = res.data
+                    // console.log(this.userLiked);
+                    this.userLiked.forEach(liked => {
+                        this.likedIds.push(liked.id)
+                    })
+
+                })
+        },
+        like() {
+            api.post(`/api/auth/posts/${this.id}/likes`)
+            let likesCount = parseInt(document.querySelector(`.likesCount`).textContent)
+            if (this.likedIds.includes(this.id)) {
+                const likeIndex = this.likedIds.indexOf(this.id)
+                this.likedIds.splice(likeIndex, 1)
+                likesCount -= 1
+                document.querySelector(`.likesCount`).textContent = likesCount
+                console.log(this.likedIds);
+            } else {
+
+                this.likedIds.push(this.id)
+                likesCount += 1
+                document.querySelector(`.likesCount`).textContent = likesCount
+                console.log(this.likedIds);
+            }
+        },
+        // toggleLike() {
+        //     // let content = parseInt(document.querySelector(`.likesCount-${id}`).textContent)
+        //     if (this.likedIds.includes(this.id)) {
+        //         const index = this.likedIds.indexOf(id)
+        //         this.likedIds.splice(index, 1)
+        //         content -= 1
+        //         document.querySelector(`.likesCount-${id}`).textContent = content
+        //     } else {
+        //         this.likedIds.push(id)
+        //         content += 1
+        //         document.querySelector(`.likesCount-${id}`).textContent = content
+        //     }
+        //     this.like()
+        // },
     }
 }
 </script>
@@ -126,12 +174,25 @@ h1, h2, p, i {
     margin: 0;
 }
 
+a {
+    text-decoration: none;
+    color: #0060B6;
+}
+
+a:before {
+    text-decoration: none;
+}
+
 .main-container {
     width: 70%;
     margin: 0 auto;
     border: 1px solid black;
     padding: 15px;
     display: flex;
+}
+
+.far.fa-heart.fas-heart-animation {
+    animation: heart-pulse 0.3s ease-in-out;
 }
 
 .commentaries-container {
