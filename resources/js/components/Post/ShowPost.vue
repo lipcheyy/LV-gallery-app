@@ -87,7 +87,6 @@ export default {
                 api.get(`/api/auth/posts/${this.id}`)
                     .then(res => {
                         this.post = res.data.data
-                        console.log(this.post);
                     })
             }
         },

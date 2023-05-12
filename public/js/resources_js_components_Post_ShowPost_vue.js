@@ -38,7 +38,6 @@ __webpack_require__.r(__webpack_exports__);
       if (this.$route.params.id) {
         _api__WEBPACK_IMPORTED_MODULE_0__["default"].get("/api/auth/posts/".concat(this.id)).then(function (res) {
           _this.post = res.data.data;
-          console.log(_this.post);
         });
       }
     },

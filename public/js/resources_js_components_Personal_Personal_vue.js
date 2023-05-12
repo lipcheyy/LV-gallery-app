@@ -204,7 +204,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       posts: null,
-      username: ''
+      username: '',
+      userId: parseInt(localStorage.getItem('id'))
     };
   },
   mounted: function mounted() {},
@@ -507,7 +508,19 @@ var render = function render() {
         }
       }
     }
-  }, [_vm._v("детальніше")])], 1);
+  }, [_vm._v("детальніше")]), _vm._v(" "), _vm.user.id === _vm.userId ? _c("router-link", {
+    staticClass: "btn btn-success",
+    attrs: {
+      to: {
+        name: "post.edit",
+        params: {
+          id: _vm.id
+        }
+      }
+    }
+  }, [_c("i", {
+    staticClass: "fas fa-pencil"
+  })]) : _vm._e()], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;

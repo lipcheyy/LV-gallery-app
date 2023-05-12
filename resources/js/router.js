@@ -55,6 +55,11 @@ const route =new VueRouter({
             path:'/admin/users',
             component:()=>import('./components/Admin/AddUser/UserIndex'),
             name:'users.index'
+        },
+        {
+            path:'/post/edit/:id',
+            component:()=>import('./components/Post/UpdatePost/UpdatePost'),
+            name:'post.edit'
         }
     ]
 })

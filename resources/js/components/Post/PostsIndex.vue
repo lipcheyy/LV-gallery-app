@@ -13,7 +13,6 @@
                         :title="post.title"
                         :date="post.date"
                         >
-
                     </post-layout>
                 </template>
             </div>
