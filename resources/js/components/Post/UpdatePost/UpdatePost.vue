@@ -31,7 +31,7 @@
                         </template>
                     </select>
                 </div>
-                <input @click.prevent="update(id)" type="submit" class="button-create" value="updat">
+                <input @click.prevent="update(post.id)" type="submit" class="button-create" value="updat">
             </div>
         </div>
     </div>
@@ -51,7 +51,8 @@ export default {
             title:'',
             category_id:1,
             dropzone:null,
-            username:''
+            username:'',
+            imgToDelete:null
         }
     },
     mounted() {
@@ -60,6 +61,9 @@ export default {
             autoProcessQueue: false,
             addRemoveLinks:true,
             maxFiles:1
+        })
+        this.dropzone.on('removedfile',(file)=>{
+           this.imgToDelete=file.id
         })
         this.getPost()
         this.getCategories()
@@ -72,7 +76,7 @@ export default {
                     this.title=this.post.title
                     this.username=this.post.user.name
                     this.post.images.forEach(image=>{
-                        let file = { name: "Filename 2", size: 12345 };
+                        let file = {id:image.id ,name: "Filename 2", size: 12345 };
                         this.dropzone.displayExistingFile(file,image.url );
                     })
 
@@ -85,7 +89,8 @@ export default {
                     this.$Progress.finish()
                 })
         },
-        uodate(id) {
+        update(id) {
+            console.log(this.imgToDelete);
             const data = new FormData
             const files = this.dropzone.getAcceptedFiles()
             files.forEach(file => {
@@ -93,6 +98,7 @@ export default {
                 this.dropzone.removeFile(file)
             })
             data.append('title',this.title)
+            data.append('imgToDelete',this.imgToDelete)
             data.append('category_id',this.category_id)
             data.append('_method','PATCH')
             api.post(`/api/auth/posts/${id}/update`, data)

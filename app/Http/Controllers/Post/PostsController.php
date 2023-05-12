@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Post;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Post\StoreRequest;
+use App\Http\Requests\Post\UpdateRequest;
 use App\Http\Resources\Post\PostResource;
 use App\Models\Category;
 use App\Models\Image;
 use App\Models\Post;
 use Carbon\Carbon;
+use http\Message\Body;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -25,8 +27,9 @@ class   PostsController extends Controller
         });
         return PostResource::collection($posts);
     }
-    public function update(StoreRequest $request){
+    public function update(UpdateRequest $request, Post $post){
         $data = $request->validated();
+        return dump($data);
         $images = $data['images'];
         unset($data['images']);
         $data['user_id'] = auth()->user()->id;
@@ -85,16 +88,11 @@ class   PostsController extends Controller
         foreach ($images as $image) {
             $imageName = md5(Carbon::now() . '_' . $image->getClientOriginalName()) . '.' . $image->getClientOriginalExtension();
             $filePath = Storage::disk('public')->putFileAs('/images', $image, $imageName);
-            $previewName = 'prev_' . $imageName;
             Image::create([
                 'path' => $filePath,
                 'url' => url('storage/' . $filePath),
-                'preview_url' => url('storage/images/' . $previewName),
                 'post_id' => $post->id
             ]);
-            \Intervention\Image\Facades\Image::make($image)
-                ->fit(100, 100)
-                ->save(storage_path('app/public/images/' . $previewName));
         }
         return response()->json(['message' => 'image successfully uploaded']);
 

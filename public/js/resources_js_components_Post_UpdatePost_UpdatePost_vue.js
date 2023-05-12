@@ -25,52 +25,60 @@ __webpack_require__.r(__webpack_exports__);
       title: '',
       category_id: 1,
       dropzone: null,
-      username: ''
+      username: '',
+      imgToDelete: null
     };
   },
   mounted: function mounted() {
+    var _this = this;
     this.dropzone = new dropzone__WEBPACK_IMPORTED_MODULE_1__["default"](this.$refs.dropzone, {
       url: 'test',
       autoProcessQueue: false,
       addRemoveLinks: true,
       maxFiles: 1
     });
+    this.dropzone.on('removedfile', function (file) {
+      _this.imgToDelete = file.id;
+    });
     this.getPost();
     this.getCategories();
   },
   methods: {
     getPost: function getPost() {
-      var _this = this;
+      var _this2 = this;
       _api__WEBPACK_IMPORTED_MODULE_0__["default"].get("/api/auth/posts/".concat(this.postId)).then(function (res) {
-        _this.post = res.data.data;
-        _this.title = _this.post.title;
-        _this.username = _this.post.user.name;
-        _this.post.images.forEach(function (image) {
+        _this2.post = res.data.data;
+        _this2.title = _this2.post.title;
+        _this2.username = _this2.post.user.name;
+        _this2.post.images.forEach(function (image) {
           var file = {
+            id: image.id,
             name: "Filename 2",
             size: 12345
           };
-          _this.dropzone.displayExistingFile(file, image.url);
+          _this2.dropzone.displayExistingFile(file, image.url);
         });
       });
     },
     getCategories: function getCategories() {
-      var _this2 = this;
+      var _this3 = this;
       this.$Progress.start();
       _api__WEBPACK_IMPORTED_MODULE_0__["default"].get('/api/auth/admin/category').then(function (res) {
-        _this2.categories = res.data.data;
-        _this2.$Progress.finish();
+        _this3.categories = res.data.data;
+        _this3.$Progress.finish();
       });
     },
-    uodate: function uodate(id) {
-      var _this3 = this;
+    update: function update(id) {
+      var _this4 = this;
+      console.log(this.imgToDelete);
       var data = new FormData();
       var files = this.dropzone.getAcceptedFiles();
       files.forEach(function (file) {
         data.append('images[]', file);
-        _this3.dropzone.removeFile(file);
+        _this4.dropzone.removeFile(file);
       });
       data.append('title', this.title);
+      data.append('imgToDelete', this.imgToDelete);
       data.append('category_id', this.category_id);
       data.append('_method', 'PATCH');
       _api__WEBPACK_IMPORTED_MODULE_0__["default"].post("/api/auth/posts/".concat(id, "/update"), data).then(function (res) {
@@ -181,7 +189,7 @@ var render = function render() {
     on: {
       click: function click($event) {
         $event.preventDefault();
-        return _vm.update(_vm.id);
+        return _vm.update(_vm.post.id);
       }
     }
   })])])]);
