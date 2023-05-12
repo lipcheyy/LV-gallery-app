@@ -64,30 +64,38 @@ __webpack_require__.r(__webpack_exports__);
       this.toEdit = id;
       this.contentToEdit = content;
     },
-    update: function update(id) {
+    destroyPost: function destroyPost(id) {
       var _this4 = this;
+      _api__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"]("/api/auth/posts/".concat(id)).then(function () {
+        _this4.$router.push({
+          name: 'post.index'
+        });
+      });
+    },
+    update: function update(id) {
+      var _this5 = this;
       this.toEdit = null;
       _api__WEBPACK_IMPORTED_MODULE_0__["default"].patch("/api/auth/posts/".concat(this.id, "/comments/").concat(id), {
         content: this.contentToEdit
       }).then(function (res) {
-        _this4.getPost();
+        _this5.getPost();
       });
     },
     getUserLikes: function getUserLikes() {
-      var _this5 = this;
+      var _this6 = this;
       _api__WEBPACK_IMPORTED_MODULE_0__["default"].get('/api/auth/posts/liked').then(function (res) {
-        _this5.userLiked = res.data;
+        _this6.userLiked = res.data;
         // console.log(this.userLiked);
-        _this5.userLiked.forEach(function (liked) {
-          _this5.likedIds.push(liked.id);
+        _this6.userLiked.forEach(function (liked) {
+          _this6.likedIds.push(liked.id);
         });
       });
     },
     getUserSaves: function getUserSaves() {
-      var _this6 = this;
+      var _this7 = this;
       _api__WEBPACK_IMPORTED_MODULE_0__["default"].get('/api/auth/posts/saved').then(function (res) {
         res.data.forEach(function (saved) {
-          _this6.savedIds.push(saved.id);
+          _this7.savedIds.push(saved.id);
         });
       });
     },
@@ -185,7 +193,32 @@ var render = function render() {
         return _vm.save.apply(null, arguments);
       }
     }
-  })])]), _vm._v(" "), _c("div", {
+  })])]), _vm._v(" "), _vm.post.user.id === _vm.user_id ? _c("span", [_c("router-link", {
+    staticClass: "btn btn-success",
+    attrs: {
+      to: {
+        name: "post.edit",
+        params: {
+          id: _vm.id
+        }
+      }
+    }
+  }, [_c("i", {
+    staticClass: "fas fa-pencil"
+  })]), _vm._v(" "), _c("a", {
+    staticClass: "btn btn-danger",
+    attrs: {
+      href: "#"
+    },
+    on: {
+      click: function click($event) {
+        $event.preventDefault();
+        return _vm.destroyPost(_vm.id);
+      }
+    }
+  }, [_c("i", {
+    staticClass: "fas fa-trash"
+  })])], 1) : _vm._e(), _vm._v(" "), _c("div", {
     staticClass: "line"
   }), _vm._v(" "), _c("div", {
     staticClass: "commentaries"
