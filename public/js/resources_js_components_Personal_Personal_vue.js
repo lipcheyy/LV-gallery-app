@@ -92,7 +92,6 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
       this.$Progress.start();
       _api__WEBPACK_IMPORTED_MODULE_1__["default"].get("/api/auth/users/own").then(function (res) {
-        console.log(132);
         _this.posts = res.data.data;
         _this.$Progress.finish();
       });
@@ -159,7 +158,6 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
       this.$Progress.start();
       _api__WEBPACK_IMPORTED_MODULE_1__["default"].get("/api/auth/users/saved").then(function (res) {
-        console.log(132);
         _this.posts = res.data.data;
         _this.$Progress.finish();
       });

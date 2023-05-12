@@ -22,7 +22,7 @@
                     <div class="category_block" id="categoryy">
                         <li id="categoryy"><a class="white_style_text" id="categoryy">Категорії </a></li>
                     </div>
-                    <div class="category_list">
+                    <div class="category_list" v-if="access_token" >
                         <ul>
                             <template v-for="category in categories">
                                 <router-link :to="{name:'category.posts',params:{id:category.id}}">{{ category.title}}</router-link>
@@ -88,10 +88,12 @@ export default {
         },
 
         getCategories() {
-            api.get('/api/auth/admin/category')
-                .then(res => {
-                    this.categories = res.data.data
-                })
+            if (this.access_token){
+                api.get('/api/auth/admin/category')
+                    .then(res => {
+                        this.categories = res.data.data
+                    })
+            }
         },
 
         userdata() {

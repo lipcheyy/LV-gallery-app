@@ -93,7 +93,9 @@ __webpack_require__.r(__webpack_exports__);
     this.getUserLikes();
     this.getUserSaves();
     this.$router.afterEach(function (to, from) {
-      _this.getPosts();
+      if (to.name === 'category.posts') {
+        _this.getPosts();
+      }
     });
   },
   methods: {

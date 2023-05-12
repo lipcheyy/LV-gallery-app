@@ -5366,9 +5366,11 @@ __webpack_require__.r(__webpack_exports__);
     },
     getCategories: function getCategories() {
       var _this2 = this;
-      _api__WEBPACK_IMPORTED_MODULE_0__["default"].get('/api/auth/admin/category').then(function (res) {
-        _this2.categories = res.data.data;
-      });
+      if (this.access_token) {
+        _api__WEBPACK_IMPORTED_MODULE_0__["default"].get('/api/auth/admin/category').then(function (res) {
+          _this2.categories = res.data.data;
+        });
+      }
     },
     userdata: function userdata() {
       var _this3 = this;
@@ -5554,7 +5556,7 @@ var render = function render() {
         name: "post.create"
       }
     }
-  }, [_vm._v("Створити\n                    ")]) : _vm._e()], 1), _vm._v(" "), _vm._m(2), _vm._v(" "), _c("div", {
+  }, [_vm._v("Створити\n                    ")]) : _vm._e()], 1), _vm._v(" "), _vm._m(2), _vm._v(" "), _vm.access_token ? _c("div", {
     staticClass: "category_list"
   }, [_c("ul", [_vm._l(_vm.categories, function (category) {
     return [_c("router-link", {
@@ -5567,7 +5569,7 @@ var render = function render() {
         }
       }
     }, [_vm._v(_vm._s(category.title))])];
-  })], 2)]), _vm._v(" "), _c("li", [_vm.access_token && _vm.userRole === 1 ? _c("router-link", {
+  })], 2)]) : _vm._e(), _vm._v(" "), _c("li", [_vm.access_token && _vm.userRole === 1 ? _c("router-link", {
     staticClass: "white_style_text",
     attrs: {
       "exact-active-class": "active",

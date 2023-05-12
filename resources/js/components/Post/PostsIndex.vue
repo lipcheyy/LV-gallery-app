@@ -11,6 +11,7 @@
                         :savedIds="savedIds"
                         :user="post.user"
                         :title="post.title"
+                        :date="post.date"
                         >
 
                     </post-layout>
@@ -81,7 +82,7 @@ export default {
                     this.posts = res.data.data
                     this.pagination = res.data.meta
                     this.$Progress.finish()
-                    console.log(this.posts);
+                    // console.log(this.posts);
                 })
         },
         getUserLikes() {
