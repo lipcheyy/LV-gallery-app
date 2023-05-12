@@ -43,7 +43,9 @@ export default {
         this.getUserLikes()
         this.getUserSaves()
         this.$router.afterEach((to,from)=>{
-            this.getPosts()
+            if (to.name==='category.posts') {
+                this.getPosts()
+            }
         })
     },
     methods: {
@@ -65,9 +67,7 @@ export default {
                     this.userLiked.forEach(liked=>{
                         this.likedIds.push(liked.id)
                     })
-
                 })
-
         },
         getUserSaves(){
             api.get('/api/auth/posts/saved')
@@ -77,7 +77,6 @@ export default {
                     })
                 })
         }
-
     }
 }
 

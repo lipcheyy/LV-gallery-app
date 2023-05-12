@@ -48,7 +48,6 @@ export default {
             this.$Progress.start()
             api.get(`/api/auth/users/own`, )
                 .then(res => {
-                    console.log(132);
                     this.posts = res.data.data
                     this.$Progress.finish()
                 })

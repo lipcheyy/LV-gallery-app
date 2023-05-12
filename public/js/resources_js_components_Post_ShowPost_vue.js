@@ -30,9 +30,11 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     getPost: function getPost() {
       var _this = this;
-      _api__WEBPACK_IMPORTED_MODULE_0__["default"].get("/api/auth/posts/".concat(this.$route.params.id)).then(function (res) {
-        _this.post = res.data.data;
-      });
+      if (this.$route.params.id) {
+        _api__WEBPACK_IMPORTED_MODULE_0__["default"].get("/api/auth/posts/".concat(this.$route.params.id)).then(function (res) {
+          _this.post = res.data.data;
+        });
+      }
     },
     storeComment: function storeComment() {
       var _this2 = this;
@@ -108,9 +110,9 @@ var render = function render() {
       src: __webpack_require__(/*! ../Includes/Images/User.png */ "./resources/js/components/Includes/Images/User.png"),
       alt: "User"
     }
-  }), _vm._v(" "), _c("h2", {
+  }), _vm._v(" "), _vm.post.user.name !== "" ? [_c("h2", {
     staticClass: "username"
-  }, [_vm._v(_vm._s(_vm.post.user.name))])]), _vm._v(" "), _vm._m(0)]), _vm._v(" "), _c("div", {
+  }, [_vm._v(_vm._s(_vm.post.user.name))])] : _vm._e()], 2), _vm._v(" "), _vm._m(0)]), _vm._v(" "), _c("div", {
     staticClass: "line"
   }), _vm._v(" "), _c("div", {
     staticClass: "commentaries"

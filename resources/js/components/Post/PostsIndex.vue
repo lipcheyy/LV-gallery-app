@@ -11,6 +11,7 @@
                         :savedIds="savedIds"
                         :user="post.user"
                         :title="post.title"
+                        :date="post.date"
                         >
 
                     </post-layout>

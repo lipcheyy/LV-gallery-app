@@ -9,7 +9,9 @@
             <div class="post-user-info">
                 <div class="user-info">
                     <img class="user" src="../Includes/Images/User.png" alt="User">
-                    <h2 class="username">{{ post.user.name }}</h2>
+                    <template v-if="post.user.name!==''">
+                        <h2  class="username">{{ post.user.name }}</h2>
+                    </template>
                 </div>
 
 
@@ -75,10 +77,12 @@ export default {
     },
     methods: {
         getPost() {
-            api.get(`/api/auth/posts/${this.$route.params.id}`)
-                .then(res => {
-                    this.post = res.data.data
-                })
+            if (this.$route.params.id) {
+                api.get(`/api/auth/posts/${this.$route.params.id}`)
+                    .then(res => {
+                        this.post = res.data.data
+                    })
+            }
         },
         storeComment() {
             api.post(`/api/auth/posts/${this.$route.params.id}/comments`, {
