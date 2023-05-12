@@ -69,9 +69,12 @@ export default {
             api.get(`/api/auth/posts/${this.postId}`)
                 .then(res => {
                     this.post = res.data.data
-                    console.log(this.post);
                     this.title=this.post.title
                     this.username=this.post.user.name
+                    this.post.images.forEach(image=>{
+                        let file = { name: "Filename 2", size: 12345 };
+                        this.dropzone.displayExistingFile(file,image.url );
+                    })
 
                 })
         },getCategories() {

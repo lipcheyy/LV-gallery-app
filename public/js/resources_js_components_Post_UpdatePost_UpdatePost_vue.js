@@ -43,9 +43,15 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
       _api__WEBPACK_IMPORTED_MODULE_0__["default"].get("/api/auth/posts/".concat(this.postId)).then(function (res) {
         _this.post = res.data.data;
-        console.log(_this.post);
         _this.title = _this.post.title;
         _this.username = _this.post.user.name;
+        _this.post.images.forEach(function (image) {
+          var file = {
+            name: "Filename 2",
+            size: 12345
+          };
+          _this.dropzone.displayExistingFile(file, image.url);
+        });
       });
     },
     getCategories: function getCategories() {
