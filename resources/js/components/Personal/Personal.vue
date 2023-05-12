@@ -10,7 +10,7 @@
                 >
             </div>
 
-            <h1 class="name">Ім'я</h1>
+            <h1 class="name">{{username}}</h1>
         </div>
 
         <div class="control-page">
@@ -53,7 +53,7 @@ export default {
     data() {
         return {
             userRole: null,
-            username: null,
+            username: localStorage.getItem('username'),
             showOwnPosts: true,
             showSavedPosts: false
         }

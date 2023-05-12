@@ -25,7 +25,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       userRole: null,
-      username: null,
+      username: localStorage.getItem('username'),
       showOwnPosts: true,
       showSavedPosts: false
     };
@@ -267,7 +267,11 @@ var render = function render() {
     _c = _vm._self._c;
   return _c("div", {
     staticClass: "main-container"
-  }, [_vm._m(0), _vm._v(" "), _c("div", {
+  }, [_c("div", {
+    staticClass: "user-info"
+  }, [_vm._m(0), _vm._v(" "), _c("h1", {
+    staticClass: "name"
+  }, [_vm._v(_vm._s(_vm.username))])]), _vm._v(" "), _c("div", {
     staticClass: "control-page"
   }, [_c("div", {
     staticClass: "line"
@@ -315,8 +319,6 @@ var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
-    staticClass: "user-info"
-  }, [_c("div", {
     staticClass: "circle"
   }, [_c("img", {
     staticClass: "user-icon",
@@ -324,9 +326,7 @@ var staticRenderFns = [function () {
       src: __webpack_require__(/*! ../Includes/Images/User.png */ "./resources/js/components/Includes/Images/User.png"),
       alt: "User"
     }
-  })]), _vm._v(" "), _c("h1", {
-    staticClass: "name"
-  }, [_vm._v("Ім'я")])]);
+  })]);
 }];
 render._withStripped = true;
 
