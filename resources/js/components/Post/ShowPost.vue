@@ -18,7 +18,7 @@
                     <span @click.prevent="like">
                         <i class="far fa-heart" :class="{'fas fa-heart':likedIds.includes(id)}"></i>
                     </span>
-                    <i class="far fa-bookmark"></i>
+                    <i @click.prevent="save" class="far fa-bookmark" :class="{'fas fa-bookmark':savedIds.includes(id)}"></i>
                 </div>
             </div>
             <div class="line"></div>
@@ -72,13 +72,14 @@ export default {
             toEdit: null,
             contentToEdit: '',
             id: parseInt(this.$route.params.id),
-            likedIds: []
+            likedIds: [],
+            savedIds:[]
         }
     },
     mounted() {
         this.getPost()
         this.getUserLikes()
-        console.log(this.likedIds);
+        this.getUserSaves()
     },
     methods: {
         getPost() {
@@ -134,6 +135,14 @@ export default {
 
                 })
         },
+        getUserSaves(){
+            api.get('/api/auth/posts/saved')
+                .then(res=>{
+                    res.data.forEach(saved=>{
+                        this.savedIds.push(saved.id)
+                    })
+                })
+        },
         like() {
             api.post(`/api/auth/posts/${this.id}/likes`)
             let likesCount = parseInt(document.querySelector(`.likesCount`).textContent)
@@ -142,29 +151,22 @@ export default {
                 this.likedIds.splice(likeIndex, 1)
                 likesCount -= 1
                 document.querySelector(`.likesCount`).textContent = likesCount
-                console.log(this.likedIds);
             } else {
-
                 this.likedIds.push(this.id)
                 likesCount += 1
                 document.querySelector(`.likesCount`).textContent = likesCount
-                console.log(this.likedIds);
             }
         },
-        // toggleLike() {
-        //     // let content = parseInt(document.querySelector(`.likesCount-${id}`).textContent)
-        //     if (this.likedIds.includes(this.id)) {
-        //         const index = this.likedIds.indexOf(id)
-        //         this.likedIds.splice(index, 1)
-        //         content -= 1
-        //         document.querySelector(`.likesCount-${id}`).textContent = content
-        //     } else {
-        //         this.likedIds.push(id)
-        //         content += 1
-        //         document.querySelector(`.likesCount-${id}`).textContent = content
-        //     }
-        //     this.like()
-        // },
+        save(){
+            api.post(`/api/auth/posts/${this.id}/saves`)
+            if (this.savedIds.includes(this.id)){
+                const saveIndex=this.savedIds.indexOf(this.id)
+                this.savedIds.splice(saveIndex,1)
+            }else {
+                this.savedIds.push(this.id)
+            }
+        }
+
     }
 }
 </script>
