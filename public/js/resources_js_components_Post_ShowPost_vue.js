@@ -24,7 +24,8 @@ __webpack_require__.r(__webpack_exports__);
       contentToEdit: '',
       id: parseInt(this.$route.params.id),
       likedIds: [],
-      savedIds: []
+      savedIds: [],
+      userRole: parseInt(localStorage.getItem('user_role'))
     };
   },
   mounted: function mounted() {
@@ -193,7 +194,7 @@ var render = function render() {
         return _vm.save.apply(null, arguments);
       }
     }
-  })])]), _vm._v(" "), _vm.post.user.id === _vm.user_id ? _c("span", [_c("router-link", {
+  })])]), _vm._v(" "), _vm.post.user.id === _vm.user_id || _vm.userRole === 1 ? _c("span", [_c("router-link", {
     staticClass: "btn btn-success",
     attrs: {
       to: {
@@ -235,7 +236,7 @@ var render = function render() {
       "class": _vm.commentToEdit(comment.id) ? "d-none" : ""
     }, [_c("i", {
       staticClass: "comment-title"
-    }, [_vm._v(_vm._s(comment.content))])]), _vm._v(" "), comment.writer.id === _vm.user_id ? [_c("div", {
+    }, [_vm._v(_vm._s(comment.content))])]), _vm._v(" "), comment.writer.id === _vm.user_id || _vm.userRole === 1 ? [_c("div", {
       on: {
         click: function click($event) {
           $event.preventDefault();
