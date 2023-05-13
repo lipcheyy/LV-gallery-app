@@ -21,7 +21,7 @@
                     <i @click.prevent="save" class="far fa-bookmark" :class="{'fas fa-bookmark':savedIds.includes(id)}"></i>
                 </div>
             </div>
-            <span v-if="post.user.id===user_id">
+            <span v-if="post.user.id===user_id || userRole===1">
             <router-link :to="{name:'post.edit',params:{id:id}}" class="btn btn-success">
                 <i class="fas fa-pencil"></i>
             </router-link>
@@ -37,7 +37,7 @@
                     <span :class="commentToEdit(comment.id)?'d-none':''">
                         <i class="comment-title">{{ comment.content }}</i>
                     </span>
-                    <template v-if="comment.writer.id===user_id">
+                    <template v-if="comment.writer.id===user_id || userRole===1">
                         <div @click.prevent="destroy(comment.id)">
                             <i class="fas fa-trash"></i>
                         </div>
@@ -79,7 +79,8 @@ export default {
             contentToEdit: '',
             id: parseInt(this.$route.params.id),
             likedIds: [],
-            savedIds:[]
+            savedIds:[],
+            userRole:parseInt(localStorage.getItem('user_role'))
         }
     },
     mounted() {

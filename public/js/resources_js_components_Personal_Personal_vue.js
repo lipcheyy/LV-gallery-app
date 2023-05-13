@@ -205,6 +205,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       posts: null,
       username: '',
+      userRole: parseInt(localStorage.getItem('user_role')),
       userId: parseInt(localStorage.getItem('id'))
     };
   },
@@ -514,7 +515,7 @@ var render = function render() {
         }
       }
     }
-  }, [_vm._v("детальніше")]), _vm._v(" "), _vm.user.id === _vm.userId ? _c("span", [_c("router-link", {
+  }, [_vm._v("детальніше")]), _vm._v(" "), _vm.user.id === _vm.userId || _vm.userRole === 1 ? [_c("router-link", {
     staticClass: "btn btn-success",
     attrs: {
       to: {
@@ -539,7 +540,7 @@ var render = function render() {
     }
   }, [_c("i", {
     staticClass: "fas fa-trash"
-  })])], 1) : _vm._e()], 1);
+  })])] : _vm._e()], 2);
 };
 var staticRenderFns = [];
 render._withStripped = true;

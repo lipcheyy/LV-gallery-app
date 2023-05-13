@@ -36,12 +36,12 @@
 
         </div>
         <router-link :to="{name:'post.show',params:{id:id}}" class="btn btn-primary">детальніше</router-link>
-        <span v-if="user.id===userId">
+        <template v-if="user.id===userId ||userRole===1">
             <router-link :to="{name:'post.edit',params:{id:id}}" class="btn btn-success">
                 <i class="fas fa-pencil"></i>
             </router-link>
             <a href="#" class="btn btn-danger" @click.prevent="destroy(id)"><i class="fas fa-trash"></i></a>
-        </span>
+        </template>
 
     </div>
 </template>
@@ -56,6 +56,7 @@ export default {
         return {
             posts: null,
             username: '',
+            userRole:parseInt(localStorage.getItem('user_role')),
             userId: parseInt(localStorage.getItem('id'))
         }
     },
