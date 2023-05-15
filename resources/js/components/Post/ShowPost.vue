@@ -2,9 +2,11 @@
     <div class="main-container" v-if="post && post.images">
         <template>
             <template v-for="image in post.images">
-                <img class="post" :src="image.url" alt="Post">
+                <div class="post" :style="{ 'background-image': 'url(' + image.url + ')' }" alt="Post"> </div>
             </template>
         </template>
+
+
         <div class="commentaries-container">
             <div class="post-user-info">
                 <div class="user-info">
@@ -218,7 +220,10 @@ a:before {
 }
 
 .post {
+    background: 50% 50% no-repeat;
+    background-size: cover;
     width: 45%;
+    height: 600px;
 }
 
 .post-user-info {
