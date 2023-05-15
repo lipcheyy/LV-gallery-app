@@ -40,7 +40,7 @@
                 <!--            </div>-->
 
                 <!--        </div>-->
-                <div>{{response}}</div>
+                <div class="alert alert-danger">{{response}}</div>
             </div>
         </div>
         <success v-if="alertMessage" :message="alertMessage" @close="onAlertClose"></success>

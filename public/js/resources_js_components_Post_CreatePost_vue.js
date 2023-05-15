@@ -228,7 +228,9 @@ var render = function render() {
         return _vm.success.apply(null, arguments);
       }
     }
-  }), _vm._v(" "), _c("div", [_vm._v(_vm._s(_vm.response))])])]), _vm._v(" "), _vm.alertMessage ? _c("success", {
+  }), _vm._v(" "), _c("div", {
+    staticClass: "alert alert-danger"
+  }, [_vm._v(_vm._s(_vm.response))])])]), _vm._v(" "), _vm.alertMessage ? _c("success", {
     attrs: {
       message: _vm.alertMessage
     },
