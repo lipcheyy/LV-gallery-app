@@ -12,10 +12,10 @@
                 <div class="user-info">
                     <img class="user" src="../Includes/Images/User.png" alt="User">
                     <h2 class="username">{{ post.user.name }}</h2>
-                    <div>title {{ post.title }}</div>
+                    <div>{{ post.title }}</div>
                 </div>
 
-                like cnt<span class="likesCount">{{ post.likesCount }}</span>
+                <span class="likesCount">{{ post.likesCount }}</span>
                 <div class="post-interaction">
                     <span @click.prevent="like">
                         <i class="far fa-heart" :class="{'fas fa-heart':likedIds.includes(id)}"></i>
@@ -36,21 +36,29 @@
                             comment.writer.name
                         }}
                     </div>
-                    <span :class="commentToEdit(comment.id)?'d-none':''">
-                        <i class="comment-title">{{ comment.content }}</i>
-                    </span>
-                    <template v-if="comment.writer.id===user_id || userRole===1">
-                        <div @click.prevent="destroy(comment.id)">
-                            <i class="fas fa-trash"></i>
+                    <div class="comment-indludes">
+                        <div class="content-wrap">
+                            <span :class="commentToEdit(comment.id)?'d-none':''">
+                            <i class="comment-title">{{ comment.content }}</i>
+                             </span>
                         </div>
-                        <div @click.prevent="getCommentDataToEdit(comment.id,comment.content)">
-                            <i class="fas fa-pencil"></i>
+                        <div class="comment-interactions">
+                            <template v-if="comment.writer.id===user_id || userRole===1">
+                                <div @click.prevent="destroy(comment.id)">
+                                    <i class="fas fa-trash"></i>
+                                </div>
+                                <div @click.prevent="getCommentDataToEdit(comment.id,comment.content)">
+                                    <i class="fas fa-pencil"></i>
+                                </div>
+                            </template>
                         </div>
-                    </template>
-                    <span :class="commentToEdit(comment.id)?'':'d-none'">
+
+                        <span :class="commentToEdit(comment.id)?'':'d-none'">
                         <input v-model="contentToEdit">
                         <a href="" @click.prevent="update(comment.id)">upd</a>
                     </span>
+                    </div>
+
                 </div>
 
 
@@ -218,7 +226,22 @@ a:before {
     flex-direction: column;
     justify-content: space-between;
 }
-
+.comment-indludes {
+    display: flex;
+    justify-content:  space-between;
+}
+.comment-interactions {
+    display: flex;
+    gap: 5px;
+}
+.content-wrap {
+    width: 90%;
+    background: red;
+}
+.comment-title {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
 .post {
     background: 50% 50% no-repeat;
     background-size: cover;
