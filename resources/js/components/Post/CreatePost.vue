@@ -115,7 +115,7 @@ export default {
                 .then(res => {
                     this.categories = res.data.data
                     this.$Progress.finish()
-                })
+                    })
             },
 
     }
