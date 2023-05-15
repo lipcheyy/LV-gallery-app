@@ -25,7 +25,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     reset: function reset() {
       var _this = this;
-      axios.post('/api/users/reset', {
+      axios.patch('/api/users/reset', {
         email: this.email,
         old_password: this.old_password,
         password: this.password,

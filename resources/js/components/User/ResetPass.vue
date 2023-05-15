@@ -42,7 +42,7 @@ export default {
     },
     methods:{
         reset(){
-            axios.post('/api/users/reset',{
+            axios.patch('/api/users/reset',{
                 email:this.email,
                 old_password:this.old_password,
                 password:this.password,

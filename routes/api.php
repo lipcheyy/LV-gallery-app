@@ -21,7 +21,7 @@ Route::group(
      'prefix'=>'users'],
     function (){
         Route::post('/registration','StoreController');
-        Route::post('/reset','ResetController');
+        Route::patch('/reset','ResetController');
 });
 Route::group([
 
