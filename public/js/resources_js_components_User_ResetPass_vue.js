@@ -31,7 +31,9 @@ __webpack_require__.r(__webpack_exports__);
         password: this.password,
         password_confirm: this.password_confirm
       }).then(function (res) {
-        console.log(res);
+        _this.$router.push({
+          name: 'user.login'
+        });
       })["catch"](function (error) {
         _this.error = error.response.data.message;
       });

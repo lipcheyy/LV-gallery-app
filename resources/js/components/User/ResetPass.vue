@@ -49,7 +49,7 @@ export default {
                 password_confirm:this.password_confirm
             })
                 .then(res=>{
-                    console.log(res);
+                    this.$router.push({name:'user.login'})
                 })
                 .catch(error => {
                     this.error = error.response.data.message;
