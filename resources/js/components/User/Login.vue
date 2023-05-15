@@ -11,7 +11,9 @@
                 <input type="email" v-model="email" class="form-control">
                 <p class="title">Пароль</p>
                 <input type="password" v-model="password" class="form-control">
-                <router-link  :to="{name:'user.registration'}">Remember password?</router-link>
+                <template>
+                    <router-link :to="{ name: 'user.reset' }">Remember password?</router-link>
+                </template>
             </div>
 
             <div class="submit-container">

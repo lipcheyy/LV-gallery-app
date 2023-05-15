@@ -128,13 +128,13 @@ var render = function render() {
         _vm.password = $event.target.value;
       }
     }
-  }), _vm._v(" "), _c("router-link", {
+  }), _vm._v(" "), [_c("router-link", {
     attrs: {
       to: {
-        name: "user.registration"
+        name: "user.reset"
       }
     }
-  }, [_vm._v("Remember password?")])], 1), _vm._v(" "), _c("div", {
+  }, [_vm._v("Remember password?")])]], 2), _vm._v(" "), _c("div", {
     staticClass: "submit-container"
   }, [_c("input", {
     staticClass: "btn",
