@@ -10,14 +10,16 @@
             <div class="inputs-container">
                 <p class="title">Пошта</p>
                 <input type="email" v-model="email" class="form-control">
+                <p class="title">Старий пароль</p>
+                <input type="password" v-model="old_password" class="form-control">
                 <p class="title">Новий пароль</p>
                 <input type="password" v-model="password" class="form-control">
                 <p class="title">Повторіть новий пароль</p>
-                <input type="password" v-model="password" class="form-control">
+                <input type="password" v-model="password_confirm" class="form-control">
             </div>
 
             <div class="submit-container">
-                <input type="submit" @click.prevent="login" class="btn" value="Зберегти">
+                <input type="submit" @click.prevent="reset" class="btn" value="Зберегти">
                 <p class="alert alert-danger custom-alert" v-if="error">{{error}}</p>
             </div>
 
@@ -33,9 +35,28 @@ export default {
         return{
             email:null,
             password:null,
+            password_confirm:null,
+            old_password:null,
             error:null,
         }
     },
+    methods:{
+        reset(){
+            axios.post('/api/users/reset',{
+                email:this.email,
+                old_password:this.old_password,
+                password:this.password,
+                password_confirm:this.password_confirm
+            })
+                .then(res=>{
+                    console.log(res);
+                })
+                .catch(error => {
+                    this.error = error.response.data.message;
+                });
+        }
+
+    }
 }
 </script>
 
