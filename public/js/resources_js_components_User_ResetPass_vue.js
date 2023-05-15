@@ -17,8 +17,26 @@ __webpack_require__.r(__webpack_exports__);
     return {
       email: null,
       password: null,
+      password_confirm: null,
       error: null
     };
+  },
+  methods: {
+    reset: function reset() {
+      var _this = this;
+      axios.patch('/api/users/reset', {
+        email: this.email,
+        old_password: this.old_password,
+        password: this.password,
+        password_confirm: this.password_confirm
+      }).then(function (res) {
+        _this.$router.push({
+          name: 'user.login'
+        });
+      })["catch"](function (error) {
+        _this.error = error.response.data.message;
+      });
+    }
   }
 });
 
@@ -94,20 +112,20 @@ var render = function render() {
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: _vm.password,
-      expression: "password"
+      value: _vm.password_confirm,
+      expression: "password_confirm"
     }],
     staticClass: "form-control",
     attrs: {
       type: "password"
     },
     domProps: {
-      value: _vm.password
+      value: _vm.password_confirm
     },
     on: {
       input: function input($event) {
         if ($event.target.composing) return;
-        _vm.password = $event.target.value;
+        _vm.password_confirm = $event.target.value;
       }
     }
   })]), _vm._v(" "), _c("div", {
@@ -121,7 +139,7 @@ var render = function render() {
     on: {
       click: function click($event) {
         $event.preventDefault();
-        return _vm.login.apply(null, arguments);
+        return _vm.reset.apply(null, arguments);
       }
     }
   }), _vm._v(" "), _vm.error ? _c("p", {
