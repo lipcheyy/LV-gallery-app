@@ -12,7 +12,6 @@
                 <div class="user-info">
                     <img class="user" src="../Includes/Images/User.png" alt="User">
                     <h2 class="username">{{ post.user.name }}</h2>
-                    <div>{{ post.title }}</div>
                 </div>
 
                 <div class="post-interaction">
@@ -31,6 +30,7 @@
 
             </div>
             <div class="line"></div>
+            <div class="title">{{ post.title }}</div>
             <div class="commentaries">
                 <div class="comment" v-for="comment in post.comments">
                     <div><img class="comment-user" src="../Includes/Images/User.png" alt="User">{{
@@ -335,5 +335,9 @@ a:before {
     justify-content: space-between;
     gap: 10px
 
+}
+
+.title {
+    margin: 10px auto 0 auto;
 }
 </style>
