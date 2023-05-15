@@ -17,7 +17,11 @@
             </div>
 
         </div>
-        <img class="img" :src="url">
+
+        <div class="post-images" :style="{ 'background-image': 'url(' + url + ')' }">
+<!--             <img class="img" :src="url">-->
+
+        </div>
         <div class="buttons-container">
             <div>{{ title }}</div>
             <div class="like_container">
@@ -109,8 +113,14 @@ export default {
     display: flex;
     flex-direction: column;
 }
-
+.post-images {
+    background: 50% 50% no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 700px;
+}
 .img {
+    object-fit: cover;
     width: 100%;
     height: 80%;
 }
