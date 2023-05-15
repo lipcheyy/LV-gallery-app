@@ -11,6 +11,7 @@
                 <input type="email" v-model="email" class="form-control">
                 <p class="title">Пароль</p>
                 <input type="password" v-model="password" class="form-control">
+                <router-link  :to="{name:'user.registration'}">Remember password?</router-link>
             </div>
 
             <div class="submit-container">
@@ -64,6 +65,8 @@ export default {
 
 a{
     text-decoration: none;
+    color: blue;
+    cursor: pointer;
 }
 .main-container {
     width: 490px;

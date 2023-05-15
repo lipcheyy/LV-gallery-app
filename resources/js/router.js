@@ -11,7 +11,7 @@ const route =new VueRouter({
             name:'user.login'
         },
         {
-            path:'/users/registration',
+            path:'/users/reset',
             component: ()=> import('./components/User/Registration'),
             name:'user.registration'
         },

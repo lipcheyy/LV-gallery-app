@@ -5851,7 +5851,7 @@ var route = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     },
     name: 'user.login'
   }, {
-    path: '/users/registration',
+    path: '/users/reset',
     component: function component() {
       return __webpack_require__.e(/*! import() */ "resources_js_components_User_Registration_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/User/Registration */ "./resources/js/components/User/Registration.vue"));
     },
