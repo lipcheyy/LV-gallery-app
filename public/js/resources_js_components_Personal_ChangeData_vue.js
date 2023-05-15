@@ -19,12 +19,14 @@ __webpack_require__.r(__webpack_exports__);
   name: "ChangeData",
   data: function data() {
     return {
+      id: parseInt(localStorage.getItem('id')),
       name: '',
       old_password: null,
       password: null,
       password_confirm: null,
       dropzone: null,
-      filename: null
+      filename: null,
+      responce: null
     };
   },
   mounted: function mounted() {
@@ -44,6 +46,20 @@ __webpack_require__.r(__webpack_exports__);
       data.append('_method', 'PATCH');
       var id = parseInt(localStorage.getItem('id'));
       _api__WEBPACK_IMPORTED_MODULE_1__["default"].post("/api/auth/users/".concat(id), data);
+    },
+    updatePassword: function updatePassword() {
+      _api__WEBPACK_IMPORTED_MODULE_1__["default"].patch("/api/auth/users/".concat(this.id, "/password"), {
+        password: this.password,
+        old_password: this.old_password,
+        password_confirm: this.password_confirm
+      }).then(function (res) {
+        console.log(res);
+      })["catch"](function (error) {
+        var errors = error.response.data.errors;
+        if (errors.password_confirm) {
+          console.log(errors.password_confirm[0]);
+        }
+      });
     }
   }
 });
@@ -101,28 +117,85 @@ var render = function render() {
   }), _vm._v(" "), _c("p", {
     staticClass: "title"
   }, [_vm._v("Старий пароль")]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.old_password,
+      expression: "old_password"
+    }],
     staticClass: "form-control",
     attrs: {
       type: "text",
       placeholder: "ім'я"
+    },
+    domProps: {
+      value: _vm.old_password
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.old_password = $event.target.value;
+      }
     }
   }), _vm._v(" "), _c("p", {
     staticClass: "title"
   }, [_vm._v("Пароль")]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.password,
+      expression: "password"
+    }],
     staticClass: "form-control",
     attrs: {
       type: "password",
       placeholder: "*******"
+    },
+    domProps: {
+      value: _vm.password
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.password = $event.target.value;
+      }
     }
   }), _vm._v(" "), _c("p", {
     staticClass: "title"
   }, [_vm._v("Повторіть пароль")]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.password_confirm,
+      expression: "password_confirm"
+    }],
     staticClass: "form-control",
     attrs: {
       type: "password",
       placeholder: "*******"
+    },
+    domProps: {
+      value: _vm.password_confirm
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.password_confirm = $event.target.value;
+      }
     }
-  })]), _vm._v(" "), _c("button", {
+  })]), _vm._v(" "), _c("input", {
+    staticClass: "btn btn-success",
+    attrs: {
+      type: "submit",
+      value: "change pass"
+    },
+    on: {
+      click: function click($event) {
+        $event.preventDefault();
+        return _vm.updatePassword.apply(null, arguments);
+      }
+    }
+  }), _vm._v(" "), _c("button", {
     staticClass: "control",
     attrs: {
       type: "submit"

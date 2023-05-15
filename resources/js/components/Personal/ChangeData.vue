@@ -10,13 +10,13 @@
                 <p class="title">Ім'я</p>
                 <input type="text" v-model="name" placeholder="ім'я" class="form-control">
                 <p class="title">Старий пароль</p>
-                <input type="text" placeholder="ім'я" class="form-control">
+                <input type="text" v-model="old_password" placeholder="ім'я" class="form-control">
                 <p class="title">Пароль</p>
-                <input type="password" placeholder="*******" class="form-control">
+                <input type="password" v-model="password" placeholder="*******" class="form-control">
                 <p class="title">Повторіть пароль</p>
-                <input type="password" placeholder="*******" class="form-control">
+                <input type="password" v-model="password_confirm" placeholder="*******" class="form-control">
             </div>
-
+            <input type="submit" class="btn btn-success" value="change pass" @click.prevent="updatePassword">
             <button class="control" type="submit" @click.prevent="update">Внести зміни</button>
         </div>
 
@@ -30,12 +30,14 @@ export default {
     name: "ChangeData",
     data(){
         return{
+            id:parseInt(localStorage.getItem('id')),
             name:'',
             old_password: null,
             password: null,
             password_confirm: null,
             dropzone:null,
-            filename:null
+            filename:null,
+            responce:null
         }
     },
     mounted() {
@@ -43,7 +45,8 @@ export default {
             url: 'test',
             autoProcessQueue: false,
             addRemoveLinks:true,
-            maxFiles:1
+            maxFiles:1,
+
         })
     },
     methods:{
@@ -55,6 +58,23 @@ export default {
             data.append('_method','PATCH')
             const id=parseInt(localStorage.getItem('id'))
             api.post(`/api/auth/users/${id}`,data)
+        },
+        updatePassword(){
+            api.patch(`/api/auth/users/${this.id}/password`,{
+                password:this.password,
+                old_password:this.old_password,
+                password_confirm:this.password_confirm
+            })
+                .then(res=>{
+                    console.log(res);
+                })
+                . catch(error=>{
+                    const errors = error.response.data.errors;
+                    if (errors.password_confirm) {
+                        console.log(errors.password_confirm[0]);
+                    }
+                })
+
         }
     }
 }

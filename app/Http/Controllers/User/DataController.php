@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\DataRequest;
 use App\Http\Requests\User\DataUpdateRequest;
+use App\Http\Requests\User\UpdatePassword;
 use App\Http\Resources\Post\PostResource;
 use App\Http\Resources\User\UserResource;
 use App\Models\Avatar;
@@ -14,6 +15,7 @@ use App\Models\Post;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
 class DataController extends Controller
@@ -65,6 +67,19 @@ class DataController extends Controller
             'imagesCount'=>$imagesCount
         ];
         return response()->json($data);
+    }
+    public function updatePassword(User $user,UpdatePassword $request){
+        $data=$request->validated();
+        $data["password"]=Hash::make($data["password"]);
+
+        $credentials = [
+            'password' => $data['old_password'],
+        ];
+        if (!Hash::check($data['old_password'], $user->password)) {
+            return response()->json(['message' => 'Incorrect old password']);
+        }
+        $user->update(['password'=>$data['password']]);
+        return response()->json(['message'=>'success']);
     }
     public function userRes(){
         $user=auth()->user();

@@ -38,6 +38,7 @@ Route::group([
             Route::get('/own','DataController@getOwnPosts');
             Route::get('/user','DataController@userRes');
             Route::patch('/{user}','DataController@update');
+            Route::patch('/{user}/password','DataController@updatePassword');
         });
         Route::group(['namespace' => 'Personal'], function () {
             Route::post('personal','IndexController');
