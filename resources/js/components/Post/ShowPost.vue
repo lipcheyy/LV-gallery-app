@@ -236,7 +236,6 @@ a:before {
 }
 .content-wrap {
     width: 90%;
-    background: red;
 }
 .comment-title {
     word-wrap: break-word;
