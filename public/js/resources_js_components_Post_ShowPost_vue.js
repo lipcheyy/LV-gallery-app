@@ -146,10 +146,12 @@ var render = function render() {
   return _vm.post && _vm.post.images ? _c("div", {
     staticClass: "main-container"
   }, [[_vm._l(_vm.post.images, function (image) {
-    return [_c("img", {
+    return [_c("div", {
       staticClass: "post",
+      style: {
+        "background-image": "url(" + image.url + ")"
+      },
       attrs: {
-        src: image.url,
         alt: "Post"
       }
     })];
@@ -167,11 +169,11 @@ var render = function render() {
     }
   }), _vm._v(" "), _c("h2", {
     staticClass: "username"
-  }, [_vm._v(_vm._s(_vm.post.user.name))]), _vm._v(" "), _c("div", [_vm._v("title " + _vm._s(_vm.post.title))])]), _vm._v("\n\n            like cnt"), _c("span", {
-    staticClass: "likesCount"
-  }, [_vm._v(_vm._s(_vm.post.likesCount))]), _vm._v(" "), _c("div", {
+  }, [_vm._v(_vm._s(_vm.post.user.name))])]), _vm._v(" "), _c("div", {
     staticClass: "post-interaction"
   }, [_c("span", {
+    staticClass: "likesCount"
+  }, [_vm._v(_vm._s(_vm.post.likesCount))]), _vm._v(" "), _c("span", {
     on: {
       click: function click($event) {
         $event.preventDefault();
@@ -194,8 +196,12 @@ var render = function render() {
         return _vm.save.apply(null, arguments);
       }
     }
-  })])]), _vm._v(" "), _vm.post.user.id === _vm.user_id || _vm.userRole === 1 ? _c("span", [_c("router-link", {
-    staticClass: "btn btn-success",
+  }), _vm._v(" "), _vm.post.user.id === _vm.user_id || _vm.userRole === 1 ? _c("span", {
+    staticStyle: {
+      display: "flex",
+      gap: "10px"
+    }
+  }, [_c("router-link", {
     attrs: {
       to: {
         name: "post.edit",
@@ -205,9 +211,11 @@ var render = function render() {
       }
     }
   }, [_c("i", {
-    staticClass: "fas fa-pencil"
+    staticClass: "fas fa-pencil",
+    staticStyle: {
+      color: "black"
+    }
   })]), _vm._v(" "), _c("a", {
-    staticClass: "btn btn-danger",
     attrs: {
       href: "#"
     },
@@ -218,10 +226,15 @@ var render = function render() {
       }
     }
   }, [_c("i", {
-    staticClass: "fas fa-trash"
-  })])], 1) : _vm._e(), _vm._v(" "), _c("div", {
+    staticClass: "fas fa-trash",
+    staticStyle: {
+      color: "black"
+    }
+  })])], 1) : _vm._e()])]), _vm._v(" "), _c("div", {
     staticClass: "line"
   }), _vm._v(" "), _c("div", {
+    staticClass: "title"
+  }, [_vm._v(_vm._s(_vm.post.title))]), _vm._v(" "), _c("div", {
     staticClass: "commentaries"
   }, _vm._l(_vm.post.comments, function (comment) {
     return _c("div", {
@@ -232,11 +245,17 @@ var render = function render() {
         src: __webpack_require__(/*! ../Includes/Images/User.png */ "./resources/js/components/Includes/Images/User.png"),
         alt: "User"
       }
-    }), _vm._v(_vm._s(comment.writer.name) + "\n                ")]), _vm._v(" "), _c("span", {
+    }), _vm._v(_vm._s(comment.writer.name) + "\n                ")]), _vm._v(" "), _c("div", {
+      staticClass: "comment-indludes"
+    }, [_c("div", {
+      staticClass: "content-wrap"
+    }, [_c("span", {
       "class": _vm.commentToEdit(comment.id) ? "d-none" : ""
     }, [_c("i", {
       staticClass: "comment-title"
-    }, [_vm._v(_vm._s(comment.content))])]), _vm._v(" "), comment.writer.id === _vm.user_id || _vm.userRole === 1 ? [_c("div", {
+    }, [_vm._v(_vm._s(comment.content))])])]), _vm._v(" "), _c("div", {
+      staticClass: "comment-interactions"
+    }, [comment.writer.id === _vm.user_id || _vm.userRole === 1 ? [_c("div", {
       on: {
         click: function click($event) {
           $event.preventDefault();
@@ -254,7 +273,7 @@ var render = function render() {
       }
     }, [_c("i", {
       staticClass: "fas fa-pencil"
-    })])] : _vm._e(), _vm._v(" "), _c("span", {
+    })])] : _vm._e()], 2), _vm._v(" "), _c("span", {
       "class": _vm.commentToEdit(comment.id) ? "" : "d-none"
     }, [_c("input", {
       directives: [{
@@ -282,7 +301,7 @@ var render = function render() {
           return _vm.update(comment.id);
         }
       }
-    }, [_vm._v("upd")])])], 2);
+    }, [_vm._v("upd")])])])]);
   }), 0), _vm._v(" "), _c("div", {
     staticClass: "send-container"
   }, [_c("input", {
@@ -344,7 +363,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nh1[data-v-e50970de], h2[data-v-e50970de], p[data-v-e50970de], i[data-v-e50970de] {\n    margin: 0;\n}\na[data-v-e50970de] {\n    text-decoration: none;\n    color: #0060B6;\n}\na[data-v-e50970de]:before {\n    text-decoration: none;\n}\n.main-container[data-v-e50970de] {\n    width: 70%;\n    margin: 0 auto;\n    border: 1px solid black;\n    padding: 15px;\n    display: flex;\n}\n.far.fa-heart.fas-heart-animation[data-v-e50970de] {\n    animation: heart-pulse 0.3s ease-in-out;\n}\n.commentaries-container[data-v-e50970de] {\n    margin-left: 3%;\n    width: 52%;\n    display: flex;\n    flex-direction: column;\n    justify-content: space-between;\n}\n.post[data-v-e50970de] {\n    width: 45%;\n}\n.post-user-info[data-v-e50970de] {\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n}\n.line[data-v-e50970de] {\n    width: 100%;\n    height: 3px;\n    background-color: #D9D9D9;\n    border-radius: 10%;\n    margin-top: 5px;\n}\n.user[data-v-e50970de] {\n    width: 10%;\n    border-radius: 50%;\n    border: 1px solid black;\n    margin-right: 10px;\n}\n.commentaries[data-v-e50970de] {\n    padding: 10px;\n    margin-top: 10px;\n    height: 75%;\n    overflow: auto;\n}\n.comment[data-v-e50970de] {\n    width: 100%;\n    border: 1px solid black;\n    border-radius: 10px;\n    padding: 5px;\n    margin: 5px 0;\n}\n.comment-user[data-v-e50970de] {\n    height: 20px;\n    border: 1px solid black;\n    border-radius: 50%;\n}\n.user-info[data-v-e50970de] {\n    display: flex;\n    width: 70%;\n}\n.send-container[data-v-e50970de] {\n    display: flex;\n    align-items: center;\n    width: 100%;\n    height: 10%;\n    justify-content: space-between;\n}\n.send-comment[data-v-e50970de] {\n    width: 75%;\n    height: 100%;\n    border: 1px solid grey;\n    font-size: 32px;\n    border-radius: 10px;\n}\n.send-btn[data-v-e50970de] {\n    width: 20%;\n    height: 100%;\n    font-size: 24px;\n    border: 1px solid grey;\n    border-radius: 10px;\n    padding: 0;\n}\n.fa-paper-plane[data-v-e50970de] {\n    margin: 0 auto;\n}\n.post-interaction[data-v-e50970de] {\n    height: 100%;\n    width: 15%;\n    display: flex;\n    align-items: center;\n    font-size: 32px;\n    justify-content: space-between;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nh1[data-v-e50970de], h2[data-v-e50970de], p[data-v-e50970de], i[data-v-e50970de] {\n    margin: 0;\n}\na[data-v-e50970de] {\n    text-decoration: none;\n    color: #0060B6;\n}\na[data-v-e50970de]:before {\n    text-decoration: none;\n}\n.main-container[data-v-e50970de] {\n    width: 70%;\n    margin: 0 auto;\n    border: 1px solid black;\n    padding: 15px;\n    display: flex;\n}\n.far.fa-heart.fas-heart-animation[data-v-e50970de] {\n    animation: heart-pulse 0.3s ease-in-out;\n}\n.commentaries-container[data-v-e50970de] {\n    margin-left: 3%;\n    width: 52%;\n    display: flex;\n    flex-direction: column;\n    justify-content: space-between;\n}\n.comment-indludes[data-v-e50970de] {\n    display: flex;\n    justify-content:  space-between;\n}\n.comment-interactions[data-v-e50970de] {\n    display: flex;\n    gap: 5px;\n}\n.content-wrap[data-v-e50970de] {\n    width: 90%;\n}\n.comment-title[data-v-e50970de] {\n    word-wrap: break-word;\n    overflow-wrap: break-word;\n}\n.post[data-v-e50970de] {\n    background: 50% 50% no-repeat;\n    background-size: cover;\n    width: 45%;\n    height: 600px;\n}\n.post-user-info[data-v-e50970de] {\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n}\n.line[data-v-e50970de] {\n    width: 100%;\n    height: 3px;\n    background-color: #D9D9D9;\n    border-radius: 10%;\n    margin-top: 5px;\n}\n.user[data-v-e50970de] {\n    width: 10%;\n    border-radius: 50%;\n    border: 1px solid black;\n    margin-right: 10px;\n}\n.commentaries[data-v-e50970de] {\n    padding: 10px;\n    margin-top: 10px;\n    height: 400px;\n    overflow: auto;\n}\n.comment[data-v-e50970de] {\n    width: 100%;\n    border: 1px solid black;\n    border-radius: 10px;\n    padding: 5px;\n    margin: 5px 0;\n}\n.comment-user[data-v-e50970de] {\n    height: 20px;\n    border: 1px solid black;\n    border-radius: 50%;\n}\n.user-info[data-v-e50970de] {\n    display: flex;\n    width: 70%;\n}\n.send-container[data-v-e50970de] {\n    display: flex;\n    align-items: center;\n    width: 100%;\n    height: 10%;\n    justify-content: space-between;\n}\n.send-comment[data-v-e50970de] {\n    width: 75%;\n    height: 100%;\n    border: 1px solid grey;\n    font-size: 32px;\n    border-radius: 10px;\n}\n.send-btn[data-v-e50970de] {\n    width: 20%;\n    height: 100%;\n    font-size: 24px;\n    border: 1px solid grey;\n    border-radius: 10px;\n    padding: 0;\n}\n.fa-paper-plane[data-v-e50970de] {\n    margin: 0 auto;\n}\n.post-interaction[data-v-e50970de] {\n    height: 100%;\n    display: flex;\n    align-items: center;\n    font-size: 32px;\n    justify-content: space-between;\n    gap: 10px\n}\n.title[data-v-e50970de] {\n    margin: 10px auto 0 auto;\n}\n@media only screen and (max-width: 1024px) {\n.main-container[data-v-e50970de] {\n        flex-direction: column;\n}\n.post[data-v-e50970de], .commentaries-container[data-v-e50970de] {\n        width: 100%;\n        justify-content: space-between;\n        margin: 0 auto;\n}\n.commentaries[data-v-e50970de] {\n        height: 200px;\n}\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

@@ -130,6 +130,8 @@ p, h1, h2, h3 {
     display: flex;
     gap: 34px;
     margin-bottom: 50px;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 i {
@@ -210,6 +212,7 @@ i {
     height: 250px;
     cursor: pointer;
 }
+
 
 
 </style>

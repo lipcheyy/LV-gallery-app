@@ -2,53 +2,64 @@
     <div class="main-container" v-if="post && post.images">
         <template>
             <template v-for="image in post.images">
-                <img class="post" :src="image.url" alt="Post">
+                <div class="post" :style="{ 'background-image': 'url(' + image.url + ')' }" alt="Post"> </div>
             </template>
         </template>
+
+
         <div class="commentaries-container">
             <div class="post-user-info">
                 <div class="user-info">
                     <img class="user" src="../Includes/Images/User.png" alt="User">
                     <h2 class="username">{{ post.user.name }}</h2>
-                    <div>title {{ post.title }}</div>
                 </div>
 
-                like cnt<span class="likesCount">{{ post.likesCount }}</span>
                 <div class="post-interaction">
+                    <span class="likesCount">{{ post.likesCount }}</span>
                     <span @click.prevent="like">
                         <i class="far fa-heart" :class="{'fas fa-heart':likedIds.includes(id)}"></i>
                     </span>
                     <i @click.prevent="save" class="far fa-bookmark" :class="{'fas fa-bookmark':savedIds.includes(id)}"></i>
+                    <span v-if="post.user.id===user_id || userRole===1" style="display: flex; gap: 10px;">
+                    <router-link :to="{name:'post.edit',params:{id:id}}">
+                        <i class="fas fa-pencil" style="color: black;"></i>
+                    </router-link>
+                    <a href="#"  @click.prevent="destroyPost(id)"><i class="fas fa-trash" style="color: black;"></i></a>
+                    </span>
                 </div>
+
             </div>
-            <span v-if="post.user.id===user_id || userRole===1">
-            <router-link :to="{name:'post.edit',params:{id:id}}" class="btn btn-success">
-                <i class="fas fa-pencil"></i>
-            </router-link>
-            <a href="#" class="btn btn-danger" @click.prevent="destroyPost(id)"><i class="fas fa-trash"></i></a>
-        </span>
             <div class="line"></div>
+            <div class="title">{{ post.title }}</div>
             <div class="commentaries">
                 <div class="comment" v-for="comment in post.comments">
                     <div><img class="comment-user" src="../Includes/Images/User.png" alt="User">{{
                             comment.writer.name
                         }}
                     </div>
-                    <span :class="commentToEdit(comment.id)?'d-none':''">
-                        <i class="comment-title">{{ comment.content }}</i>
-                    </span>
-                    <template v-if="comment.writer.id===user_id || userRole===1">
-                        <div @click.prevent="destroy(comment.id)">
-                            <i class="fas fa-trash"></i>
+                    <div class="comment-indludes">
+                        <div class="content-wrap">
+                            <span :class="commentToEdit(comment.id)?'d-none':''">
+                            <i class="comment-title">{{ comment.content }}</i>
+                             </span>
                         </div>
-                        <div @click.prevent="getCommentDataToEdit(comment.id,comment.content)">
-                            <i class="fas fa-pencil"></i>
+                        <div class="comment-interactions">
+                            <template v-if="comment.writer.id===user_id || userRole===1">
+                                <div @click.prevent="destroy(comment.id)">
+                                    <i class="fas fa-trash"></i>
+                                </div>
+                                <div @click.prevent="getCommentDataToEdit(comment.id,comment.content)">
+                                    <i class="fas fa-pencil"></i>
+                                </div>
+                            </template>
                         </div>
-                    </template>
-                    <span :class="commentToEdit(comment.id)?'':'d-none'">
+
+                        <span :class="commentToEdit(comment.id)?'':'d-none'">
                         <input v-model="contentToEdit">
                         <a href="" @click.prevent="update(comment.id)">upd</a>
                     </span>
+                    </div>
+
                 </div>
 
 
@@ -216,9 +227,26 @@ a:before {
     flex-direction: column;
     justify-content: space-between;
 }
-
+.comment-indludes {
+    display: flex;
+    justify-content:  space-between;
+}
+.comment-interactions {
+    display: flex;
+    gap: 5px;
+}
+.content-wrap {
+    width: 90%;
+}
+.comment-title {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
 .post {
+    background: 50% 50% no-repeat;
+    background-size: cover;
     width: 45%;
+    height: 600px;
 }
 
 .post-user-info {
@@ -245,7 +273,7 @@ a:before {
 .commentaries {
     padding: 10px;
     margin-top: 10px;
-    height: 75%;
+    height: 400px;
     overflow: auto;
 }
 
@@ -301,11 +329,30 @@ a:before {
 
 .post-interaction {
     height: 100%;
-    width: 15%;
     display: flex;
     align-items: center;
     font-size: 32px;
     justify-content: space-between;
+    gap: 10px
 
+}
+
+.title {
+    margin: 10px auto 0 auto;
+}
+
+@media only screen and (max-width: 1024px) {
+    .main-container {
+        flex-direction: column;
+    }
+    .post, .commentaries-container {
+        width: 100%;
+        justify-content: space-between;
+        margin: 0 auto;
+    }
+
+    .commentaries {
+        height: 200px;
+    }
 }
 </style>

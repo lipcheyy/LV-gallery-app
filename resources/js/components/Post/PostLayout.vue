@@ -1,5 +1,5 @@
 <template>
-    <div class="main-container">
+    <router-link :to="{name:'post.show',params:{id:id}}" class="main-container">
         <div class="postUser">
             <div class="user">
                 <img
@@ -17,33 +17,39 @@
             </div>
 
         </div>
-        <img class="img" :src="url">
-        <div class="buttons-container">
-            <div>{{ title }}</div>
-            <div class="like_container">
-                <a href="" @click.prevent="toggleLike(id)">
-                    <i class="far fa-heart likeBtn"
-                       :class="{'fas fa-heart': likedIds.includes(id), 'fas-heart-animation likeBtn': likedIds.includes(id)}"></i>
-                </a>
-                <span class="count_likes"><span :class="`likesCount-${id}`">{{ likesCount }}</span> позначок "Подобається"</span>
-            </div>
-            <div class="save_container">
-                <a href="#" @click.prevent="toggleSave(id)">
-                    <i class="far fa-bookmark"
-                       :class="{'fas fa-bookmark':savedIds.includes(id), 'fas-bookmark-animation': savedIds.includes(id)} "></i>
-                </a>
-            </div>
+
+        <div class="post-images" :style="{ 'background-image': 'url(' + url + ')' }">
 
         </div>
-        <router-link :to="{name:'post.show',params:{id:id}}" class="btn btn-primary">детальніше</router-link>
-        <template v-if="user.id===userId ||userRole===1">
-            <router-link :to="{name:'post.edit',params:{id:id}}" class="btn btn-success">
-                <i class="fas fa-pencil"></i>
-            </router-link>
-            <a href="#" class="btn btn-danger" @click.prevent="destroy(id)"><i class="fas fa-trash"></i></a>
-        </template>
+        <div class="buttons-container">
+            <div>{{ title }}</div>
+            <div class="div">
+                <div class="like_container">
+                    <a href="" @click.prevent="toggleLike(id)">
+                        <i class="far fa-heart likeBtn"
+                           :class="{'fas fa-heart': likedIds.includes(id), 'fas-heart-animation likeBtn': likedIds.includes(id)}"></i>
+                    </a>
+                    <span class="count_likes"><span :class="`likesCount-${id}`">{{ likesCount }}</span> позначок "Подобається"</span>
+                </div>
+                <div class="save_container">
+                    <a href="#" @click.prevent="toggleSave(id)">
+                        <i class="far fa-bookmark"
+                           :class="{'fas fa-bookmark':savedIds.includes(id), 'fas-bookmark-animation': savedIds.includes(id)} "></i>
+                    </a>
+                </div>
+            </div>
 
-    </div>
+
+        </div>
+<!--        <router-link :to="{name:'post.show',params:{id:id}}" class="btn btn-primary">детальніше</router-link>-->
+<!--        <template v-if="user.id===userId ||userRole===1">-->
+<!--            <router-link :to="{name:'post.edit',params:{id:id}}" class="btn btn-success">-->
+<!--                <i class="fas fa-pencil"></i>-->
+<!--            </router-link>-->
+<!--            <a href="#" class="btn btn-danger" @click.prevent="destroy(id)"><i class="fas fa-trash"></i></a>-->
+<!--        </template>-->
+
+    </router-link>
 </template>
 
 <script>
@@ -104,18 +110,27 @@ export default {
 
 <style scoped>
 .main-container {
-    height: 78vh;
+    height: 90vh;
     width: 350px;
     display: flex;
     flex-direction: column;
 }
-
-.img {
-    width: 100%;
-    height: 80%;
+.post-images {
+    background: 50% 50% no-repeat;
+    background-size: cover;
+    width: 350px;
+    height: 100%;
 }
 
 .buttons-container {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+}
+.div {
     margin-top: 10px;
     display: flex;
     justify-content: space-between;
