@@ -14,13 +14,13 @@ class ResetController extends Controller
     {
         $data=$request->validated();
         $data["password"]=Hash::make($data["password"]);
-        $credentials = [
-            'email' => $data['email'],
-            'password' => $data['old_password'],
-        ];
-        if (!auth()->attempt($credentials)) {
-            return response()->json(['message' => 'Incorrect old password'], 422);
-        }
+//        $credentials = [
+//            'email' => $data['email'],
+//            'password' => $data['old_password'],
+//        ];
+//        if (!auth()->attempt($credentials)) {
+//            return response()->json(['message' => 'Incorrect old password'], 422);
+//        }
         User::where('email',$data['email'])->update(['password'=>$data['password']]);
     }
 }

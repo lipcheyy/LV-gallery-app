@@ -25,7 +25,6 @@ class ResetRequest extends FormRequest
     {
         return [
             'email'=>'required|exists:users,email',
-            'old_password'=>'required',
             'password'=>'required',
             'password_confirm'=>'required',
         ];

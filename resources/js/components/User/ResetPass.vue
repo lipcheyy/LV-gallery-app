@@ -10,8 +10,6 @@
             <div class="inputs-container">
                 <p class="title">Пошта</p>
                 <input type="email" v-model="email" class="form-control">
-                <p class="title">Старий пароль</p>
-                <input type="password" v-model="old_password" class="form-control">
                 <p class="title">Новий пароль</p>
                 <input type="password" v-model="password" class="form-control">
                 <p class="title">Повторіть новий пароль</p>
@@ -36,7 +34,6 @@ export default {
             email:null,
             password:null,
             password_confirm:null,
-            old_password:null,
             error:null,
         }
     },
