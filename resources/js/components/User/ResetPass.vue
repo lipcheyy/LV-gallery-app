@@ -2,22 +2,22 @@
     <div class="main-container">
         <div class="form-container">
             <div class="btn-container">
-                <router-link  :to="{name:'user.login'}" class="route-btn active">Вхід</router-link>
-                <router-link  :to="{name:'user.registration'}" class="route-btn">Реєстрація</router-link>
+                <h1>
+                    Змінити пароль
+                </h1>
             </div>
 
             <div class="inputs-container">
                 <p class="title">Пошта</p>
                 <input type="email" v-model="email" class="form-control">
-                <p class="title">Пароль</p>
+                <p class="title">Новий пароль</p>
                 <input type="password" v-model="password" class="form-control">
-                <template>
-                    <router-link :to="{ name: 'user.reset' }">Remember password?</router-link>
-                </template>
+                <p class="title">Повторіть новий пароль</p>
+                <input type="password" v-model="password" class="form-control">
             </div>
 
             <div class="submit-container">
-                <input type="submit" @click.prevent="login" class="btn" value="Увійти">
+                <input type="submit" @click.prevent="login" class="btn" value="Зберегти">
                 <p class="alert alert-danger custom-alert" v-if="error">{{error}}</p>
             </div>
 
@@ -28,7 +28,7 @@
 
 <script>
 export default {
-    name: "Login",
+    name: "ResetPass",
     data(){
         return{
             email:null,
@@ -36,35 +36,10 @@ export default {
             error:null,
         }
     },
-    mounted() {
-        this.$Progress.start()
-        setTimeout(()=>{
-            this.$Progress.finish()
-        },350)
-    },
-    methods:{
-        login(){
-            axios.post('/api/auth/login',
-                {
-                    'email':this.email,
-                    'password':this.password
-                })
-                .then(res=>{
-                    let access_token=res.data.access_token
-                    localStorage.setItem('access_token',access_token)
-                    this.$router.push({name:'post.index'})
-
-                })
-                .catch(error=>{
-                    this.error= error.response.data.error;
-                })
-        }
-    },
 }
 </script>
 
 <style scoped>
-
 a{
     text-decoration: none;
     color: blue;
@@ -88,32 +63,9 @@ a{
 .btn-container {
     width: 299px;
     display: flex;
-    justify-content: space-between;
-}
-
-.route-btn {
-    width: 143px;
-    height: 25px;
-    background: #FBFBFB;
-    border: 2px solid #000000;
-    border-radius: 7px;
-    display: flex;
     justify-content: center;
-    align-items: center;
-    font-family: 'Inter', sans-serif;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 19px;
-    letter-spacing: 0.065em;
-    color: black
 }
 
-.route-btn.active {
-    background-color: red;
-    color: white;
-    border: 2px solid red;
-}
 .title {
     font-family: 'Inter', sans-serif;
     font-style: normal;
