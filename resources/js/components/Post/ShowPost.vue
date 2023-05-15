@@ -15,20 +15,21 @@
                     <div>{{ post.title }}</div>
                 </div>
 
-                <span class="likesCount">{{ post.likesCount }}</span>
                 <div class="post-interaction">
+                    <span class="likesCount">{{ post.likesCount }}</span>
                     <span @click.prevent="like">
                         <i class="far fa-heart" :class="{'fas fa-heart':likedIds.includes(id)}"></i>
                     </span>
                     <i @click.prevent="save" class="far fa-bookmark" :class="{'fas fa-bookmark':savedIds.includes(id)}"></i>
+                    <span v-if="post.user.id===user_id || userRole===1" style="display: flex; gap: 10px;">
+                    <router-link :to="{name:'post.edit',params:{id:id}}">
+                        <i class="fas fa-pencil" style="color: black;"></i>
+                    </router-link>
+                    <a href="#"  @click.prevent="destroyPost(id)"><i class="fas fa-trash" style="color: black;"></i></a>
+                    </span>
                 </div>
+
             </div>
-            <span v-if="post.user.id===user_id || userRole===1">
-            <router-link :to="{name:'post.edit',params:{id:id}}" class="btn btn-success">
-                <i class="fas fa-pencil"></i>
-            </router-link>
-            <a href="#" class="btn btn-danger" @click.prevent="destroyPost(id)"><i class="fas fa-trash"></i></a>
-        </span>
             <div class="line"></div>
             <div class="commentaries">
                 <div class="comment" v-for="comment in post.comments">
@@ -328,11 +329,11 @@ a:before {
 
 .post-interaction {
     height: 100%;
-    width: 15%;
     display: flex;
     align-items: center;
     font-size: 32px;
     justify-content: space-between;
+    gap: 10px
 
 }
 </style>
