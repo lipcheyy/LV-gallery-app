@@ -340,4 +340,19 @@ a:before {
 .title {
     margin: 10px auto 0 auto;
 }
+
+@media only screen and (max-width: 1024px) {
+    .main-container {
+        flex-direction: column;
+    }
+    .post, .commentaries-container {
+        width: 100%;
+        justify-content: space-between;
+        margin: 0 auto;
+    }
+
+    .commentaries {
+        height: 200px;
+    }
+}
 </style>
