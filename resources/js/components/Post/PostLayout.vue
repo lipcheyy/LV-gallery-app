@@ -1,5 +1,5 @@
 <template>
-    <div class="main-container">
+    <router-link :to="{name:'post.show',params:{id:id}}" class="main-container">
         <div class="postUser">
             <div class="user">
                 <img
@@ -41,15 +41,15 @@
 
 
         </div>
-        <router-link :to="{name:'post.show',params:{id:id}}" class="btn btn-primary">детальніше</router-link>
-        <template v-if="user.id===userId ||userRole===1">
-            <router-link :to="{name:'post.edit',params:{id:id}}" class="btn btn-success">
-                <i class="fas fa-pencil"></i>
-            </router-link>
-            <a href="#" class="btn btn-danger" @click.prevent="destroy(id)"><i class="fas fa-trash"></i></a>
-        </template>
+<!--        <router-link :to="{name:'post.show',params:{id:id}}" class="btn btn-primary">детальніше</router-link>-->
+<!--        <template v-if="user.id===userId ||userRole===1">-->
+<!--            <router-link :to="{name:'post.edit',params:{id:id}}" class="btn btn-success">-->
+<!--                <i class="fas fa-pencil"></i>-->
+<!--            </router-link>-->
+<!--            <a href="#" class="btn btn-danger" @click.prevent="destroy(id)"><i class="fas fa-trash"></i></a>-->
+<!--        </template>-->
 
-    </div>
+    </router-link>
 </template>
 
 <script>
@@ -110,7 +110,7 @@ export default {
 
 <style scoped>
 .main-container {
-    height: 100vh;
+    height: 90vh;
     width: 350px;
     display: flex;
     flex-direction: column;
