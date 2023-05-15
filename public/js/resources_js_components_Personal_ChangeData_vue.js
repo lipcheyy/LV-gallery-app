@@ -12,9 +12,40 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var dropzone__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! dropzone */ "./node_modules/dropzone/dist/dropzone.mjs");
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../api */ "./resources/js/api.js");
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "ChangeData"
+  name: "ChangeData",
+  data: function data() {
+    return {
+      name: '',
+      old_password: null,
+      password: null,
+      password_confirm: null,
+      dropzone: null,
+      filename: null
+    };
+  },
+  mounted: function mounted() {
+    this.dropzone = new dropzone__WEBPACK_IMPORTED_MODULE_0__["default"](this.$refs.dropzone, {
+      url: 'test',
+      autoProcessQueue: false,
+      addRemoveLinks: true,
+      maxFiles: 1
+    });
+  },
+  methods: {
+    update: function update() {
+      var data = new FormData();
+      var file = this.dropzone.getAcceptedFiles()[0];
+      data.append('avatar', file);
+      data.append('name', this.name);
+      data.append('_method', 'PATCH');
+      var id = parseInt(localStorage.getItem('id'));
+      _api__WEBPACK_IMPORTED_MODULE_1__["default"].post("/api/auth/users/".concat(id), data);
+    }
+  }
 });
 
 /***/ }),
@@ -42,21 +73,34 @@ var render = function render() {
     staticClass: "dropzone_form"
   }, [_c("i", {
     staticClass: "fa-solid fa-pencil"
-  }), _vm._v(" "), _c("p", [_vm._v("Змінити аватар")])]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c("button", {
-    staticClass: "control",
-    attrs: {
-      type: "submit"
-    }
-  }, [_vm._v("Внести зміни")])])]);
-};
-var staticRenderFns = [function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("div", {
+  }), _vm._v(" "), _c("p", [_vm._v("Змінити аватар")])]), _vm._v(" "), _c("div", {
     staticClass: "change-inputs"
   }, [_c("p", {
     staticClass: "title"
   }, [_vm._v("Ім'я")]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.name,
+      expression: "name"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      type: "text",
+      placeholder: "ім'я"
+    },
+    domProps: {
+      value: _vm.name
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.name = $event.target.value;
+      }
+    }
+  }), _vm._v(" "), _c("p", {
+    staticClass: "title"
+  }, [_vm._v("Старий пароль")]), _vm._v(" "), _c("input", {
     staticClass: "form-control",
     attrs: {
       type: "text",
@@ -78,8 +122,20 @@ var staticRenderFns = [function () {
       type: "password",
       placeholder: "*******"
     }
-  })]);
-}];
+  })]), _vm._v(" "), _c("button", {
+    staticClass: "control",
+    attrs: {
+      type: "submit"
+    },
+    on: {
+      click: function click($event) {
+        $event.preventDefault();
+        return _vm.update.apply(null, arguments);
+      }
+    }
+  }, [_vm._v("Внести зміни")])])]);
+};
+var staticRenderFns = [];
 render._withStripped = true;
 
 

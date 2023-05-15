@@ -8,6 +8,8 @@
             </div>
             <div class="change-inputs">
                 <p class="title">Ім'я</p>
+                <input type="text" v-model="name" placeholder="ім'я" class="form-control">
+                <p class="title">Старий пароль</p>
                 <input type="text" placeholder="ім'я" class="form-control">
                 <p class="title">Пароль</p>
                 <input type="password" placeholder="*******" class="form-control">
@@ -15,7 +17,7 @@
                 <input type="password" placeholder="*******" class="form-control">
             </div>
 
-            <button class="control" type="submit">Внести зміни</button>
+            <button class="control" type="submit" @click.prevent="update">Внести зміни</button>
         </div>
 
     </div>
@@ -23,8 +25,38 @@
 
 <script>
 import Dropzone from 'dropzone'
+import api from "../../api";
 export default {
-    name: "ChangeData"
+    name: "ChangeData",
+    data(){
+        return{
+            name:'',
+            old_password: null,
+            password: null,
+            password_confirm: null,
+            dropzone:null,
+            filename:null
+        }
+    },
+    mounted() {
+        this.dropzone = new Dropzone(this.$refs.dropzone, {
+            url: 'test',
+            autoProcessQueue: false,
+            addRemoveLinks:true,
+            maxFiles:1
+        })
+    },
+    methods:{
+        update(){
+            const data = new FormData
+            const file = this.dropzone.getAcceptedFiles()[0]
+            data.append('avatar',file)
+            data.append('name',this.name)
+            data.append('_method','PATCH')
+            const id=parseInt(localStorage.getItem('id'))
+            api.post(`/api/auth/users/${id}`,data)
+        }
+    }
 }
 </script>
 

@@ -37,6 +37,7 @@ Route::group([
             Route::get('/saved','DataController@getSavedPosts');
             Route::get('/data','DataController@getData');
             Route::get('/own','DataController@getOwnPosts');
+            Route::patch('/{user}','DataController@update');
         });
         Route::group(['namespace' => 'Personal'], function () {
             Route::post('personal','IndexController');
