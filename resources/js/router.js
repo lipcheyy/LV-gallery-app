@@ -21,6 +21,11 @@ const route =new VueRouter({
             name:'user.reset'
         },
         {
+            path:'/users/change',
+            component: ()=> import('./components/Personal/ChangeData'),
+            name:'user.change'
+        },
+        {
             path:'/:id/post',
             component: ()=> import('./components/Post/ShowPost'),
             name:'post.show'

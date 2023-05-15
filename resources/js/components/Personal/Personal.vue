@@ -11,7 +11,9 @@
             </div>
 
             <h1 class="name">{{username}}</h1>
+            <router-link :to="{name: 'user.change'}" class='control'><h3>Змінити дані</h3></router-link>
         </div>
+
 
         <div class="control-page">
             <div class="line">
@@ -114,6 +116,7 @@ p, h1, h2, h3 {
     display: flex;
     justify-content: center;
     gap: 34px;
+    margin: 10px 0 0 0;
 }
 
 .subline {
@@ -141,7 +144,8 @@ i {
 .control {
     width: 200px;
     height: 45px;
-    background-color: white;
+    color: black;
+    text-decoration: none;
     border: 2px solid #000000;
     border-radius: 7px;
     display: flex;
