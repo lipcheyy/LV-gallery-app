@@ -1,7 +1,5 @@
 <template>
     <div>
-        <p>category main page</p>
-
         <create-component ref="test"></create-component>
 
         <div class="TableBlock">
