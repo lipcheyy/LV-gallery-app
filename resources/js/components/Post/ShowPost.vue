@@ -273,7 +273,7 @@ a:before {
 .commentaries {
     padding: 10px;
     margin-top: 10px;
-    height: 75%;
+    height: 400px;
     overflow: auto;
 }
 
