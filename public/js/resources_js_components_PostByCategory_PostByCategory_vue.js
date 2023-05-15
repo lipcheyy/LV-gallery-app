@@ -169,13 +169,19 @@ var render = function render() {
     staticClass: "postUser"
   }, [_c("div", {
     staticClass: "user"
-  }, [_c("img", {
+  }, [_vm.user.avatar.length === 0 ? _c("img", {
     staticClass: "user_pic",
     attrs: {
       src: __webpack_require__(/*! ./Images/Guest.png */ "./resources/js/components/Post/Images/Guest.png"),
       alt: "user"
     }
-  }), _vm._v(" "), _vm.user ? [_c("a", {
+  }) : _vm._e(), _vm._v(" "), _vm.user.avatar.length !== 0 ? _c("img", {
+    staticClass: "user_pic",
+    attrs: {
+      src: _vm.user.avatar[0].url,
+      alt: "user"
+    }
+  }) : _vm._e(), _vm._v(" "), _vm.user ? [_c("a", {
     staticClass: "username",
     attrs: {
       href: "#"

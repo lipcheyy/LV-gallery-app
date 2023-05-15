@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Resources\User;
+namespace App\Http\Resources\Avatar;
 
-use App\Http\Resources\Avatar\AvatarResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserResource extends JsonResource
+class AvatarResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,11 +15,8 @@ class UserResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id'=>$this->id,
-            'name'=>$this->name,
-            'email'=>$this->email,
-            'role'=>$this->role,
-            'avatar'=>AvatarResource::collection($this->avatar)
+            'url'=>$this->url,
+            'path'=>$this->path
         ];
     }
 }

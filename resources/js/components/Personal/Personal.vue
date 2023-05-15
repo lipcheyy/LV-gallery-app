@@ -3,13 +3,17 @@
         <!--        <router-link v-if="userRole===1" :to="{name:'admin.statistic'}">Admin panel</router-link>-->
         <div class="user-info">
             <div class="circle">
-                <img
-                    class="user-icon"
-                    src="../Includes/Images/User.png"
-                    alt="User"
-                >
+                <img v-if="isEmpty"
+                     src="./Images/Guest.png"
+                     class="user_pic"
+                     alt="user"
+                />
+                <img v-if="!isEmpty"
+                     :src="avatarUrl"
+                     class="user_pic"
+                     alt="user"
+                />
             </div>
-
             <h1 class="name">{{username}}</h1>
             <router-link :to="{name: 'user.change'}" class='control'><h3>Змінити дані</h3></router-link>
         </div>
@@ -57,7 +61,10 @@ export default {
             userRole: null,
             username: localStorage.getItem('username'),
             showOwnPosts: true,
-            showSavedPosts: false
+            showSavedPosts: false,
+            avatarUrl:null,
+            user:null,
+            isEmpty:true
         }
     },
     name: "Personal",
@@ -67,6 +74,7 @@ export default {
         setTimeout(()=>{
             this.$Progress.finish()
         },500)
+        this.userRes()
     },
     methods: {
         userdata() {
@@ -75,8 +83,23 @@ export default {
                     const user = res.data
                     localStorage.setItem('user_role', user.role)
                     this.userRole = parseInt(user.role)
+
                 })
         },
+        userRes(){
+            api.get('/api/auth/users/user')
+                .then(res=>{
+                    this.user=res.data.data
+                    if (this.user.avatar.length!==0){
+                        this.isEmpty=false
+                        this.user.avatar.forEach(avatar=>{
+                            console.log(avatar);
+                            this.avatarUrl=avatar.url
+                        })
+
+                    }
+                })
+        }
     },
 
 }

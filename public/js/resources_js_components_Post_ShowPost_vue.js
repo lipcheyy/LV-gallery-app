@@ -18,6 +18,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       post: null,
+      avatar: null,
       content: '',
       user_id: parseInt(localStorage.getItem('id')),
       toEdit: null,
@@ -39,6 +40,8 @@ __webpack_require__.r(__webpack_exports__);
       if (this.$route.params.id) {
         _api__WEBPACK_IMPORTED_MODULE_0__["default"].get("/api/auth/posts/".concat(this.id)).then(function (res) {
           _this.post = res.data.data;
+          _this.avatar = _this.post.user.avatar[0].url;
+          console.log(_this.avatar);
         });
       }
     },
@@ -164,7 +167,7 @@ var render = function render() {
   }, [_c("img", {
     staticClass: "user",
     attrs: {
-      src: __webpack_require__(/*! ../Includes/Images/User.png */ "./resources/js/components/Includes/Images/User.png"),
+      src: _vm.avatar,
       alt: "User"
     }
   }), _vm._v(" "), _c("h2", {

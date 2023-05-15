@@ -10,7 +10,7 @@
         <div class="commentaries-container">
             <div class="post-user-info">
                 <div class="user-info">
-                    <img class="user" src="../Includes/Images/User.png" alt="User">
+                    <img class="user" :src="avatar" alt="User">
                     <h2 class="username">{{ post.user.name }}</h2>
                 </div>
 
@@ -84,6 +84,7 @@ export default {
     data() {
         return {
             post: null,
+            avatar:null,
             content: '',
             user_id: parseInt(localStorage.getItem('id')),
             toEdit: null,
@@ -105,6 +106,8 @@ export default {
                 api.get(`/api/auth/posts/${this.id}`)
                     .then(res => {
                         this.post = res.data.data
+                        this.avatar=this.post.user.avatar[0].url
+                        console.log(this.avatar);
                     })
             }
         },

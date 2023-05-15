@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\User\DataRequest;
 use App\Http\Requests\User\DataUpdateRequest;
 use App\Http\Resources\Post\PostResource;
+use App\Http\Resources\User\UserResource;
 use App\Models\Avatar;
 use App\Models\Category;
 use App\Models\Image;
@@ -29,9 +30,19 @@ class DataController extends Controller
     public function update(User $user,DataUpdateRequest $request){
         $data=$request->validated();
         $avatar=$data['avatar']??null;
+//        return dump($user->avatar[0]->path);
         unset($data['avatar']);
-        $user->update($data);
+        if (isset($data['name'])) {
+            $user->update(['name' => $data['name']]);
+        }
         if ($avatar!='undefined'){
+
+            if ($user->avatar){
+                foreach ($user->avatar as $item) {
+                    Storage::disk('public')->delete($item->path);
+                    $item->delete();
+                }
+            }
             $imageName = md5(Carbon::now() . '_' . $avatar->getClientOriginalName()) . '.' . $avatar->getClientOriginalExtension();
             $filePath = Storage::disk('public')->putFileAs('/avatars', $avatar, $imageName);
             Avatar::create([
@@ -54,5 +65,9 @@ class DataController extends Controller
             'imagesCount'=>$imagesCount
         ];
         return response()->json($data);
+    }
+    public function userRes(){
+        $user=auth()->user();
+        return new UserResource($user);
     }
 }

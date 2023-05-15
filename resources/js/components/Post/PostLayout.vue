@@ -2,10 +2,15 @@
     <router-link :to="{name:'post.show',params:{id:id}}" class="main-container">
         <div class="postUser">
             <div class="user">
-                <img
+                <img v-if="user.avatar.length===0"
                     src="./Images/Guest.png"
                     class="user_pic"
                     alt="user"
+                />
+                <img v-if="user.avatar.length!==0"
+                     :src="user.avatar[0].url"
+                     class="user_pic"
+                     alt="user"
                 />
                 <template v-if="user">
                     <a href='#' class="username">{{ user.name }}</a>

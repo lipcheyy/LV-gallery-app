@@ -27,7 +27,10 @@ __webpack_require__.r(__webpack_exports__);
       userRole: null,
       username: localStorage.getItem('username'),
       showOwnPosts: true,
-      showSavedPosts: false
+      showSavedPosts: false,
+      avatarUrl: null,
+      user: null,
+      isEmpty: true
     };
   },
   name: "Personal",
@@ -38,6 +41,7 @@ __webpack_require__.r(__webpack_exports__);
     setTimeout(function () {
       _this.$Progress.finish();
     }, 500);
+    this.userRes();
   },
   methods: {
     userdata: function userdata() {
@@ -46,6 +50,19 @@ __webpack_require__.r(__webpack_exports__);
         var user = res.data;
         localStorage.setItem('user_role', user.role);
         _this2.userRole = parseInt(user.role);
+      });
+    },
+    userRes: function userRes() {
+      var _this3 = this;
+      _api__WEBPACK_IMPORTED_MODULE_0__["default"].get('/api/auth/users/user').then(function (res) {
+        _this3.user = res.data.data;
+        if (_this3.user.avatar.length !== 0) {
+          _this3.isEmpty = false;
+          _this3.user.avatar.forEach(function (avatar) {
+            console.log(avatar);
+            _this3.avatarUrl = avatar.url;
+          });
+        }
       });
     }
   }
@@ -270,7 +287,21 @@ var render = function render() {
     staticClass: "main-container"
   }, [_c("div", {
     staticClass: "user-info"
-  }, [_vm._m(0), _vm._v(" "), _c("h1", {
+  }, [_c("div", {
+    staticClass: "circle"
+  }, [_vm.isEmpty ? _c("img", {
+    staticClass: "user_pic",
+    attrs: {
+      src: __webpack_require__(/*! ./Images/Guest.png */ "./resources/js/components/Personal/Images/Guest.png"),
+      alt: "user"
+    }
+  }) : _vm._e(), _vm._v(" "), !_vm.isEmpty ? _c("img", {
+    staticClass: "user_pic",
+    attrs: {
+      src: _vm.avatarUrl,
+      alt: "user"
+    }
+  }) : _vm._e()]), _vm._v(" "), _c("h1", {
     staticClass: "name"
   }, [_vm._v(_vm._s(_vm.username))]), _vm._v(" "), _c("router-link", {
     staticClass: "control",
@@ -323,19 +354,7 @@ var render = function render() {
     staticClass: "far fa-bookmark"
   }), _vm._v(" "), _c("h3", [_vm._v("Збережені")])])])]), _vm._v(" "), _vm.showOwnPosts ? _c("user-posts") : _vm._e(), _vm._v(" "), _vm.showSavedPosts ? _c("user-saved") : _vm._e()], 1);
 };
-var staticRenderFns = [function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("div", {
-    staticClass: "circle"
-  }, [_c("img", {
-    staticClass: "user-icon",
-    attrs: {
-      src: __webpack_require__(/*! ../Includes/Images/User.png */ "./resources/js/components/Includes/Images/User.png"),
-      alt: "User"
-    }
-  })]);
-}];
+var staticRenderFns = [];
 render._withStripped = true;
 
 
@@ -458,13 +477,19 @@ var render = function render() {
     staticClass: "postUser"
   }, [_c("div", {
     staticClass: "user"
-  }, [_c("img", {
+  }, [_vm.user.avatar.length === 0 ? _c("img", {
     staticClass: "user_pic",
     attrs: {
       src: __webpack_require__(/*! ./Images/Guest.png */ "./resources/js/components/Post/Images/Guest.png"),
       alt: "user"
     }
-  }), _vm._v(" "), _vm.user ? [_c("a", {
+  }) : _vm._e(), _vm._v(" "), _vm.user.avatar.length !== 0 ? _c("img", {
+    staticClass: "user_pic",
+    attrs: {
+      src: _vm.user.avatar[0].url,
+      alt: "user"
+    }
+  }) : _vm._e(), _vm._v(" "), _vm.user ? [_c("a", {
     staticClass: "username",
     attrs: {
       href: "#"
@@ -627,13 +652,13 @@ ___CSS_LOADER_EXPORT___.push([module.id, "\n.main-container[data-v-4eabf0be] {\n
 
 /***/ }),
 
-/***/ "./resources/js/components/Includes/Images/User.png":
-/*!**********************************************************!*\
-  !*** ./resources/js/components/Includes/Images/User.png ***!
-  \**********************************************************/
+/***/ "./resources/js/components/Personal/Images/Guest.png":
+/*!***********************************************************!*\
+  !*** ./resources/js/components/Personal/Images/Guest.png ***!
+  \***********************************************************/
 /***/ ((module) => {
 
-module.exports = "/images/User.png?6456b560ef79027feb1ff172972d8039";
+module.exports = "/images/Guest.png?3cc06a01b2dcf7e06d4125df24547bf9";
 
 /***/ }),
 
