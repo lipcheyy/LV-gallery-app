@@ -8,11 +8,11 @@
             </div>
             <div class="change-inputs">
                 <p class="title">Ім'я</p>
-                <input type="text" class="form-control">
-                <p class="title">Пошта</p>
-                <input type="email" class="form-control">
+                <input type="text" placeholder="ім'я" class="form-control">
                 <p class="title">Пароль</p>
-                <input type="password" class="form-control">
+                <input type="password" placeholder="*******" class="form-control">
+                <p class="title">Повторіть пароль</p>
+                <input type="password" placeholder="*******" class="form-control">
             </div>
 
             <button class="control" type="submit">Внести зміни</button>

@@ -59,21 +59,24 @@ var staticRenderFns = [function () {
   }, [_vm._v("Ім'я")]), _vm._v(" "), _c("input", {
     staticClass: "form-control",
     attrs: {
-      type: "text"
-    }
-  }), _vm._v(" "), _c("p", {
-    staticClass: "title"
-  }, [_vm._v("Пошта")]), _vm._v(" "), _c("input", {
-    staticClass: "form-control",
-    attrs: {
-      type: "email"
+      type: "text",
+      placeholder: "ім'я"
     }
   }), _vm._v(" "), _c("p", {
     staticClass: "title"
   }, [_vm._v("Пароль")]), _vm._v(" "), _c("input", {
     staticClass: "form-control",
     attrs: {
-      type: "password"
+      type: "password",
+      placeholder: "*******"
+    }
+  }), _vm._v(" "), _c("p", {
+    staticClass: "title"
+  }, [_vm._v("Повторіть пароль")]), _vm._v(" "), _c("input", {
+    staticClass: "form-control",
+    attrs: {
+      type: "password",
+      placeholder: "*******"
     }
   })]);
 }];
