@@ -19,7 +19,7 @@
 
             <div class="submit-container">
                 <input type="submit" @click.prevent="storeUser" class="btn" value="Зареєструватися">
-                <p v-if="error" >{{error}}</p>
+                <p class="alert alert-danger custom-alert" v-if="error">{{error}}</p>
             </div>
         </div>
     </div>
@@ -141,6 +141,8 @@ a{
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
+    gap: 10px;
 }
 .btn {
     margin-top: 29px;
