@@ -19,24 +19,26 @@
         </div>
 
         <div class="post-images" :style="{ 'background-image': 'url(' + url + ')' }">
-<!--             <img class="img" :src="url">-->
 
         </div>
         <div class="buttons-container">
             <div>{{ title }}</div>
-            <div class="like_container">
-                <a href="" @click.prevent="toggleLike(id)">
-                    <i class="far fa-heart likeBtn"
-                       :class="{'fas fa-heart': likedIds.includes(id), 'fas-heart-animation likeBtn': likedIds.includes(id)}"></i>
-                </a>
-                <span class="count_likes"><span :class="`likesCount-${id}`">{{ likesCount }}</span> позначок "Подобається"</span>
+            <div class="div">
+                <div class="like_container">
+                    <a href="" @click.prevent="toggleLike(id)">
+                        <i class="far fa-heart likeBtn"
+                           :class="{'fas fa-heart': likedIds.includes(id), 'fas-heart-animation likeBtn': likedIds.includes(id)}"></i>
+                    </a>
+                    <span class="count_likes"><span :class="`likesCount-${id}`">{{ likesCount }}</span> позначок "Подобається"</span>
+                </div>
+                <div class="save_container">
+                    <a href="#" @click.prevent="toggleSave(id)">
+                        <i class="far fa-bookmark"
+                           :class="{'fas fa-bookmark':savedIds.includes(id), 'fas-bookmark-animation': savedIds.includes(id)} "></i>
+                    </a>
+                </div>
             </div>
-            <div class="save_container">
-                <a href="#" @click.prevent="toggleSave(id)">
-                    <i class="far fa-bookmark"
-                       :class="{'fas fa-bookmark':savedIds.includes(id), 'fas-bookmark-animation': savedIds.includes(id)} "></i>
-                </a>
-            </div>
+
 
         </div>
         <router-link :to="{name:'post.show',params:{id:id}}" class="btn btn-primary">детальніше</router-link>
@@ -116,16 +118,19 @@ export default {
 .post-images {
     background: 50% 50% no-repeat;
     background-size: cover;
-    width: 100%;
-    height: 700px;
-}
-.img {
-    object-fit: cover;
-    width: 100%;
-    height: 80%;
+    width: 350px;
+    height: 100%;
 }
 
 .buttons-container {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+}
+.div {
     margin-top: 10px;
     display: flex;
     justify-content: space-between;
