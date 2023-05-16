@@ -33,15 +33,12 @@
             <div class="title">{{ post.title }}</div>
             <div class="commentaries">
                 <div class="comment" v-for="comment in post.comments">
-                    <div><img class="comment-user" src="../Includes/Images/User.png" alt="User">{{
-                            comment.writer.name
-                        }}
-                    </div>
-                    <div class="comment-indludes">
-                        <div class="content-wrap">
-                            <span :class="commentToEdit(comment.id)?'d-none':''">
-                            <i class="comment-title">{{ comment.content }}</i>
-                             </span>
+                    <div style="display:flex; justify-content: space-between ">
+                        <div style="display:flex; gap: 5px;">
+                            <div class="comment-user" :style="{ 'background-image': 'url(' + avatar + ')' }"></div>
+                            {{
+                                comment.writer.name
+                            }}
                         </div>
                         <div class="comment-interactions">
                             <template v-if="comment.writer.id===user_id || userRole===1">
@@ -53,6 +50,14 @@
                                 </div>
                             </template>
                         </div>
+                    </div>
+                    <div class="comment-indludes">
+                        <div class="content-wrap">
+                            <span :class="commentToEdit(comment.id)?'d-none':''">
+                            <i class="comment-title">{{ comment.content }}</i>
+                             </span>
+                        </div>
+
 
                         <span :class="commentToEdit(comment.id)?'':'d-none'">
                         <input v-model="contentToEdit">
@@ -293,8 +298,11 @@ a:before {
 
 .comment-user {
     height: 20px;
+    width: 20px;
     border: 1px solid black;
     border-radius: 50%;
+    background: 50% 50% no-repeat;
+    background-size: cover;
 
 }
 
