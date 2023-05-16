@@ -18,7 +18,7 @@
             </div>
             <div style="display: flex; flex-direction: column; gap: 10px;">
                 <input type="submit" class="control" value="Змінити пароль" @click.prevent="updatePassword">
-                <button class="control" type="submit" @click.prevent="update">Змінити аватар</button>
+                <button class="control avatar" type="submit" @click.prevent="update">Змінити аватар</button>
             </div>
 
         </div>
@@ -137,9 +137,16 @@ i {
     transition: all 0.5s ease;
     animation: glowing 0.5s infinite;
 }
-
+.control.avatar {
+    animation: glowingSecond 0.5s infinite;
+}
 .control:hover {
     transform: scale(1.09);
+}
+@keyframes glowingSecond {
+    0% { box-shadow: 0 0 12px #B00000; }
+    50% { box-shadow: 0 0 5px #800e0e; }
+    100% { box-shadow: 0 0 12px #B00000; }
 }
 
 @keyframes glowing {
