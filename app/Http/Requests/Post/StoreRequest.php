@@ -30,4 +30,11 @@ class StoreRequest extends FormRequest
             'user_id'=>'integer'
         ];
     }
+    public function messages()
+    {
+        return [
+            'images.required'=>response()->json(['error'=>'no image']),
+            'title.required'=>response()->json(['error'=>'no title']),
+        ];
+    }
 }

@@ -96,7 +96,12 @@ export default {
             api.post('/api/auth/posts', data)
                 .then(res => {
                     this.response=res.data.message
+                    console.log(res);
                     this.title=''
+
+                })
+                .catch(error=>{
+                    console.log(error);
                 })
 
         },

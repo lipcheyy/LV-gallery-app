@@ -39,9 +39,13 @@
             <div class="rightNav">
                 <ul class="navbarR">
                     <li>
-                        <router-link v-if="access_token" :to="{name:'personal.page'}"><img class="icoRighr"
-                                                                                           src="./Images/my_acc.png"
-                                                                                           alt="myAccount">
+                        <router-link v-if="access_token" :to="{name:'personal.page'}">
+                            <img v-if="isEmpty"
+                                 src="Images/User.png"
+                                 class="user-icon"
+                                 alt="user"
+                            />
+                            <img v-if="!isEmpty" :src="avatarUrl" class="user-icon" alt="">
                         </router-link>
                     </li>
                     <li><a href="#" v-if="access_token" @click.prevent="logout"><img class="icoRighr"
@@ -63,13 +67,17 @@ export default {
             access_token: null,
             userRole: null,
             categories: null,
-            category_id: 1
+            category_id: 1,
+            avatarUrl:null,
+            isEmpty:true,
+            user:null
         }
     },
     mounted() {
         this.getAccessToken()
         this.userdata()
         this.getCategories()
+        this.userRes()
     },
     updated() {
         this.getAccessToken()
@@ -107,6 +115,23 @@ export default {
                         this.userRole = parseInt(user.role)
                     })
             }
+        },
+        userRes(){
+            if (this.access_token) {
+                api.get('/api/auth/users/user')
+                    .then(res => {
+                        this.user = res.data.data
+                        if (this.user.avatar.length !== 0) {
+                            this.isEmpty = false
+                            this.user.avatar.forEach(avatar => {
+                                this.avatarUrl = avatar.url
+                            })
+                            console.log(this.avatarUrl);
+                        }
+                        console.log(this.isEmpty);
+                    })
+            }
+
         },
     }
 
@@ -150,7 +175,13 @@ button,a {
     z-index: 13;
     /*margin-bottom:74px;*/
 }
-
+.user-icon {
+    height: 10%;
+    width: 13%;
+    border-radius: 50%;
+    background: 50% 50% no-repeat;
+    background-size: cover;
+}
 .leftNav {
     text-decoration: none;
     display: flex;

@@ -35,7 +35,12 @@
                 <div class="comment" v-for="comment in post.comments">
                     <div style="display:flex; justify-content: space-between ">
                         <div style="display:flex; gap: 5px;">
-                            <div class="comment-user" :style="{ 'background-image': 'url(' + avatar + ')' }"></div>
+                            <template v-if="comment.writer.avatar.length===0">
+                                <div class="comment-user guest"></div>
+                            </template>
+                            <template v-if="comment.writer.avatar.length!==0">
+                                <div class="comment-user" :style="{ 'background-image': 'url(' + comment.writer.avatar[0].url + ')' }"></div></template>
+
                             {{
                                 comment.writer.name
                             }}
@@ -91,19 +96,23 @@ export default {
             post: null,
             avatar:null,
             content: '',
+            user:null,
             user_id: parseInt(localStorage.getItem('id')),
             toEdit: null,
             contentToEdit: '',
             id: parseInt(this.$route.params.id),
             likedIds: [],
             savedIds:[],
-            userRole:parseInt(localStorage.getItem('user_role'))
+            userRole:parseInt(localStorage.getItem('user_role')),
+            avatarUrl:null,
+            isEmpty:true
         }
     },
     mounted() {
         this.getPost()
         this.getUserLikes()
         this.getUserSaves()
+        this.userRes()
     },
     methods: {
         getPost() {
@@ -112,7 +121,9 @@ export default {
                     .then(res => {
                         this.post = res.data.data
                         this.avatar=this.post.user.avatar[0].url
-                        console.log(this.avatar);
+                        this.post.comments.forEach(com=>{
+                            console.log(com.writer.avatar[0].url);
+                        })
                     })
             }
         },
@@ -130,6 +141,20 @@ export default {
             api.delete(`/api/auth/posts/${this.id}/comments/${id}`)
                 .then(() => {
                     this.getPost()
+                })
+        },
+        userRes(){
+            api.get('/api/auth/users/user')
+                .then(res=>{
+                    this.user=res.data.data
+                    if (this.user.avatar.length!==0){
+                        this.isEmpty=false
+                        this.user.avatar.forEach(avatar=>{
+                            this.avatarUrl=avatar.url
+                        })
+
+
+                    }
                 })
         },
         commentToEdit(id) {
@@ -206,7 +231,9 @@ export default {
 h1, h2, p, i {
     margin: 0;
 }
-
+.guest{
+    background: url("/Images/Guest.png");
+}
 a {
     text-decoration: none;
     color: #0060B6;

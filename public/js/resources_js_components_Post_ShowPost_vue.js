@@ -20,19 +20,23 @@ __webpack_require__.r(__webpack_exports__);
       post: null,
       avatar: null,
       content: '',
+      user: null,
       user_id: parseInt(localStorage.getItem('id')),
       toEdit: null,
       contentToEdit: '',
       id: parseInt(this.$route.params.id),
       likedIds: [],
       savedIds: [],
-      userRole: parseInt(localStorage.getItem('user_role'))
+      userRole: parseInt(localStorage.getItem('user_role')),
+      avatarUrl: null,
+      isEmpty: true
     };
   },
   mounted: function mounted() {
     this.getPost();
     this.getUserLikes();
     this.getUserSaves();
+    this.userRes();
   },
   methods: {
     getPost: function getPost() {
@@ -41,7 +45,9 @@ __webpack_require__.r(__webpack_exports__);
         _api__WEBPACK_IMPORTED_MODULE_0__["default"].get("/api/auth/posts/".concat(this.id)).then(function (res) {
           _this.post = res.data.data;
           _this.avatar = _this.post.user.avatar[0].url;
-          console.log(_this.avatar);
+          _this.post.comments.forEach(function (com) {
+            console.log(com.writer.avatar[0].url);
+          });
         });
       }
     },
@@ -61,6 +67,18 @@ __webpack_require__.r(__webpack_exports__);
         _this3.getPost();
       });
     },
+    userRes: function userRes() {
+      var _this4 = this;
+      _api__WEBPACK_IMPORTED_MODULE_0__["default"].get('/api/auth/users/user').then(function (res) {
+        _this4.user = res.data.data;
+        if (_this4.user.avatar.length !== 0) {
+          _this4.isEmpty = false;
+          _this4.user.avatar.forEach(function (avatar) {
+            _this4.avatarUrl = avatar.url;
+          });
+        }
+      });
+    },
     commentToEdit: function commentToEdit(id) {
       return this.toEdit === id;
     },
@@ -69,37 +87,37 @@ __webpack_require__.r(__webpack_exports__);
       this.contentToEdit = content;
     },
     destroyPost: function destroyPost(id) {
-      var _this4 = this;
+      var _this5 = this;
       _api__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"]("/api/auth/posts/".concat(id)).then(function () {
-        _this4.$router.push({
+        _this5.$router.push({
           name: 'post.index'
         });
       });
     },
     update: function update(id) {
-      var _this5 = this;
+      var _this6 = this;
       this.toEdit = null;
       _api__WEBPACK_IMPORTED_MODULE_0__["default"].patch("/api/auth/posts/".concat(this.id, "/comments/").concat(id), {
         content: this.contentToEdit
       }).then(function (res) {
-        _this5.getPost();
+        _this6.getPost();
       });
     },
     getUserLikes: function getUserLikes() {
-      var _this6 = this;
+      var _this7 = this;
       _api__WEBPACK_IMPORTED_MODULE_0__["default"].get('/api/auth/posts/liked').then(function (res) {
-        _this6.userLiked = res.data;
+        _this7.userLiked = res.data;
         // console.log(this.userLiked);
-        _this6.userLiked.forEach(function (liked) {
-          _this6.likedIds.push(liked.id);
+        _this7.userLiked.forEach(function (liked) {
+          _this7.likedIds.push(liked.id);
         });
       });
     },
     getUserSaves: function getUserSaves() {
-      var _this7 = this;
+      var _this8 = this;
       _api__WEBPACK_IMPORTED_MODULE_0__["default"].get('/api/auth/posts/saved').then(function (res) {
         res.data.forEach(function (saved) {
-          _this7.savedIds.push(saved.id);
+          _this8.savedIds.push(saved.id);
         });
       });
     },
@@ -250,12 +268,14 @@ var render = function render() {
         display: "flex",
         gap: "5px"
       }
-    }, [_c("div", {
+    }, [comment.writer.avatar.length === 0 ? [_c("div", {
+      staticClass: "comment-user guest"
+    })] : _vm._e(), _vm._v(" "), comment.writer.avatar.length !== 0 ? [_c("div", {
       staticClass: "comment-user",
       style: {
-        "background-image": "url(" + _vm.avatar + ")"
+        "background-image": "url(" + comment.writer.avatar[0].url + ")"
       }
-    }), _vm._v("\n                        " + _vm._s(comment.writer.name) + "\n                    ")]), _vm._v(" "), _c("div", {
+    })] : _vm._e(), _vm._v("\n\n                        " + _vm._s(comment.writer.name) + "\n                    ")], 2), _vm._v(" "), _c("div", {
       staticClass: "comment-interactions"
     }, [comment.writer.id === _vm.user_id || _vm.userRole === 1 ? [_c("div", {
       on: {
@@ -372,7 +392,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nh1[data-v-e50970de], h2[data-v-e50970de], p[data-v-e50970de], i[data-v-e50970de] {\n    margin: 0;\n}\na[data-v-e50970de] {\n    text-decoration: none;\n    color: #0060B6;\n}\na[data-v-e50970de]:before {\n    text-decoration: none;\n}\n.main-container[data-v-e50970de] {\n    width: 70%;\n    margin: 0 auto;\n    border: 1px solid black;\n    padding: 15px;\n    display: flex;\n}\n.far.fa-heart.fas-heart-animation[data-v-e50970de] {\n    animation: heart-pulse 0.3s ease-in-out;\n}\n.commentaries-container[data-v-e50970de] {\n    margin-left: 3%;\n    width: 52%;\n    display: flex;\n    flex-direction: column;\n    justify-content: space-between;\n}\n.comment-indludes[data-v-e50970de] {\n    display: flex;\n    justify-content:  space-between;\n}\n.comment-interactions[data-v-e50970de] {\n    display: flex;\n    gap: 5px;\n}\n.content-wrap[data-v-e50970de] {\n    width: 90%;\n}\n.comment-title[data-v-e50970de] {\n    word-wrap: break-word;\n    overflow-wrap: break-word;\n}\n.post[data-v-e50970de] {\n    background: 50% 50% no-repeat;\n    background-size: cover;\n    width: 45%;\n    height: 600px;\n}\n.post-user-info[data-v-e50970de] {\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n}\n.line[data-v-e50970de] {\n    width: 100%;\n    height: 3px;\n    background-color: #D9D9D9;\n    border-radius: 10%;\n    margin-top: 5px;\n}\n.user[data-v-e50970de] {\n    width: 50px;\n    height: 50px;\n    border-radius: 50%;\n    margin-right: 10px;\n    border-radius: 50%;\n    background: 50% 50% no-repeat;\n    background-size: cover;\n}\n.commentaries[data-v-e50970de] {\n    padding: 10px;\n    margin-top: 10px;\n    height: 400px;\n    overflow: auto;\n}\n.comment[data-v-e50970de] {\n    width: 100%;\n    border: 1px solid black;\n    border-radius: 10px;\n    padding: 5px;\n    margin: 5px 0;\n}\n.comment-user[data-v-e50970de] {\n    height: 20px;\n    width: 20px;\n    border: 1px solid black;\n    border-radius: 50%;\n    background: 50% 50% no-repeat;\n    background-size: cover;\n}\n.user-info[data-v-e50970de] {\n    display: flex;\n    width: 70%;\n    align-items: center;\n}\n.send-container[data-v-e50970de] {\n    display: flex;\n    align-items: center;\n    width: 100%;\n    height: 10%;\n    justify-content: space-between;\n}\n.send-comment[data-v-e50970de] {\n    width: 75%;\n    height: 100%;\n    border: 1px solid grey;\n    font-size: 32px;\n    border-radius: 10px;\n}\n.send-btn[data-v-e50970de] {\n    width: 20%;\n    height: 100%;\n    font-size: 24px;\n    border: 1px solid grey;\n    border-radius: 10px;\n    padding: 0;\n}\n.fa-paper-plane[data-v-e50970de] {\n    margin: 0 auto;\n}\n.post-interaction[data-v-e50970de] {\n    height: 100%;\n    display: flex;\n    align-items: center;\n    font-size: 32px;\n    justify-content: space-between;\n    gap: 10px\n}\n.title[data-v-e50970de] {\n    margin: 10px auto 0 auto;\n}\n@media only screen and (max-width: 1024px) {\n.main-container[data-v-e50970de] {\n        flex-direction: column;\n}\n.post[data-v-e50970de], .commentaries-container[data-v-e50970de] {\n        width: 100%;\n        justify-content: space-between;\n        margin: 0 auto;\n}\n.commentaries[data-v-e50970de] {\n        height: 200px;\n}\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nh1[data-v-e50970de], h2[data-v-e50970de], p[data-v-e50970de], i[data-v-e50970de] {\n    margin: 0;\n}\n.guest[data-v-e50970de]{\n    background: url(\"/Images/Guest.png\");\n}\na[data-v-e50970de] {\n    text-decoration: none;\n    color: #0060B6;\n}\na[data-v-e50970de]:before {\n    text-decoration: none;\n}\n.main-container[data-v-e50970de] {\n    width: 70%;\n    margin: 0 auto;\n    border: 1px solid black;\n    padding: 15px;\n    display: flex;\n}\n.far.fa-heart.fas-heart-animation[data-v-e50970de] {\n    animation: heart-pulse 0.3s ease-in-out;\n}\n.commentaries-container[data-v-e50970de] {\n    margin-left: 3%;\n    width: 52%;\n    display: flex;\n    flex-direction: column;\n    justify-content: space-between;\n}\n.comment-indludes[data-v-e50970de] {\n    display: flex;\n    justify-content:  space-between;\n}\n.comment-interactions[data-v-e50970de] {\n    display: flex;\n    gap: 5px;\n}\n.content-wrap[data-v-e50970de] {\n    width: 90%;\n}\n.comment-title[data-v-e50970de] {\n    word-wrap: break-word;\n    overflow-wrap: break-word;\n}\n.post[data-v-e50970de] {\n    background: 50% 50% no-repeat;\n    background-size: cover;\n    width: 45%;\n    height: 600px;\n}\n.post-user-info[data-v-e50970de] {\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n}\n.line[data-v-e50970de] {\n    width: 100%;\n    height: 3px;\n    background-color: #D9D9D9;\n    border-radius: 10%;\n    margin-top: 5px;\n}\n.user[data-v-e50970de] {\n    width: 50px;\n    height: 50px;\n    border-radius: 50%;\n    margin-right: 10px;\n    border-radius: 50%;\n    background: 50% 50% no-repeat;\n    background-size: cover;\n}\n.commentaries[data-v-e50970de] {\n    padding: 10px;\n    margin-top: 10px;\n    height: 400px;\n    overflow: auto;\n}\n.comment[data-v-e50970de] {\n    width: 100%;\n    border: 1px solid black;\n    border-radius: 10px;\n    padding: 5px;\n    margin: 5px 0;\n}\n.comment-user[data-v-e50970de] {\n    height: 20px;\n    width: 20px;\n    border: 1px solid black;\n    border-radius: 50%;\n    background: 50% 50% no-repeat;\n    background-size: cover;\n}\n.user-info[data-v-e50970de] {\n    display: flex;\n    width: 70%;\n    align-items: center;\n}\n.send-container[data-v-e50970de] {\n    display: flex;\n    align-items: center;\n    width: 100%;\n    height: 10%;\n    justify-content: space-between;\n}\n.send-comment[data-v-e50970de] {\n    width: 75%;\n    height: 100%;\n    border: 1px solid grey;\n    font-size: 32px;\n    border-radius: 10px;\n}\n.send-btn[data-v-e50970de] {\n    width: 20%;\n    height: 100%;\n    font-size: 24px;\n    border: 1px solid grey;\n    border-radius: 10px;\n    padding: 0;\n}\n.fa-paper-plane[data-v-e50970de] {\n    margin: 0 auto;\n}\n.post-interaction[data-v-e50970de] {\n    height: 100%;\n    display: flex;\n    align-items: center;\n    font-size: 32px;\n    justify-content: space-between;\n    gap: 10px\n}\n.title[data-v-e50970de] {\n    margin: 10px auto 0 auto;\n}\n@media only screen and (max-width: 1024px) {\n.main-container[data-v-e50970de] {\n        flex-direction: column;\n}\n.post[data-v-e50970de], .commentaries-container[data-v-e50970de] {\n        width: 100%;\n        justify-content: space-between;\n        margin: 0 auto;\n}\n.commentaries[data-v-e50970de] {\n        height: 200px;\n}\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

@@ -92,7 +92,6 @@ export default {
                     if (this.user.avatar.length!==0){
                         this.isEmpty=false
                         this.user.avatar.forEach(avatar=>{
-                            console.log(avatar);
                             this.avatarUrl=avatar.url
                         })
 
