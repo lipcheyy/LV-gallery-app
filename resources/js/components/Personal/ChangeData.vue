@@ -8,9 +8,9 @@
             </div>
             <div class="change-inputs">
                 <p class="title">Ім'я</p>
-                <input type="text" v-model="name" placeholder="ім'я" class="form-control">
+                <input type="text" v-model="name" placeholder="Ім'я" class="form-control">
                 <p class="title">Старий пароль</p>
-                <input type="text" v-model="old_password" placeholder="ім'я" class="form-control">
+                <input type="text" v-model="old_password" placeholder="Введіть старий пароль" class="form-control">
                 <p class="title">Пароль</p>
                 <input type="password" v-model="password" placeholder="*******" class="form-control">
                 <p class="title">Повторіть пароль</p>
