@@ -176,11 +176,9 @@ button,a {
     /*margin-bottom:74px;*/
 }
 .user-icon {
-    height: 10%;
-    width: 13%;
+    height: 50px;
+    width: 50px;
     border-radius: 50%;
-    background: 50% 50% no-repeat;
-    background-size: cover;
 }
 .leftNav {
     text-decoration: none;
