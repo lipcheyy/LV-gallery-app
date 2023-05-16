@@ -183,11 +183,17 @@ var render = function render() {
         _vm.password_confirm = $event.target.value;
       }
     }
-  })]), _vm._v(" "), _c("input", {
-    staticClass: "btn btn-success",
+  })]), _vm._v(" "), _c("div", {
+    staticStyle: {
+      display: "flex",
+      "flex-direction": "column",
+      gap: "10px"
+    }
+  }, [_c("input", {
+    staticClass: "control",
     attrs: {
       type: "submit",
-      value: "change pass"
+      value: "Змінити пароль"
     },
     on: {
       click: function click($event) {
@@ -206,7 +212,7 @@ var render = function render() {
         return _vm.update.apply(null, arguments);
       }
     }
-  }, [_vm._v("Внести зміни")])])]);
+  }, [_vm._v("Змінити аватар")])])])]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -230,7 +236,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nh1[data-v-f95bdfa4],h2[data-v-f95bdfa4],h3[data-v-f95bdfa4], p[data-v-f95bdfa4] {\n    margin: 0;\n    padding: 0;\n}\n.main-container[data-v-f95bdfa4] {\n    margin: 0 auto;\n    width: 60%;\n    border-radius: 14px;\n    margin: 0 auto;\n    display: flex;\n    background: #D9D9D9;\n    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.25);\n    padding: 15px;\n    flex-direction: column;\n    align-items: center;\n}\ni[data-v-f95bdfa4] {\n    font-size: 32px;\n}\n.dropzone_form[data-v-f95bdfa4] {\n    width: 200px;\n    height: 200px;\n    background: #FFFFFF;\n    border-radius: 8px;\n    display: flex;\n    flex-direction: column;\n    flex-display: column;\n    justify-content: center;\n    align-items: center;\n    outline: 2px dashed #D9D9D9;\n    outline-offset: -25px;\n}\n.wrapper[data-v-f95bdfa4] {\n    display: flex;\n    width: 100%;\n    justify-content: space-evenly;\n    margin-top: 10px;\n}\n.control[data-v-f95bdfa4] {\n    border: 0;\n    height: 40px;\n    width: 200px;\n    margin: auto 0;\n    background: #B00000;\n    border: none;\n    color: white;\n    transition: all 0.5s ease;\n    animation: glowing-f95bdfa4 0.5s infinite;\n}\n.control[data-v-f95bdfa4]:hover {\n    transform: scale(1.09);\n}\n@keyframes glowing-f95bdfa4 {\n0% { box-shadow: 0 0 5px #B00000;\n}\n50% { box-shadow: 0 0 12px #800e0e;\n}\n100% { box-shadow: 0 0 3px #B00000;\n}\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nh1[data-v-f95bdfa4],h2[data-v-f95bdfa4],h3[data-v-f95bdfa4], p[data-v-f95bdfa4] {\n    margin: 0;\n    padding: 0;\n}\n.main-container[data-v-f95bdfa4] {\n    margin: 0 auto;\n    width: 60%;\n    border-radius: 14px;\n    margin: 0 auto;\n    display: flex;\n    background: #D9D9D9;\n    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.25);\n    padding: 15px;\n    flex-direction: column;\n    align-items: center;\n}\ni[data-v-f95bdfa4] {\n    font-size: 32px;\n}\n.dropzone_form[data-v-f95bdfa4] {\n    width: 200px;\n    height: 200px;\n    background: #FFFFFF;\n    border-radius: 8px;\n    display: flex;\n    flex-direction: column;\n    flex-display: column;\n    justify-content: center;\n    align-items: center;\n    outline: 2px dashed #D9D9D9;\n    outline-offset: -25px;\n}\n.wrapper[data-v-f95bdfa4] {\n    display: flex;\n    width: 100%;\n    justify-content: space-evenly;\n    align-items: center;\n    margin-top: 10px;\n}\n.form-control[data-v-f95bdfa4] {\n    height: 30px;\n}\n.control[data-v-f95bdfa4] {\n    border: 0;\n    height: 40px;\n    width: 200px;\n    margin: auto 0;\n    background: #B00000;\n    border: none;\n    color: white;\n    transition: all 0.5s ease;\n    animation: glowing-f95bdfa4 0.5s infinite;\n}\n.control[data-v-f95bdfa4]:hover {\n    transform: scale(1.09);\n}\n@keyframes glowing-f95bdfa4 {\n0% { box-shadow: 0 0 5px #B00000;\n}\n50% { box-shadow: 0 0 12px #800e0e;\n}\n100% { box-shadow: 0 0 3px #B00000;\n}\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

@@ -16,8 +16,11 @@
                 <p class="title">Повторіть пароль</p>
                 <input type="password" v-model="password_confirm" placeholder="*******" class="form-control">
             </div>
-            <input type="submit" class="btn btn-success" value="change pass" @click.prevent="updatePassword">
-            <button class="control" type="submit" @click.prevent="update">Внести зміни</button>
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+                <input type="submit" class="control" value="Змінити пароль" @click.prevent="updatePassword">
+                <button class="control" type="submit" @click.prevent="update">Змінити аватар</button>
+            </div>
+
         </div>
 
     </div>
@@ -117,9 +120,12 @@ i {
     display: flex;
     width: 100%;
     justify-content: space-evenly;
+    align-items: center;
     margin-top: 10px;
 }
-
+.form-control {
+    height: 30px;
+}
 .control {
     border: 0;
     height: 40px;
