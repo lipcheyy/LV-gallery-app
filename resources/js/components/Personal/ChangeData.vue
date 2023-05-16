@@ -61,6 +61,7 @@ export default {
             data.append('_method','PATCH')
             const id=parseInt(localStorage.getItem('id'))
             api.post(`/api/auth/users/${id}`,data)
+            location.reload();
         },
         updatePassword(){
             api.patch(`/api/auth/users/${this.id}/password`,{
@@ -77,6 +78,7 @@ export default {
                         console.log(errors.password_confirm[0]);
                     }
                 })
+            location.reload();
 
         }
     }

@@ -46,6 +46,7 @@ __webpack_require__.r(__webpack_exports__);
       data.append('_method', 'PATCH');
       var id = parseInt(localStorage.getItem('id'));
       _api__WEBPACK_IMPORTED_MODULE_1__["default"].post("/api/auth/users/".concat(id), data);
+      location.reload();
     },
     updatePassword: function updatePassword() {
       _api__WEBPACK_IMPORTED_MODULE_1__["default"].patch("/api/auth/users/".concat(this.id, "/password"), {
@@ -60,6 +61,7 @@ __webpack_require__.r(__webpack_exports__);
           console.log(errors.password_confirm[0]);
         }
       });
+      location.reload();
     }
   }
 });
