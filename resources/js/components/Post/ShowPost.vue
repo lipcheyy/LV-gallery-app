@@ -10,7 +10,7 @@
         <div class="commentaries-container">
             <div class="post-user-info">
                 <div class="user-info">
-                    <img class="user" :src="avatar" alt="User">
+                    <div class="user" :style="{ 'background-image': 'url(' + avatar + ')' }" ></div>
                     <h2 class="username">{{ post.user.name }}</h2>
                 </div>
 
@@ -267,10 +267,13 @@ a:before {
 }
 
 .user {
-    width: 10%;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
-    border: 1px solid black;
     margin-right: 10px;
+    border-radius: 50%;
+    background: 50% 50% no-repeat;
+    background-size: cover;
 }
 
 .commentaries {
