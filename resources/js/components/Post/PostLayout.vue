@@ -2,16 +2,14 @@
     <router-link :to="{name:'post.show',params:{id:id}}" class="main-container">
         <div class="postUser">
             <div class="user">
-                <img v-if="user.avatar.length===0"
-                    src="./Images/Guest.png"
+                <div v-if="user.avatar.length===0"
+                     :style="{ 'background-image': 'url(./Images/Guest.png)' }"
                     class="user_pic"
-                    alt="user"
-                />
-                <img v-if="user.avatar.length!==0"
-                     :src="user.avatar[0].url"
+                ></div>
+                <div v-if="user.avatar.length!==0"
+                     :style="{ 'background-image': 'url(' + user.avatar[0].url + ')' }"
                      class="user_pic"
-                     alt="user"
-                />
+                ></div>
                 <template v-if="user">
                     <a href='#' class="username">{{ user.name }}</a>
                 </template>
@@ -209,18 +207,23 @@ i {
     display: flex;
     align-items: center;
     padding: 0 10px;
+    margin: 0 0 5px 0;
     justify-content: space-between;
 }
 
 .user {
-    height: 80%;
+    height: 100%;
     display: flex;
     align-items: center;
 }
 
 .user_pic {
-    height: 100%;
+    height: 40px;
+    width: 40px;
     margin-right: 5px;
+    border-radius: 50%;
+    background: 50% 50% no-repeat;
+    background-size: cover;
 }
 
 
