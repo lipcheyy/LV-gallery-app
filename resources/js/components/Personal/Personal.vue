@@ -5,14 +5,13 @@
             <div class="circle">
                 <img v-if="isEmpty"
                      src="./Images/Guest.png"
-                     class="user_pic"
+                     class="user-icon"
                      alt="user"
                 />
-                <img v-if="!isEmpty"
-                     :src="avatarUrl"
-                     class="user_pic"
-                     alt="user"
-                />
+                <div v-if="!isEmpty"
+                     :style="{ 'background-image': 'url(' + avatarUrl + ')' }"
+                     class="user-icon"
+                ></div>
             </div>
             <h1 class="name">{{username}}</h1>
             <router-link :to="{name: 'user.change'}" class='control'><h3>Змінити дані</h3></router-link>
@@ -198,8 +197,11 @@ i {
 }
 
 .user-icon {
-    width: 75%;
-    height: 75%;
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    background: 50% 50% no-repeat;
+    background-size: cover;
 }
 
 .user-info {
@@ -219,26 +221,6 @@ i {
 }
 
 
-.posts {
-    width: 80%;
-    background: rgba(183, 183, 183, 0.14);
-    border: 4px dashed #C5C5C5;
-    border-radius: 8px;
-    display: flex;
-    flex-wrap: wrap;
-    /*height: 47.50692520775623vh;*/
-    column-gap: 30px;
-    row-gap: 20px;
-    justify-content: center;
-    align-items: center;
-    padding: 30px 0 30px 0;
-}
-
-.post {
-    width: 200px;
-    height: 250px;
-    cursor: pointer;
-}
 
 
 
