@@ -301,6 +301,7 @@ a:before {
 .user-info {
     display: flex;
     width: 70%;
+    align-items: center;
 }
 
 .send-container {
